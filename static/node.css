@@ -1,0 +1,42 @@
+.tree {
+  padding: 1em;
+  width: fit-content;
+}
+
+.node {
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.children > .node {
+  padding-left: 2em;
+  border-left: 1px solid #999;
+}
+
+.name {
+  height: 16px;
+  margin: 1px;
+  vertical-align: middle;
+}
+
+.name:focus {
+  position: relative;
+  z-index: -1;
+}
+
+.toggle-button:has(~ .children:empty) {
+  color: #eee;
+}
+
+.toggle-button {
+  margin-right: 1px;
+}
+
+.remove-button {
+  margin-left: 1px;
+}
+
+.toggle-button,
+.remove-button {
+  width: 14px;
+}

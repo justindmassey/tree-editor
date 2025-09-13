@@ -1,0 +1,51 @@
+@import url("./tree-editor.css");
+
+html.inverted {
+  filter: invert(1);
+}
+
+body {
+  margin: 0px;
+  font-family: sans-serif;
+  background: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  position: relative;
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 14px;
+  cursor: default;
+  border: 1px solid #999;
+  padding: 3px;
+  vertical-align: middle;
+  color: #999;
+  user-select: none;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.button:hover {
+  color: #666;
+  border-color: #666;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #999;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+body.flash {
+  animation: flash 200ms ease-out;
+}

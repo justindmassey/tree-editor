@@ -1,0 +1,21 @@
+.help {
+  background: white;
+  border-left: 1px solid #999;
+  overflow: auto;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  padding: 1em;
+  height: 100vh;
+  z-index: 2;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0.25em;
+  border: 1px solid #999;
+}

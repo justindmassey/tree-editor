@@ -1,0 +1,33 @@
+.menu {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.menu-items {
+  position: absolute;
+  display: none;
+}
+
+.menu:hover > .menu-items {
+  display: block;
+}
+
+.menu-items {
+  background: white;
+}
+
+.menu-label > *,
+.menu-items > * {
+  cursor: default;
+  user-select: none;
+  border: 1px solid #999;
+  padding: 0.25em;
+  border-radius: 2px;
+  margin-top: -1px;
+  display: block;
+}
+
+.menu-items > *:hover {
+  background: #eee;
+}

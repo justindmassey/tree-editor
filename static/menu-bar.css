@@ -1,0 +1,11 @@
+@import url("./lib/menu.css");
+
+.menu-bar {
+  padding: 1em;
+  border-bottom: 1px solid #999;
+  position: fixed;
+  width: 100vw;
+  top: 0px;
+  z-index: 1;
+  background: white;
+}
