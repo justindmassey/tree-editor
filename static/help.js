@@ -5,7 +5,7 @@ import globalCommands from "./global-commands.js";
 function makeCommandReference(commands) {
   let commandsTable = table();
   for (let cmd in commands) {
-    commandsTable.appendChild(tr(td(commands[cmd].description), td(cmd)));
+    commandsTable.appendChild(tr(td(cmd), td(commands[cmd].description)));
   }
   return commandsTable;
 }
