@@ -20,7 +20,7 @@ function element(tag, ...children) {
       element.appendChild(child);
     } else if (child && child.elem && child.elem instanceof Element) {
       element.appendChild(child.elem);
-    } else if (child !== undefined && child !== null) {
+    } else {
       element.appendChild(new Text(String(child)));
     }
   }
