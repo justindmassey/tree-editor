@@ -169,12 +169,6 @@ const nodeCommands = {
       }
     },
   },
-  "Alt+d Alt+d d": {
-    description: "test",
-    action() {
-      alert('ok')
-    },
-  },
   "Alt+d d": {
     description: "delete descendants",
     action() {
