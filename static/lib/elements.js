@@ -13,23 +13,19 @@ Element.prototype.a = function (key, value) {
   return this;
 };
 
-function element(tag, ...children) {
-  let element = document.createElement(tag);
-  for (let child of children) {
-    if (child instanceof Element) {
-      element.appendChild(child);
-    } else if (child && child.elem && child.elem instanceof Element) {
-      element.appendChild(child.elem);
-    } else {
-      element.appendChild(new Text(String(child)));
-    }
-  }
-  return element;
-}
-
 function createElement(tag) {
   return function (...children) {
-    return element(tag, ...children);
+    let element = document.createElement(tag);
+    for (let child of children) {
+      if (child instanceof Element) {
+	element.appendChild(child);
+      } else if (child && child.elem && child.elem instanceof Element) {
+	element.appendChild(child.elem);
+      } else {
+	element.appendChild(new Text(String(child)));
+      }
+    }
+    return element;
   };
 }
 
