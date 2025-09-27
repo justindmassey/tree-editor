@@ -22,7 +22,7 @@ function createElement(tag) {
       } else if (child && child.elem && child.elem instanceof Element) {
 	element.appendChild(child.elem);
       } else {
-	element.appendChild(new Text(String(child)));
+	element.appendChild(new Text(child));
       }
     }
     return element;
