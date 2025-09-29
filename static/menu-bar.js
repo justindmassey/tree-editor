@@ -5,9 +5,11 @@ import importText from "./importers/text.js";
 import importJson from "./importers/json.js";
 import exportToText from "./exporters/text.js";
 import exportToJson from "./exporters/json.js";
+import exportToXml from "./exporters/xml.js";
 import tree from "./tree.js";
 import history from "./history.js";
 import Menu from "./lib/menu.js";
+
 
 class MenuBar {
   constructor() {
@@ -30,7 +32,10 @@ class MenuBar {
         }),
         div("JSON").e("click", () => {
           downloadFile(tree.root.name.value + ".json", exportToJson(tree.root));
-        })
+        }),
+	div("XML").e("click", ()=> {
+	  downloadFile(tree.root.name.value + ".xml", exportToXml(tree.root))
+	})
       )
     ).c("menu-bar", "hidden");
   }
