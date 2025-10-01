@@ -3,7 +3,7 @@ function exportNode(node) {
   if(node.children.children.length) {
     n = document.createElement(node.name.value);
     for(let child of node.children.children) {
-      let m = child.node.name.value.match(/^([^=]+)=(.*)$/)
+      let m = child.node.name.value.match(/^([^=]+)=(.*)$/);
       if(m) {
 	n.setAttribute(m[1], m[2]);
       } else {
@@ -11,7 +11,7 @@ function exportNode(node) {
       }
     }
   } else {
-    n = new Text(node.name.value);
+    n = new Text(node.name.value + "\n");
   }
   return n;
 }
