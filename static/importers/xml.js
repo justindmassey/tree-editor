@@ -2,7 +2,7 @@ import Node from "../node.js"
 const TEXT = 3
 
 function importNode(node) {
-  let n = new Node(node.tagName)
+  let n = new Node(node.tagName);
   for(let attr of node.attributes) {
     n.appendChild(new Node(attr.name + "=" + attr.value));
   }
