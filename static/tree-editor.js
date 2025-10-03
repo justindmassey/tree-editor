@@ -14,9 +14,7 @@ class TreeEditor {
     registerShortcuts(window, globalCommands, this);
     let showMenuBar = localStorage.getItem("menuBar")
     if(showMenuBar) {
-      setTimeout(()=>{
-	globalCommands["Alt+m"].action.bind(this)()
-      }, 0)
+      setTimeout(globalCommands["Alt+m"].action.bind(this), 0)
     }
   }
 }
