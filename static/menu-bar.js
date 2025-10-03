@@ -19,14 +19,17 @@ class MenuBar {
         div("Import"),
         new TextUploader("Text", (text) => {
           tree.root = importText(text);
+	  tree.root.focus()
           history.add();
         }),
         new TextUploader("JSON", (json) => {
           tree.root = importJson(json);
+	  tree.root.focus()
           history.add();
         }),
 	new TextUploader("XML", (xml) => {
           tree.root = importXml(xml);
+	  tree.root.focus()
           history.add();
         })
       ),
