@@ -20,10 +20,7 @@ class Tree {
   }
 
   set root(node) {
-    if (this.elem.firstChild) {
-      this.elem.firstChild.remove();
-    }
-    this.elem.appendChild(node.elem);
+    this.elem.replaceChildren(node.elem)
   }
 
   get root() {
