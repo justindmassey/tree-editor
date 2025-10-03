@@ -8,8 +8,7 @@ function importNode(node) {
   }
   for(let child of node.childNodes) {
     if(child.nodeType == TEXT) {
-      child.textContent = child.textContent.replace(/\n$/, '');
-      for(let line of child.textContent.split("\n")) {
+      for(let line of child.textContent.replace(/\n$/, '').split("\n")) {
 	n.appendChild(new Node(line));
       }
     } else {
