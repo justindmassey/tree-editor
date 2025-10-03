@@ -4,25 +4,23 @@ const TEXT = 3
 function importNode(node) {
   let n = new Node(node.tagName)
   for(let attr of node.attributes) {
-    n.appendChild(new Node(attr.name + "=" + attr.value))
+    n.appendChild(new Node(attr.name + "=" + attr.value));
   }
   for(let child of node.childNodes) {
     if(child.nodeType == TEXT) {
-      child.textContent = child.textContent.replace(/\n$/, '')
+      child.textContent = child.textContent.replace(/\n$/, '');
       for(let line of child.textContent.split("\n")) {
-	n.appendChild(new Node(line))
+	n.appendChild(new Node(line));
       }
     } else {
-      n.appendChild(importNode(child))
+      n.appendChild(importNode(child));
     }
   }
-  window.n = node
-  return n
+  return n;
 }
 
 export default function importXml(xmlStr) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xmlStr, "text/xml");
-  window.de = doc.documentElement
   return importNode(doc.documentElement);
 }
