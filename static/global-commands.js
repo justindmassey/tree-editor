@@ -35,8 +35,10 @@ export default {
     action() {
       this.menuBar.elem.classList.toggle("hidden");
       if (this.menuBar.elem.classList.contains("hidden")) {
+	localStorage.setItem("menuBar", "");
         this.tree.elem.style.marginTop = "0px";
       } else {
+	localStorage.setItem("menuBar", "true");
         this.tree.elem.style.marginTop = this.menuBar.elem.offsetHeight + "px";
       }
     },
