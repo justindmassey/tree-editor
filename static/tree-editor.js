@@ -16,6 +16,10 @@ class TreeEditor {
     if(showMenuBar) {
       setTimeout(globalCommands["Alt+m"].action.bind(this), 0)
     }
+    let showHelp = localStorage.getItem("help")
+    if(showHelp) {
+      setTimeout(globalCommands["Alt+h"].action.bind(this), 0)
+    }
   }
 }
 

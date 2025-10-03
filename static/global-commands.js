@@ -28,6 +28,11 @@ export default {
     description: "toggle help display",
     action() {
       this.help.elem.classList.toggle("hidden");
+      if(this.help.elem.classList.contains("hidden")) {
+	localStorage.setItem("help", "");
+      } else {
+	localStorage.setItem("help", "true");
+      }
     },
   },
   "Alt+m": {
