@@ -3,6 +3,7 @@ import TextUploader from "./lib/text-uploader.js";
 import downloadFile from "./lib/download-file.js";
 import importText from "./importers/text.js";
 import importJson from "./importers/json.js";
+import importXml from "./importers/xml.js";
 import exportToText from "./exporters/text.js";
 import exportToJson from "./exporters/json.js";
 import exportToXml from "./exporters/xml.js";
@@ -22,6 +23,10 @@ class MenuBar {
         }),
         new TextUploader("JSON", (json) => {
           tree.root = importJson(json);
+          history.add();
+        }),
+	new TextUploader("XML", (xml) => {
+          tree.root = importXml(xml);
           history.add();
         })
       ),
