@@ -12,12 +12,10 @@ class TreeEditor {
     this.help = help;
     this.elem = div(this.menuBar, this.tree, this.help);
     registerShortcuts(window, globalCommands, this);
-    let showMenuBar = localStorage.getItem("menuBar")
-    if(showMenuBar) {
+    if(localStorage.getItem("menuBar")) {
       setTimeout(globalCommands["Alt+m"].action.bind(this), 0)
     }
-    let showHelp = localStorage.getItem("help")
-    if(showHelp) {
+    if(localStorage.getItem("help")) {
       setTimeout(globalCommands["Alt+h"].action.bind(this), 0)
     }
   }
