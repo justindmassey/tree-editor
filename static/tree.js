@@ -4,7 +4,12 @@ import history from "./history.js";
 
 class Tree {
   constructor() {
-    this.elem = div().c("tree");
+    this.tree = div()
+    this.output = div().c("output")
+    this.elem = div(
+      this.tree,
+      this.output
+    ).c("tree")
     this.clipboard = null;
     this.load()
   }
@@ -20,12 +25,12 @@ class Tree {
   }
 
   set root(node) {
-    this.elem.replaceChildren(node.elem)
+    this.tree.replaceChildren(node.elem)
   }
 
   get root() {
-    if (this.elem.firstChild) {
-      return this.elem.firstChild.node;
+    if (this.tree.firstChild) {
+      return this.tree.firstChild.node;
     }
   }
 }
