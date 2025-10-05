@@ -1,5 +1,5 @@
 export default class History {
-  constructor(maxLength, onchange) {
+  constructor(onchange, maxLength = 100) {
     this.maxLength = maxLength;
     this.onchange = onchange;
     this.history = [];

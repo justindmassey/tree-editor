@@ -1,10 +1,11 @@
 import tree from "./tree.js";
 import Node from "./node.js";
 import History from "./lib/history.js";
+import updateOutput from "./update-output.js"
 
 class TreeHistory extends History {
   constructor() {
-    super(100);
+    super(updateOutput);
   }
 
   serialize() {
