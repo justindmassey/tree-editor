@@ -20,6 +20,15 @@ const nodeCommands = {
       }
     },
   },
+  "Alt+Enter": {
+    description: "append child to grandparent",
+    action() {
+      if(this.parent && this.parent.parent) {
+	this.parent.parent.appendChild(new Node())
+	history.add()
+      }
+    }
+  },
   "Control+d": {
     description: "delete this node",
     action() {
