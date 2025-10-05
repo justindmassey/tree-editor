@@ -4,7 +4,7 @@ import history from "./history.js";
 import addCommandAliases from "./lib/add-command-aliases.js";
 
 const nodeCommands = {
-  "Shift+Enter": {
+  "Alt+Enter": {
     description: "prepend a new child node",
     action() {
       this.prependChild(new Node());
@@ -20,7 +20,7 @@ const nodeCommands = {
       }
     },
   },
-  "Alt+Enter": {
+  "Shift+Enter": {
     description: "append child to grandparent",
     action() {
       if(this.parent && this.parent.parent) {
