@@ -4,6 +4,12 @@ import history from "./history.js";
 import addCommandAliases from "./lib/add-command-aliases.js";
 
 const nodeCommands = {
+  "Tab": {
+    description: "toggle visibility of children",
+    action() {
+      this.toggle();
+    }
+  },
   "Shift+Enter": {
     description: "prepend a new child node",
     action() {
