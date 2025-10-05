@@ -13,10 +13,10 @@ class TreeEditor {
     this.elem = div(this.menuBar, this.tree, this.help);
     registerShortcuts(window, globalCommands, this);
     if(localStorage.getItem("menuBar")) {
-      setTimeout(globalCommands["Alt+m"].action.bind(this), 0)
+      setTimeout(globalCommands["Alt+m"].action.bind(this), 0);
     }
     if(localStorage.getItem("help")) {
-      setTimeout(globalCommands["Alt+h"].action.bind(this), 0)
+      setTimeout(globalCommands["Alt+h"].action.bind(this), 0);
     }
   }
 }
