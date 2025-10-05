@@ -35,7 +35,9 @@ class Tree {
   }
 
   updateOutput() {
-    this.output.replaceChildren(exportNode(this.root))
+    if(!this.output.classList.contains("hidden")) {
+      this.output.replaceChildren(exportNode(this.root))
+    }
   }
   
 }
