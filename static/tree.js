@@ -5,7 +5,7 @@ import history from "./history.js";
 class Tree {
   constructor() {
     this.tree = div()
-    this.output = div().c("output")
+    this.output = div().c("output", "hidden")
     this.elem = div(
       this.tree,
       this.output
@@ -33,6 +33,33 @@ class Tree {
       return this.tree.firstChild.node;
     }
   }
+
+  updateOutput() {
+    this.output.replaceChildren(exportNode(this.root))
+  }
+  
+}
+
+function exportNode(node) {
+  let n;
+  try {
+    if(node.children.children.length) {
+      n = document.createElement(node.name.value);
+      for(let child of node.children.children) {
+	let m = child.node.name.value.match(/^([^=]+)=(.*)$/);
+	if(m) {
+	  n.setAttribute(m[1], m[2]);
+	} else {
+	  n.appendChild(exportNode(child.node));
+	}
+      }
+    } else {
+      n = div(node.name.value);
+    }
+  } catch(e) {
+    n = div()
+  }
+  return n;
 }
 
 export default new Tree();

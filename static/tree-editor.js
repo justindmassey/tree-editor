@@ -18,6 +18,9 @@ class TreeEditor {
     if(localStorage.getItem("help")) {
       setTimeout(globalCommands["Alt+h"].action.bind(this), 0);
     }
+    if(localStorage.getItem("output")) {
+      setTimeout(globalCommands["Alt+o"].action.bind(this), 0);
+    }
   }
 }
 

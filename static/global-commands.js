@@ -48,4 +48,15 @@ export default {
       }
     },
   },
+  "Alt+o": {
+    description: "toggle output display",
+    action() {
+      this.tree.output.classList.toggle("hidden");
+      if(this.tree.output.classList.contains("hidden")) {
+	localStorage.setItem("output", "");
+      } else {
+	localStorage.setItem("output", "true");
+      }
+    }
+  },
 };
