@@ -11,7 +11,7 @@ export default class History {
     this.history = this.history.slice(-this.maxLength, this.index);
     this.history.push(this.serialize());
     if(this.onchange) {
-      this.onchange(this.history[this.history.length - 1]);
+      this.onchange(this);
     }
   }
     
@@ -20,7 +20,7 @@ export default class History {
       this.index--;
       this.deserialize(this.history[this.index]);
       if(this.onchange) {
-	this.onchange(this.history[this.history.length - 1]);
+	this.onchange(this);
       }
     }
   }
@@ -30,7 +30,7 @@ export default class History {
       this.index++;
       this.deserialize(this.history[this.index]);
       if(this.onchange) {
-	this.onchange(this.history[this.history.length - 1]);
+	this.onchange(this);
       }
     }
   }
