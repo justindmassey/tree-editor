@@ -19,6 +19,9 @@ export default class History {
     if(this.index > 0){
       this.index--;
       this.deserialize(this.history[this.index]);
+      if(this.onchange) {
+	this.onchange(this.history[this.history.length - 1]);
+      }
     }
   }
     
@@ -26,6 +29,9 @@ export default class History {
     if(this.index < this.history.length - 1) {
       this.index++;
       this.deserialize(this.history[this.index]);
+      if(this.onchange) {
+	this.onchange(this.history[this.history.length - 1]);
+      }
     }
   }
 }
