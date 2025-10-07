@@ -30,8 +30,8 @@ const nodeCommands = {
     description: "append child to grandparent",
     action() {
       if(this.parent && this.parent.parent) {
-	this.parent.parent.appendChild(new Node())
-	history.add()
+	this.parent.parent.appendChild(new Node());
+	history.add();
       }
     }
   },
@@ -48,9 +48,9 @@ const nodeCommands = {
     action() {
       if(this.parent) {
 	if(this.elem.previousSibling) {
-	  this.elem.previousSibling.node.focus()
+	  this.elem.previousSibling.node.focus();
 	} else {
-	  this.parent.children.lastChild.node.focus()
+	  this.parent.children.lastChild.node.focus();
 	}
       }
     }
@@ -60,9 +60,9 @@ const nodeCommands = {
     action() {
       if(this.parent) {
 	if(this.elem.nextSibling) {
-	  this.elem.nextSibling.node.focus()
+	  this.elem.nextSibling.node.focus();
 	} else {
-	  this.parent.children.firstChild.node.focus()
+	  this.parent.children.firstChild.node.focus();
 	}
       }
     }
@@ -212,9 +212,7 @@ const nodeCommands = {
     description: "delete descendants",
     action() {
       if (this.children.firstChild) {
-        while (this.children.firstChild) {
-          this.children.firstChild.remove();
-        }
+        this.children.replaceChildren();
         history.add();
       }
     },

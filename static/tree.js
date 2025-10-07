@@ -4,14 +4,14 @@ import history from "./history.js";
 
 class Tree {
   constructor() {
-    this.tree = div()
+    this.tree = div();
     this.output = div().c("output", "hidden")
     this.elem = div(
       this.tree,
       this.output
-    ).c("tree")
+    ).c("tree");
     this.clipboard = null;
-    this.load()
+    this.load();
   }
 
   load() {
