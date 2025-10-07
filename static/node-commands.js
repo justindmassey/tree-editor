@@ -43,6 +43,30 @@ const nodeCommands = {
       }
     },
   },
+  "Alt+ArrowUp": {
+    description: "focus previous sibling",
+    action() {
+      if(this.parent) {
+	if(this.elem.previousSibling) {
+	  this.elem.previousSibling.node.focus()
+	} else {
+	  this.parent.children.lastChild.node.focus()
+	}
+      }
+    }
+  },
+  "Alt+ArrowDown": {
+    description: "focus next sibling",
+    action() {
+      if(this.parent) {
+	if(this.elem.nextSibling) {
+	  this.elem.nextSibling.node.focus()
+	} else {
+	  this.parent.children.firstChild.node.focus()
+	}
+      }
+    }
+  },
   "Shift+ArrowUp": {
     description: "move this node up",
     action() {
@@ -226,4 +250,6 @@ export default addCommandAliases(nodeCommands, {
   ArrowDown: ["Alt+n"],
   "Shift+ArrowUp": ["Alt+Shift+P"],
   "Shift+ArrowDown": ["Alt+Shift+N"],
+  "Alt+ArrowUp": ["Control+Alt+p"],
+  "Alt+ArrowDown": ["Control+Alt+n"]
 });

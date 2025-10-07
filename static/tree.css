@@ -1,5 +1,7 @@
 .tree {
     display: flex;
+    padding: 1em;
+    width: fit-content;
 }
 
 .output {

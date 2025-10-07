@@ -25,7 +25,7 @@ class Tree {
   }
 
   set root(node) {
-    this.tree.replaceChildren(node.elem)
+    this.tree.replaceChildren(node.elem);
   }
 
   get root() {
@@ -36,7 +36,7 @@ class Tree {
 
   updateOutput() {
     if(!this.output.classList.contains("hidden")) {
-      this.output.replaceChildren(exportNode(this.root))
+      this.output.replaceChildren(exportNode(this.root));
     }
   }
   
@@ -59,7 +59,7 @@ function exportNode(node) {
       n = div(node.name.value);
     }
   } catch(e) {
-    n = div()
+    n = div();
   }
   return n;
 }
