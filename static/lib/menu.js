@@ -11,6 +11,6 @@ export default class Menu {
   }
 
   clearItems() {
-    this.items.replaceChildren()
+    this.items.replaceChildren();
   }
 }

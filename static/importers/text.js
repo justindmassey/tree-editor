@@ -10,5 +10,5 @@ function convertNode(node) {
 }
 
 export default function importText(text) {
-  return convertNode(parseIndentedText(text))
+  return convertNode(parseIndentedText(text));
 }

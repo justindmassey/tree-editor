@@ -20,17 +20,17 @@ class MenuBar {
         div("Import"),
         new TextUploader("Text", (text) => {
           tree.root = importText(text);
-	  tree.root.focus();
+          tree.root.focus();
           history.add();
         }),
         new TextUploader("JSON", (json) => {
           tree.root = importJson(json);
-	  tree.root.focus();
+          tree.root.focus();
           history.add();
         }),
-	new TextUploader("XML", (xml) => {
+        new TextUploader("XML", (xml) => {
           tree.root = importXml(xml);
-	  tree.root.focus()
+          tree.root.focus();
           history.add();
         })
       ),
@@ -42,9 +42,9 @@ class MenuBar {
         div("JSON").e("click", () => {
           downloadFile(tree.root.name.value + ".json", exportToJson(tree.root));
         }),
-	div("XML").e("click", ()=> {
-	  downloadFile(tree.root.name.value + ".xml", exportToXml(tree.root))
-	})
+        div("XML").e("click", () => {
+          downloadFile(tree.root.name.value + ".xml", exportToXml(tree.root));
+        })
       )
     ).c("menu-bar", "hidden");
   }

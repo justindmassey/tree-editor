@@ -5,32 +5,32 @@ export default class History {
     this.history = [];
     this.index = -1;
   }
-    
+
   add() {
     this.index++;
     this.history = this.history.slice(-this.maxLength, this.index);
     this.history.push(this.serialize());
-    if(this.onchange) {
+    if (this.onchange) {
       this.onchange(this);
     }
   }
-    
-  undo(){
-    if(this.index > 0){
+
+  undo() {
+    if (this.index > 0) {
       this.index--;
       this.deserialize(this.history[this.index]);
-      if(this.onchange) {
-	this.onchange(this);
+      if (this.onchange) {
+        this.onchange(this);
       }
     }
   }
-    
+
   redo() {
-    if(this.index < this.history.length - 1) {
+    if (this.index < this.history.length - 1) {
       this.index++;
       this.deserialize(this.history[this.index]);
-      if(this.onchange) {
-	this.onchange(this);
+      if (this.onchange) {
+        this.onchange(this);
       }
     }
   }

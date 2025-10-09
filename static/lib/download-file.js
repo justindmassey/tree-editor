@@ -59,6 +59,6 @@ export default function downloadFile(filename, contents) {
     document.body.appendChild(link);
     link.click();
     link.remove();
-    URL.revokeObjectURL(link.href)
+    URL.revokeObjectURL(link.href);
   }
 }

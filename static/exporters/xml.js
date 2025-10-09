@@ -1,13 +1,13 @@
 function exportNode(node) {
   let n;
-  if(node.children.children.length) {
+  if (node.children.children.length) {
     n = document.createElement(node.name.value);
-    for(let child of node.children.children) {
+    for (let child of node.children.children) {
       let m = child.node.name.value.match(/^([^=]+)=(.*)$/);
-      if(m) {
-	n.setAttribute(m[1], m[2]);
+      if (m) {
+        n.setAttribute(m[1], m[2]);
       } else {
-	n.appendChild(exportNode(child.node));
+        n.appendChild(exportNode(child.node));
       }
     }
   } else {
@@ -17,5 +17,7 @@ function exportNode(node) {
 }
 
 export default function exportToXml(node) {
-  return '<?xml version="1.0" encoding="UTF-8"?>\n' + exportNode(node).outerHTML
+  return (
+    '<?xml version="1.0" encoding="UTF-8"?>\n' + exportNode(node).outerHTML
+  );
 }

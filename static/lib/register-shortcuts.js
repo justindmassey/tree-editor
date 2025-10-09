@@ -29,20 +29,20 @@ class ExecShortcut {
       event.preventDefault();
       this.prefixCommand += command + " ";
     } else {
-      let prefixedCommand = this.prefixCommand + command
-      if(this.commands[prefixedCommand]) {
-        event.preventDefault()
-        this.commands[prefixedCommand].action.bind(this.bindObject)(event)
-        this.prefixCommand = ""
-      } else if(this.prefixCommands[prefixedCommand]) {
-        event.preventDefault()
-        this.prefixCommand = prefixedCommand + " "
-      } else if(this.commands[command]) {
-        event.preventDefault()
-        this.commands[command].action.bind(this.bindObject)(event)
-        this.prefixCommand = ""
-      } else  {
-        this.prefixCommand = ""
+      let prefixedCommand = this.prefixCommand + command;
+      if (this.commands[prefixedCommand]) {
+        event.preventDefault();
+        this.commands[prefixedCommand].action.bind(this.bindObject)(event);
+        this.prefixCommand = "";
+      } else if (this.prefixCommands[prefixedCommand]) {
+        event.preventDefault();
+        this.prefixCommand = prefixedCommand + " ";
+      } else if (this.commands[command]) {
+        event.preventDefault();
+        this.commands[command].action.bind(this.bindObject)(event);
+        this.prefixCommand = "";
+      } else {
+        this.prefixCommand = "";
       }
     }
   }

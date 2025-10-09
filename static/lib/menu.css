@@ -1,34 +1,34 @@
 .menu {
-    position: relative;
-    display: inline-block;
-    margin-right: 0.5em;
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5em;
 }
 
 .menu-items {
-    position: absolute;
-    display: none;
+  position: absolute;
+  display: none;
 }
 
 .menu:hover > .menu-items {
-    display: block;
+  display: block;
 }
 
 .menu-items {
-    background: white;
+  background: white;
 }
 
 .menu-label > *,
 .menu-items > * {
-    white-space: nowrap;
-    cursor: default;
-    user-select: none;
-    border: 1px solid #999;
-    padding: 0.25em;
-    border-radius: 2px;
-    margin-top: -1px;
-    display: block;
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+  border: 1px solid #999;
+  padding: 0.25em;
+  border-radius: 2px;
+  margin-top: -1px;
+  display: block;
 }
 
 .menu-items > *:hover {
-    background: #eee;
+  background: #eee;
 }

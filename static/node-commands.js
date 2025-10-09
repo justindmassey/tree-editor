@@ -4,11 +4,11 @@ import history from "./history.js";
 import addCommandAliases from "./lib/add-command-aliases.js";
 
 const nodeCommands = {
-  "Tab": {
+  Tab: {
     description: "toggle visibility of children",
     action() {
       this.toggle();
-    }
+    },
   },
   "Shift+Enter": {
     description: "prepend a new child node",
@@ -29,11 +29,11 @@ const nodeCommands = {
   "Alt+Enter": {
     description: "append child to grandparent",
     action() {
-      if(this.parent && this.parent.parent) {
-	this.parent.parent.appendChild(new Node());
-	history.add();
+      if (this.parent && this.parent.parent) {
+        this.parent.parent.appendChild(new Node());
+        history.add();
       }
-    }
+    },
   },
   "Control+d": {
     description: "delete this node",
@@ -46,26 +46,26 @@ const nodeCommands = {
   "Alt+ArrowUp": {
     description: "focus previous sibling",
     action() {
-      if(this.parent) {
-	if(this.elem.previousSibling) {
-	  this.elem.previousSibling.node.focus();
-	} else {
-	  this.parent.children.lastChild.node.focus();
-	}
+      if (this.parent) {
+        if (this.elem.previousSibling) {
+          this.elem.previousSibling.node.focus();
+        } else {
+          this.parent.children.lastChild.node.focus();
+        }
       }
-    }
+    },
   },
   "Alt+ArrowDown": {
     description: "focus next sibling",
     action() {
-      if(this.parent) {
-	if(this.elem.nextSibling) {
-	  this.elem.nextSibling.node.focus();
-	} else {
-	  this.parent.children.firstChild.node.focus();
-	}
+      if (this.parent) {
+        if (this.elem.nextSibling) {
+          this.elem.nextSibling.node.focus();
+        } else {
+          this.parent.children.firstChild.node.focus();
+        }
       }
-    }
+    },
   },
   "Shift+ArrowUp": {
     description: "move this node up",
@@ -249,5 +249,5 @@ export default addCommandAliases(nodeCommands, {
   "Shift+ArrowUp": ["Alt+Shift+P"],
   "Shift+ArrowDown": ["Alt+Shift+N"],
   "Alt+ArrowUp": ["Control+Alt+p"],
-  "Alt+ArrowDown": ["Control+Alt+n"]
+  "Alt+ArrowDown": ["Control+Alt+n"],
 });

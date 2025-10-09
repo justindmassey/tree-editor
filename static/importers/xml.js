@@ -1,15 +1,15 @@
-import Node from "../node.js"
-const TEXT = 3
+import Node from "../node.js";
+const TEXT = 3;
 
 function importNode(node) {
   let n = new Node(node.tagName);
-  for(let attr of node.attributes) {
+  for (let attr of node.attributes) {
     n.appendChild(new Node(attr.name + "=" + attr.value));
   }
-  for(let child of node.childNodes) {
-    if(child.nodeType == TEXT) {
-      for(let line of child.textContent.replace(/\n$/, '').split("\n")) {
-	n.appendChild(new Node(line));
+  for (let child of node.childNodes) {
+    if (child.nodeType == TEXT) {
+      for (let line of child.textContent.replace(/\n$/, "").split("\n")) {
+        n.appendChild(new Node(line));
       }
     } else {
       n.appendChild(importNode(child));

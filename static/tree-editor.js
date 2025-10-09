@@ -12,13 +12,13 @@ class TreeEditor {
     this.help = help;
     this.elem = div(this.menuBar, this.tree, this.help);
     registerShortcuts(window, globalCommands, this);
-    if(localStorage.getItem("menuBar")) {
+    if (localStorage.getItem("menuBar")) {
       setTimeout(globalCommands["Alt+m"].action.bind(this), 0);
     }
-    if(localStorage.getItem("help") || localStorage.getItem("help") == null) {
+    if (localStorage.getItem("help") || localStorage.getItem("help") == null) {
       setTimeout(globalCommands["Alt+h"].action.bind(this), 0);
     }
-    if(localStorage.getItem("output")) {
+    if (localStorage.getItem("output")) {
       setTimeout(globalCommands["Alt+o"].action.bind(this), 0);
     }
   }
