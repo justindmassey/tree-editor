@@ -1,14 +1,37 @@
 import history from "./history.js";
+import {post, get} from "./lib/ajax.js";
+import treeMenu from "./tree-menu.js";
+import Node from "./node.js";
 
 export default {
   "Control+s": {
     description: "save the tree",
     action() {
-      localStorage.setItem("tree", JSON.stringify(this.tree.root.serialize()));
-      document.body.classList.remove("flash");
-      document.body.offsetWidth;
-      document.body.classList.add("flash");
+      post(
+	"/save/" + encodeURIComponent(this.tree.root.name.value),
+	JSON.stringify(this.tree.root.serialize())
+      ).then((res)=> {
+	localStorage.setItem("tree", this.tree.root.name.value);
+	treeMenu.update()
+	document.body.classList.remove("flash");
+	document.body.offsetWidth;
+	document.body.classList.add("flash");
+      }).catch((err)=> {
+	console.log(err)
+      })
     },
+  },
+  "Control+Alt+d": {
+    description: "delete this tree",
+    action() {
+      get("/delete/" + encodeURIComponent(this.tree.root.name.value)).then((res) => {
+	treeMenu.update()
+	this.tree.root = new Node()
+	this.tree.root.focus()
+	history.add()
+	localStorage.setItem("tree", "")
+      })
+    }
   },
   "Control+z": {
     description: "undo",

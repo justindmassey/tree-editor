@@ -1,6 +1,7 @@
 import Node from "./node.js";
 import { div } from "./lib/elements.js";
 import history from "./history.js";
+import loadTree from "./load-tree.js";
 
 class Tree {
   constructor() {
@@ -16,12 +17,15 @@ class Tree {
 
   load() {
     if (localStorage.getItem("tree")) {
-      this.root = Node.deserialize(JSON.parse(localStorage.getItem("tree")));
+      loadTree(localStorage.getItem("tree"))
     } else {
-      this.root = new Node("Alt+h for help");
-      setTimeout(() => this.root.focus(), 0);
+      this.root = new Node();
+      setTimeout(() => {
+	this.root.focus()
+	history.add()
+      }, 0);
     }
-    setTimeout(() => history.add(), 0);
+
   }
 
   set root(node) {

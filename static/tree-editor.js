@@ -15,7 +15,7 @@ class TreeEditor {
     if(localStorage.getItem("menuBar")) {
       setTimeout(globalCommands["Alt+m"].action.bind(this), 0);
     }
-    if(localStorage.getItem("help")) {
+    if(localStorage.getItem("help") || localStorage.getItem("help") == null) {
       setTimeout(globalCommands["Alt+h"].action.bind(this), 0);
     }
     if(localStorage.getItem("output")) {

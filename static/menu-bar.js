@@ -10,21 +10,24 @@ import exportToXml from "./exporters/xml.js";
 import tree from "./tree.js";
 import history from "./history.js";
 import Menu from "./lib/menu.js";
+import treeMenu from "./tree-menu.js";
 
+treeMenu.update()
 
 class MenuBar {
   constructor() {
     this.elem = div(
+      treeMenu,
       new Menu(
         div("Import"),
         new TextUploader("Text", (text) => {
           tree.root = importText(text);
-	  tree.root.focus()
+	  tree.root.focus();
           history.add();
         }),
         new TextUploader("JSON", (json) => {
           tree.root = importJson(json);
-	  tree.root.focus()
+	  tree.root.focus();
           history.add();
         }),
 	new TextUploader("XML", (xml) => {

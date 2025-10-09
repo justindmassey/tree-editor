@@ -1,0 +1,9 @@
+.tree {
+    display: flex;
+    padding: 1em;
+    width: fit-content;
+}
+
+.output {
+    margin-left: 1em;
+}
