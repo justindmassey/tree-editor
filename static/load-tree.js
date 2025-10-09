@@ -3,10 +3,10 @@ import tree from "./tree.js";
 import Node from "./node.js";
 import history from "./history.js";
 
-export default function loadTree(name) {
-  get('/trees/' + encodeURIComponent(name)).then((json)=> {
-    tree.root = Node.deserialize(json)
-    history.add()
-    localStorage.setItem("tree", name)
+export default function loadTree(name, call) {
+  get('/trees/' + encodeURIComponent(name)).then((data)=> {
+    tree.root = Node.deserialize(data);
+    history.add();
+    localStorage.setItem("tree", name);
   })
 }

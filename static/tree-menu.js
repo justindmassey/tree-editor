@@ -10,6 +10,7 @@ class TreeMenu {
   constructor() {
     this.menu = new Menu(div("Trees"));
     this.elem = this.menu.elem;
+    this.update()
   }
 
   update() {

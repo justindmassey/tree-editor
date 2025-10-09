@@ -12,8 +12,6 @@ import history from "./history.js";
 import Menu from "./lib/menu.js";
 import treeMenu from "./tree-menu.js";
 
-treeMenu.update()
-
 class MenuBar {
   constructor() {
     this.elem = div(
