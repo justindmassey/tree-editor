@@ -1,7 +1,7 @@
 import Node from "./node.js";
 import { div } from "./lib/elements.js";
 import history from "./history.js";
-import loadTree from "./load-tree.js";
+import { get } from "./lib/ajax.js";
 
 class Tree {
   constructor() {
@@ -9,19 +9,14 @@ class Tree {
     this.output = div().c("output", "hidden");
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
-    this.load();
   }
 
-  load() {
-    if (localStorage.getItem("tree")) {
-      loadTree(localStorage.getItem("tree"));
-    } else {
-      this.root = new Node();
-      setTimeout(() => {
-        this.root.focus();
-        history.add();
-      }, 0);
-    }
+  load(name) {
+    get("/trees/" + encodeURIComponent(name)).then((data) => {
+      this.root = Node.deserialize(data);
+      history.add();
+      localStorage.setItem("tree", name);
+    });
   }
 
   set root(node) {
