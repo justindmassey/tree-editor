@@ -1,19 +1,21 @@
-function exportNode(node) {
-  let n;
-  if (node.children.children.length) {
-    n = document.createElement(node.name.value);
-    for (let child of node.children.children) {
-      let m = child.node.name.value.match(/^([^=]+)=(.*)$/);
-      if (m) {
-        n.setAttribute(m[1], m[2]);
-      } else {
-        n.appendChild(exportNode(child.node));
+export function exportNode(node) {
+  try {
+    let n;
+    if (node.children.children.length) {
+      n = document.createElement(node.name.value);
+      for (let child of node.children.children) {
+        let m = child.node.name.value.match(/^([^=]+)=(.*)$/);
+        if (m) {
+          n.setAttribute(m[1], m[2]);
+        } else {
+          n.appendChild(exportNode(child.node));
+        }
       }
+    } else {
+      n = new Text(node.name.value + "\n");
     }
-  } else {
-    n = new Text(node.name.value + "\n");
-  }
-  return n;
+    return n;
+  } catch (e) {}
 }
 
 export default function exportToXml(node) {
