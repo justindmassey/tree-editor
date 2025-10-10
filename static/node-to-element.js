@@ -1,11 +1,16 @@
 import { ol, li } from "./lib/elements.js"
+import renderers from "./renderers.js"
 
-function NodeToLi(node) {
+function NodeToItems(node) {
+    let m = node.name.value.match(/^(:\S+)\s*(.*)/)
+    if(m && renderers[m[1]]) {
+        return [li(renderers[m[1]].render(node, m[2]))]
+    }
     if(node.children.children.length) {
         let n = li(node.name.value)
         let c = ol()
         for(let child of node.children.children) {
-            for(let item of NodeToLi(child.node)) {
+            for(let item of NodeToItems(child.node)) {
                 c.appendChild(item)
             }
         }
@@ -16,8 +21,9 @@ function NodeToLi(node) {
 }
 
 export default function nodeToElement(node) {
+    
     let list = ol()
-    for(let item of NodeToLi(node)) {
+    for(let item of NodeToItems(node)) {
         list.appendChild(item)
     }
     return list
