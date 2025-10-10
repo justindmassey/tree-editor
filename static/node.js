@@ -1,7 +1,7 @@
 import registerShortcuts from "./lib/register-shortcuts.js";
 import nodeCommands from "./node-commands.js";
 import { div, input, ol, li } from "./lib/elements.js";
-import renderers from "./renderers.js";
+import widgets from "./widgets.js";
 import history from "./history.js";
 
 export default class Node {
@@ -38,8 +38,8 @@ export default class Node {
 
   toElement() {
     let m = this.name.value.match(/^(:\S+)\s*(.*)/);
-    if (m && renderers[m[1]]) {
-      return renderers[m[1]].render(node, m[2]);
+    if (m && widgets[m[1]]) {
+      return widgets[m[1]].render(this, m[2]);
     } else {
       let children = ol();
       for (let child of this.children.children) {

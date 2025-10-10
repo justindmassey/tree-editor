@@ -1,8 +1,9 @@
 import { div, table, tr, td, h1, h2 } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
+import widgets from "./widgets.js";
 
-function makeCommandReference(commands) {
+function makeReference(commands) {
   let commandsTable = table();
   for (let cmd in commands) {
     commandsTable.appendChild(tr(td(cmd), td(commands[cmd].description)));
@@ -15,9 +16,11 @@ class Help {
     this.elem = div(
       h1("Help"),
       h2("Global Commands"),
-      makeCommandReference(globalCommands),
+      makeReference(globalCommands),
       h2("Node Commands"),
-      makeCommandReference(nodeCommands)
+      makeReference(nodeCommands),
+      h2("Widgets"),
+      makeReference(widgets)
     ).c("help", "hidden");
   }
 }
