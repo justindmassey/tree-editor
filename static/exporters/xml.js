@@ -1,4 +1,4 @@
-export function exportNode(node) {
+function exportNode(node) {
   try {
     let n;
     if (node.children.children.length) {

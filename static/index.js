@@ -16,7 +16,6 @@ if (localStorage.getItem("output")) {
 if (localStorage.getItem("tree")) {
   treeEditor.tree.load(localStorage.getItem("tree"));
 } else {
-  treeEditor.tree.root = new Node();
   treeEditor.tree.root.focus();
   history.add();
 }

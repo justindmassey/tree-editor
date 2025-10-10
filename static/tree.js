@@ -2,7 +2,7 @@ import Node from "./node.js";
 import { div } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
-import { exportNode } from "./exporters/xml.js";
+import nodeToElement from "./node-to-element.js";
 
 class Tree {
   constructor() {
@@ -10,6 +10,7 @@ class Tree {
     this.output = div().c("output", "hidden");
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
+    this.root = new Node()
   }
 
   load(name) {
@@ -32,7 +33,7 @@ class Tree {
 
   updateOutput() {
     if (!this.output.classList.contains("hidden")) {
-      this.output.replaceChildren(exportNode(this.root));
+      this.output.replaceChildren(nodeToElement(this.root));
     }
   }
 }
