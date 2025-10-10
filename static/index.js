@@ -1,5 +1,4 @@
 import treeEditor from "./tree-editor.js";
-import Node from "./node.js";
 import history from "./history.js";
 import globalCommands from "./global-commands.js";
 
