@@ -38,7 +38,7 @@ export default class Node {
     this.expand();
   }
 
-  setAttribute(name, value, focus = false) {
+  setAttribute(name, value = "", focus = false) {
     let found = false;
     for (let child of this.children.children) {
       if (child.node.name.value.startsWith(name + "=")) {

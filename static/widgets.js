@@ -21,7 +21,7 @@ export default {
       if ("url" in node.attributes) {
         link.href = node._atts.url;
       } else {
-        node.setAttribute("url", "");
+        node.setAttribute("url");
       }
       return link;
     },
