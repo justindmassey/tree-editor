@@ -43,6 +43,9 @@ export default class Node {
     for (let child of this.children.children) {
       if (child.node.name.value.startsWith(name + "=")) {
         child.node.name.value = name + "=" + value;
+        if(focus) {
+          child.node.focus()
+        }
         found = true;
         break;
       }
