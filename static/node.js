@@ -5,8 +5,7 @@ import widgets from "./widgets.js";
 import history from "./history.js";
 
 export default class Node {
-
-  static attrRegEx = /^([^=]+)=(.*)$/
+  static attrRegEx = /^([^=]+)=(.*)$/;
 
   constructor(name = "", ...children) {
     this.toggleButton = div()
@@ -39,7 +38,7 @@ export default class Node {
     this.expand();
   }
 
-  setAttribute(name, value) {
+  setAttribute(name, value, focus = false) {
     let found = false;
     for (let child of this.children.children) {
       if (child.node.name.value.startsWith(name + "=")) {
@@ -49,20 +48,25 @@ export default class Node {
       }
     }
     if (!found) {
-      this.prependChild(new Node(name + "=" + value));
+      let attr = new Node(name + "=" + value);
+      if (focus) {
+        this.prependChild(attr);
+      } else {
+        this.prependChild(attr, false);
+      }
     }
   }
 
   get attributes() {
-    let atts = {}
-    for(let child of this.children.children) {
-      let m = child.node.name.value.match(Node.attrRegEx)
-      if(m) {
-        atts[m[1]] = m[2]
+    let atts = {};
+    for (let child of this.children.children) {
+      let m = child.node.name.value.match(Node.attrRegEx);
+      if (m) {
+        atts[m[1]] = m[2];
       }
     }
-    this._atts = atts
-    return atts
+    this._atts = atts;
+    return atts;
   }
 
   toElement() {
