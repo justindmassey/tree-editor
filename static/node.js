@@ -82,15 +82,13 @@ export default class Node {
       return widgets[m[1]].create(this, m[2]);
     } else {
       let children = ol();
-      let hasNonAttrChild = false;
       for (let child of this.children.children) {
         if (!child.node.isAttribute) {
           children.appendChild(li(child.node.toElement()));
-          hasNonAttrChild = true;
         }
       }
       let name = this.name.value.replace(/\\=/g, "=");
-      if (hasNonAttrChild) {
+      if (children.children.length) {
         return div(div(name), children);
       } else {
         return div(name);
