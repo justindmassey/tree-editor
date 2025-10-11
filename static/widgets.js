@@ -43,11 +43,7 @@ export default {
               history.add();
             });
           if ("checked" in child.node.attributes) {
-            if (child.node._atts.checked == "true") {
-              checkbox.checked = true;
-            } else {
-              checkbox.checked = false;
-            }
+            checkbox.checked = child.node._atts.checked == "true";
           } else {
             child.node.setAttribute("checked", "false");
           }
