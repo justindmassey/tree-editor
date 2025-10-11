@@ -9,13 +9,13 @@ class Tree {
     this.output = div().c("output", "hidden");
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
-    this.root = new Node()
+    this.root = new Node();
   }
 
   load(name) {
     get("/trees/" + encodeURIComponent(name)).then((data) => {
       this.root = Node.deserialize(data);
-      history.add();
+      setTimeout(() => history.add(), 0);
       localStorage.setItem("tree", name);
     });
   }
