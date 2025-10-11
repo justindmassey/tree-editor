@@ -5,6 +5,9 @@ import widgets from "./widgets.js";
 import history from "./history.js";
 
 export default class Node {
+
+  static attrRegEx = /^([^=]+)=(.*)$/
+
   constructor(name = "", ...children) {
     this.toggleButton = div()
       .c("button", "toggle-button")
@@ -53,7 +56,7 @@ export default class Node {
   get attributes() {
     let atts = {}
     for(let child of this.children.children) {
-      let m = child.node.name.value.match(/^([^=]+)=(.*)$/)
+      let m = child.node.name.value.match(Node.attrRegEx)
       if(m) {
         atts[m[1]] = m[2]
       }

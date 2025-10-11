@@ -4,7 +4,7 @@ const TEXT = 3;
 function importNode(node) {
   let n = new Node(node.tagName);
   for (let attr of node.attributes) {
-    n.appendChild(new Node(attr.name + "=" + attr.value));
+    n.setAttribute(attr.name, attr.value);
   }
   for (let child of node.childNodes) {
     if (child.nodeType == TEXT) {

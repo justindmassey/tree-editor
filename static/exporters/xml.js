@@ -1,10 +1,12 @@
+import Node from "../node.js";
+
 function exportNode(node) {
   try {
     let n;
     if (node.children.children.length) {
       n = document.createElement(node.name.value);
       for (let child of node.children.children) {
-        let m = child.node.name.value.match(/^([^=]+)=(.*)$/);
+        let m = child.node.name.value.match(Node.attrRegEx);
         if (m) {
           n.setAttribute(m[1], m[2]);
         } else {
