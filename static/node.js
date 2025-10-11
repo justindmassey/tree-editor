@@ -43,8 +43,8 @@ export default class Node {
     for (let child of this.children.children) {
       if (child.node.name.value.startsWith(name + "=")) {
         child.node.name.value = name + "=" + value;
-        if(focus) {
-          child.node.focus()
+        if (focus) {
+          child.node.focus();
         }
         found = true;
         break;
@@ -73,7 +73,7 @@ export default class Node {
   }
 
   get isAttribute() {
-    return this.name.value.match(/(?<!\\)=/)
+    return this.name.value.match(/(?<!\\)=/);
   }
 
   toElement() {
@@ -82,14 +82,14 @@ export default class Node {
       return widgets[m[1]].create(this, m[2]);
     } else {
       let children = ol();
-      let hasNonAttrChild = false
+      let hasNonAttrChild = false;
       for (let child of this.children.children) {
         if (!child.node.isAttribute) {
           children.appendChild(li(child.node.toElement()));
-          hasNonAttrChild = true
+          hasNonAttrChild = true;
         }
       }
-      let name = this.name.value.replace(/\\=/g, "=")
+      let name = this.name.value.replace(/\\=/g, "=");
       if (hasNonAttrChild) {
         return div(div(name), children);
       } else {

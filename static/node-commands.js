@@ -228,14 +228,14 @@ const nodeCommands = {
   "Alt+s": {
     description: "collapse siblings",
     action() {
-      if(this.parent) {
-        for(let sibling of this.parent.children.children) {
-          sibling.node.collapse()
+      if (this.parent) {
+        for (let sibling of this.parent.children.children) {
+          sibling.node.collapse();
         }
       } else {
-        this.collapse()
+        this.collapse();
       }
-    }
+    },
   },
   "Alt+d x": {
     description: "expand all descendants",
