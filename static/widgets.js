@@ -7,7 +7,9 @@ export default {
     create(node, arg) {
       let children = div();
       for (let child of node.children.children) {
-        children.appendChild(child.node.toElement());
+        if (!child.node.isAttribute) {
+          children.appendChild(child.node.toElement());
+        }
       }
       return div(h1(arg), children);
     },
@@ -29,27 +31,30 @@ export default {
     create(node, arg) {
       let checklist = div();
       for (let child of node.children.children) {
-        let checkbox = input()
-          .a("type", "checkbox")
-          .e("change", () => {
-            if (checkbox.checked) {
-              child.node.setAttribute("checked", "true");
+        if (!child.node.isAttribute) {
+          let checkbox = input()
+            .a("type", "checkbox")
+            .e("change", () => {
+              if (checkbox.checked) {
+                child.node.setAttribute("checked", "true");
+              } else {
+                child.node.setAttribute("checked", "false");
+              }
+              history.add();
+            });
+          if ("checked" in child.node.attributes) {
+            if (child.node._atts.checked == "true") {
+              checkbox.checked = true;
             } else {
-              child.node.setAttribute("checked", "false");
+              checkbox.checked = false;
             }
-            history.add();
-          });
-        if ("checked" in child.node.attributes) {
-          if (child.node._atts.checked == "true") {
-            checkbox.checked = true;
           } else {
-            checkbox.checked = false;
+            child.node.setAttribute("checked", "false");
           }
-        } else {
-          child.node.setAttribute("checked", "false");
+          checklist.appendChild(
+            div(checkbox, child.node.toElement()).c("checklist-item")
+          );
         }
-        let item = div(checkbox, child.node.toElement()).c("checklist-item");
-        checklist.appendChild(item);
       }
       return checklist;
     },

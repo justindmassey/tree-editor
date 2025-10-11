@@ -69,6 +69,10 @@ export default class Node {
     return atts;
   }
 
+  get isAttribute() {
+    return this.name.value.match(/(?<!\\)=/)
+  }
+
   toElement() {
     let m = this.name.value.match(/^(:\S+)\s*(.*)/);
     if (m && widgets[m[1]]) {
@@ -77,12 +81,12 @@ export default class Node {
       let children = ol();
       let hasNonAttrChild = false
       for (let child of this.children.children) {
-        if (!child.node.name.value.match(/(?<!\\)=/)) {
+        if (!child.node.isAttribute) {
           children.appendChild(li(child.node.toElement()));
           hasNonAttrChild = true
         }
       }
-      let name = this.name.value.replace(/\\=/, "=")
+      let name = this.name.value.replace(/\\=/g, "=")
       if (hasNonAttrChild) {
         return div(div(name), children);
       } else {
