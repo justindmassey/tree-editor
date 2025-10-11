@@ -51,7 +51,6 @@ export default {
           } else {
             child.node.setAttribute("checked", "false");
           }
-          let item;
           checklist.appendChild(
             div(checkbox, child.node.toElement()).c("checklist-item")
           );
