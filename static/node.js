@@ -36,6 +36,31 @@ export default class Node {
     this.expand();
   }
 
+  setAttribute(name, value) {
+    let found = false;
+    for (let child of this.children.children) {
+      if (child.node.name.value.startsWith(name + "=")) {
+        child.node.name.value = name + "=" + value;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      this.prependChild(new Node(name + "=" + value));
+    }
+  }
+
+  get attributes() {
+    let atts = {}
+    for(let child of this.children.children) {
+      let m = child.node.name.value.match(/^([^=]+)=(.*)$/)
+      if(m) {
+        atts[m[1]] = m[2]
+      }
+    }
+    return atts
+  }
+
   toElement() {
     let m = this.name.value.match(/^(:\S+)\s*(.*)/);
     if (m && widgets[m[1]]) {
