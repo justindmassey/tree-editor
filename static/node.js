@@ -79,7 +79,7 @@ export default class Node {
   toElement() {
     let m = this.name.value.match(/^(:\S+)\s*(.*)/);
     if (m && widgets[m[1]]) {
-      return widgets[m[1]].create(this, m[2]);
+      return widgets[m[1]].create(this, m[2].replace(/\\=/g, "="));
     } else {
       let children = ol();
       for (let child of this.children.children) {
