@@ -61,6 +61,7 @@ export default class Node {
         atts[m[1]] = m[2]
       }
     }
+    this._atts = atts
     return atts
   }
 
