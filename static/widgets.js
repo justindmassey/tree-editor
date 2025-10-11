@@ -16,41 +16,42 @@ export default {
     description: "a link",
     create(node, arg) {
       let link = a(arg).a("target", "_blank");
-      if (node.attributes.url) {
+      if ("url" in node.attributes) {
         link.href = node._atts.url;
       } else {
         node.setAttribute("url", "");
       }
-      return link
+      return link;
     },
   },
   ":cl": {
     description: "a checklist",
     create(node, arg) {
-      let checklist = div()
-      for(let child of node.children.children) {
-        let checkbox = input().a("type", "checkbox")
-        checkbox.e("change", ()=> {
-          if(checkbox.checked) {
-            child.node.setAttribute("checked", "true")
+      let checklist = div();
+      for (let child of node.children.children) {
+        let checkbox = input()
+          .a("type", "checkbox")
+          .e("change", () => {
+            if (checkbox.checked) {
+              child.node.setAttribute("checked", "true");
+            } else {
+              child.node.setAttribute("checked", "false");
+            }
+            history.add();
+          });
+        if ("checked" in child.node.attributes) {
+          if (child.node._atts.checked == "true") {
+            checkbox.checked = true;
           } else {
-            child.node.setAttribute("checked", "false")
-          }
-          history.add()
-        })
-        if("checked" in child.node.attributes) {
-          if(child.node._atts.checked == "true") {
-            checkbox.checked = true
-          } else {
-            checkbox.checked = false
+            checkbox.checked = false;
           }
         } else {
-          child.node.setAttribute("checked", "false")
+          child.node.setAttribute("checked", "false");
         }
-        let item = div(checkbox, child.node.toElement()).c("checklist-item")
-        checklist.appendChild(item)
+        let item = div(checkbox, child.node.toElement()).c("checklist-item");
+        checklist.appendChild(item);
       }
-      return checklist
-    }
-  }
+      return checklist;
+    },
+  },
 };
