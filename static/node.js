@@ -87,7 +87,7 @@ export default class Node {
           children.appendChild(li(child.node.toElement()));
         }
       }
-      let name = this.name.value.replace(/\\=/g, "=");
+      let name = this.name.value.replace(/\\=/g, "=") || ' ';
       if (children.children.length) {
         return div(div(name), children);
       } else {
