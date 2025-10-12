@@ -23,7 +23,7 @@ export default {
       } else {
         node.setAttribute("url");
       }
-      return link;
+      return div(link);
     },
   },
   ":cl": {
