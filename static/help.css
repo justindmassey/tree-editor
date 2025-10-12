@@ -16,6 +16,7 @@ table {
 }
 
 td {
+  vertical-align: top;
   padding: 0.25em;
   border: 1px solid #999;
 }
