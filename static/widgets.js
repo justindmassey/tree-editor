@@ -1,9 +1,12 @@
-import { div, h1, a, input } from "./lib/elements.js";
+import { div, h1, a, input, code } from "./lib/elements.js";
 import history from "./history.js";
 
 export default {
   ":h": {
-    description: "a header",
+    description: div(
+      div("a large header with the children below"),
+      div("Argument: the header text")
+    ),
     create(node, arg) {
       let children = div();
       for (let child of node.children.children) {
@@ -15,7 +18,11 @@ export default {
     },
   },
   ":l": {
-    description: "a link",
+    description: div(
+      div("a hyperlink"),
+      div("Argument: the link text"),
+      div(code("url"), ": The URL the link opens")
+    ),
     create(node, arg) {
       let link = a(arg).a("target", "_blank");
       if ("url" in node.attributes) {
@@ -27,7 +34,11 @@ export default {
     },
   },
   ":cl": {
-    description: "a checklist",
+    description: div(
+      div("turns each child into a checklist item"),
+      div("Argument: the label to display above the list"),
+      div("Items have the attribute ", code("checked"))
+    ),
     create(node, arg) {
       let checklist = div();
       for (let child of node.children.children) {

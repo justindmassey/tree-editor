@@ -19,3 +19,8 @@ td {
   padding: 0.25em;
   border: 1px solid #999;
 }
+
+code {
+  font-size: 1.25em;
+  color: #666
+}
