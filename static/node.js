@@ -39,7 +39,6 @@ export default class Node {
   }
 
   setAttribute(name, value = "", focus = false) {
-    let found = false;
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
       if (child.node.name.value.startsWith(name + "=")) {
@@ -47,14 +46,11 @@ export default class Node {
         if (focus) {
           child.node.focus();
         }
-        found = true;
-        break;
+        return;
       }
     }
-    if (!found) {
-      let attr = new Node(name + "=" + value);
-      this.prependChild(attr, focus);
-    }
+    let attr = new Node(name + "=" + value);
+    this.prependChild(attr, focus);
   }
 
   get attributes() {
@@ -173,7 +169,7 @@ export default class Node {
       this.elem.remove();
       return true;
     } else if (this.name.value != "" || this.children.children.length) {
-      this.children.replaceChildren()
+      this.children.replaceChildren();
       this.name.value = "";
       return true;
     }
