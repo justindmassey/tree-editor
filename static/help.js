@@ -20,7 +20,10 @@ class Help {
       h2("Node Commands"),
       makeReference(nodeCommands),
       h2("Widgets"),
-      p("Widgets have the form ", code(":WIDGET ARGUMENT")),
+      p(
+        div("Widgets have the form ", code(":WIDGET ARGUMENT")),
+        div("Widgets are rendered to the output")
+      ),
       makeReference(widgets)
     ).c("help", "hidden");
   }
