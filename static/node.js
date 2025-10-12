@@ -58,7 +58,7 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        atts[m[1]] = m[2];
+        atts[m[1]] = m[2].replace(/\\=/g, "=");
       }
     }
     this._atts = atts;
