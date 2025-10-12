@@ -23,7 +23,13 @@ class Help {
       p(
         div("Widgets begin with ", code(":WIDGET ARGUMENT")),
         div("Widgets are rendered to the output"),
-        div('Equals symbols ("', code("="), '") can be escaped with a backslash ("',code("\\"),'")')
+        div(
+          'Equals symbols ("',
+          code("="),
+          '") can be escaped with a backslash ("',
+          code("\\"),
+          '")'
+        )
       ),
       makeReference(widgets)
     ).c("help", "hidden");
