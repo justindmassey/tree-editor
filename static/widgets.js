@@ -5,7 +5,7 @@ export default {
   ":h": {
     description: div(
       div("a large header with the children below"),
-      div("Argument: the header text")
+      div(code("ARGUMENT"), ": the header text")
     ),
     create(node, arg) {
       let children = div();
@@ -20,7 +20,7 @@ export default {
   ":l": {
     description: div(
       div("a hyperlink"),
-      div("Argument: the link text"),
+      div(code("ARGUMENT"), ": the link text"),
       div(code("url"), ": The URL the link opens")
     ),
     create(node, arg) {
@@ -36,8 +36,8 @@ export default {
   ":cl": {
     description: div(
       div("turns each child into a checklist item"),
-      div("Argument: the label to display above the list"),
-      div("Items have the attribute ", code("checked"))
+      div(code("ARGUMENT"), ": the label to display above the list"),
+      div("items have the attribute ", code("checked"))
     ),
     create(node, arg) {
       let checklist = div();
