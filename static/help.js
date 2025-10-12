@@ -1,4 +1,4 @@
-import { div, table, tr, td, h1, h2 } from "./lib/elements.js";
+import { div, table, tr, td, h1, h2, code, p } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
@@ -20,6 +20,7 @@ class Help {
       h2("Node Commands"),
       makeReference(nodeCommands),
       h2("Widgets"),
+      p("Widgets have the form ", code(":WIDGET ARGUMENT")),
       makeReference(widgets)
     ).c("help", "hidden");
   }
