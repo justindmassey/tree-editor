@@ -30,7 +30,7 @@ class Help {
           code("\\"),
           '").'
         ),
-        div("Escaping equals symbols following the first unescaped one is optional")
+        div("Escaping equals symbols following the first unescaped one is optional.")
       ),
       makeReference(widgets)
     ).c("help", "hidden");
