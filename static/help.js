@@ -29,7 +29,8 @@ class Help {
           '") can be escaped with a backslash ("',
           code("\\"),
           '").'
-        )
+        ),
+        div("Escaping equals symbols following the first unescaped one is optional")
       ),
       makeReference(widgets)
     ).c("help", "hidden");
