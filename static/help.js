@@ -3,12 +3,12 @@ import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
 
-function makeReference(commands) {
-  let commandsTable = table();
-  for (let cmd in commands) {
-    commandsTable.appendChild(tr(td(cmd), td(commands[cmd].description)));
+function makeReference(items) {
+  let reference = table();
+  for (let item in items) {
+    reference.appendChild(tr(td(item), td(items[item].description)));
   }
-  return commandsTable;
+  return reference;
 }
 
 class Help {
