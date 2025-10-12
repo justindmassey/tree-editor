@@ -21,7 +21,7 @@ class Help {
       makeReference(nodeCommands),
       h2("Widgets"),
       p(
-        div("Widgets have the form ", code(":WIDGET ARGUMENT")),
+        div("Widgets begin with ", code(":WIDGET ARGUMENT")),
         div("Widgets are rendered to the output"),
         div('Equals symbols ("', code("="), '") can be escaped with a backslash ("',code("\\"),'")')
       ),
