@@ -173,9 +173,7 @@ export default class Node {
       this.elem.remove();
       return true;
     } else if (this.name.value != "" || this.children.children.length) {
-      while (this.children.firstChild) {
-        this.children.firstChild.remove();
-      }
+      this.children.replaceChildren()
       this.name.value = "";
       return true;
     }
