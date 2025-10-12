@@ -6,6 +6,11 @@
     width: fit-content;
 }
 
+.tree-container {
+    padding-right: 1em;
+}
+
 .output {
-    margin-left: 1em;
+    border-left: 1px solid #999;
+    padding-left: 1em;
 }

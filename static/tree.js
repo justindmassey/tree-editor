@@ -5,7 +5,7 @@ import { get } from "./lib/ajax.js";
 
 class Tree {
   constructor() {
-    this.tree = div();
+    this.tree = div().c("tree-container");
     this.output = div().c("output", "hidden");
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
