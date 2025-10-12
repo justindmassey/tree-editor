@@ -33,7 +33,7 @@ export default class Node {
     ).c("node");
     this.elem.node = this;
     for (let child of children) {
-      this.appendChild(child);
+      this.appendChild(child, false);
     }
     this.expand();
   }
