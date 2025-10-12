@@ -58,7 +58,7 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        atts[m[1].replace(/\\=/g, "=")] = m[2].replace(/\\=/g, "=");
+        atts[unescape(m[1])] = unescape(m[2]);
       }
     }
     this._atts = atts;
@@ -72,7 +72,7 @@ export default class Node {
   toElement() {
     let m = this.name.value.match(/^(:\S+)\s*(.*)/);
     if (m && widgets[m[1]]) {
-      return widgets[m[1]].create(this, m[2].replace(/\\=/g, "="));
+      return widgets[m[1]].create(this, unescape(m[2]));
     } else {
       let children = ol();
       for (let child of this.children.children) {
@@ -80,7 +80,7 @@ export default class Node {
           children.appendChild(li(child.node.toElement()));
         }
       }
-      let name = this.name.value.replace(/\\=/g, "=") || " ";
+      let name = unescape(this.name.value) || " ";
       if (children.children.length) {
         return div(div(name), children);
       } else {
@@ -224,4 +224,8 @@ export default class Node {
       this.collapse();
     }
   }
+}
+
+function unescape(str) {
+  return str.replace(/\\=/g, "=")
 }
