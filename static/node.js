@@ -60,7 +60,7 @@ export default class Node {
   get attributes() {
     let atts = {};
     for (let child of this.children.children) {
-      let m = child.node.name.value.match(Node.attrRegEx);
+      let m = child.node.isAttribute;
       if (m) {
         atts[m[1]] = m[2];
       }
