@@ -35,11 +35,7 @@ export default {
           let checkbox = input()
             .a("type", "checkbox")
             .e("change", () => {
-              if (checkbox.checked) {
-                child.node.setAttribute("checked", "true");
-              } else {
-                child.node.setAttribute("checked", "false");
-              }
+              child.node.setAttribute("checked", checkbox.checked)
               history.add();
             });
           if ("checked" in child.node.attributes) {
