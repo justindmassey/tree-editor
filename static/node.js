@@ -39,7 +39,7 @@ export default class Node {
   }
 
   setAttribute(name, value = "", focus = false) {
-    name = name.replace(/=/g, "\\=")
+    name = name.replace(/=/g, "\\=").replace(/^-/, "\\-");
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
       if (child.node.name.value.startsWith(name + "=")) {
@@ -228,5 +228,5 @@ export default class Node {
 }
 
 export function unescape(str) {
-  return str.replace(/\\=/g, "=")
+  return str.replace(/\\=/g, "=").replace(/^\\-/, "-");
 }
