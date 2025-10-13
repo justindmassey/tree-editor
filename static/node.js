@@ -71,7 +71,7 @@ export default class Node {
   }
 
   toElement() {
-    let m = this.name.value.match(/^(:\S+)\s*(.*)/);
+    let m = this.name.value.match(/^(-\S+)\s*(.*)/);
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create(this, unescape(m[2]));
     } else {

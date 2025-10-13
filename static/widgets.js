@@ -13,7 +13,7 @@ import {
 import history from "./history.js";
 import { unescape } from "./node.js";
 export default {
-  ":h": {
+  "-h": {
     description: div(
       div("a large header with the children below"),
       div(code("ARGUMENT"), ": the header text")
@@ -28,7 +28,7 @@ export default {
       return div(h1(arg), children);
     },
   },
-  ":l": {
+  "-l": {
     description: div(
       div("a hyperlink"),
       div(code("ARGUMENT"), ": the link text"),
@@ -44,7 +44,7 @@ export default {
       return div(link);
     },
   },
-  ":cl": {
+  "-cl": {
     description: div(
       div("turns each child into a checklist item"),
       div(code("ARGUMENT"), ": the label to display above the list"),
@@ -77,7 +77,7 @@ export default {
       }
     },
   },
-  ":t": {
+  "-t": {
     description: div(
       div("a table"),
       div(code("ARGUMENT"), ": a label to display above the table"),
