@@ -87,33 +87,36 @@ export default {
       let header = tr();
       let bdy = tbody();
       let longestChild = 0;
-      for (let child of node.children.children) {
-        if (!child.node.isAttribute) {
-          header.appendChild(td(unescape(child.node.name.value)));
-          let nonAttrChildren = 0;
-          for (let gc of child.node.children.children) {
-            if (!gc.node.isAttribute) {
-              nonAttrChildren++;
-            }
-          }
-          if (nonAttrChildren > longestChild) {
-            longestChild = nonAttrChildren;
-          }
+      let children = Array.from(node.children.children).filter(
+        (child) => !child.node.isAttribute
+      );
+      for (let child of children) {
+        let grandchildren = Array.from(child.node.children.children).filter(
+          (child) => !child.node.isAttribute
+        );
+        header.appendChild(td(unescape(child.node.name.value)));
+        if (grandchildren.length > longestChild) {
+          longestChild = grandchildren.length;
         }
       }
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
-        for (let child of node.children.children) {
-          if (!child.node.isAttribute) {
-            let cell = child.node.children.children[i];
-            if (cell && !cell.node.isAttribute) {
+        for (let child of children) {
+          let grandchildren = Array.from(child.node.children.children).filter(
+            (child) => !child.node.isAttribute
+          );
+          let cell = grandchildren[i];
+          if (cell) {
+            if (!cell.node.isAttribute) {
               row.appendChild(td(cell.node.toElement()));
-            } else {
-              row.appendChild(td());
             }
+          } else {
+            row.appendChild(td());
           }
         }
-        bdy.appendChild(row);
+        if (row.textContent) {
+          bdy.appendChild(row);
+        }
       }
       let tbl = table(thead(header), bdy);
       if (arg) {
