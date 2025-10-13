@@ -114,9 +114,7 @@ export default {
             row.appendChild(td());
           }
         }
-        if (row.textContent) {
-          bdy.appendChild(row);
-        }
+        bdy.appendChild(row);
       }
       let tbl = table(thead(header), bdy);
       if (arg) {
