@@ -1,6 +1,17 @@
-import { div, h1, a, input, code } from "./lib/elements.js";
+import {
+  div,
+  h1,
+  a,
+  input,
+  code,
+  table,
+  tr,
+  td,
+  thead,
+  tbody,
+} from "./lib/elements.js";
 import history from "./history.js";
-
+import { unescape } from "./node.js";
 export default {
   ":h": {
     description: div(
@@ -63,6 +74,52 @@ export default {
         return div(div(arg), checklist);
       } else {
         return checklist;
+      }
+    },
+  },
+  ":t": {
+    description: div(
+      div("a table"),
+      div(code("ARGUMENT"), ": a label to display above the table"),
+      div("each childs name is a table header and its children the column")
+    ),
+    create(node, arg) {
+      let header = tr();
+      let bdy = tbody();
+      let longestChild = 0;
+      for (let child of node.children.children) {
+        if (!child.node.isAttribute) {
+          header.appendChild(td(unescape(child.node.name.value)));
+          let nonAttrChildren = 0;
+          for (let gc of child.node.children.children) {
+            if (!gc.node.isAttribute) {
+              nonAttrChildren++;
+            }
+          }
+          if (nonAttrChildren > longestChild) {
+            longestChild = nonAttrChildren;
+          }
+        }
+      }
+      for (let i = 0; i < longestChild; i++) {
+        let row = tr();
+        for (let child of node.children.children) {
+          if (!child.node.isAttribute) {
+            let cell = child.node.children.children[i];
+            if (cell && !cell.node.isAttribute) {
+              row.appendChild(td(cell.node.toElement()));
+            } else {
+              row.appendChild(td());
+            }
+          }
+        }
+        bdy.appendChild(row);
+      }
+      let tbl = table(thead(header), bdy);
+      if (arg) {
+        return div(div(arg), tbl);
+      } else {
+        return tbl;
       }
     },
   },

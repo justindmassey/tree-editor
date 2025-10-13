@@ -227,6 +227,6 @@ export default class Node {
   }
 }
 
-function unescape(str) {
+export function unescape(str) {
   return str.replace(/\\=/g, "=")
 }
