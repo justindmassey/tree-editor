@@ -14,9 +14,7 @@ export default {
         .then((res) => {
           localStorage.setItem("tree", this.tree.root.name.value);
           treeMenu.update();
-          document.body.classList.remove("flash");
-          document.body.offsetWidth;
-          document.body.classList.add("flash");
+          flash();
         })
         .catch((err) => {
           console.log(err);
@@ -33,6 +31,7 @@ export default {
           this.tree.root.focus();
           history.add();
           localStorage.setItem("tree", "");
+          flash()
         }
       );
     },
@@ -88,3 +87,9 @@ export default {
     },
   },
 };
+
+function flash() {
+  document.body.classList.remove("flash");
+  document.body.offsetWidth;
+  document.body.classList.add("flash");
+}
