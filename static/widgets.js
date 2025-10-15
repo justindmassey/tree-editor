@@ -92,10 +92,10 @@ export default {
         (child) => !child.node.isAttribute
       );
       for (let child of children) {
+        header.appendChild(td(unescape(child.node.name.value) || " "));
         let grandchildren = Array.from(child.node.children.children).filter(
           (child) => !child.node.isAttribute
         );
-        header.appendChild(td(unescape(child.node.name.value) || " "));
         if (grandchildren.length > longestChild) {
           longestChild = grandchildren.length;
         }
