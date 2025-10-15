@@ -1,6 +1,12 @@
 class ExecShortcut {
   constructor(commands, bindObject = {}) {
-    this.commands = commands;
+    let cmds = {};
+    for (let cmd in commands) {
+      for (let c of cmd.split(/,\s*/)) {
+        cmds[c] = commands[cmd];
+      }
+    }
+    this.commands = cmds;
     this.bindObject = bindObject;
     this.prefixCommand = "";
     this.prefixCommands = {};

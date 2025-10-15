@@ -1,9 +1,8 @@
 import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
-import addCommandAliases from "./lib/add-command-aliases.js";
 
-const nodeCommands = {
+export default {
   Tab: {
     description: "toggle visibility of children",
     action() {
@@ -43,7 +42,7 @@ const nodeCommands = {
       }
     },
   },
-  "Alt+ArrowUp": {
+  "Alt+ArrowUp, Control+Alt+p": {
     description: "focus previous sibling",
     action() {
       if (this.parent) {
@@ -55,7 +54,7 @@ const nodeCommands = {
       }
     },
   },
-  "Alt+ArrowDown": {
+  "Alt+ArrowDown, Control+Alt+n": {
     description: "focus next sibling",
     action() {
       if (this.parent) {
@@ -67,7 +66,7 @@ const nodeCommands = {
       }
     },
   },
-  "Shift+ArrowUp": {
+  "Shift+ArrowUp, Alt+Shift+P": {
     description: "move this node up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
@@ -77,7 +76,7 @@ const nodeCommands = {
       }
     },
   },
-  "Shift+ArrowDown": {
+  "Shift+ArrowDown, Alt+Shift+N": {
     description: "move this node down",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
@@ -137,7 +136,7 @@ const nodeCommands = {
       }
     },
   },
-  ArrowUp: {
+  "ArrowUp, Alt+p": {
     description: "focus previous node",
     action() {
       if (this.elem.previousSibling) {
@@ -157,7 +156,7 @@ const nodeCommands = {
       }
     },
   },
-  ArrowDown: {
+  "ArrowDown, Alt+n": {
     description: "focus next node",
     action() {
       if (this.children.children.length && this.expanded) {
@@ -288,12 +287,3 @@ const nodeCommands = {
     action() {},
   },
 };
-
-export default addCommandAliases(nodeCommands, {
-  ArrowUp: ["Alt+p"],
-  ArrowDown: ["Alt+n"],
-  "Shift+ArrowUp": ["Alt+Shift+P"],
-  "Shift+ArrowDown": ["Alt+Shift+N"],
-  "Alt+ArrowUp": ["Control+Alt+p"],
-  "Alt+ArrowDown": ["Control+Alt+n"],
-});
