@@ -19,4 +19,4 @@ if (localStorage.getItem("tree")) {
   history.add();
 }
 
-window.treeEditor = treeEditor
+window.treeEditor = treeEditor;
