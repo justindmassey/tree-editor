@@ -220,12 +220,17 @@ const nodeCommands = {
   "Alt+d a": {
     description: "delete all attribute children",
     action() {
-      for (let child of this.children.children) {
+      let removed = false;
+      let children = Array.from(this.children.children);
+      for (let child of children) {
         if (child.node.isAttribute) {
           if (child.node.remove(false)) {
-            history.add();
+            removed = true;
           }
         }
+      }
+      if (removed) {
+        history.add();
       }
     },
   },
