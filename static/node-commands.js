@@ -217,6 +217,18 @@ const nodeCommands = {
       }
     },
   },
+  "Alt+d a": {
+    description: "delete all attribute children",
+    action() {
+      for(let child of this.children.children) {
+        if(child.node.isAttribute) {
+          if(child.node.remove(false)) {
+            history.add()
+          }
+        }
+      }
+    }
+  },
   "Alt+d r": {
     description: "replace root with this node",
     action() {
@@ -241,18 +253,18 @@ const nodeCommands = {
     description: "collaps all descendants with only attribute children",
     action() {
       this.traverse((node) => {
-        let hasNonAttrChild = false
-        for(let child of node.children.children) {
-          if(!child.node.isAttribute) {
-            hasNonAttrChild = true
-            break
+        let hasNonAttrChild = false;
+        for (let child of node.children.children) {
+          if (!child.node.isAttribute) {
+            hasNonAttrChild = true;
+            break;
           }
         }
-        if(!hasNonAttrChild) {
-          node.collapse()
+        if (!hasNonAttrChild) {
+          node.collapse();
         }
-      }, false)
-    }
+      }, false);
+    },
   },
   "Alt+d x": {
     description: "expand all descendants",
