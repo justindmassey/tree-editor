@@ -26,16 +26,21 @@ class Help {
         div(
           'Equals symbols ("',
           code("="),
-          '") can be escaped with a backslash ("',
-          code("\\"),
-          '").'
+          '") and dashes("',
+          code("-"),
+          '") at the beginning of line',
+          div(' can be escaped with a backslash ("', code("\\"), '").')
         ),
         div(
           "Escaping equals symbols following ",
           "the first unescaped one is optional."
         )
       ),
-      makeReference(widgets)
+      makeReference(widgets),
+      h2("XML Export"),
+      div("Nodes with children become tags."),
+      div("Attribute nodes become attributes."),
+      div("Nodes without children become lines of text.")
     ).c("help", "hidden");
   }
 }
