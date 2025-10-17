@@ -11,6 +11,7 @@ import {
   tbody,
 } from "./lib/elements.js";
 import history from "./history.js";
+import Tabs from "./lib/tabs.js";
 
 export default {
   "-hdr": {
@@ -107,6 +108,37 @@ export default {
         return div(div(arg), tbl);
       } else {
         return tbl;
+      }
+    },
+  },
+  "-tbs": {
+    description: div(
+      div("a tab panel"),
+      div(code("ARGUMENT"), ": a label to show above the tabs"),
+      div("each child name becomes a tab name and its children the tab content"),
+      div(code("tab"), " holds the current tab")
+    ),
+    create(node, arg) {
+      let tabs = {};
+      for (let child of node.nonAttrChildren) {
+        tabs[child.nameText] = div();
+        for (let grandchild of child.nonAttrChildren) {
+          tabs[child._nameText].appendChild(grandchild.toElement());
+        }
+      }
+      let tabsObj = new Tabs(tabs, (tab) => {
+        node.setAttribute("tab", tab);
+        history.add();
+      });
+      if ("tab" in node.attributes) {
+        tabsObj.tab = node._attributes.tab;
+      } else {
+        node.setAttribute("tab", tabsObj.tab);
+      }
+      if (arg) {
+        return div(div(arg), tabsObj.elem);
+      } else {
+        return tabsObj.elem;
       }
     },
   },
