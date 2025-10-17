@@ -95,7 +95,7 @@ export default class Node {
         res.push(child.node);
       }
     }
-    return res
+    return res;
   }
 
   traverseUp(callback) {
