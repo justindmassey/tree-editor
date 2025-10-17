@@ -257,14 +257,7 @@ export default {
     description: "collaps all descendants with only attribute children",
     action() {
       this.traverse((node) => {
-        let hasNonAttrChild = false;
-        for (let child of node.children.children) {
-          if (!child.node.isAttribute) {
-            hasNonAttrChild = true;
-            break;
-          }
-        }
-        if (!hasNonAttrChild) {
+        if (!node.nonAttrChildren.length) {
           node.collapse();
         }
       }, false);
