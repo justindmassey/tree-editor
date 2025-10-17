@@ -79,7 +79,7 @@ export default class Node {
         children.appendChild(li(child.toElement()));
       }
       if (children.children.length) {
-        return div(div(this.nameText), children).c("widget");
+        return div(div(this.nameText), children);
       } else {
         return div(this.nameText);
       }

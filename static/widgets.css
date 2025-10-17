@@ -10,3 +10,7 @@ thead {
 .widget {
     margin-bottom: 1em;
 }
+
+ol {
+    margin-top: 0em;
+}

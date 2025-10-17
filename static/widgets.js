@@ -68,9 +68,9 @@ export default {
         );
       }
       if (arg) {
-        return div(div(arg), checklist).c("widget");
+        return div(div(arg), checklist);
       } else {
-        return checklist.c("widget");
+        return checklist;
       }
     },
   },
