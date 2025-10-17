@@ -21,10 +21,8 @@ export default {
     ),
     create(node, arg) {
       let children = div();
-      for (let child of node.children.children) {
-        if (!child.node.isAttribute) {
-          children.appendChild(child.node.toElement());
-        }
+      for (let child of node.nonAttrChildren) {
+        children.appendChild(child.toElement());
       }
       return div(h1(arg), children);
     },
@@ -53,23 +51,21 @@ export default {
     ),
     create(node, arg) {
       let checklist = div();
-      for (let child of node.children.children) {
-        if (!child.node.isAttribute) {
-          let checkbox = input()
-            .a("type", "checkbox")
-            .e("change", () => {
-              child.node.setAttribute("checked", checkbox.checked);
-              history.add();
-            });
-          if ("checked" in child.node.attributes) {
-            checkbox.checked = child.node._atts.checked == "true";
-          } else {
-            child.node.setAttribute("checked", "false");
-          }
-          checklist.appendChild(
-            div(checkbox, child.node.toElement()).c("checklist-item")
-          );
+      for (let child of node.nonAttrChildren) {
+        let checkbox = input()
+          .a("type", "checkbox")
+          .e("change", () => {
+            child.setAttribute("checked", checkbox.checked);
+            history.add();
+          });
+        if ("checked" in child.attributes) {
+          checkbox.checked = child._atts.checked == "true";
+        } else {
+          child.setAttribute("checked", "false");
         }
+        checklist.appendChild(
+          div(checkbox, child.toElement()).c("checklist-item")
+        );
       }
       if (arg) {
         return div(div(arg), checklist);
@@ -88,28 +84,21 @@ export default {
       let header = tr();
       let bdy = tbody();
       let longestChild = 0;
-      let children = Array.from(node.children.children).filter(
-        (child) => !child.node.isAttribute
-      );
-      for (let child of children) {
-        header.appendChild(td(unescape(child.node.name.value) || " "));
-        let grandchildren = Array.from(child.node.children.children).filter(
-          (child) => !child.node.isAttribute
-        );
+
+      for (let child of node.nonAttrChildren) {
+        header.appendChild(td(unescape(child.name.value) || " "));
+        let grandchildren = child.nonAttrChildren;
         if (grandchildren.length > longestChild) {
           longestChild = grandchildren.length;
         }
       }
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
-        for (let child of children) {
-          let grandchildren = Array.from(child.node.children.children).filter(
-            (child) => !child.node.isAttribute
-          );
-          let cell = grandchildren[i];
+        for (let child of node.nonAttrChildren) {
+          let cell = child.nonAttrChildren[i];
           if (cell) {
-            if (!cell.node.isAttribute) {
-              row.appendChild(td(cell.node.toElement()));
+            if (!cell.isAttribute) {
+              row.appendChild(td(cell.toElement()));
             }
           } else {
             row.appendChild(td());

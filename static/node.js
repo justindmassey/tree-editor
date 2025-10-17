@@ -76,10 +76,8 @@ export default class Node {
       return widgets[m[1]].create(this, unescape(m[2]));
     } else {
       let children = ol();
-      for (let child of this.children.children) {
-        if (!child.node.isAttribute) {
-          children.appendChild(li(child.node.toElement()));
-        }
+      for (let child of this.nonAttrChildren) {
+        children.appendChild(li(child.toElement()));
       }
       let name = unescape(this.name.value) || " ";
       if (children.children.length) {
@@ -88,6 +86,16 @@ export default class Node {
         return div(name);
       }
     }
+  }
+
+  get nonAttrChildren() {
+    let res = [];
+    for (let child of this.children.children) {
+      if (!child.node.isAttribute) {
+        res.push(child.node);
+      }
+    }
+    return res
   }
 
   traverseUp(callback) {
