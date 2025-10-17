@@ -20,10 +20,11 @@ export default class Tabs {
         this.headers[name] = div(name)
           .c("tab")
           .e("click", () => {
-            let oldName = this.tab
-            this.tab = name;
-            if (this.onchange && oldName != name) {
-              this.onchange(name);
+            if (this.tab != name) {
+              this.tab = name;
+              if (this.onchange) {
+                this.onchange(name);
+              }
             }
           });
         this.header.appendChild(this.headers[name]);
