@@ -133,7 +133,7 @@ export default {
       if ("tab" in node.attributes && tabs[node._attributes.tab]) {
         tabsObj.tab = node._attributes.tab;
       } else {
-        node.setAttribute("tab", tabsObj._tab);
+        node.setAttribute("tab", tabsObj.tab);
       }
       if (arg) {
         return div(div(arg), tabsObj.elem);
