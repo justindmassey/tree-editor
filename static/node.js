@@ -235,10 +235,10 @@ export default class Node {
   }
 }
 
-export function unescape(str) {
-  return str.replace(/\\=/g, "=").replace(/^\\-/, "-");
-}
-
 function unescapeValue(str) {
   return str.replace(/\\=/g, "=");
+}
+
+export function unescape(str) {
+  return unescapeValue(str).replace(/^\\-/, "-");
 }
