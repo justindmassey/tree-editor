@@ -10,6 +10,13 @@ export default {
     },
   },
   "Shift+Enter": {
+    description: "append a new child node",
+    action() {
+      this.appendChild(new Node());
+      history.add();
+    },
+  },
+  "Alt+Shift+Enter": {
     description: "prepend a new child node",
     action() {
       this.prependChild(new Node());
