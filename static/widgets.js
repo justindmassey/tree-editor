@@ -86,9 +86,8 @@ export default {
 
       for (let child of node.nonAttrChildren) {
         header.appendChild(td(child.nameText));
-        let grandchildrenCnt = child.nonAttrChildren.length;
-        if (grandchildrenCnt > longestChild) {
-          longestChild = grandchildrenCnt;
+        if (child.nonAttrChildren.length > longestChild) {
+          longestChild = child._nonAttrChildren.length;
         }
       }
       for (let i = 0; i < longestChild; i++) {
