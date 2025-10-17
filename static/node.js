@@ -55,14 +55,14 @@ export default class Node {
   }
 
   get attributes() {
-    this._attributes = {}
+    this._attributes = {};
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
         this._attributes[unescape(m[1])] = unescapeValue(m[2]);
       }
     }
-    return this._attributes
+    return this._attributes;
   }
 
   get isAttribute() {
@@ -78,7 +78,6 @@ export default class Node {
       for (let child of this.nonAttrChildren) {
         children.appendChild(li(child.toElement()));
       }
-      let name = unescape(this.name.value) || " ";
       if (children.children.length) {
         return div(div(this.nameText), children);
       } else {
@@ -88,7 +87,7 @@ export default class Node {
   }
 
   get nonAttrChildren() {
-    this._nonAttrChildren = []
+    this._nonAttrChildren = [];
     for (let child of this.children.children) {
       if (!child.node.isAttribute) {
         this._nonAttrChildren.push(child.node);
@@ -98,8 +97,8 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = unescape(this.name.value) || " "
-    return this._nameText
+    this._nameText = unescape(this.name.value) || " ";
+    return this._nameText;
   }
 
   traverseUp(callback) {
