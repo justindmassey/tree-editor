@@ -154,6 +154,7 @@ export default class Node {
   }
 
   focus() {
+    this.traverseUp((n) => n.expand());
     this.name.focus();
   }
 
