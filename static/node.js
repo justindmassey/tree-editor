@@ -62,7 +62,7 @@ export default class Node {
         atts[unescape(m[1])] = unescape(m[2]);
       }
     }
-    this._atts = atts;
+    this._attributes = atts;
     return atts;
   }
 

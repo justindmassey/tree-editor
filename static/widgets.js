@@ -36,7 +36,7 @@ export default {
     create(node, arg) {
       let link = a(arg).a("target", "_blank");
       if ("url" in node.attributes) {
-        link.href = node._atts.url;
+        link.href = node._attributes.url;
       } else {
         node.setAttribute("url");
       }
@@ -59,7 +59,7 @@ export default {
             history.add();
           });
         if ("checked" in child.attributes) {
-          checkbox.checked = child._atts.checked == "true";
+          checkbox.checked = child._attributes.checked == "true";
         } else {
           child.setAttribute("checked", "false");
         }
