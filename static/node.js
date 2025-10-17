@@ -95,6 +95,7 @@ export default class Node {
         res.push(child.node);
       }
     }
+    this._nonAttrChildren = res
     return res;
   }
 

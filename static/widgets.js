@@ -14,7 +14,7 @@ import history from "./history.js";
 import { unescape } from "./node.js";
 
 export default {
-  "-h": {
+  "-hdr": {
     description: div(
       div("a large header with the children below"),
       div(code("ARGUMENT"), ": the header text")
@@ -27,7 +27,7 @@ export default {
       return div(h1(arg), children);
     },
   },
-  "-l": {
+  "-lnk": {
     description: div(
       div("a hyperlink"),
       div(code("ARGUMENT"), ": the link text"),
@@ -74,7 +74,7 @@ export default {
       }
     },
   },
-  "-t": {
+  "-tbl": {
     description: div(
       div("a table"),
       div(code("ARGUMENT"), ": a label to display above the table"),
@@ -94,7 +94,7 @@ export default {
       }
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
-        for (let child of node.nonAttrChildren) {
+        for (let child of node._nonAttrChildren) {
           let cell = child.nonAttrChildren[i];
           if (cell) {
             row.appendChild(td(cell.toElement()));
