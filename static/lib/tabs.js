@@ -30,7 +30,7 @@ export default class Tabs {
         tabs[name].classList.add("hidden");
         this.body.appendChild(tabs[name]);
       }
-      this._tab = Object.keys(tabs)[0];
+      this._tab = tabNames[0];
       this.tab = this._tab;
     }
   }
