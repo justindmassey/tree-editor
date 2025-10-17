@@ -59,7 +59,7 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        atts[unescape(m[1])] = unescape(m[2]);
+        atts[unescape(m[1])] = unescapeValue(m[2]);
       }
     }
     this._attributes = atts;
@@ -237,4 +237,8 @@ export default class Node {
 
 export function unescape(str) {
   return str.replace(/\\=/g, "=").replace(/^\\-/, "-");
+}
+
+function unescapeValue(str) {
+  return str.replace(/\\=/g, "=")
 }
