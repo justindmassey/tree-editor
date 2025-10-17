@@ -1,5 +1,6 @@
 .tabs {
   border: 1px solid #999;
+  border-radius: 2px;
   width: fit-content;
 }
 
