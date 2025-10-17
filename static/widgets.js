@@ -24,7 +24,7 @@ export default {
       for (let child of node.nonAttrChildren) {
         children.appendChild(child.toElement());
       }
-      return div(h1(arg), children);
+      return div(h1(arg), children).c("widget");
     },
   },
   "-lnk": {
@@ -68,9 +68,9 @@ export default {
         );
       }
       if (arg) {
-        return div(div(arg), checklist);
+        return div(div(arg), checklist).c("widget");
       } else {
-        return checklist;
+        return checklist.c("widget");
       }
     },
   },
@@ -105,9 +105,9 @@ export default {
       }
       let tbl = table(thead(header), bdy);
       if (arg) {
-        return div(div(arg), tbl);
+        return div(div(arg), tbl).c("widget");
       } else {
-        return tbl;
+        return tbl.c("widget");
       }
     },
   },
@@ -115,7 +115,9 @@ export default {
     description: div(
       div("a tab panel"),
       div(code("ARGUMENT"), ": a label to show above the tabs"),
-      div("each child name becomes a tab name and its children the tab content"),
+      div(
+        "each child name becomes a tab name and its children the tab content"
+      ),
       div(code("tab"), " holds the current tab")
     ),
     create(node, arg) {
@@ -136,9 +138,9 @@ export default {
         node.setAttribute("tab", tabsObj.tab);
       }
       if (arg) {
-        return div(div(arg), tabsObj.elem);
+        return div(div(arg), tabsObj.elem.c("widget"));
       } else {
-        return tabsObj.elem;
+        return tabsObj.elem.c("widget");
       }
     },
   },
