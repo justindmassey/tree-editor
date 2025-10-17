@@ -6,7 +6,7 @@ import widgets from "./widgets.js";
 function makeReference(items) {
   let reference = table();
   for (let item in items) {
-    reference.appendChild(tr(td(item), td(items[item].description)));
+    reference.appendChild(tr(td(code(item)), td(items[item].description)));
   }
   return reference;
 }
