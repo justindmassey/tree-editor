@@ -130,10 +130,10 @@ export default {
         node.setAttribute("tab", tab);
         history.add();
       });
-      if ("tab" in node.attributes) {
+      if ("tab" in node.attributes && tabs[node._attributes.tab]) {
         tabsObj.tab = node._attributes.tab;
       } else {
-        node.setAttribute("tab", tabsObj.tab);
+        node.setAttribute("tab", tabsObj._tab);
       }
       if (arg) {
         return div(div(arg), tabsObj.elem);
