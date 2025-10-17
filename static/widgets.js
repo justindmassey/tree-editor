@@ -11,7 +11,6 @@ import {
   tbody,
 } from "./lib/elements.js";
 import history from "./history.js";
-import { unescape } from "./node.js";
 
 export default {
   "-hdr": {
@@ -86,7 +85,7 @@ export default {
       let longestChild = 0;
 
       for (let child of node.nonAttrChildren) {
-        header.appendChild(td(unescape(child.name.value) || " "));
+        header.appendChild(td(child.nameText));
         let grandchildrenCnt = child.nonAttrChildren.length;
         if (grandchildrenCnt > longestChild) {
           longestChild = grandchildrenCnt;

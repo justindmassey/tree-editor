@@ -55,15 +55,14 @@ export default class Node {
   }
 
   get attributes() {
-    let atts = {};
+    this._attributes = {}
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        atts[unescape(m[1])] = unescapeValue(m[2]);
+        this._attributes[unescape(m[1])] = unescapeValue(m[2]);
       }
     }
-    this._attributes = atts;
-    return atts;
+    return this._attributes
   }
 
   get isAttribute() {
@@ -81,22 +80,26 @@ export default class Node {
       }
       let name = unescape(this.name.value) || " ";
       if (children.children.length) {
-        return div(div(name), children);
+        return div(div(this.nameText), children);
       } else {
-        return div(name);
+        return div(this.nameText);
       }
     }
   }
 
   get nonAttrChildren() {
-    let res = [];
+    this._nonAttrChildren = []
     for (let child of this.children.children) {
       if (!child.node.isAttribute) {
-        res.push(child.node);
+        this._nonAttrChildren.push(child.node);
       }
     }
-    this._nonAttrChildren = res
-    return res;
+    return this._nonAttrChildren;
+  }
+
+  get nameText() {
+    this._nameText = unescape(this.name.value) || " "
+    return this._nameText
   }
 
   traverseUp(callback) {
@@ -240,6 +243,6 @@ function unescapeValue(str) {
   return str.replace(/\\=/g, "=");
 }
 
-export function unescape(str) {
+function unescape(str) {
   return unescapeValue(str).replace(/^\\-/, "-");
 }
