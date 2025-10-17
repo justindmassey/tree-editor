@@ -97,9 +97,7 @@ export default {
         for (let child of node.nonAttrChildren) {
           let cell = child.nonAttrChildren[i];
           if (cell) {
-            if (!cell.isAttribute) {
-              row.appendChild(td(cell.toElement()));
-            }
+            row.appendChild(td(cell.toElement()));
           } else {
             row.appendChild(td());
           }
