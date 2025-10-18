@@ -7,7 +7,7 @@ thead {
     font-weight: bold;
 }
 
-.widget {
+.tbl, .tabs {
     margin-bottom: 1em;
 }
 

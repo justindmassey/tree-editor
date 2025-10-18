@@ -24,7 +24,7 @@ export default {
       for (let child of node.nonAttrChildren) {
         children.appendChild(child.toElement());
       }
-      return div(h1(arg), children).c("widget");
+      return div(h1(arg), children).c("hdr");
     },
   },
   "-lnk": {
@@ -105,9 +105,9 @@ export default {
       }
       let tbl = table(thead(header), bdy);
       if (arg) {
-        return div(div(arg), tbl).c("widget");
+        return div(div(arg), tbl).c("tbl");
       } else {
-        return tbl.c("widget");
+        return tbl.c("tbl");
       }
     },
   },
