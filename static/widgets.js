@@ -138,9 +138,9 @@ export default {
         node.setAttribute("tab", tabsObj.tab);
       }
       if (arg) {
-        return div(div(arg), tabsObj.elem.c("widget"));
+        return div(div(arg), tabsObj.elem);
       } else {
-        return tabsObj.elem.c("widget");
+        return tabsObj.elem;
       }
     },
   },
