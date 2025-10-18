@@ -1,3 +1,5 @@
+@import url("./lib/tabs.css");
+
 .checklist-item {
     display: flex;
     align-items: start;

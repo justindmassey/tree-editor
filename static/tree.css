@@ -1,5 +1,4 @@
 @import url("./widgets.css");
-@import url("./lib/tabs.css");
 
 .tree {
   display: flex;
