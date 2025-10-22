@@ -58,7 +58,7 @@ export default {
           .a("type", "checkbox")
           .e("change", () => {
             child.setAttribute("checked", checkbox.checked);
-            history.add();
+            history.add(true);
           });
         if ("checked" in child.attributes) {
           checkbox.checked = child._attributes.checked == "true";
@@ -132,7 +132,7 @@ export default {
       }
       let tabsObj = new Tabs(tabs, (tab) => {
         node.setAttribute("tab", tab);
-        history.add();
+        history.add(true);
       });
       if ("tab" in node.attributes && tabs[node._attributes.tab]) {
         tabsObj.tab = node._attributes.tab;
