@@ -161,6 +161,7 @@ export default {
           for (let line of ta.value.split("\n")) {
             node.appendChild(new Node(line), false);
           }
+          history.add(true)
         });
       let lines = [];
       for (let child of node.children.children) {

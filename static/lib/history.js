@@ -6,11 +6,11 @@ export default class History {
     this.index = -1;
   }
 
-  add() {
+  add(skipOnChange) {
     this.index++;
     this.history = this.history.slice(-this.maxLength, this.index);
     this.history.push(this.serialize());
-    if (this.onchange) {
+    if (this.onchange && !skipOnChange) {
       this.onchange(this);
     }
   }
