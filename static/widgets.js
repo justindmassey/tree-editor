@@ -9,9 +9,11 @@ import {
   td,
   thead,
   tbody,
+  textarea,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
+import Node from "./node.js";
 
 export default {
   "-hdr": {
@@ -141,6 +143,34 @@ export default {
         return div(div(arg), tabsObj.elem);
       } else {
         return tabsObj.elem;
+      }
+    },
+  },
+  "-ta": {
+    description: div(
+      div("a textarea"),
+      div(code("ARGUMENT"), ": a label"),
+      div("children become lines of text")
+    ),
+    create(node, arg) {
+      let ta = textarea()
+        .a("rows", 5)
+        .a("cols", 30)
+        .e("input", () => {
+          node.children.replaceChildren();
+          for (let line of ta.value.split("\n")) {
+            node.appendChild(new Node(line), false);
+          }
+        });
+      let lines = [];
+      for (let child of node.children.children) {
+        lines.push(child.node.name.value);
+      }
+      ta.value = lines.join("\n");
+      if (arg) {
+        return div(div(arg), ta);
+      } else {
+        return ta;
       }
     },
   },
