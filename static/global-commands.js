@@ -54,12 +54,10 @@ export default {
     description: "focus first node with string in its name",
     action() {
       let find = prompt("Focus first node containing:").toUpperCase();
-      this.tree.root.traverse(function (n) {
+      this.tree.root.traverse((n) => {
         if (n.name.value.toUpperCase().includes(find)) {
           n.focus();
           return true;
-        } else {
-          return false;
         }
       });
     },
