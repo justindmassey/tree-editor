@@ -111,10 +111,12 @@ export default class Node {
 
   traverse(callback, includeCollapsed = true) {
     if (callback(this)) {
-      return;
+      return true;
     } else if (includeCollapsed || this.expanded) {
       for (let child of this.children.children) {
-        child.node.traverse(callback, includeCollapsed);
+        if (child.node.traverse(callback, includeCollapsed)) {
+          return true;
+        }
       }
     }
   }

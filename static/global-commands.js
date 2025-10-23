@@ -31,7 +31,7 @@ export default {
           this.tree.root.focus();
           history.add();
           localStorage.setItem("tree", "");
-          flash()
+          flash();
         }
       );
     },
@@ -48,6 +48,20 @@ export default {
     description: "focus root node",
     action() {
       this.tree.root.focus();
+    },
+  },
+  "Alt+j": {
+    description: "focus first node with string in its name",
+    action() {
+      let find = prompt("Focus first node containing:").toUpperCase();
+      this.tree.root.traverse(function (n) {
+        if (n.name.value.toUpperCase().includes(find)) {
+          n.focus();
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
   },
   "Alt+h": {
