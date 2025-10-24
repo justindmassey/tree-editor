@@ -154,8 +154,8 @@ export default {
     ),
     create(node, arg) {
       let ta = textarea()
-        .a("rows", 5)
-        .a("cols", 30)
+        .a("rows", 8)
+        .a("cols", 40)
         .e("input", () => {
           node.children.replaceChildren();
           for (let line of ta.value.split("\n")) {

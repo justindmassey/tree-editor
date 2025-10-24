@@ -13,7 +13,7 @@ export default class Node {
       .e("click", () => this.toggle());
     this.name = input()
       .c("name")
-      .a("size", 30)
+      .a("size", 40)
       .e("input", () => history.add());
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
