@@ -101,7 +101,7 @@ export default {
     description: "roll siblings up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
-        this.parent.appendChild(this.parent.children.firstChild.node);
+        this.parent.appendChild(this.parent.children.firstChild.node, false);
         this.focus();
         history.add();
       }
