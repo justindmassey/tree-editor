@@ -173,7 +173,7 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = unescape(this.name.value);
+    this._nameText = unescape(this.name.value) || " ";
     return this._nameText;
   }
 
