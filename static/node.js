@@ -130,7 +130,7 @@ export default class Node {
       }
     }
     let attr = new Node(name + "=" + value);
-    this.prependChild(attr, focus);
+    this.appendChild(attr, focus);
   }
 
   get attributes() {
