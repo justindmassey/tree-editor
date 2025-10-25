@@ -89,8 +89,7 @@ export default class Node {
         }
         let prevAttr = this.getAttrNode(child.node.lastAttrName);
         if (prevAttr && child.node.lastAttrName != m[1]) {
-          let prevAttrValue = prevAttr.isAttribute[2];
-          this.setAttribute(m[1], prevAttrValue);
+          this.setAttribute(m[1], prevAttr.isAttribute[2]);
           prevAttr.remove(false);
         }
         if (!(m[1] in this.attributes)) {
