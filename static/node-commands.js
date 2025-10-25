@@ -97,6 +97,26 @@ export default {
       }
     },
   },
+  "Control+ArrowUp": {
+    description: "roll siblings up",
+    action() {
+      if (this.parent && this.parent.children.children.length > 1) {
+        this.parent.appendChild(this.parent.children.firstChild.node);
+        this.focus();
+        history.add();
+      }
+    },
+  },
+  "Control+ArrowDown": {
+    description: "roll siblings down",
+    action() {
+      if (this.parent && this.parent.children.children.length > 1) {
+        this.parent.prependChild(this.parent.children.lastChild.node, false);
+        this.focus();
+        history.add();
+      }
+    },
+  },
   "Control+Enter": {
     description: "add a new parent node",
     action() {
