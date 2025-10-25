@@ -37,16 +37,16 @@ class Help {
         )
       ),
       makeReference(widgets),
-      h2("XML Export"),
-      div("Nodes with children become tags."),
-      div("Attribute nodes become attributes."),
-      div("Nodes without children become lines of text."),
       h2("Type Definitions"),
-      div("Nodes with the name of the form ", code("::TYPE")),
+      div("Nodes with a name of the form ", code("::TYPE")),
       div("are type definitions."),
       div("Children of nodes with ", code(":TYPE"), " in their name"),
       div("inherit the children and attributes of that type definition."),
-      div('The colons ("', code(":"), '") can be escaped with a backslash')
+      div('The colons ("', code(":"), '") can be escaped with a backslash'),
+      h2("XML Export"),
+      div("Nodes with children become tags."),
+      div("Attribute nodes become attributes."),
+      div("Nodes without children become lines of text.")
     ).c("help", "hidden");
   }
 }
