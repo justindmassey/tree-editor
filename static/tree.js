@@ -48,9 +48,7 @@ class Tree {
           for (let t of types) {
             if (typedefs[t]) {
               for (let child of n.nonAttrChildren) {
-                for (let prop of typedefs[t].children.children) {
-                  child.merge(typedefs[t]);
-                }
+                child.merge(typedefs[t]);
               }
             }
           }
