@@ -35,7 +35,7 @@ class Tree {
     let typedefs = {};
     typedefMenu.menu.clearItems();
     this.root.traverse((n) => {
-      let m = n.name.value.match(/^:(:(\S+))/);
+      let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
         typedefs[m[1]] = n;
         typedefMenu.menu.addItem(div(m[2]).e("click", () => n.focus()));

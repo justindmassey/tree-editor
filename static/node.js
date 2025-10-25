@@ -6,7 +6,9 @@ import history from "./history.js";
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
+  static widgetRegEx = /^(-\S+)\s*(.*)/
   static typeRegEx = /(?<!:|\\):[^:\s]+/g;
+  static typedefRegEx = /^:(:(\S+))/;
 
   constructor(name = "", ...children) {
     this.toggleButton = div()
@@ -146,13 +148,19 @@ export default class Node {
   }
 
   toElement() {
-    let m = this.name.value.match(/^(-\S+)\s*(.*)/);
+    let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
     } else {
       let children = ol();
-      for (let child of this.children.children) {
-        children.appendChild(li(child.node.toElement()));
+      if (this.name.value.match(Node.typedefRegEx)) {
+        for (let child of this.children.children) {
+          children.appendChild(li(child.node.toElement()));
+        }
+      } else {
+        for (let child of this.nonAttrChildren) {
+          children.appendChild(li(child.toElement()));
+        }
       }
       if (children.children.length) {
         return div(div(this.nameText), children);
