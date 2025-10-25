@@ -151,8 +151,8 @@ export default class Node {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
     } else {
       let children = ol();
-      for (let child of this.nonAttrChildren) {
-        children.appendChild(li(child.toElement()));
+      for (let child of this.children.children) {
+        children.appendChild(li(child.node.toElement()));
       }
       if (children.children.length) {
         return div(div(this.nameText), children);
@@ -173,7 +173,7 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = unescape(this.name.value) || " ";
+    this._nameText = unescape(this.name.value);
     return this._nameText;
   }
 
