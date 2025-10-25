@@ -6,6 +6,7 @@ import history from "./history.js";
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
+  static typeRegEx = /(?<!:|\\):[^:\s]+/g;
 
   constructor(name = "", ...children) {
     this.toggleButton = div()
@@ -14,9 +15,21 @@ export default class Node {
     this.name = input()
       .c("name")
       .a("size", 40)
-      .e("input", () => history.add());
+      .e("input", () => {
+        history.add();
+        this.lastName = this.name.value;
+        let m = this.isAttribute;
+        if (m) {
+          this.lastAttrName = m[1];
+        }
+      });
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
+    this.lastName = name;
+    let m = this.isAttribute;
+    if (m) {
+      this.lastAttrName = m[1];
+    }
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -36,6 +49,72 @@ export default class Node {
       this.appendChild(child, false);
     }
     this.expand();
+  }
+
+  copy() {
+    let n = new Node(this.name.value);
+    n.lastName = this.lastName;
+    n.lastAttrName = this.lastAttrName;
+    for (let child of this.children.children) {
+      n.appendChild(child.node.copy());
+    }
+    return n;
+  }
+
+  getChild(name) {
+    for (let child of this.children.children) {
+      if (child.node.name.value == name) {
+        return child.node;
+      }
+    }
+  }
+
+  getAttrNode(name) {
+    for (let child of this.children.children) {
+      let m = child.node.isAttribute;
+      if (m && m[1] == name) {
+        return child.node;
+      }
+    }
+  }
+
+  merge(node) {
+    let n = node.copy();
+    for (let child of n.children.children) {
+      let m = child.node.isAttribute;
+      if (m) {
+        let prevNode = this.getChild(child.node.lastName);
+        if (prevNode) {
+          prevNode.remove(false);
+        }
+        let prevAttr = this.getAttrNode(child.node.lastAttrName);
+        if (prevAttr && child.node.lastAttrName != child.node.isAttribute[1]) {
+          let prevAttrValue = prevAttr.isAttribute[2];
+          this.setAttribute(m[1], prevAttrValue);
+          prevAttr.remove(false);
+        }
+        if (!(m[1] in this.attributes)) {
+          this.setAttribute(m[1], m[2]);
+        }
+      } else {
+        let prevChild = this.getChild(child.node.lastName);
+        if (prevChild && child.node.name.value != child.node.lastName) {
+          prevChild.remove(false);
+        }
+        if (!this.getChild(child.node.name.value)) {
+          if (!this.getChild(child.node.name)) {
+            this.appendChild(child.node, false);
+          }
+        }
+      }
+    }
+    for (let child1 of this.children.children) {
+      for (let child2 of n.children.children) {
+        if (child1.node.name.value == child2.node.name.value) {
+          child1.node.merge(child2.node);
+        }
+      }
+    }
   }
 
   setAttribute(name, value = "", focus = false) {
@@ -244,7 +323,10 @@ export default class Node {
 }
 
 function unescapeValue(str) {
-  return str.replace(/\\=/g, "=");
+  return str
+    .replace(/\\=/g, "=")
+    .replace(/\\:/g, ":")
+    .replace(Node.typeRegEx, "");
 }
 
 function unescape(str) {

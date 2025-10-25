@@ -2,6 +2,7 @@ import Node from "./node.js";
 import { div } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
+import typedefMenu from "./typedef-menu.js";
 
 class Tree {
   constructor() {
@@ -28,6 +29,34 @@ class Tree {
     if (this.tree.firstChild) {
       return this.tree.firstChild.node;
     }
+  }
+
+  updateTypes() {
+    let typedefs = {};
+    typedefMenu.menu.clearItems();
+    this.root.traverse((n) => {
+      let m = n.name.value.match(/^:(:\S+)/);
+      if (m) {
+        typedefs[m[1]] = n;
+        typedefMenu.menu.addItem(div(m[1]).e("click", () => n.focus()));
+      }
+    });
+    this.root.traverse((n) => {
+      if (!n.isAttribute) {
+        let types = n.name.value.match(Node.typeRegEx);
+        if (types) {
+          for (let t of types) {
+            if (typedefs[t]) {
+              for (let child of n.nonAttrChildren) {
+                for (let prop of typedefs[t].children.children) {
+                  child.merge(typedefs[t]);
+                }
+              }
+            }
+          }
+        }
+      }
+    });
   }
 
   updateOutput() {

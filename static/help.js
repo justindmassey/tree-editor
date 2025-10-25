@@ -40,7 +40,12 @@ class Help {
       h2("XML Export"),
       div("Nodes with children become tags."),
       div("Attribute nodes become attributes."),
-      div("Nodes without children become lines of text.")
+      div("Nodes without children become lines of text."),
+      h2("Type Definitions"),
+      div("Nodes with the name of the form ", code("::TYPE")),
+      div("are type definitions."),
+      div("Children of nodes with ", code(":TYPE"), " in their name"),
+      div("inherit the children and attributes of that type definition.")
     ).c("help", "hidden");
   }
 }

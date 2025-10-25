@@ -11,11 +11,13 @@ import tree from "./tree.js";
 import history from "./history.js";
 import Menu from "./lib/menu.js";
 import treeMenu from "./tree-menu.js";
+import typedefMenu from "./typedef-menu.js";
 
 class MenuBar {
   constructor() {
     this.elem = div(
       treeMenu,
+      typedefMenu,
       new Menu(
         div("Import"),
         new TextUploader("Text", (text) => {
