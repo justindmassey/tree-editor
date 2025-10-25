@@ -102,9 +102,7 @@ export default class Node {
           prevChild.remove(false);
         }
         if (!this.getChild(child.node.name.value)) {
-          if (!this.getChild(child.node.name)) {
-            this.appendChild(child.node, false);
-          }
+          this.appendChild(child.node, false);
         }
       }
     }
