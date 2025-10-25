@@ -34,27 +34,31 @@ class Tree {
   updateTypes() {
     let typedefs = {};
     typedefMenu.menu.clearItems();
+    let foundTypedef = false;
     this.root.traverse((n) => {
       let m = n.name.value.match(/^:(:(\S+))/);
       if (m) {
+        foundTypedef = true;
         typedefs[m[1]] = n;
         typedefMenu.menu.addItem(div(m[2]).e("click", () => n.focus()));
       }
     });
-    this.root.traverse((n) => {
-      if (!n.isAttribute) {
-        let types = n.name.value.match(Node.typeRegEx);
-        if (types) {
-          for (let t of types) {
-            if (typedefs[t]) {
-              for (let child of n.nonAttrChildren) {
-                child.merge(typedefs[t]);
+    if (foundTypedef) {
+      this.root.traverse((n) => {
+        if (!n.isAttribute) {
+          let types = n.name.value.match(Node.typeRegEx);
+          if (types) {
+            for (let t of types) {
+              if (typedefs[t]) {
+                for (let child of n.nonAttrChildren) {
+                  child.merge(typedefs[t]);
+                }
               }
             }
           }
         }
-      }
-    });
+      });
+    }
   }
 
   updateOutput() {
