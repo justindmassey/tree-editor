@@ -52,14 +52,15 @@ class Tree {
                 n.merge(typedefs[t]);
               }
             }
-          }
-          let listTypes = n.name.value.match(Node.listTypeRegEx);
-          if (listTypes) {
-            for (let i = listTypes.length - 1; i >= 0; i--) {
-              let t = listTypes[i];
-              if (typedefs[t]) {
-                for (let child of n.nonAttrChildren) {
-                  child.merge(typedefs[t]);
+          } else {
+            let listTypes = n.name.value.match(Node.listTypeRegEx);
+            if (listTypes) {
+              for (let i = listTypes.length - 1; i >= 0; i--) {
+                let t = listTypes[i];
+                if (typedefs[t]) {
+                  for (let child of n.nonAttrChildren) {
+                    child.merge(typedefs[t]);
+                  }
                 }
               }
             }

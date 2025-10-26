@@ -46,6 +46,7 @@ class Help {
       div("Children of nodes with ", code(":TYPE"), " in their name"),
       div("inherit from that type definition."),
       div('The colons ("', code(":"), '") can be escaped with a backslash.'),
+      div('If a node has node types then list types are ignored.').
       h2("XML Export"),
       div("Nodes with children become tags."),
       div("Attribute nodes become attributes."),

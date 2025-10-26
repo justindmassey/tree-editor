@@ -8,8 +8,8 @@ import moveElementToIndex from "./lib/move-element-to-index.js";
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
   static widgetRegEx = /^(-\S+)\s*(.*)/;
-  static nodeTypeRegEx = /(?<!\\)\.[^\.\s]+/g;
-  static listTypeRegEx = /(?<!:|\\):[^:\s]+/g;
+  static nodeTypeRegEx = /(?<!\\)\.[^\.:\s]+/g;
+  static listTypeRegEx = /(?<!:|\\):[^\.:\s]+/g;
   static typedefRegEx = /^:(:(\S+))/;
 
   constructor(name = "", ...children) {
