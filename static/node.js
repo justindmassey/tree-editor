@@ -84,8 +84,10 @@ export default class Node {
   merge(node) {
     let activeElement = document.activeElement;
     let n = node.copy();
-    for (let i = 0; i < n.children.children.length; i++) {
-      let child = n.children.children[i];
+    let children = Array.from(n.children.children)
+    for (let i = 0; i < children.length; i++) {
+      let child = children[i];
+      
       let m = child.node.isAttribute;
       if (m) {
         let prevNode = this.getChild(child.node.lastName);
