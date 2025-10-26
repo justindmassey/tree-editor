@@ -8,7 +8,8 @@ import moveElementToIndex from "./lib/move-element-to-index.js";
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
   static widgetRegEx = /^(-\S+)\s*(.*)/;
-  static typeRegEx = /(?<!:|\\):[^:\s]+/g;
+  static nodeTypeRegEx = /(?<!\\)\.[^\.\s]+/g;
+  static listTypeRegEx = /(?<!:|\\):[^:\s]+/g;
   static typedefRegEx = /^:(:(\S+))/;
 
   constructor(name = "", ...children) {
@@ -84,10 +85,10 @@ export default class Node {
   merge(node) {
     let activeElement = document.activeElement;
     let n = node.copy();
-    let children = Array.from(n.children.children)
+    let children = Array.from(n.children.children);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
-      
+
       let m = child.node.isAttribute;
       if (m) {
         let prevNode = this.getChild(child.node.lastName);
@@ -339,7 +340,9 @@ function unescapeValue(str) {
   return str
     .replace(/\\=/g, "=")
     .replace(/\\:/g, ":")
-    .replace(Node.typeRegEx, "");
+    .replace(/\\\./g, ".")
+    .replace(Node.listTypeRegEx, "")
+    .replace(Node.nodeTypeRegEx, "");
 }
 
 function unescape(str) {

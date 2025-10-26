@@ -44,10 +44,19 @@ class Tree {
     if (Object.keys(typedefs).length) {
       this.root.traverse((n) => {
         if (!n.isAttribute) {
-          let types = n.name.value.match(Node.typeRegEx);
-          if (types) {
-            for (let i = types.length - 1; i >= 0; i--) {
-              let t = types[i];
+          let nodeTypes = n.name.value.match(Node.nodeTypeRegEx);
+          if (nodeTypes) {
+            for (let i = nodeTypes.length - 1; i >= 0; i--) {
+              let t = ":" + nodeTypes[i].slice(1);
+              if (typedefs[t]) {
+                n.merge(typedefs[t]);
+              }
+            }
+          }
+          let listTypes = n.name.value.match(Node.listTypeRegEx);
+          if (listTypes) {
+            for (let i = listTypes.length - 1; i >= 0; i--) {
+              let t = listTypes[i];
               if (typedefs[t]) {
                 for (let child of n.nonAttrChildren) {
                   child.merge(typedefs[t]);
