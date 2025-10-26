@@ -38,7 +38,7 @@ class Tree {
       let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
         typedefs[m[1]] = n;
-        typedefMenu.menu.addItem(div(m[2]).e("click", () => n.focus()));
+        typedefMenu.menu.addItem(div(m[1]).e("click", () => n.focus()));
       }
     });
     if (Object.keys(typedefs).length) {
@@ -47,7 +47,7 @@ class Tree {
           let nodeTypes = n.name.value.match(Node.nodeTypeRegEx);
           if (nodeTypes) {
             for (let i = nodeTypes.length - 1; i >= 0; i--) {
-              let t = ":" + nodeTypes[i].slice(1);
+              let t = nodeTypes[i].slice(1);
               if (typedefs[t]) {
                 n.merge(typedefs[t]);
               }
@@ -56,7 +56,7 @@ class Tree {
           let listTypes = n.name.value.match(Node.listTypeRegEx);
           if (listTypes) {
             for (let i = listTypes.length - 1; i >= 0; i--) {
-              let t = listTypes[i];
+              let t = listTypes[i].slice(1);
               if (typedefs[t]) {
                 for (let child of n.nonAttrChildren) {
                   child.merge(typedefs[t]);

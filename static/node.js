@@ -10,7 +10,7 @@ export default class Node {
   static widgetRegEx = /^(-\S+)\s*(.*)/;
   static nodeTypeRegEx = /(?<!\\)\.[^\.:\s]+/g;
   static listTypeRegEx = /(?<!:|\\):[^\.:\s]+/g;
-  static typedefRegEx = /^:(:(\S+))/;
+  static typedefRegEx = /^::(\S+)/;
 
   constructor(name = "", ...children) {
     this.toggleButton = div()
