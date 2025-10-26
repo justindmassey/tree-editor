@@ -6,7 +6,7 @@ import history from "./history.js";
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
-  static widgetRegEx = /^(-\S+)\s*(.*)/
+  static widgetRegEx = /^(-\S+)\s*(.*)/;
   static typeRegEx = /(?<!:|\\):[^:\s]+/g;
   static typedefRegEx = /^:(:(\S+))/;
 
@@ -82,7 +82,8 @@ export default class Node {
 
   merge(node) {
     let n = node.copy();
-    for (let child of n.children.children) {
+    for (let i = 0; i < n.children.children.length; i++) {
+      let child = n.children.children[i];
       let m = child.node.isAttribute;
       if (m) {
         let prevNode = this.getChild(child.node.lastName);
@@ -97,6 +98,7 @@ export default class Node {
         if (!(m[1] in this.attributes)) {
           this.setAttribute(m[1], m[2]);
         }
+        moveElementToIndex(this.getAttrNode(m[1]).elem, i);
       } else {
         let prevChild = this.getChild(child.node.lastName);
         if (prevChild && child.node.name.value != child.node.lastName) {
@@ -105,6 +107,7 @@ export default class Node {
         if (!this.getChild(child.node.name.value)) {
           this.appendChild(child.node, false);
         }
+        moveElementToIndex(this.getChild(child.node.name.value).elem, i);
       }
     }
     for (let child1 of this.children.children) {
@@ -336,4 +339,20 @@ function unescapeValue(str) {
 
 function unescape(str) {
   return unescapeValue(str).replace(/^\\-/, "-");
+}
+
+function moveElementToIndex(element, newIndex) {
+  const parent = element.parentNode;
+  if (!parent) return;
+
+  const children = Array.from(parent.children);
+  const clampedIndex = Math.max(0, Math.min(newIndex, children.length - 1));
+
+  if (children[clampedIndex] === element) return;
+  parent.removeChild(element);
+  if (clampedIndex >= parent.children.length) {
+    parent.appendChild(element);
+  } else {
+    parent.insertBefore(element, parent.children[clampedIndex]);
+  }
 }

@@ -46,7 +46,8 @@ class Tree {
         if (!n.isAttribute) {
           let types = n.name.value.match(Node.typeRegEx);
           if (types) {
-            for (let t of types) {
+            for (let i = types.length - 1; i >= 0; i--) {
+              let t = types[i];
               if (typedefs[t]) {
                 for (let child of n.nonAttrChildren) {
                   child.merge(typedefs[t]);
