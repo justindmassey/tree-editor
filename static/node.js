@@ -3,6 +3,7 @@ import nodeCommands from "./node-commands.js";
 import { div, input, ol, li } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
+import moveElementToIndex from "./lib/move-element-to-index.js";
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
@@ -339,20 +340,4 @@ function unescapeValue(str) {
 
 function unescape(str) {
   return unescapeValue(str).replace(/^\\-/, "-");
-}
-
-function moveElementToIndex(element, newIndex) {
-  const parent = element.parentNode;
-  if (!parent) return;
-
-  const children = Array.from(parent.children);
-  const clampedIndex = Math.max(0, Math.min(newIndex, children.length - 1));
-
-  if (children[clampedIndex] === element) return;
-  parent.removeChild(element);
-  if (clampedIndex >= parent.children.length) {
-    parent.appendChild(element);
-  } else {
-    parent.insertBefore(element, parent.children[clampedIndex]);
-  }
 }
