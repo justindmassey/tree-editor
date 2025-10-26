@@ -82,6 +82,7 @@ export default class Node {
   }
 
   merge(node) {
+    let activeElement = document.activeElement
     let n = node.copy();
     for (let i = 0; i < n.children.children.length; i++) {
       let child = n.children.children[i];
@@ -118,6 +119,7 @@ export default class Node {
         }
       }
     }
+    activeElement.focus()
   }
 
   setAttribute(name, value = "", focus = false) {
