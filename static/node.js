@@ -88,7 +88,6 @@ export default class Node {
     let children = Array.from(n.children.children);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
-
       let m = child.node.isAttribute;
       if (m) {
         let prevNode = this.getChild(child.node.lastName);
