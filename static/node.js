@@ -81,6 +81,12 @@ export default class Node {
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
       if (removeLastName) {
+        if(child.node.lastName == null) {
+          let prevNode = this.getChild("")
+          if(prevNode) {
+            prevNode.remove(false);
+          }
+        }
         let prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
           prevNode.remove(false);
