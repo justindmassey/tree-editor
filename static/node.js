@@ -79,8 +79,9 @@ export default class Node {
     let children = Array.from(n.children.children);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
+      let prevNode
       if (removeLastName && child.node.lastName != child.node.name.value) {
-        let prevNode = this.getChild(child.node.lastName);
+        prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
           prevNode.remove(false);
         }
@@ -93,6 +94,9 @@ export default class Node {
         moveElementToIndex(this.getAttrNode(m[1]).elem, i);
       } else {
         if (!this.getChild(child.node.name.value)) {
+          if(prevNode) {
+            child.node.merge(prevNode)
+          }
           this.appendChild(child.node, false);
         }
         moveElementToIndex(this.getChild(child.node.name.value).elem, i);
