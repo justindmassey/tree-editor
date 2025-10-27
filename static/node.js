@@ -50,7 +50,6 @@ export default class Node {
   copy() {
     let n = new Node(this.name.value);
     n.lastName = this.lastName;
-    n.lastAttrName = this.lastAttrName;
     for (let child of this.children.children) {
       n.appendChild(child.node.copy());
     }
