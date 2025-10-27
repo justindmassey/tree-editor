@@ -150,7 +150,6 @@ export default class Node {
           children.appendChild(li(child.toElement()));
         }
       }
-
       if (children.children.length) {
         return div(div(this.nameText), children);
       } else {
