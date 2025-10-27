@@ -22,18 +22,10 @@ export default class Node {
       .e("input", () => {
         history.add();
         this.lastName = this.name.value;
-        let m = this.isAttribute;
-        if (m) {
-          this.lastAttrName = m[1];
-        }
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
     this.lastName = name;
-    let m = this.isAttribute;
-    if (m) {
-      this.lastAttrName = m[1];
-    }
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -82,32 +74,25 @@ export default class Node {
     }
   }
 
-  merge(node) {
+  merge(node, removeLastName = true) {
     let activeElement = document.activeElement;
     let n = node.copy();
     let children = Array.from(n.children.children);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
-      let m = child.node.isAttribute;
-      if (m) {
+      if (removeLastName) {
         let prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
           prevNode.remove(false);
         }
-        let prevAttr = this.getAttrNode(child.node.lastAttrName);
-        if (prevAttr && child.node.lastAttrName != m[1]) {
-          this.setAttribute(m[1], prevAttr.isAttribute[2]);
-          prevAttr.remove(false);
-        }
+      }
+      let m = child.node.isAttribute;
+      if (m) {
         if (!(m[1] in this.attributes)) {
           this.setAttribute(m[1], m[2]);
         }
         moveElementToIndex(this.getAttrNode(m[1]).elem, i);
       } else {
-        let prevChild = this.getChild(child.node.lastName);
-        if (prevChild && child.node.name.value != child.node.lastName) {
-          prevChild.remove(false);
-        }
         if (!this.getChild(child.node.name.value)) {
           this.appendChild(child.node, false);
         }
