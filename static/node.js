@@ -95,7 +95,7 @@ export default class Node {
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
-            child.node.merge(prevNode);
+            child.node.merge(prevNode, false);
           }
           this.appendChild(child.node, false);
         }
