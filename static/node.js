@@ -22,10 +22,18 @@ export default class Node {
       .e("input", () => {
         history.add();
         this.lastName = this.name.value;
+        let m = this.isAttribute;
+        if (m) {
+          this.lastAttrName = m[1];
+        }
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
     this.lastName = name;
+    let m = this.isAttribute;
+    if (m) {
+      this.lastAttrName = m[1];
+    }
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -50,6 +58,7 @@ export default class Node {
   copy() {
     let n = new Node(this.name.value);
     n.lastName = this.lastName;
+    n.lastAttrName = this.lastAttrName;
     for (let child of this.children.children) {
       n.appendChild(child.node.copy());
     }
@@ -88,7 +97,15 @@ export default class Node {
       }
       let m = child.node.isAttribute;
       if (m) {
-        if (!(m[1] in this.attributes)) {
+        let lastAttrNode;
+        if (removeLastName && m[1] != child.node.lastAttrName) {
+          lastAttrNode = this.getAttrNode(child.node.lastAttrName);
+          if (lastAttrNode) {
+            lastAttrNode.remove(false);
+            this.setAttribute(m[1], lastAttrNode.isAttribute[2])
+          }
+        }
+        if (!(m[1] in this.attributes) && !lastAttrNode) {
           this.setAttribute(m[1], m[2]);
         }
         moveElementToIndex(this.getAttrNode(m[1]).elem, i);
