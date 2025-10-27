@@ -139,7 +139,8 @@ export default class Node {
     return this.name.value.match(Node.attrRegEx);
   }
 
-  toElement() {
+  _toElement() {
+    let elem;
     let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
@@ -157,6 +158,18 @@ export default class Node {
         return div(this.nameText);
       }
     }
+  }
+
+  toElement() {
+    let elem = this._toElement()
+    elem.e("click", (ev) => {
+      if(ev.ctrlKey) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.focus()
+      }
+    })
+    return elem
   }
 
   get nonAttrChildren() {

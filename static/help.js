@@ -34,7 +34,8 @@ class Help {
         div(
           "Escaping equals symbols following ",
           "the first unescaped one is optional."
-        )
+        ),
+        div("Control-click a widget to focus its node.")
       ),
       makeReference(widgets),
       h2("Type Definitions"),
