@@ -82,7 +82,7 @@ export default class Node {
       let child = children[i];
       if (removeLastName) {
         let prevNode = this.getChild(child.node.lastName);
-        if (prevNode) {
+        if (prevNode && child.node.lastName != child.node.name.value) {
           prevNode.remove(false);
         }
       }
