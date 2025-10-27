@@ -97,15 +97,14 @@ export default class Node {
       }
       let m = child.node.isAttribute;
       if (m) {
-        let lastAttrNode;
         if (removeLastName && m[1] != child.node.lastAttrName) {
-          lastAttrNode = this.getAttrNode(child.node.lastAttrName);
+          let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode) {
             lastAttrNode.remove(false);
-            this.setAttribute(m[1], lastAttrNode.isAttribute[2])
+            this.setAttribute(m[1], lastAttrNode.isAttribute[2]);
           }
         }
-        if (!(m[1] in this.attributes) && !lastAttrNode) {
+        if (!(m[1] in this.attributes)) {
           this.setAttribute(m[1], m[2]);
         }
         moveElementToIndex(this.getAttrNode(m[1]).elem, i);
