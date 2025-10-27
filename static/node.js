@@ -140,7 +140,6 @@ export default class Node {
   }
 
   _toElement() {
-    let elem;
     let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
@@ -161,15 +160,15 @@ export default class Node {
   }
 
   toElement() {
-    let elem = this._toElement()
+    let elem = this._toElement();
     elem.e("click", (ev) => {
-      if(ev.ctrlKey) {
-        ev.preventDefault()
-        ev.stopPropagation()
-        this.focus()
+      if (ev.ctrlKey) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        this.focus();
       }
-    })
-    return elem
+    });
+    return elem;
   }
 
   get nonAttrChildren() {
