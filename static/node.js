@@ -25,7 +25,7 @@ export default class Node {
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
-    this.lastName = name;
+    this.lastName = null;
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -82,7 +82,7 @@ export default class Node {
       let child = children[i];
       if (removeLastName) {
         let prevNode = this.getChild(child.node.lastName);
-        if (prevNode && child.node.lastName != child.node.name.value) {
+        if (prevNode) {
           prevNode.remove(false);
         }
       }
