@@ -161,15 +161,12 @@ export default class Node {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
     } else {
       let children = ol();
-      if (this.name.value.match(Node.typedefRegEx)) {
-        for (let child of this.children.children) {
-          children.appendChild(li(child.node.toElement()));
-        }
-      } else {
-        for (let child of this.nonAttrChildren) {
+      for (let child of this.nonAttrChildren) {
+        if (!child.name.value.match(Node.typedefRegEx)) {
           children.appendChild(li(child.toElement()));
         }
       }
+
       if (children.children.length) {
         return div(div(this.nameText), children);
       } else {
