@@ -234,6 +234,15 @@ export default {
       }
     },
   },
+  "Alt+y": {
+    description: "merge clipboard into this node",
+    action() {
+      if(tree.clipboard) {
+        this.merge(Node.deserialize(tree.clipboard), false)
+        history.add()
+      }
+    }
+  },
   "Alt+d d": {
     description: "delete descendants",
     action() {
