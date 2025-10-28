@@ -43,7 +43,7 @@ class Tree {
     });
     if (Object.keys(typedefs).length) {
       this.root.traverse((n) => {
-        if (!n.isAttribute) {
+        if (!n.isAttribute && !n.name.value.match(Node.typedefRegEx)) {
           let nodeTypes = n.name.value.match(Node.nodeTypeRegEx);
           if (nodeTypes) {
             for (let i = nodeTypes.length - 1; i >= 0; i--) {
