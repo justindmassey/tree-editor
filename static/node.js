@@ -25,6 +25,8 @@ export default class Node {
         let m = this.isAttribute;
         if (m) {
           this.lastAttrName = m[1];
+        } else {
+          this.lastAttrName = null;
         }
       });
     registerShortcuts(this.name, nodeCommands, this);
@@ -33,6 +35,8 @@ export default class Node {
     let m = this.isAttribute;
     if (m) {
       this.lastAttrName = m[1];
+    } else {
+      this.lastAttrName = null;
     }
     this.removeButton = div("✕")
       .c("button", "remove-button")
