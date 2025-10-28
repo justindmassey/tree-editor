@@ -105,11 +105,11 @@ export default class Node {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode) {
             lastAttrNode.remove(false);
-            this.setAttribute(m[1], lastAttrNode.isAttribute[2], false, false);
+            this.setAttribute(m[1], lastAttrNode.isAttribute[2]);
           }
         }
         if (!(unescape(m[1]) in this.attributes)) {
-          this.setAttribute(m[1], m[2], false, false);
+          this.setAttribute(m[1], m[2]);
         }
         moveElementToIndex(this.getAttrNode(m[1]).elem, i);
       } else {
@@ -132,10 +132,8 @@ export default class Node {
     activeElement.focus();
   }
 
-  setAttribute(name, value = "", focus = false, escape = true) {
-    if (escape) {
-      name = name.replace(/(?<!\\)=/g, "\\=").replace(/^-/, "\\-");
-    }
+  setAttribute(name, value = "", focus = false) {
+    name = name.replace(/(?<!\\)=/g, "\\=");
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
       if (child.node.name.value.startsWith(name + "=")) {
