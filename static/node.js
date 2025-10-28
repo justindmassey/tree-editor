@@ -215,7 +215,7 @@ export default class Node {
     if (callback(this)) {
       return;
     } else if (this.parent) {
-      this.parent.traverseUp(callback);
+      return this.parent.traverseUp(callback);
     }
   }
 
