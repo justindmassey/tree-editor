@@ -8,7 +8,9 @@ Features:
  - import/export of text, JSON, and XML
 
 Usage:
+
     cd tree-editor
     npm install
     node .
+    
 then visit localhost:3000
