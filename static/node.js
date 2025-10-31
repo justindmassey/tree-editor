@@ -111,7 +111,9 @@ export default class Node {
         if (!(unescape(m[1]) in this.attributes)) {
           this.setAttribute(m[1], m[2], false, false);
         }
-        moveElementToIndex(this.getAttrNode(m[1]).elem, i);
+        let lastAttrNode = this.getAttrNode(m[1])
+        lastAttrNode.lastAttrName = child.node.lastAttrName
+        moveElementToIndex(lastAttrNode.elem, i);
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
