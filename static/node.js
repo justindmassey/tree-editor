@@ -112,7 +112,7 @@ export default class Node {
           this.setAttribute(m[1], m[2], false, false);
         }
         let attrNode = this.getAttrNode(m[1]);
-        attrNode.lastName = child.node.lastName;
+        //attrNode.lastName = child.node.lastName;
         attrNode.lastAttrName = child.node.lastAttrName;
         moveElementToIndex(attrNode.elem, i);
       } else {
@@ -122,9 +122,9 @@ export default class Node {
           }
           this.appendChild(child.node, false);
         }
-        let childNode = this.getChild(child.node.name.value);
-        childNode.lastName = child.node.lastName;
-        moveElementToIndex(childNode.elem, i);
+        let lastChild = this.getChild(child.node.name.value);
+        lastChild.lastName = child.node.lastName;
+        moveElementToIndex(lastChild.elem, i);
       }
     }
     for (let child1 of this.nonAttrChildren) {
