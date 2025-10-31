@@ -123,9 +123,9 @@ export default class Node {
           }
           this.appendChild(child.node, false);
         }
-        let lastChild = this.getChild(child.node.name.value);
-        lastChild.lastName = child.node.lastName;
-        moveElementToIndex(lastChild.elem, i);
+        let childNode = this.getChild(child.node.name.value);
+        childNode.lastName = child.node.lastName;
+        moveElementToIndex(childNode.elem, i);
       }
     }
     for (let child1 of this.nonAttrChildren) {
