@@ -101,8 +101,9 @@ export default class Node {
       }
       let m = child.node.isAttribute;
       if (m) {
+        let lastAttrNode
         if (removeLastName && m[1] != child.node.lastAttrName) {
-          let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
+          lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode) {
             lastAttrNode.remove(false);
             this.setAttribute(m[1], lastAttrNode.isAttribute[2], false, false);
@@ -111,9 +112,10 @@ export default class Node {
         if (!(unescape(m[1]) in this.attributes)) {
           this.setAttribute(m[1], m[2], false, false);
         }
-        let lastAttrNode = this.getAttrNode(m[1])
-        lastAttrNode.lastAttrName = child.node.lastAttrName
-        moveElementToIndex(lastAttrNode.elem, i);
+        let attrNode = this.getAttrNode(m[1])
+        attrNode.lastName = child.node.lastName
+        attrNode.lastAttrName = child.node.lastAttrName
+        moveElementToIndex(attrNode.elem, i);
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
