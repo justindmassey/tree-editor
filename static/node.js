@@ -112,7 +112,7 @@ export default class Node {
           this.setAttribute(m[1], m[2], false, false);
         }
         let attrNode = this.getAttrNode(m[1]);
-        //attrNode.lastName = child.node.lastName;
+        attrNode.lastName = child.node.lastName;
         attrNode.lastAttrName = child.node.lastAttrName;
         moveElementToIndex(attrNode.elem, i);
       } else {
