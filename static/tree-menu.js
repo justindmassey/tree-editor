@@ -13,8 +13,14 @@ class TreeMenu {
   update() {
     this.menu.clearItems();
     get("/list").then((list) => {
-      for (let treeName of list) {
-        this.menu.addItem(div(treeName).e("click", () => tree.load(treeName)));
+      if (list.error) {
+        alert(list.error);
+      } else {
+        for (let treeName of list) {
+          this.menu.addItem(
+            div(treeName).e("click", () => tree.load(treeName))
+          );
+        }
       }
     });
   }

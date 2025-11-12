@@ -15,9 +15,13 @@ class Tree {
 
   load(name) {
     get("/trees/" + encodeURIComponent(name)).then((data) => {
-      this.root = Node.deserialize(data);
-      setTimeout(() => history.add(), 0);
-      localStorage.setItem("tree", name);
+      if (data.error) {
+        alert(data.error);
+      } else {
+        this.root = Node.deserialize(data);
+        setTimeout(() => history.add(), 0);
+        localStorage.setItem("tree", name);
+      }
     });
   }
 

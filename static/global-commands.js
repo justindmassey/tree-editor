@@ -10,15 +10,15 @@ export default {
       post(
         "/save/" + encodeURIComponent(this.tree.root.name.value),
         JSON.stringify(this.tree.root.serialize())
-      )
-        .then((res) => {
+      ).then((res) => {
+        if (res.error) {
+          alert(res.error);
+        } else {
           localStorage.setItem("tree", this.tree.root.name.value);
           treeMenu.update();
           flash();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        }
+      });
     },
   },
   "Control+Alt+d": {
@@ -26,12 +26,16 @@ export default {
     action() {
       get("/delete/" + encodeURIComponent(this.tree.root.name.value)).then(
         (res) => {
-          treeMenu.update();
-          this.tree.root = new Node();
-          this.tree.root.focus();
-          history.add();
-          localStorage.setItem("tree", "");
-          flash();
+          if (res.error) {
+            alert(res.error);
+          } else {
+            treeMenu.update();
+            this.tree.root = new Node();
+            this.tree.root.focus();
+            history.add();
+            localStorage.setItem("tree", "");
+            flash();
+          }
         }
       );
     },

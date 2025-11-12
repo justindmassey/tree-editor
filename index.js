@@ -20,13 +20,17 @@ fastify.get("/list", async function (req, res) {
       return filename.replace(/\.[^\.]*$/, "");
     });
   } catch (e) {
-    return [];
+    return { error: e.message };
   }
 });
 
 fastify.get("/trees/:name", async function (req, res) {
   let filename = path.join(__dirname, "trees", req.params.name + ".json");
-  return fs.readFile(filename);
+  try {
+    return fs.readFile(filename);
+  } catch (e) {
+    return { error: e.message };
+  }
 });
 
 fastify.post("/save/:name", async function (req, res) {
@@ -36,7 +40,7 @@ fastify.post("/save/:name", async function (req, res) {
   } catch (e) {
     return { error: e.message };
   }
-  return { error: null };
+  return {};
 });
 
 fastify.get("/delete/:name", async function (req, res) {
