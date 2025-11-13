@@ -21,23 +21,11 @@ export default class Node {
       .a("size", 40)
       .e("input", () => {
         history.add();
-        this.lastName = this.name.value;
-        let m = this.isAttribute;
-        if (m) {
-          this.lastAttrName = m[1];
-        } else {
-          this.lastAttrName = null;
-        }
+        this.updateLastValues();
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
-    this.lastName = name;
-    let m = this.isAttribute;
-    if (m) {
-      this.lastAttrName = m[1];
-    } else {
-      this.lastAttrName = null;
-    }
+    this.updateLastValues();
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -57,6 +45,16 @@ export default class Node {
       this.appendChild(child, false);
     }
     this.expand();
+  }
+
+  updateLastValues() {
+    this.lastName = this.name.value;
+    let m = this.isAttribute;
+    if (m) {
+      this.lastAttrName = m[1];
+    } else {
+      this.lastAttrName = null;
+    }
   }
 
   copy() {
