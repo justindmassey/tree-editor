@@ -190,15 +190,13 @@ export default class Node {
   }
 
   toElement() {
-    let elem = this._toElement();
-    elem.e("click", (ev) => {
+    return this._toElement().e("click", (ev) => {
       if (ev.ctrlKey) {
         ev.preventDefault();
         ev.stopPropagation();
         this.focus();
       }
     });
-    return elem;
   }
 
   get nonAttrChildren() {
