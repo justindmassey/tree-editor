@@ -123,7 +123,9 @@ export default class Node {
           this.appendChild(child.node, false);
         }
         let lastChild = this.getChild(child.node.name.value);
-        lastChild.lastName = child.node.lastName;
+        if (document.activeElement != lastChild.name) {
+          lastChild.lastName = child.node.lastName;
+        }
         moveElementToIndex(lastChild.elem, i);
       }
     }
