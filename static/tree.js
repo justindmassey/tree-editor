@@ -37,12 +37,12 @@ class Tree {
 
   updateTypes() {
     let typedefs = {};
-    typedefMenu.menu.clearItems();
+    typedefMenu.clearItems();
     this.root.traverse((n) => {
       let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
         typedefs[m[1]] = n;
-        typedefMenu.menu.addItem(div(m[1]).e("click", () => n.focus()));
+        typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
       }
     });
     if (Object.keys(typedefs).length) {
