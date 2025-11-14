@@ -41,7 +41,7 @@ class Help {
         div("The output is updated in real time.")
       ),
       makeReference(widgets),
-      h2("Type Definitions"),
+      h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),
       div("are type definitions."),
       div("Nodes with ", code(".TYPE"), " in their name"),
