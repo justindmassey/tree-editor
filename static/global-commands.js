@@ -91,7 +91,7 @@ export default {
     },
   },
   "Alt+o": {
-    description: "toggle output display",
+    description: "toggle output visibility",
     action() {
       this.tree.output.classList.toggle("hidden");
       if (this.tree.output.classList.contains("hidden")) {
