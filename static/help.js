@@ -22,9 +22,8 @@ class Help {
       h2("Widgets"),
       p(
         div("Widgets begin with ", code("-WIDGET ARGUMENT"), "."),
-        div(
-          "Widgets are rendered to the output (press Alt+o to toggle the output display)."
-        ),
+        div("Widgets are rendered to the output"),
+        div("(press Alt+o to toggle the output visibility)."),
         div(
           'Equals symbols ("',
           code("="),
