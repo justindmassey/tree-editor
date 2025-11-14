@@ -38,7 +38,7 @@ class Help {
           "the first unescaped one is optional."
         ),
         div("Control-click a widget to focus its node."),
-        div("The output is updated in real time")
+        div("The output is updated in real time.")
       ),
       makeReference(widgets),
       h2("Type Definitions"),
@@ -50,8 +50,8 @@ class Help {
       div("Children of nodes with ", code(":TYPE"), " in their name"),
       div("inherit from that type definition."),
       div('The colons ("', code(":"), '") can be escaped with a backslash.'),
-      div("Type definitions can inherit from other type definitions"),
-      div("Types are updated in real time"),
+      div("Type definitions can inherit from other type definitions."),
+      div("Types are updated in real time."),
       h2("XML Export"),
       div("Nodes with children become tags."),
       div("Attribute nodes become attributes."),
