@@ -1,18 +1,3 @@
-Element.prototype.e = function (event, callback) {
-  this.addEventListener(event, callback);
-  return this;
-};
-
-Element.prototype.c = function (...classes) {
-  this.classList.add(...classes);
-  return this;
-};
-
-Element.prototype.a = function (key, value) {
-  this.setAttribute(key, value);
-  return this;
-};
-
 function createElement(tag) {
   return function (...children) {
     let element = document.createElement(tag);
@@ -28,6 +13,21 @@ function createElement(tag) {
     return element;
   };
 }
+
+Element.prototype.e = function (event, callback) {
+  this.addEventListener(event, callback);
+  return this;
+};
+
+Element.prototype.c = function (...classes) {
+  this.classList.add(...classes);
+  return this;
+};
+
+Element.prototype.a = function (key, value) {
+  this.setAttribute(key, value);
+  return this;
+};
 
 export const a = createElement("a");
 export const abbr = createElement("abbr");
