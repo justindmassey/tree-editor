@@ -19,11 +19,7 @@ function exportNode(node) {
           return n;
         }
       } else {
-        try {
-          n.appendChild(exportNode(child.node));
-        } catch (e) {
-          return n;
-        }
+        n.appendChild(exportNode(child.node));
       }
     }
     return n;
