@@ -44,7 +44,7 @@ class Help {
       div("Nodes with a name of the form ", code("::TYPE")),
       div("are type definitions."),
       div("Nodes with ", code(".TYPE"), " in their name"),
-      div("inherit from the type definition."),
+      div("inherit from that type definition."),
       div('The dots ("', code("."), '") can be escaped with a backslash.'),
       div("Children of nodes with ", code(":TYPE"), " in their name"),
       div("inherit from that type definition."),
