@@ -2,8 +2,9 @@ import Node from "../node.js";
 
 function exportNode(node) {
   if (node.children.children.length) {
+    let n;
     try {
-      let n = document.createElement(node.name.value);
+      n = document.createElement(node.name.value);
     } catch (e) {
       alert("Invalid tagname: " + node.name.value);
       return;
@@ -15,12 +16,14 @@ function exportNode(node) {
           n.setAttribute(m[1], m[2]);
         } catch (e) {
           alert("Invalid attribute name: " + m[1]);
-          return;
+          return n;
         }
       } else {
         try {
           n.appendChild(exportNode(child.node));
-        } catch (e) {}
+        } catch (e) {
+          return n;
+        }
       }
     }
     return n;
@@ -30,8 +33,8 @@ function exportNode(node) {
 }
 
 export default function exportToXml(node) {
-  let xml = exportNode(node)
+  let xml = exportNode(node);
   return (
-    '<?xml version="1.0" encoding="UTF-8"?>\n' + (xml && xml.outerHTML || '')
+    '<?xml version="1.0" encoding="UTF-8"?>\n' + ((xml && xml.outerHTML) || "")
   );
 }
