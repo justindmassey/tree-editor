@@ -1,27 +1,37 @@
 import Node from "../node.js";
 
 function exportNode(node) {
-  try {
-    let n;
-    if (node.children.children.length) {
-      n = document.createElement(node.name.value);
-      for (let child of node.children.children) {
-        let m = child.node.isAttribute
-        if (m) {
+  if (node.children.children.length) {
+    try {
+      let n = document.createElement(node.name.value);
+    } catch (e) {
+      alert("Invalid tagname: " + node.name.value);
+      return;
+    }
+    for (let child of node.children.children) {
+      let m = child.node.isAttribute;
+      if (m) {
+        try {
           n.setAttribute(m[1], m[2]);
-        } else {
-          n.appendChild(exportNode(child.node));
+        } catch (e) {
+          alert("Invalid attribute name: " + m[1]);
+          return;
         }
+      } else {
+        try {
+          n.appendChild(exportNode(child.node));
+        } catch (e) {}
       }
-    } else {
-      n = new Text(node.name.value + "\n");
     }
     return n;
-  } catch (e) {}
+  } else {
+    return new Text(node.name.value + "\n");
+  }
 }
 
 export default function exportToXml(node) {
+  let xml = exportNode(node)
   return (
-    '<?xml version="1.0" encoding="UTF-8"?>\n' + exportNode(node).outerHTML
+    '<?xml version="1.0" encoding="UTF-8"?>\n' + (xml && xml.outerHTML || '')
   );
 }
