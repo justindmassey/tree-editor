@@ -1,5 +1,5 @@
 .tabs {
-  border: 1px solid #999;
+  border: 1px solid var(--color-2);
   border-radius: 2px;
   width: fit-content;
 }
@@ -7,7 +7,7 @@
 .tabs-header {
   display: flex;
   align-items: stretch;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid var(--color-2);
 }
 
 .tab {
@@ -23,11 +23,11 @@
 }
 
 .tab:not(:last-child) {
-  border-right: 1px solid #999;
+  border-right: 1px solid var(--color-2);
 }
 
 .tab.active {
-  background: #999;
+  background: var(--color-2);
 }
 
 .tabs-body {

@@ -2,10 +2,10 @@
 
 .menu-bar {
   padding: 1em;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #a3a3a3;
   position: fixed;
   width: 100vw;
   top: 0px;
   z-index: 1;
-  background: white;
+  background: var(--bg);
 }

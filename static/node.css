@@ -5,7 +5,7 @@
 
 .children > .node {
   padding-left: 2em;
-  border-left: 1px solid #999;
+  border-left: 1px solid var(--color-2);
 }
 
 .name {
@@ -20,7 +20,7 @@
 }
 
 .toggle-button:has(~ .children:empty) {
-  color: #eee;
+  color: var(--color-3);
 }
 
 .toggle-button {
