@@ -1,7 +1,7 @@
 import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
-
+import exportToText from "./exporters/text.js";
 export default {
   Tab: {
     description: "toggle visibility of children",
@@ -237,11 +237,11 @@ export default {
   "Alt+y": {
     description: "merge clipboard into this node",
     action() {
-      if(tree.clipboard) {
-        this.merge(Node.deserialize(tree.clipboard), false)
-        history.add()
+      if (tree.clipboard) {
+        this.merge(Node.deserialize(tree.clipboard), false);
+        history.add();
       }
-    }
+    },
   },
   "Alt+d d": {
     description: "delete descendants",
@@ -277,7 +277,7 @@ export default {
       history.add();
     },
   },
-  "Alt+s": {
+  "Alt+s c": {
     description: "collapse siblings",
     action() {
       if (this.parent) {
@@ -286,6 +286,23 @@ export default {
         }
       } else {
         this.collapse();
+      }
+    },
+  },
+  "Alt+s s": {
+    description: "sort siblings",
+    action() {
+      if (this.parent) {
+        let curText = exportToText(this.parent);
+        this.parent.children.replaceChildren(
+          ...Array.from(this.parent.children.children).sort((a, b) => {
+            return a.node.name.value > b.node.name.value ? 1 : -1;
+          })
+        );
+        this.focus();
+        if (curText != exportToText(this.parent)) {
+          history.add();
+        }
       }
     },
   },
