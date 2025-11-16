@@ -20,12 +20,12 @@ class MenuBar {
       typedefMenu,
       new Menu(
         div("Import"),
-        new TextUploader("Text", (text) => {
+        new TextUploader("Text", ".txt", (text) => {
           tree.root = importText(text);
           tree.root.focus();
           history.add();
         }),
-        new TextUploader("JSON", (json) => {
+        new TextUploader("JSON", ".json", (json) => {
           try {
             tree.root = importJson(json);
           } catch (e) {
@@ -35,7 +35,7 @@ class MenuBar {
           tree.root.focus();
           history.add();
         }),
-        new TextUploader("XML", (xml) => {
+        new TextUploader("XML", ".xml", (xml) => {
           tree.root = importXml(xml);
           tree.root.focus();
           history.add();
