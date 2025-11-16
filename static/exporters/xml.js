@@ -30,7 +30,7 @@ function exportNode(node) {
 
 export default function exportToXml(node) {
   let xml = exportNode(node);
-  return (
-    '<?xml version="1.0" encoding="UTF-8"?>\n' + ((xml && xml.outerHTML) || "")
-  );
+  if (xml) {
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + xml.outerHTML;
+  }
 }

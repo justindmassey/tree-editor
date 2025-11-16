@@ -45,7 +45,10 @@ class MenuBar {
           downloadFile(tree.root.name.value + ".json", exportToJson(tree.root));
         }),
         div("XML").e("click", () => {
-          downloadFile(tree.root.name.value + ".xml", exportToXml(tree.root));
+          let xml = exportToXml(tree.root);
+          if (xml) {
+            downloadFile(tree.root.name.value + ".xml", xml);
+          }
         })
       )
     ).c("menu-bar", "hidden");
