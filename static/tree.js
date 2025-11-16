@@ -3,6 +3,7 @@ import { div } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import typedefMenu from "./typedef-menu.js";
+import menuBar from "./menu-bar.js";
 
 class Tree {
   constructor() {
@@ -77,6 +78,11 @@ class Tree {
     if (!this.output.classList.contains("hidden")) {
       this.output.replaceChildren(this.root.toElement());
     }
+  }
+
+  update() {
+    this.updateTypes();
+    this.updateOutput();
   }
 }
 

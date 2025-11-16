@@ -5,8 +5,7 @@ import History from "./lib/history.js";
 class TreeHistory extends History {
   constructor() {
     super(() => {
-      tree.updateTypes();
-      tree.updateOutput();
+      tree.update();
     });
   }
 
