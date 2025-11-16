@@ -26,7 +26,12 @@ class MenuBar {
           history.add();
         }),
         new TextUploader("JSON", (json) => {
-          tree.root = importJson(json);
+          try {
+            tree.root = importJson(json);
+          } catch (e) {
+            alert("Import failed");
+            return;
+          }
           tree.root.focus();
           history.add();
         }),
