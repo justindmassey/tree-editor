@@ -179,7 +179,10 @@ export default class Node {
     } else {
       let children = ol();
       for (let child of this.nonAttrChildren) {
-        if (!child.name.value.match(Node.typedefRegEx)) {
+        if (
+          !child.name.value.match(Node.typedefRegEx) &&
+          !child.name.value.startsWith("#")
+        ) {
           children.appendChild(li(child.toElement()));
         }
       }
@@ -360,11 +363,11 @@ export default class Node {
 
 function unescapeValue(str) {
   return str
+    .replace(Node.listTypeRegEx, "")
+    .replace(Node.nodeTypeRegEx, "")
     .replace(/\\=/g, "=")
     .replace(/\\:/g, ":")
-    .replace(/\\\./g, ".")
-    .replace(Node.listTypeRegEx, "")
-    .replace(Node.nodeTypeRegEx, "");
+    .replace(/\\\./g, ".");
 }
 
 function unescape(str) {
