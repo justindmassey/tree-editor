@@ -228,7 +228,7 @@ export default class Node {
     if (callback(this)) {
       return true;
     } else if (includeCollapsed || this.expanded) {
-      for (let child of this.children.children) {
+      for (let child of Array.from(this.children.children)) {
         if (child.node.traverse(callback, includeCollapsed)) {
           return true;
         }
