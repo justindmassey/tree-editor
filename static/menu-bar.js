@@ -29,7 +29,7 @@ class MenuBar {
           try {
             tree.root = importJson(json);
           } catch (e) {
-            alert("Import failed");
+            alert("Import failed: " + e.message);
             return;
           }
           tree.root.focus();
