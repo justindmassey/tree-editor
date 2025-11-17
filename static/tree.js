@@ -8,10 +8,11 @@ class Tree {
   constructor() {
     this.tree = div().c("tree-container");
     this.output = div().c("output", "hidden");
-    window.addEventListener(
-      "keydown",
-      (ev) => (this.output.style.cursor = "default")
-    );
+    window.addEventListener("keydown", (ev) => {
+      if (ev.ctrlKey) {
+        this.output.style.cursor = "default";
+      }
+    });
     window.addEventListener("keyup", (ev) => (this.output.style.cursor = ""));
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
