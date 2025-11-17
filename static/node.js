@@ -129,10 +129,10 @@ export default class Node {
         moveElementToIndex(lastChild.elem, i);
       }
     }
-    for (let child1 of this.nonAttrChildren) {
-      for (let child2 of n.nonAttrChildren) {
-        if (child1.name.value == child2.name.value) {
-          child1.merge(child2);
+    for (let child1 of this.children.children) {
+      for (let child2 of n.children.children) {
+        if (child1.node.name.value == child2.node.name.value) {
+          child1.node.merge(child2.node);
         }
       }
     }
