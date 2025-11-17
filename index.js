@@ -16,7 +16,7 @@ if (!fss.existsSync(treesDir)) {
 
 fastify.get("/list", async function (req, res) {
   try {
-    return (await fs.readdir(path.join(__dirname, "trees"))).map((filename) => {
+    return (await fs.readdir(treesDir)).map((filename) => {
       return filename.replace(/\.[^\.]*$/, "");
     });
   } catch (e) {
