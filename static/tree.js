@@ -3,7 +3,6 @@ import { div } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import typedefMenu from "./typedef-menu.js";
-import menuBar from "./menu-bar.js";
 
 class Tree {
   constructor() {
@@ -39,14 +38,35 @@ class Tree {
   updateTypes() {
     let typedefs = {};
     typedefMenu.clearItems();
+    let recursionError = false;
     this.root.traverse((n) => {
       let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
         typedefs[m[1]] = n;
         typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
+        n.traverse((node) => {
+          let nodeTypes = node.name.value.match(Node.nodeTypeRegEx) || [];
+          for(let t of nodeTypes) {
+            if(t == "." + m[1]) {
+              alert("Error: recursive type definition")
+              recursionError = true
+              node.name.value = node.name.value.replace(t, "")
+              return true
+            }
+          }
+          let listTypes = node.name.value.match(Node.listType) || [];
+          for(let t of listTypes) {
+            if(t == ":" + m[1]) {
+              alert("Error: recursive type definition")
+              recursionError = true
+              node.name.value = node.name.value.replace(t, "")
+              return true
+            }
+          }
+        });
       }
     });
-    if (Object.keys(typedefs).length) {
+    if (Object.keys(typedefs).length && !recursionError) {
       this.root.traverse((n) => {
         if (!n.isAttribute) {
           let nodeTypes = n.name.value.match(Node.nodeTypeRegEx);

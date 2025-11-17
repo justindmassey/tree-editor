@@ -39,8 +39,13 @@ class Help {
           "Escaping equals symbols following ",
           "the first unescaped one is optional."
         ),
-        div("Control-click a widget to focus its node."),
-        div("The output is updated in real time.")
+        div(
+          'Non-root nodes that start with a hash symbol ("',
+          code("#", '")'),
+          div("are not rendered to the output"),
+          div("Control-click a widget to focus its node."),
+          div("The output is updated in real time.")
+        )
       ),
       makeReference(widgets),
 
@@ -54,6 +59,8 @@ class Help {
       div("inherit from that type definition."),
       div('The colons ("', code(":"), '") can be escaped with a backslash.'),
       div("Type definitions can inherit from other type definitions."),
+      div("Type definitions that are not the root node"),
+      div("are not rendered to the output."),
       div("Types are updated in real time."),
 
       h2("XML Export"),
