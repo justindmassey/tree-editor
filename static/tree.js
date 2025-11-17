@@ -46,21 +46,23 @@ class Tree {
         typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
         n.traverse((node) => {
           let nodeTypes = node.name.value.match(Node.nodeTypeRegEx) || [];
-          for(let t of nodeTypes) {
-            if(t == "." + m[1]) {
-              alert("Error: recursive type definition")
-              recursionError = true
-              node.name.value = node.name.value.replace(t, "")
-              return true
+          for (let t of nodeTypes) {
+            if (t == "." + m[1]) {
+              alert("Error: recursive type definition");
+              recursionError = true;
+              node.name.value = node.name.value.replace(t, "");
+              this.updateTypes();
+              return true;
             }
           }
-          let listTypes = node.name.value.match(Node.listType) || [];
-          for(let t of listTypes) {
-            if(t == ":" + m[1]) {
-              alert("Error: recursive type definition")
-              recursionError = true
-              node.name.value = node.name.value.replace(t, "")
-              return true
+          let listTypes = node.name.value.match(Node.listTypeRegEx) || [];
+          for (let t of listTypes) {
+            if (t == ":" + m[1]) {
+              alert("Error: recursive type definition");
+              recursionError = true;
+              node.name.value = node.name.value.replace(t, "");
+              this.updateTypes();
+              return true;
             }
           }
         });
