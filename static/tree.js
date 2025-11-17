@@ -75,9 +75,7 @@ class Tree {
   }
 
   updateOutput() {
-    if (!this.output.classList.contains("hidden")) {
-      this.output.replaceChildren(this.root.toElement());
-    }
+    this.output.replaceChildren(this.root.toElement());
   }
 
   update() {

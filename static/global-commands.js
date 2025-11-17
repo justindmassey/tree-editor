@@ -97,7 +97,6 @@ export default {
       if (this.tree.output.classList.contains("hidden")) {
         localStorage.setItem("output", "");
       } else {
-        this.tree.updateOutput();
         localStorage.setItem("output", "true");
       }
     },
