@@ -178,13 +178,8 @@ export default class Node {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
     } else {
       let children = ol();
-      for (let child of this.nonAttrChildren) {
-        if (
-          !child.name.value.match(Node.typedefRegEx) &&
-          !child.name.value.startsWith("#")
-        ) {
-          children.appendChild(li(child.toElement()));
-        }
+      for (let child of this.childNodes) {
+        children.appendChild(li(child.toElement()));
       }
       if (children.children.length) {
         return div(div(this.nameText), children);
@@ -202,6 +197,20 @@ export default class Node {
         this.focus();
       }
     });
+  }
+
+  get childNodes() {
+    this._childNodes = [];
+    for (let child of this.children.children) {
+      if (
+        !child.node.isAttribute &&
+        !child.node.name.value.startsWith("#") &&
+        !child.node.name.value.match(Node.typedefRegEx)
+      ) {
+        this._childNodes.push(child.node);
+      }
+    }
+    return this._childNodes;
   }
 
   get nonAttrChildren() {

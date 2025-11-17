@@ -310,7 +310,7 @@ export default {
     description: "collaps all descendants with only attribute children",
     action() {
       this.traverse((node) => {
-        if (!node.nonAttrChildren.length) {
+        if (!node.childNodes.length) {
           node.collapse();
         }
       }, false);

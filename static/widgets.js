@@ -23,7 +23,7 @@ export default {
     ),
     create(node, arg) {
       let children = div();
-      for (let child of node.nonAttrChildren) {
+      for (let child of node.childNodes) {
         children.appendChild(child.toElement());
       }
       return div(h1(arg), children).c("hdr");
@@ -53,7 +53,7 @@ export default {
     ),
     create(node, arg) {
       let checklist = div();
-      for (let child of node.nonAttrChildren) {
+      for (let child of node.childNodes) {
         let checkbox = input()
           .a("type", "checkbox")
           .e("change", () => {
@@ -87,16 +87,16 @@ export default {
       let bdy = tbody();
       let longestChild = 0;
 
-      for (let child of node.nonAttrChildren) {
+      for (let child of node.childNodes) {
         header.appendChild(td(child.nameText));
-        if (child.nonAttrChildren.length > longestChild) {
-          longestChild = child._nonAttrChildren.length;
+        if (child.childNodes.length > longestChild) {
+          longestChild = child._childNodes.length;
         }
       }
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
-        for (let child of node._nonAttrChildren) {
-          let cell = child.nonAttrChildren[i];
+        for (let child of node._childNodes) {
+          let cell = child.childNodes[i];
           if (cell) {
             row.appendChild(td(cell.toElement()));
           } else {
@@ -124,9 +124,9 @@ export default {
     ),
     create(node, arg) {
       let tabs = {};
-      for (let child of node.nonAttrChildren) {
+      for (let child of node.childNodes) {
         tabs[child.nameText] = div();
-        for (let grandchild of child.nonAttrChildren) {
+        for (let grandchild of child.childNodes) {
           tabs[child._nameText].appendChild(grandchild.toElement());
         }
       }
