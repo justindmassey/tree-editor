@@ -122,11 +122,11 @@ export default class Node {
           }
           this.appendChild(child.node, false);
         }
-        let lastChild = this.getChild(child.node.name.value);
-        if (document.activeElement != lastChild.name) {
-          lastChild.lastName = child.node.lastName;
+        let mergedChild = this.getChild(child.node.name.value);
+        if (document.activeElement != mergedChild.name) {
+          mergedChild.lastName = child.node.lastName;
         }
-        moveElementToIndex(lastChild.elem, i);
+        moveElementToIndex(mergedChild.elem, i);
       }
     }
     for (let child1 of this.children.children) {
