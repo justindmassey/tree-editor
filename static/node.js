@@ -374,11 +374,10 @@ function unescapeValue(str) {
   return str
     .replace(Node.listTypeRegEx, "")
     .replace(Node.nodeTypeRegEx, "")
-    .replace(/\\=/g, "=")
     .replace(/\\:/g, ":")
     .replace(/\\\./g, ".");
 }
 
 function unescape(str) {
-  return unescapeValue(str).replace(/^\\-/, "-");
+  return unescapeValue(str).replace(/^\\-/, "-").replace(/^\\#/, "#");
 }
