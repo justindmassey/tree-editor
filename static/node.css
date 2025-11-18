@@ -16,7 +16,6 @@
 
 .name:focus {
   position: relative;
-  z-index: -1;
 }
 
 .toggle-button:has(~ .children:empty) {
