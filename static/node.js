@@ -141,7 +141,10 @@ export default class Node {
 
   setAttribute(name, value = "", focus = false, escape = true) {
     if (escape) {
-      name = name.replace(/=/g, "\\=").replace(/^-/, "\\-");
+      name = name
+        .replace(/=/g, "\\=")
+        .replace(/^-/, "\\-")
+        .replace(/^#/, "\\#");
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
