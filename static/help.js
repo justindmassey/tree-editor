@@ -28,29 +28,33 @@ class Help {
         div("Widgets are rendered to the output"),
         div("(press Alt+o to toggle the output visibility)."),
         div(
-          'Equals symbols ("',
-          code("="),
-          '") and dashes("',
-          code("-"),
-          '") at the beginning of line',
-          div(' can be escaped with a backslash ("', code("\\"), '").')
-        ),
-        div(
-          "Equals symbols following ",
-          "the first unescaped don't need to be escaped."
-        ),
-        div(
           'Non-root nodes that start with a hash symbol ("',
           code("#", '")'),
           div("are not rendered to the output."),
           div("Control-click a widget to focus its node."),
           div("The output is updated in real time."),
           div(
-            "The hash symbol at the beginning can be escaped with a backslash."
+            'The hash symbol and the dash ("',
+            code("-"),
+            '") at the beginning of a node name',
+            div("can be escaped with a backslash.")
           )
         )
       ),
       makeReference(widgets),
+
+      h2("Attributes"),
+      div("Attributes have the form ", code("NAME=VALUE")),
+      div(
+        'Equals symbols ("',
+        code("="),
+        '")',
+        "can be escaped with a backslash."
+      ),
+      div(
+        "Equals symbols following ",
+        "the first unescaped one don't need to be escaped."
+      ),
 
       h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),
