@@ -31,7 +31,7 @@ class Help {
           'Non-root nodes that start with a hash symbol ("',
           code("#", '")'),
           div("are not rendered to the output."),
-          div("Control-click a widget to focus its node."),
+          div("Control-click a widget in the output to focus its node."),
           div("The output is updated in real time."),
           div(
             'The hash symbol and the dash ("',
