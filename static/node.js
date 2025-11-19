@@ -119,7 +119,8 @@ export default class Node {
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
-            if (prevNode.isAttribute) {
+            if (prevNode.isAttribute && prevNode.lastName == child.node.lastName) {
+              console.log(prevNode, child.node)
               this.appendChild(prevNode);
               moveElementToIndex(prevNode.elem, i - 1);
             }
