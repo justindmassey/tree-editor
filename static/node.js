@@ -109,6 +109,7 @@ export default class Node {
         if (!(unescape(m[1]) in this.attributes)) {
           this.setAttribute(m[1], m[2], false, false);
         }
+
         let attrNode = this.getAttrNode(m[1]);
         if (document.activeElement != attrNode.name) {
           attrNode.lastName = child.node.lastName;
@@ -118,6 +119,10 @@ export default class Node {
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
+            if (prevNode.isAttribute) {
+              this.appendChild(prevNode);
+              moveElementToIndex(prevNode.elem, i - 1);
+            }
             child.node.merge(prevNode, false);
           }
           this.appendChild(child.node, false);
