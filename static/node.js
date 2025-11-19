@@ -119,12 +119,8 @@ export default class Node {
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
-            if (
-              prevNode.isAttribute &&
-              prevNode.lastName == child.node.lastName
-            ) {
-              this.appendChild(prevNode);
-              moveElementToIndex(prevNode.elem, i - 1);
+            if(prevNode.isAttribute) {
+              // TODO: readd attribute if needed
             }
             child.node.merge(prevNode, false);
           }
