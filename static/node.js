@@ -192,9 +192,9 @@ export default class Node {
         children.appendChild(li(child.toElement()));
       }
       if (children.children.length) {
-        return div(div(this.nameText), children);
+        return div(div(this.nameText || " "), children);
       } else {
-        return div(this.nameText);
+        return div(this.nameText || " ");
       }
     }
   }
@@ -234,7 +234,7 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = unescape(this.name.value) || " ";
+    this._nameText = unescape(this.name.value);
     return this._nameText;
   }
 

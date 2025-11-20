@@ -10,6 +10,8 @@ import {
   thead,
   tbody,
   textarea,
+  select,
+  option,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -172,6 +174,33 @@ export default {
         return div(div(arg), ta);
       } else {
         return ta;
+      }
+    },
+  },
+  "-opt": {
+    description: div(
+      div("option"),
+      div(code("ARGUMENT"), ": a label"),
+      div(code("value"), ": the selected option"),
+      div("children become optinons")
+    ),
+    create(node, arg) {
+      let opt = select().e("change", () => {
+        node.setAttribute("value", opt.value);
+        history.add(true);
+      });
+      for (let child of node.childNodes) {
+        opt.appendChild(option(child.nameText));
+      }
+      if ("value" in node.attributes) {
+        opt.value = node._attributes.value;
+      } else {
+        node.setAttribute("value", opt.value);
+      }
+      if (arg) {
+        return div(arg, ": ", opt);
+      } else {
+        return opt;
       }
     },
   },
