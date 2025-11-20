@@ -120,7 +120,7 @@ export default class Node {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
             if (prevNode.isAttribute) {
-              if (unescape(prevNode.isAttribute[1]) in node.attributes) {
+              if (node.getAttrNode(prevNode.isAttribute[1])) {
                 this.appendChild(prevNode);
                 moveElementToIndex(prevNode.elem, i - 1);
               }
