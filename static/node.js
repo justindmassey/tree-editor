@@ -119,8 +119,13 @@ export default class Node {
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
-            if(prevNode.isAttribute) {
-              // TODO: readd attribute if needed
+            if (prevNode.isAttribute) {
+              console.log(node.attributes)
+              if (unescape(prevNode.isAttribute[1]) in node.attributes) {
+                this.appendChild(prevNode);
+                moveElementToIndex(prevNode.elem, i - 1);
+              }
+              // readd attribute if needed
             }
             child.node.merge(prevNode, false);
           }
