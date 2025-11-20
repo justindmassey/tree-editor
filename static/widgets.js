@@ -198,7 +198,7 @@ export default {
         node.setAttribute("value", opt.value);
       }
       if (arg) {
-        return div(arg, ": ", opt);
+        return div(arg, " ", opt);
       } else {
         return opt;
       }
