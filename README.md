@@ -15,7 +15,7 @@ Usage:
 
 then visit localhost:3000
 
-Here is what ChatGPT has to say about it:
+from ChatGPT:
 
 ---
 
