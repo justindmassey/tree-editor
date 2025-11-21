@@ -17,78 +17,108 @@ then visit localhost:3000
 
 Here is ChatGPT pitching it:
 
-### *“What if structured data could be created as easily as writing text?”*
+Here is an **updated, sharper, repositioned investor pitch** based on your clarification that **Tree Editor is not text-first** — it is fundamentally a **data editor with an optional text syntax**, powered by a visual editing interface, widgets, inheritance, and a live preview engine.
 
-**Tree Editor makes that possible.**
+This version is tighter, more scalable, and positions Tree Editor correctly as a **next-generation structured data platform**.
 
 ---
 
-## 🚨 Problem
+# 💼 **Tree Editor — Updated Investor Pitch (Visual Data Editor Positioning)**
 
-Most structured data today is created and managed through:
+### **The Future of Structured Data Editing Is Visual, Consistent, and Schema-Aware.
 
-* rigid database schemas
-* complex configuration files
+Tree Editor makes this future accessible today.**
+
+---
+
+## 🌍 **The Problem**
+
+Modern software, games, AI systems, and digital products rely heavily on **structured data**:
+
+* configuration models
+* game entities & item data
+* AI agent schemas
+* content models
+* semantic relationships
+* knowledge graphs
+* dynamic UI definitions
+
+But today, this data is managed through:
+
+* JSON/YAML files
+* ad-hoc spreadsheets
+* rigid CMSes
+* proprietary editors
+* brittle hand-written configs
 * developer-only tools
-* heavyweight form or schema builders
 
-These systems are powerful — but:
+These tools are either **too technical**, **too rigid**, or **too fragile**.
+Small changes frequently break entire systems.
+Non-developers can’t safely edit or evolve structured data, causing bottlenecks and slowing down teams.
 
-* slow to change
-* difficult for non-experts
-* expensive to maintain
-* prone to inconsistency
-
-Meanwhile, AI, no-code tools, and dynamic content systems all require **fast, flexible, human-editable structured data**.
-
-There is no tool that lets everyday users *think in structures* without forcing them into a rigid schema or UI.
+There is no modern, general-purpose tool for **visual structured data editing**.
 
 ---
 
-## 🌿 Solution: **Tree Editor**
+## 🚀 **The Solution: Tree Editor**
 
-**Tree Editor is a smart, text-first structured data editor** that transforms plain text into dynamic, rule-driven data models.
+**Tree Editor is a visual, schema-aware, local-first data editor** designed for complex hierarchical structures.
 
-### Key capabilities:
+It provides:
 
-* **Live type inheritance**
-* **Automatic consistency across the entire structure**
-* **Widget-based UI generation**
-* **Simple, expressive DSL for hierarchical data**
-* **Two-pane interface with instant preview**
-* **Zero dependencies, local-first, offline-friendly**
+* **A dynamic, visual data editing interface**
+* **Live type inheritance** (change a type → all instances update)
+* **Automatic consistency across the entire model**
+* **Rich widgets**: tables, tabs, links, forms, text areas
+* **A two-pane system** with **editor + live preview**
+* **Local-first architecture** (no dependencies, no backend lock-in)
+* **Optional DSL** for power users, but not required
+* **Export to JSON or other machine-readable formats**
 
-Users write text.
-Tree Editor turns it into a structured system.
-
----
-
-## 🧠 What Makes It Different
-
-Tree Editor isn’t another note-taking app or form builder.
-It is a **new paradigm** for data modeling.
-
-### Unique advantages:
-
-* A custom, lightweight **DSL** for structured text
-* A real-time **type inheritance engine**
-* A widget-layer that turns nodes into live UI elements
-* Completely framework-free, portable, and fast
-* Works seamlessly for both developers **and** non-technical users
-
-It fills the gap between **notes** and **systems** — a space no tool currently serves well.
+Tree Editor is a **new category of tool**:
+a **Visual Data IDE** that merges the freedom of a structured editor with the intelligence of a schema system.
 
 ---
 
-## 🌟 Vision
+## 🧠 **Why It’s Unique**
 
-To make **structured thinking universal**.
+Tree Editor combines advantages rarely found in a single product:
 
-Tree Editor gives anyone — not just developers — the power to design, extend, and maintain complex information systems.
+### **1. Live Templates & Inheritance**
 
-It is the missing link between:
+Change a template.
+Every instance updates automatically — instantly and safely.
 
-* creativity and infrastructure
-* notes and databases
-* ideas and prototypes
-* structure and usability
+### **2. Visual Editing + Structured Output**
+
+Users manipulate data through UI widgets, not raw syntax.
+
+### **3. Flexible, Expressive Models**
+
+It supports everything from game data to agent schemas to knowledge graphs.
+
+### **4. No Dependencies, Local First**
+
+Runs anywhere. Integrates with anything. No vendor lock-in.
+
+### **5. Extensible Widget System**
+
+Developers and teams can define:
+
+* visual views
+* table formats
+* input controls
+* domain-specific editors
+  all driven by the underlying data model.
+
+This is effectively the UI layer that JSON and YAML never had.
+
+---
+
+## 🌱 **The Vision**
+
+**To make structured data creation, editing, and modeling accessible to everyone — not just developers.**
+
+Tree Editor transforms how teams think about data,
+how they build systems,
+and how ideas become structured, coherent models.
