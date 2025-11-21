@@ -2,6 +2,7 @@ import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
 import exportToText from "./exporters/text.js";
+
 export default {
   Tab: {
     description: "toggle visibility of children",
