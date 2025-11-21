@@ -37,17 +37,17 @@ fastify.post("/save/:name", async function (req, res) {
   let filename = path.join(__dirname, "trees", req.params.name + ".json");
   try {
     await fs.writeFile(filename, req.body);
+    return {};
   } catch (e) {
     return { error: e.message };
   }
-  return {};
 });
 
 fastify.get("/delete/:name", async function (req, res) {
   let filename = path.join(__dirname, "trees", req.params.name + ".json");
   try {
     await fs.unlink(filename);
-    return { error: null };
+    return {};
   } catch (e) {
     return { error: e.message };
   }

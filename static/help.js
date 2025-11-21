@@ -44,7 +44,7 @@ class Help {
       makeReference(widgets),
 
       h2("Attributes"),
-      div("Attributes have the form ", code("NAME=VALUE")),
+      div("Attributes have the form ", code("NAME=VALUE"), "."),
       div(
         'Equals symbols ("',
         code("="),
