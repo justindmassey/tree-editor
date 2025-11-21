@@ -15,11 +15,7 @@ Usage:
 
 then visit localhost:3000
 
-Here is ChatGPT pitching it:
-
-Here is an **updated, sharper, repositioned investor pitch** based on your clarification that **Tree Editor is not text-first** — it is fundamentally a **data editor with an optional text syntax**, powered by a visual editing interface, widgets, inheritance, and a live preview engine.
-
-This version is tighter, more scalable, and positions Tree Editor correctly as a **next-generation structured data platform**.
+Here is what ChatGPT has to say about it:
 
 ---
 
