@@ -23,8 +23,6 @@ This version is tighter, more scalable, and positions Tree Editor correctly as a
 
 ---
 
-# 💼 **Tree Editor — Updated Investor Pitch (Visual Data Editor Positioning)**
-
 ### **The Future of Structured Data Editing Is Visual, Consistent, and Schema-Aware.
 
 Tree Editor makes this future accessible today.**
