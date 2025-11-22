@@ -14,7 +14,7 @@ import {
   option,
   ul,
   ol,
-  li
+  li,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -37,14 +37,10 @@ export default {
       } else {
         return div(arg || " ");
       }
-    }
+    },
   },
   "-ol": {
-    description: div(
-      div("ordered list"),
-      div(code("ARGUMENT"), ": a label"),
-      div("this is the default widget")
-    ),
+    description: div(div("ordered list"), div(code("ARGUMENT"), ": a label")),
     create(node, arg) {
       let children = ol();
       for (let child of node.childNodes) {
@@ -55,7 +51,7 @@ export default {
       } else {
         return div(arg || " ");
       }
-    }
+    },
   },
   "-hdr": {
     description: div(
