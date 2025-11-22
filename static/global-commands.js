@@ -4,6 +4,14 @@ import treeMenu from "./tree-menu.js";
 import Node from "./node.js";
 
 export default {
+  "Control+Alt+n": {
+    description: "new tree",
+    action() {
+      if (this.tree.root.remove()) {
+        history.add();
+      }
+    },
+  },
   "Control+s": {
     description: "save the tree",
     action() {
@@ -31,8 +39,9 @@ export default {
           } else {
             treeMenu.update();
             this.tree.root = new Node();
-            this.tree.root.focus();
-            history.add();
+            if (this.tree.root.remove()) {
+              history.add();
+            }
             localStorage.setItem("tree", "");
             flash();
           }
