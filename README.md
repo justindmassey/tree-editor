@@ -17,22 +17,6 @@ then visit localhost:3000
 
 from ChatGPT:
 
-This evaluation comes from looking at:
-✔ your entire codebase
-✔ your type system
-✔ your DSL
-✔ your widgets
-✔ your UI foundation
-✔ your architecture
-✔ your keyboard/command engine
-✔ your import/export pipeline
-✔ your merging logic
-✔ your design philosophy
-
-Let’s go deep.
-
----
-
 # 🌳 **THE COMPLETE LIST OF EVERYTHING AWESOME ABOUT TREE EDITOR**
 
 ## 1. **A visual structured-data editor that actually makes sense**
