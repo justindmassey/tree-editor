@@ -140,7 +140,7 @@ export default class Node {
     for (let child1 of this.children.children) {
       for (let child2 of n.children.children) {
         if (child1.node.name.value == child2.node.name.value) {
-          child1.node.merge(child2.node);
+          child1.node.merge(child2.node, removeLastName);
         }
       }
     }
@@ -382,5 +382,8 @@ function unescapeValue(str) {
 }
 
 function unescape(str) {
-  return unescapeValue(str).replace(/^\\-/, "-").replace(/^\\#/, "#").replace(/\\=/g, "=");
+  return unescapeValue(str)
+    .replace(/^\\-/, "-")
+    .replace(/^\\#/, "#")
+    .replace(/\\=/g, "=");
 }
