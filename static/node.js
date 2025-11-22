@@ -119,11 +119,12 @@ export default class Node {
       } else {
         if (!this.getChild(child.node.name.value)) {
           if (prevNode) {
-            if (prevNode.isAttribute) {
-              if (node.getAttrNode(prevNode.isAttribute[1])) {
-                this.appendChild(prevNode);
-                moveElementToIndex(prevNode.elem, i - 1);
-              }
+            if (
+              prevNode.isAttribute &&
+              node.getAttrNode(prevNode.isAttribute[1])
+            ) {
+              this.appendChild(prevNode);
+              moveElementToIndex(prevNode.elem, i - 1);
             }
             child.node.merge(prevNode, false);
           }
