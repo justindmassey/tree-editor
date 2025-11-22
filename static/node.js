@@ -188,15 +188,7 @@ export default class Node {
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create(this, unescapeValue(m[2]));
     } else {
-      let children = ol();
-      for (let child of this.childNodes) {
-        children.appendChild(li(child.toElement()));
-      }
-      if (children.children.length) {
-        return div(div(this.nameText || " "), children);
-      } else {
-        return div(this.nameText || " ");
-      }
+      return widgets["-ul"].create(this, unescape(this.name.value));
     }
   }
 
@@ -390,5 +382,5 @@ function unescapeValue(str) {
 }
 
 function unescape(str) {
-  return unescapeValue(str).replace(/^\\-/, "-").replace(/^\\#/, "#");
+  return unescapeValue(str).replace(/^\\-/, "-").replace(/^\\#/, "#").replace(/\\=/g, "=");
 }

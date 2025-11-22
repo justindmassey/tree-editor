@@ -1,18 +1,24 @@
 @import url("./lib/tabs.css");
 
 .checklist-item {
-    display: flex;
-    align-items: start;
+  display: flex;
+  align-items: start;
 }
 
 thead {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-.tbl, .tabs {
-    margin-bottom: 1em;
+.tbl,
+.tabs {
+  margin-bottom: 1em;
 }
 
 ol {
-    margin-top: 0em;
+  margin-top: 0em;
+}
+
+ul {
+  margin-top: 0em;
+  list-style-type: disc;
 }

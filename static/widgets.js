@@ -12,15 +12,54 @@ import {
   textarea,
   select,
   option,
+  ul,
+  ol,
+  li
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
 import Node from "./node.js";
 
 export default {
+  "-ul": {
+    description: div(
+      div("unordered list"),
+      div(code("ARGUMENT"), ": a label"),
+      div("this is the default widget")
+    ),
+    create(node, arg) {
+      let children = ul();
+      for (let child of node.childNodes) {
+        children.appendChild(li(child.toElement()));
+      }
+      if (children.children.length) {
+        return div(div(arg || " "), children);
+      } else {
+        return div(arg || " ");
+      }
+    }
+  },
+  "-ol": {
+    description: div(
+      div("ordered list"),
+      div(code("ARGUMENT"), ": a label"),
+      div("this is the default widget")
+    ),
+    create(node, arg) {
+      let children = ol();
+      for (let child of node.childNodes) {
+        children.appendChild(li(child.toElement()));
+      }
+      if (children.children.length) {
+        return div(div(arg || " "), children);
+      } else {
+        return div(arg || " ");
+      }
+    }
+  },
   "-hdr": {
     description: div(
-      div("a large header with the children below"),
+      div("large header with the children below"),
       div(code("ARGUMENT"), ": the header text")
     ),
     create(node, arg) {
