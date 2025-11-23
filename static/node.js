@@ -18,7 +18,7 @@ export default class Node {
       .e("click", () => this.toggle());
     this.name = input()
       .c("name")
-      .a("size", 41)
+      .a("size", 50)
       .e("input", () => {
         history.add();
         this.updateLastValues();
