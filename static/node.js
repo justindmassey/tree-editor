@@ -230,7 +230,7 @@ export default class Node {
   get attrNodes() {
     this._attrNodes = [];
     for (let child of this.children.children) {
-      if (child.node.isAttribute) {
+      if (child.node.isAttribute && !child.node.name.value.startsWith("#")) {
         this._attrNodes.push(child.node);
       }
     }
