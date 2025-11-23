@@ -252,20 +252,12 @@ export default {
       let form = table();
       let children = div();
       for (let attrNode of node.attrNodes) {
-        let entry = input();
+        let entry = input().e("input", () => {
+          attrNode.name.value = attrNode.isAttribute[1] + "=" + entry.value;
+          history.add(true);
+        });
         entry.value = attrNode.isAttribute[2];
-        form.appendChild(
-          tr(
-            td(attrNode.isAttribute[1]),
-            td(
-              entry.e("input", () => {
-                attrNode.name.value =
-                  attrNode.isAttribute[1] + "=" + entry.value;
-                history.add(true);
-              })
-            )
-          )
-        );
+        form.appendChild(tr(td(attrNode.isAttribute[1]), td(entry)));
       }
       for (let child of node.childNodes) {
         children.appendChild(child.toElement());
