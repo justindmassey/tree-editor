@@ -51,7 +51,11 @@ fastify.get("/delete/:name", async function (req, res) {
 });
 
 fastify.listen({ port: 3000 }, function (err, addr) {
-  console.log("Listening on", addr);
+  if (err) {
+    console.error(err.message);
+  } else {
+    console.log("Listening on", addr);
+  }
 });
 
 function getFilename(treeName) {
