@@ -15,6 +15,8 @@ import {
   ul,
   ol,
   li,
+  fieldset,
+  legend,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -236,6 +238,42 @@ export default {
         return div(arg, " ", opt);
       } else {
         return opt;
+      }
+    },
+  },
+  "-frm": {
+    description: div(
+      div("form"),
+      div(code("ARGUMENT"), ": a label"),
+      div("attributes become form fields"),
+      div("non-attribute children are rendered below")
+    ),
+    create(node, arg) {
+      let form = table();
+      let children = div();
+      for (let attrNode of node.attrNodes) {
+        let entry = input();
+        entry.value = attrNode.isAttribute[2];
+        form.appendChild(
+          tr(
+            td(attrNode.isAttribute[1]),
+            td(
+              entry.e("input", () => {
+                attrNode.name.value =
+                  attrNode.isAttribute[1] + "=" + entry.value;
+                history.add(true);
+              })
+            )
+          )
+        );
+      }
+      for (let child of node.childNodes) {
+        children.appendChild(child.toElement());
+      }
+      if (arg) {
+        return fieldset(legend(arg), form, children).c("frm");
+      } else {
+        return div(form, children).c("frm");
       }
     },
   },

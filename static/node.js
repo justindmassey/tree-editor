@@ -226,6 +226,16 @@ export default class Node {
     return this._nonAttrChildren;
   }
 
+  get attrNodes() {
+    this._attrNodes = [];
+    for (let child of this.children.children) {
+      if (child.node.isAttribute) {
+        this._attrNodes.push(child.node);
+      }
+    }
+    return this._attrNodes;
+  }
+
   get nameText() {
     this._nameText = unescape(this.name.value);
     return this._nameText;

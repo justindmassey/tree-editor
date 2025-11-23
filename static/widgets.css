@@ -22,3 +22,11 @@ ul {
   margin-top: 0em;
   list-style-type: disc;
 }
+
+.frm > table > tr > td {
+  border: none;
+}
+
+.frm > table > tr > td:nth-child(1) {
+  text-align: right;
+}
