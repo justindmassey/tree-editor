@@ -257,7 +257,15 @@ export default {
           history.add(true);
         });
         entry.value = attrNode.isAttribute[2];
-        form.appendChild(tr(td(attrNode._isAttribute[1]), td(entry)));
+        form.appendChild(
+          tr(td(attrNode._isAttribute[1]), td(entry)).e("click", (ev) => {
+            if (ev.ctrlKey) {
+              ev.stopPropagation();
+              ev.preventDefault();
+              attrNode.focus();
+            }
+          })
+        );
       }
       for (let child of node.childNodes) {
         children.appendChild(child.toElement());
