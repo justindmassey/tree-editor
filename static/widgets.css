@@ -26,6 +26,7 @@ ul {
 
 .frm > table > tr > td {
   border: none;
+  vertical-align: middle;
 }
 
 .frm > table > tr > td:nth-child(1) {
