@@ -12,6 +12,7 @@
   height: 16px;
   margin: 1px;
   vertical-align: middle;
+  font-family: monospace;
 }
 
 .name:focus {
