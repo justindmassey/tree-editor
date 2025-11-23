@@ -25,26 +25,16 @@ fastify.get("/list", async function (req, res) {
 });
 
 fastify.get("/trees/:name", async function (req, res) {
-  let filename = path.join(
-    __dirname,
-    "trees",
-    req.params.name.replace(/\//g, " > ") + ".json"
-  );
   try {
-    return fs.readFile(filename);
+    return fs.readFile(getFilename(req.params.name));
   } catch (e) {
     return { error: e.message };
   }
 });
 
 fastify.post("/save/:name", async function (req, res) {
-  let filename = path.join(
-    __dirname,
-    "trees",
-    req.params.name.replace(/\//g, " > ") + ".json"
-  );
   try {
-    await fs.writeFile(filename, req.body);
+    await fs.writeFile(getFilename(req.params.name), req.body);
     return {};
   } catch (e) {
     return { error: e.message };
@@ -52,13 +42,8 @@ fastify.post("/save/:name", async function (req, res) {
 });
 
 fastify.get("/delete/:name", async function (req, res) {
-  let filename = path.join(
-    __dirname,
-    "trees",
-    req.params.name.replace(/\//g, " > ") + ".json"
-  );
   try {
-    await fs.unlink(filename);
+    await fs.unlink(getFilename(req.params.name));
     return {};
   } catch (e) {
     return { error: e.message };
@@ -68,3 +53,11 @@ fastify.get("/delete/:name", async function (req, res) {
 fastify.listen({ port: 3000 }, function (err, addr) {
   console.log("Listening on", addr);
 });
+
+function getFilename(treeName) {
+  return path.join(
+    __dirname,
+    "trees",
+    treeName.replace(/\//g, " > ") + ".json"
+  );
+}
