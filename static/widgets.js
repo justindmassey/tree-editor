@@ -257,7 +257,7 @@ export default {
           history.add(true);
         });
         entry.value = attrNode.isAttribute[2];
-        form.appendChild(tr(td(attrNode.isAttribute[1]), td(entry)));
+        form.appendChild(tr(td(attrNode._isAttribute[1]), td(entry)));
       }
       for (let child of node.childNodes) {
         children.appendChild(child.toElement());

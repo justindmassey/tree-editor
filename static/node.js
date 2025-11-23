@@ -121,7 +121,7 @@ export default class Node {
           if (prevNode) {
             if (
               prevNode.isAttribute &&
-              node.getAttrNode(prevNode.isAttribute[1])
+              node.getAttrNode(prevNode._isAttribute[1])
             ) {
               this.appendChild(prevNode);
               moveElementToIndex(prevNode.elem, i - 1);
@@ -180,7 +180,8 @@ export default class Node {
   }
 
   get isAttribute() {
-    return this.name.value.match(Node.attrRegEx);
+    this._isAttribute = this.name.value.match(Node.attrRegEx);
+    return this._isAttribute;
   }
 
   _toElement() {
