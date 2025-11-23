@@ -39,9 +39,8 @@ export default {
           } else {
             treeMenu.update();
             this.tree.root = new Node();
-            if (this.tree.root.remove()) {
-              history.add();
-            }
+            this.tree.root.focus();
+            history.add();
             localStorage.setItem("tree", "");
             flash();
           }

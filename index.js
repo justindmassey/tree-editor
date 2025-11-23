@@ -17,7 +17,7 @@ if (!fss.existsSync(treesDir)) {
 fastify.get("/list", async function (req, res) {
   try {
     return (await fs.readdir(treesDir)).map((filename) => {
-      return filename.replace(" > ", "/").replace(/\.[^\.]*$/, "");
+      return filename.replace(/ > /g, "/").replace(/\.[^\.]*$/, "");
     });
   } catch (e) {
     return { error: e.message };
@@ -28,7 +28,7 @@ fastify.get("/trees/:name", async function (req, res) {
   let filename = path.join(
     __dirname,
     "trees",
-    req.params.name.replace("/", " > ") + ".json"
+    req.params.name.replace(/\//g, " > ") + ".json"
   );
   try {
     return fs.readFile(filename);
@@ -41,7 +41,7 @@ fastify.post("/save/:name", async function (req, res) {
   let filename = path.join(
     __dirname,
     "trees",
-    req.params.name.replace("/", " > ") + ".json"
+    req.params.name.replace(/\//g, " > ") + ".json"
   );
   try {
     await fs.writeFile(filename, req.body);
@@ -55,7 +55,7 @@ fastify.get("/delete/:name", async function (req, res) {
   let filename = path.join(
     __dirname,
     "trees",
-    req.params.name.replace("/", " > ") + ".json"
+    req.params.name.replace(/\//g, " > ") + ".json"
   );
   try {
     await fs.unlink(filename);
