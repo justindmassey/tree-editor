@@ -256,7 +256,7 @@ export default {
           attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
           history.add(true);
         });
-        entry.value = attrNode.isAttribute[2];
+        entry.value = attrNode._isAttribute[2];
         form.appendChild(
           tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) => {
             if (ev.ctrlKey) {
