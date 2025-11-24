@@ -253,7 +253,7 @@ export default {
       let children = div();
       for (let attrNode of node.attrNodes) {
         let entry = input().e("input", () => {
-          attrNode.name.value = attrNode.isAttribute[1] + "=" + entry.value;
+          attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
           history.add(true);
         });
         entry.value = attrNode.isAttribute[2];
