@@ -3,6 +3,7 @@
 .checklist-item {
   display: flex;
   align-items: start;
+  padding-left: 1.25em;
 }
 
 thead {

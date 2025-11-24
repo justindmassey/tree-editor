@@ -10,6 +10,7 @@ export default {
       if (this.tree.root.remove()) {
         history.add();
       }
+      localStorage.setItem("tree", this.tree.root.name.value);
     },
   },
   "Control+s": {
@@ -67,7 +68,10 @@ export default {
     action() {
       let find = prompt("Focus first node containing:").toUpperCase();
       this.tree.root.traverse((n) => {
-        if (n.name.value.toUpperCase().includes(find)) {
+        if (
+          n.name.value.toUpperCase().includes(find) &&
+          document.activeElement != n.name
+        ) {
           n.focus();
           return true;
         }

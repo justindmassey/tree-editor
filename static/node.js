@@ -242,6 +242,12 @@ export default class Node {
     return this._nameText;
   }
 
+  get attrNameText() {
+    if (this.isAttribute) {
+      return unescape(this._isAttribute[1]);
+    }
+  }
+
   traverseUp(callback) {
     if (callback(this)) {
       return;
