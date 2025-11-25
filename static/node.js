@@ -123,10 +123,10 @@ export default class Node {
               prevNode.isAttribute &&
               node.getAttrNode(prevNode._isAttribute[1])
             ) {
-              this.appendChild(prevNode);
+              this.appendChild(prevNode, false);
               moveElementToIndex(prevNode.elem, i - 1);
             } else if (node.getChild(prevNode.name.value)) {
-              this.appendChild(prevNode);
+              this.appendChild(prevNode, false);
             }
             child.node.merge(prevNode, false);
           }
