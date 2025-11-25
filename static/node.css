@@ -4,7 +4,7 @@
 }
 
 .children > .node {
-  padding-left: 2em;
+  padding-left: 4ex;
   border-left: 1px solid var(--color-2);
 }
 
