@@ -273,7 +273,7 @@ export default {
       if (arg) {
         return fieldset(legend(arg), form, children).c("frm");
       } else {
-        return div(form, children).c("frm");
+        return div(" ", form, children).c("frm");
       }
     },
   },

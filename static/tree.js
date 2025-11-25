@@ -9,7 +9,7 @@ class Tree {
     this.tree = div().c("tree-container");
     this.output = div().c("output", "hidden");
     window.addEventListener("keydown", (ev) => {
-      if (ev.ctrlKey) {
+      if (ev.key == "Control") {
         this.output.style.cursor = "default";
       }
     });
@@ -55,7 +55,7 @@ class Tree {
           if (nodeTypes) {
             for (let t of nodeTypes) {
               if (t == "." + m[1]) {
-                alert("Error: recursive type definition");
+                alert("Error: Recursive type definition");
                 recursionError = true;
                 n2.name.value = n2.name.value.replace(t, "");
                 this.updateTypes();
@@ -67,7 +67,7 @@ class Tree {
           if (listTypes) {
             for (let t of listTypes) {
               if (t == ":" + m[1]) {
-                alert("Error: recursive type definition");
+                alert("Error: Recursive type definition");
                 recursionError = true;
                 n2.name.value = n2.name.value.replace(t, "");
                 this.updateTypes();
