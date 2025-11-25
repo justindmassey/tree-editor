@@ -69,6 +69,7 @@ class Help {
       div("Types are updated in real time."),
       div("Type definitions that are not the root node"),
       div("are not rendered to the output."),
+      div("Removing a type does not remove inherited nodes."),
 
       h2("XML Export"),
       div("Nodes with children become tags."),
