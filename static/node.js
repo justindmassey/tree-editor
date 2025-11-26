@@ -127,6 +127,7 @@ export default class Node {
               moveElementToIndex(prevNode.elem, i - 1);
             } else if (node.getChild(prevNode.name.value)) {
               this.appendChild(prevNode, false);
+              moveElementToIndex(prevNode.elem, i - 1);
             }
             child.node.merge(prevNode, false);
           }
