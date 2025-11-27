@@ -4,6 +4,7 @@ import { div, input, ol, li } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
+import ctrlClick from "./ctrl-click.js";
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
@@ -197,13 +198,7 @@ export default class Node {
   }
 
   toElement() {
-    return this._toElement().e("click", (ev) => {
-      if (ev.ctrlKey) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        this.focus();
-      }
-    });
+    return this._toElement().e("click", (ev) => ctrlClick(this, ev));
   }
 
   get childNodes() {

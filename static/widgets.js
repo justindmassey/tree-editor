@@ -21,6 +21,7 @@ import {
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
 import Node from "./node.js";
+import ctrlClick from "./ctrl-click.js";
 
 export default {
   "-ul": {
@@ -127,7 +128,9 @@ export default {
       let longestChild = 0;
 
       for (let child of node.childNodes) {
-        header.appendChild(td(child.nameText));
+        header.appendChild(
+          td(child.nameText).e("click", (ev) => ctrlClick(child, ev))
+        );
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
@@ -258,13 +261,9 @@ export default {
         });
         entry.value = attrNode._isAttribute[2];
         form.appendChild(
-          tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) => {
-            if (ev.ctrlKey) {
-              ev.stopPropagation();
-              ev.preventDefault();
-              attrNode.focus();
-            }
-          })
+          tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
+            ctrlClick(attrNode, ev)
+          )
         );
       }
       for (let child of node.childNodes) {
