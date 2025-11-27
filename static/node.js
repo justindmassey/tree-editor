@@ -390,14 +390,14 @@ export default class Node {
 
 function unescapeValue(str) {
   return str
-    .replace(Node.listTypeRegEx, "")
-    .replace(Node.nodeTypeRegEx, "")
     .replace(/\\:/g, ":")
     .replace(/\\\./g, ".");
 }
 
 function unescape(str) {
   return unescapeValue(str)
+    .replace(Node.listTypeRegEx, "")
+    .replace(Node.nodeTypeRegEx, "")
     .replace(/^\\-/, "-")
     .replace(/^\\#/, "#")
     .replace(/\\=/g, "=");
