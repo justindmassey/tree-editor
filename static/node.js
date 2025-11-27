@@ -193,7 +193,7 @@ export default class Node {
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create(this, unescapeArg(m[2]));
     } else {
-      return widgets["-ul"].create(this, unescapeArg(this.name.value));
+      return widgets["-ul"].create(this, unescape(this.name.value));
     }
   }
 
