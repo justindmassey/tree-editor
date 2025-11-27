@@ -172,10 +172,14 @@ export default {
           tabs[child._nameText].appendChild(grandchild.toElement());
         }
       }
-      let tabsObj = new Tabs(tabs, (tab) => {
-        node.setAttribute("tab", tab);
-        history.add(true);
-      });
+      let tabsObj = new Tabs(
+        tabs,
+        (tab) => {
+          node.setAttribute("tab", tab);
+          history.add(true);
+        },
+        (ev) => ctrlClick(node.getChild(tabsObj.tab), ev)
+      );
       if ("tab" in node.attributes && tabs[node._attributes.tab]) {
         tabsObj.tab = node._attributes.tab;
       } else {

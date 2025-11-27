@@ -1,8 +1,9 @@
 import { div } from "./elements.js";
 
 export default class Tabs {
-  constructor(tabs, onchange) {
+  constructor(tabs, onchange, tabClicked) {
     this.onchange = onchange;
+    this.tabClicked = tabClicked;
     this.header = div().c("tabs-header");
     this.headers = {};
     this.body = div().c("tabs-body");
@@ -19,12 +20,15 @@ export default class Tabs {
       for (let name in tabs) {
         this.headers[name] = div(name)
           .c("tab")
-          .e("click", () => {
+          .e("click", (ev) => {
             if (this.tab != name) {
               this.tab = name;
               if (this.onchange) {
                 this.onchange(name);
               }
+            }
+            if (this.tabClicked) {
+              this.tabClicked(ev);
             }
           });
         this.header.appendChild(this.headers[name]);
