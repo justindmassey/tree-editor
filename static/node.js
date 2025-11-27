@@ -177,7 +177,7 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        this._attributes[unescape(m[1])] = unescapeValue(m[2]);
+        this._attributes[unescape(m[1])] = m[2];
       }
     }
     return this._attributes;
@@ -191,9 +191,9 @@ export default class Node {
   _toElement() {
     let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
-      return widgets[m[1]].create(this, unescapeValue(m[2]));
+      return widgets[m[1]].create(this, unescapeArg(m[2]));
     } else {
-      return widgets["-ul"].create(this, unescape(this.name.value));
+      return widgets["-ul"].create(this, unescapeArg(this.name.value));
     }
   }
 
@@ -388,17 +388,22 @@ export default class Node {
   }
 }
 
-function unescapeValue(str) {
-  return str
-    .replace(/\\:/g, ":")
-    .replace(/\\\./g, ".");
-}
-
 function unescape(str) {
-  return unescapeValue(str)
+  return str
     .replace(Node.listTypeRegEx, "")
     .replace(Node.nodeTypeRegEx, "")
+    .replace(/\\:/g, ":")
+    .replace(/\\\./g, ".")
     .replace(/^\\-/, "-")
     .replace(/^\\#/, "#")
+    .replace(/\\=/g, "=");
+}
+
+function unescapeArg(str) {
+  return str
+    .replace(Node.listTypeRegEx, "")
+    .replace(Node.nodeTypeRegEx, "")
+    .replace(/\\:/g, ":")
+    .replace(/\\\./g, ".")
     .replace(/\\=/g, "=");
 }

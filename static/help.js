@@ -51,10 +51,7 @@ class Help {
         '") ',
         "can be escaped with a backslash."
       ),
-      div(
-        "Equals symbols following ",
-        "the first unescaped one don't need to be escaped."
-      ),
+      div("Attribute values need to escaping."),
 
       h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),
