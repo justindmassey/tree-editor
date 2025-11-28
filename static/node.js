@@ -190,17 +190,17 @@ export default class Node {
     return this._isAttribute;
   }
 
-  _toElement() {
+  toElement() {
     let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
-      return widgets[m[1]].create(this, unescapeArg(m[2]));
+      return widgets[m[1]]
+        .create(this, unescapeArg(m[2]))
+        .e("click", (ev) => ctrlClick(this, ev));
     } else {
-      return widgets["-ul"].create(this, unescape(this.name.value));
+      return widgets["-ul"]
+        .create(this, unescape(this.name.value))
+        .e("click", (ev) => ctrlClick(this, ev));
     }
-  }
-
-  toElement() {
-    return this._toElement().e("click", (ev) => ctrlClick(this, ev));
   }
 
   get childNodes() {
