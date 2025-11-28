@@ -178,7 +178,7 @@ export default {
           node.setAttribute("tab", tab);
           history.add(true);
         },
-        (ev) => ctrlClick(node.getChild(tabsObj.tab), ev)
+        (ev) => ctrlClick(node.getChild(ev.target.textContent), ev)
       );
       if ("tab" in node.attributes && tabs[node._attributes.tab]) {
         tabsObj.tab = node._attributes.tab;

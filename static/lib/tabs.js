@@ -21,7 +21,7 @@ export default class Tabs {
         this.headers[name] = div(name)
           .c("tab")
           .e("click", (ev) => {
-            if (this.tab != name) {
+            if (this.tab != name && !ev.ctrlKey) {
               this.tab = name;
               if (this.onchange) {
                 this.onchange(name);
