@@ -156,7 +156,9 @@ export default class Node {
       name = name
         .replace(/=/g, "\\=")
         .replace(/^-/, "\\-")
-        .replace(/^#/, "\\#");
+        .replace(/^#/, "\\#")
+        .replace(/\./g, "\\.")
+        .replace(/:/g, "\\:");
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
