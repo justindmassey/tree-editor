@@ -37,6 +37,7 @@ body {
 .button:hover {
   color: var(--color-1);
   border-color: var(--color-1);
+  background: var(--color-3);
 }
 
 @keyframes flash {

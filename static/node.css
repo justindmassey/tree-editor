@@ -23,6 +23,10 @@
   color: var(--color-3);
 }
 
+.toggle-button:hover:has(~ .children:empty) {
+  background: var(--bg);
+}
+
 .toggle-button {
   margin-right: 1px;
 }
