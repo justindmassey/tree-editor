@@ -193,12 +193,12 @@ export default class Node {
   toElement() {
     let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
-      return widgets[m[1]]
-        .create(this, unescapeArg(m[2]))
+      return widgets[m[1]].create
+        .bind(this)(unescapeArg(m[2]))
         .e("click", (ev) => ctrlClick(this, ev));
     } else {
-      return widgets["-ul"]
-        .create(this, unescape(this.name.value))
+      return widgets["-ul"].create
+        .bind(this)(unescape(this.name.value))
         .e("click", (ev) => ctrlClick(this, ev));
     }
   }

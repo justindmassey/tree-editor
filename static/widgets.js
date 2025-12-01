@@ -30,9 +30,9 @@ export default {
       div(code("ARGUMENT"), ": a label"),
       div("this is the default widget")
     ),
-    create(node, arg) {
+    create(arg) {
       let children = ul();
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         children.appendChild(li(child.toElement()));
       }
       if (children.children.length) {
@@ -44,9 +44,9 @@ export default {
   },
   "-ol": {
     description: div(div("ordered list"), div(code("ARGUMENT"), ": a label")),
-    create(node, arg) {
+    create(arg) {
       let children = ol();
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         children.appendChild(li(child.toElement()));
       }
       if (children.children.length) {
@@ -61,9 +61,9 @@ export default {
       div("large header with the children below"),
       div(code("ARGUMENT"), ": the header text")
     ),
-    create(node, arg) {
+    create(arg) {
       let children = div();
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         children.appendChild(child.toElement());
       }
       return div(h1(arg), children).c("hdr");
@@ -75,12 +75,12 @@ export default {
       div(code("ARGUMENT"), ": the link text"),
       div(code("url"), ": The URL the link opens")
     ),
-    create(node, arg) {
+    create(arg) {
       let link = a(arg).a("target", "_blank");
-      if ("url" in node.attributes) {
-        link.href = node._attributes.url;
+      if ("url" in this.attributes) {
+        link.href = this._attributes.url;
       } else {
-        node.setAttribute("url");
+        this.setAttribute("url");
       }
       return div(link);
     },
@@ -91,9 +91,9 @@ export default {
       div(code("ARGUMENT"), ": the label to display above the list"),
       div("items have the attribute ", code("checked"))
     ),
-    create(node, arg) {
+    create(arg) {
       let checklist = div();
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         let checkbox = input()
           .a("type", "checkbox")
           .e("change", () => {
@@ -122,12 +122,12 @@ export default {
       div(code("ARGUMENT"), ": a label to display above the table"),
       div("each childs name is a table header and its children the column")
     ),
-    create(node, arg) {
+    create(arg) {
       let header = tr();
       let bdy = tbody();
       let longestChild = 0;
 
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         header.appendChild(
           td(child.nameText).e("click", (ev) => ctrlClick(child, ev))
         );
@@ -137,7 +137,7 @@ export default {
       }
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
-        for (let child of node._childNodes) {
+        for (let child of this._childNodes) {
           let cell = child.childNodes[i];
           if (cell) {
             row.appendChild(td(cell.toElement()));
@@ -164,9 +164,9 @@ export default {
       ),
       div(code("tab"), " holds the current tab")
     ),
-    create(node, arg) {
+    create(arg) {
       let tabs = {};
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         tabs[child.nameText] = div();
         for (let grandchild of child.childNodes) {
           tabs[child._nameText].appendChild(grandchild.toElement());
@@ -175,15 +175,15 @@ export default {
       let tabsObj = new Tabs(
         tabs,
         (tab) => {
-          node.setAttribute("tab", tab);
+          this.setAttribute("tab", tab);
           history.add(true);
         },
-        (ev) => ctrlClick(node.getChild(ev.target.textContent), ev)
+        (ev) => ctrlClick(this.getChild(ev.target.textContent), ev)
       );
-      if ("tab" in node.attributes && tabs[node._attributes.tab]) {
-        tabsObj.tab = node._attributes.tab;
+      if ("tab" in this.attributes && tabs[this._attributes.tab]) {
+        tabsObj.tab = this._attributes.tab;
       } else {
-        node.setAttribute("tab", tabsObj.tab);
+        this.setAttribute("tab", tabsObj.tab);
       }
       if (arg) {
         return div(div(arg), tabsObj.elem);
@@ -198,19 +198,19 @@ export default {
       div(code("ARGUMENT"), ": a label"),
       div("children become lines of text")
     ),
-    create(node, arg) {
+    create(arg) {
       let ta = textarea()
         .a("rows", 8)
         .a("cols", 40)
         .e("input", () => {
-          node.children.replaceChildren();
+          this.children.replaceChildren();
           for (let line of ta.value.split("\n")) {
-            node.appendChild(new Node(line), false);
+            this.appendChild(new Node(line), false);
           }
           history.add(true);
         });
       let lines = [];
-      for (let child of node.children.children) {
+      for (let child of this.children.children) {
         lines.push(child.node.name.value);
       }
       ta.value = lines.join("\n");
@@ -228,18 +228,18 @@ export default {
       div(code("value"), ": the selected option"),
       div("children become optinons")
     ),
-    create(node, arg) {
+    create(arg) {
       let opt = select().e("change", () => {
-        node.setAttribute("value", opt.value);
+        this.setAttribute("value", opt.value);
         history.add(true);
       });
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         opt.appendChild(option(child.nameText));
       }
-      if ("value" in node.attributes) {
-        opt.value = node._attributes.value;
+      if ("value" in this.attributes) {
+        opt.value = this._attributes.value;
       } else {
-        node.setAttribute("value", opt.value);
+        this.setAttribute("value", opt.value);
       }
       if (arg) {
         return div(arg, " ", opt);
@@ -255,10 +255,10 @@ export default {
       div("attributes become form fields"),
       div("non-attribute children are rendered below")
     ),
-    create(node, arg) {
+    create(arg) {
       let form = table();
       let children = div();
-      for (let attrNode of node.attrNodes) {
+      for (let attrNode of this.attrNodes) {
         let entry = input().e("input", () => {
           attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
           history.add(true);
@@ -270,7 +270,7 @@ export default {
           )
         );
       }
-      for (let child of node.childNodes) {
+      for (let child of this.childNodes) {
         children.appendChild(child.toElement());
       }
       if (arg) {
