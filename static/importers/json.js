@@ -4,8 +4,7 @@ function importNode(node) {
   let res = [];
   for (let name in node) {
     if (node[name] instanceof Object) {
-      let n = new Node(name, ...importNode(node[name]));
-      res.push(n);
+      res.push(new Node(name, ...importNode(node[name])));
     } else {
       res.push(new Node(name + "=" + node[name]));
     }
