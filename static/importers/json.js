@@ -1,13 +1,23 @@
 import Node from "../node.js";
 
 function importNode(node) {
-  let n = new Node(node.name);
-  for (let child of node.children) {
-    n.appendChild(importNode(child));
+  let res = [];
+  for (let name in node) {
+    if (node[name] instanceof Object) {
+      let n = new Node(name);
+      if (node[name] instanceof Object) {
+        for (let child of importNode(node[name])) {
+          n.appendChild(child);
+        }
+      }
+      res.push(n);
+    } else {
+      res.push(new Node(name + "=" + node[name]));
+    }
   }
-  return n;
+  return res;
 }
 
 export default function importJson(json) {
-  return importNode(JSON.parse(json));
+  return importNode(JSON.parse(json))[0];
 }

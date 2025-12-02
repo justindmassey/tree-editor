@@ -1,6 +1,6 @@
 import registerShortcuts from "./lib/register-shortcuts.js";
 import nodeCommands from "./node-commands.js";
-import { div, input, ol, li } from "./lib/elements.js";
+import { div, input } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";

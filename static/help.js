@@ -68,10 +68,19 @@ class Help {
       div("are not rendered to the output."),
       div("Removing a type does not remove inherited nodes."),
 
+      h2("Text Export"),
+      div("Nodes are structured with indentation"),
+      div("Text export is the only lossless one"),
+
+      h2("JSON Export"),
+      div("Nodes and attributes become JSON properties."),
+      div("So dublicate names override the last."),
+
       h2("XML Export"),
       div("Nodes with children become tags."),
       div("Attribute nodes become attributes."),
-      div("Nodes without children become lines of text.")
+      div("Nodes without children become lines of text."),
+      div("Children of attribute nodes are ignored.")
     ).c("help", "hidden");
   }
 }
