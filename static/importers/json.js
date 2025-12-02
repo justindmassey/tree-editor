@@ -5,10 +5,8 @@ function importNode(node) {
   for (let name in node) {
     if (node[name] instanceof Object) {
       let n = new Node(name);
-      if (node[name] instanceof Object) {
-        for (let child of importNode(node[name])) {
-          n.appendChild(child);
-        }
+      for (let child of importNode(node[name])) {
+        n.appendChild(child);
       }
       res.push(n);
     } else {
