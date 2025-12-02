@@ -1,9 +1,13 @@
 @import url("./lib/tabs.css");
 
-.checklist-item {
+.cl-item {
   display: flex;
   align-items: start;
   padding-left: 1.25em;
+}
+.cl-child {
+  display: inline-block;
+  margin-left: 0.25em;
 }
 
 thead {
