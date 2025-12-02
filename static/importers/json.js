@@ -4,10 +4,7 @@ function importNode(node) {
   let res = [];
   for (let name in node) {
     if (node[name] instanceof Object) {
-      let n = new Node(name);
-      for (let child of importNode(node[name])) {
-        n.appendChild(child);
-      }
+      let n = new Node(name, ...importNode(node[name]));
       res.push(n);
     } else {
       res.push(new Node(name + "=" + node[name]));
@@ -17,5 +14,10 @@ function importNode(node) {
 }
 
 export default function importJson(json) {
-  return importNode(JSON.parse(json))[0];
+  let nodes = importNode(JSON.parse(json));
+  if (nodes.length == 1) {
+    return nodes[0];
+  } else {
+    return new Node("", ...nodes);
+  }
 }
