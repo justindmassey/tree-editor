@@ -12,7 +12,8 @@ thead {
 
 .tbl,
 .tabs,
-.frm {
+.frm,
+.frm-form {
   margin-bottom: 1em;
 }
 

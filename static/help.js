@@ -69,8 +69,8 @@ class Help {
       div("Removing a type does not remove inherited nodes."),
 
       h2("Text Export"),
-      div("Nodes are structured with indentation"),
-      div("Text export is the only lossless one"),
+      div("Nodes are structured with indentation."),
+      div("Text export is the only lossless one."),
 
       h2("JSON Export"),
       div("Nodes and attributes become JSON properties."),

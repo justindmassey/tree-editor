@@ -256,7 +256,7 @@ export default {
       div("non-attribute children are rendered below")
     ),
     create(arg) {
-      let form = table();
+      let form = table().c("frm-form");
       let children = div();
       for (let attrNode of this.attrNodes) {
         let entry = input().e("input", () => {
