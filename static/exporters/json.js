@@ -16,6 +16,6 @@ export default function exportToJson(node) {
   if (node.isAttribute) {
     return JSON.stringify({ [node._isAttribute[1]]: node._isAttribute[2] });
   } else {
-    return JSON.stringify({ [node.name.value]: exportNode(node) }, null, 2);
+    return JSON.stringify({ [node.name.value]: exportNode(node) }, null, 4);
   }
 }
