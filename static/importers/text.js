@@ -9,6 +9,6 @@ function convertNode(node) {
   return n;
 }
 
-export default function importText(text, addedRootName) {
+export default function importText(text, addedRootName = "") {
   return convertNode(parseIndentedText(text, addedRootName));
 }
