@@ -166,10 +166,12 @@ export default {
     ),
     create(arg) {
       let tabs = {};
+      let tabClicked = {};
       for (let child of this.childNodes) {
         tabs[child.nameText] = div();
         for (let grandchild of child.childNodes) {
           tabs[child._nameText].appendChild(grandchild.toElement());
+          tabClicked[child._nameText] = (ev) => ctrlClick(child, ev);
         }
       }
       let tabsObj = new Tabs(
@@ -178,7 +180,7 @@ export default {
           this.setAttribute("tab", tab);
           history.add(true);
         },
-        (ev) => ctrlClick(this.getChild(ev.target.textContent), ev)
+        tabClicked
       );
       if ("tab" in this.attributes && tabs[this._attributes.tab]) {
         tabsObj.tab = this._attributes.tab;

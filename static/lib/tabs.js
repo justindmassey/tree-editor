@@ -1,9 +1,9 @@
 import { div } from "./elements.js";
 
 export default class Tabs {
-  constructor(tabs, onchange, tabClicked) {
+  constructor(tabs, onchange, headerClicked = {}) {
     this.onchange = onchange;
-    this.tabClicked = tabClicked;
+    this.headerClicked = headerClicked;
     this.header = div().c("tabs-header");
     this.headers = {};
     this.body = div().c("tabs-body");
@@ -18,19 +18,18 @@ export default class Tabs {
     let tabNames = Object.keys(tabs);
     if (tabNames.length) {
       for (let name in tabs) {
-        this.headers[name] = div(name)
-          .c("tab")
-          .e("click", (ev) => {
-            if (this.tab != name && !ev.ctrlKey) {
-              this.tab = name;
-              if (this.onchange) {
-                this.onchange(name);
-              }
+        this.headers[name] = div(name).c("tab");
+        if (this.headerClicked[name]) {
+          this.headers[name].e("click", this.headerClicked[name]);
+        }
+        this.headers[name].e("click", (ev) => {
+          if (this.tab != name) {
+            this.tab = name;
+            if (this.onchange) {
+              this.onchange(name);
             }
-            if (this.tabClicked) {
-              this.tabClicked(ev);
-            }
-          });
+          }
+        });
         this.header.appendChild(this.headers[name]);
         tabs[name].classList.add("hidden");
         this.body.appendChild(tabs[name]);
