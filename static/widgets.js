@@ -169,9 +169,9 @@ export default {
       let tabClicked = {};
       for (let child of this.childNodes) {
         tabs[child.nameText] = div();
+        tabClicked[child._nameText] = (ev) => ctrlClick(child, ev);
         for (let grandchild of child.childNodes) {
           tabs[child._nameText].appendChild(grandchild.toElement());
-          tabClicked[child._nameText] = (ev) => ctrlClick(child, ev);
         }
       }
       let tabsObj = new Tabs(
