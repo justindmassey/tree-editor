@@ -4,9 +4,7 @@ import History from "./lib/history.js";
 
 class TreeHistory extends History {
   constructor() {
-    super(() => {
-      tree.update();
-    });
+    super(() => tree.update());
   }
 
   serialize() {
