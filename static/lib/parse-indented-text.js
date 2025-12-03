@@ -1,6 +1,6 @@
-export default function parseIndentedText(text) {
+export default function parseIndentedText(text, addedRootLine = "") {
   let lines = text.split(/\r?\n/);
-  var nodes = [{ indent: -1, line: "", children: [] }];
+  var nodes = [{ indent: -1, line: addedRootLine, children: [] }];
   for (let line of lines) {
     if (!line) {
       continue;

@@ -20,14 +20,14 @@ class MenuBar {
       typedefMenu,
       new Menu(
         div("Import"),
-        new TextUploader("Text", ".txt", (text) => {
-          tree.root = importText(text);
+        new TextUploader("Text", ".txt", (text, filename) => {
+          tree.root = importText(text, removeExtension(filename));
           tree.root.focus();
           history.add();
         }),
-        new TextUploader("JSON", ".json", (json) => {
+        new TextUploader("JSON", ".json", (json, filename) => {
           try {
-            tree.root = importJson(json);
+            tree.root = importJson(json, removeExtension(filename));
           } catch (e) {
             alert("Import failed: " + e.message);
             return;
@@ -61,3 +61,7 @@ class MenuBar {
 }
 
 export default new MenuBar();
+
+function removeExtension(s) {
+  return s.replace(/\.[^\.]*$/, "");
+}

@@ -16,6 +16,7 @@ export default class TextUploader {
   onchange(ev) {
     var reader = new FileReader();
     reader.readAsText(ev.target.files[0], "UTF-8");
-    reader.onload = (ev) => this.onupload(ev.target.result);
+    reader.onload = (ev2) =>
+      this.onupload(ev2.target.result, ev.target.files[0].name);
   }
 }

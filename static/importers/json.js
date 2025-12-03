@@ -12,11 +12,11 @@ function importNode(node) {
   return res;
 }
 
-export default function importJson(json) {
+export default function importJson(json, addedRootName = "") {
   let nodes = importNode(JSON.parse(json));
   if (nodes.length == 1) {
     return nodes[0];
   } else {
-    return new Node("", ...nodes);
+    return new Node(addedRootName, ...nodes);
   }
 }
