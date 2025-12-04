@@ -106,7 +106,9 @@ export default {
           child.setAttribute("checked", "false");
         }
         checklist.appendChild(
-          div(checkbox, div(child.toElement()).c("cl-child")).c("cl-item")
+          div(checkbox, div(child.toElement()).c("cl-child"))
+            .c("cl-item")
+            .e("click", (ev) => ctrlClick(child, ev))
         );
       }
       if (arg) {
