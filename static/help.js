@@ -29,7 +29,8 @@ class Help {
         div("(press Alt+o to toggle the output visibility)."),
         div(
           'Non-root nodes that start with a hash symbol ("',
-          code("#", '") '),
+          code("#"),
+          '") ',
           div("are not rendered to the output."),
           div("Control-click a widget in the output to focus its node."),
           div("The output is updated in real time."),
