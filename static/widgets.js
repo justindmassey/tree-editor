@@ -160,7 +160,7 @@ export default {
   "-tbs": {
     description: div(
       div("a tab panel"),
-      div(code("argument"), ": a label to show above the tabs"),
+      div(code("argument"), ": a label"),
       div(
         "each child name becomes a tab name and its children the tab content"
       ),
