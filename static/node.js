@@ -61,14 +61,14 @@ export default class Node {
     }
   }
 
-  merge(node, removeLastName = true) {
+  merge(node, rename = true) {
     let activeElement = document.activeElement;
     let n = node.copy();
     let children = Array.from(n.children.children);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
       let prevNode;
-      if (removeLastName && child.node.lastName != child.node.name.value) {
+      if (rename && child.node.lastName != child.node.name.value) {
         prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
           prevNode.remove(false);
@@ -76,7 +76,7 @@ export default class Node {
       }
       let m = child.node.isAttribute;
       if (m) {
-        if (removeLastName && m[1] != child.node.lastAttrName) {
+        if (rename && m[1] != child.node.lastAttrName) {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode) {
             lastAttrNode.remove(false);
@@ -120,7 +120,7 @@ export default class Node {
     for (let child1 of this.children.children) {
       for (let child2 of n.children.children) {
         if (child1.node.name.value == child2.node.name.value) {
-          child1.node.merge(child2.node, removeLastName);
+          child1.node.merge(child2.node, rename);
         }
       }
     }
