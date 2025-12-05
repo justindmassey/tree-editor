@@ -51,7 +51,7 @@ class Help {
         '") ',
         "can be escaped with a backslash."
       ),
-      div("Attribute values need to escaping."),
+      div("Attribute values need no escaping."),
 
       h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),
