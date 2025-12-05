@@ -88,7 +88,7 @@ export default {
   "-cl": {
     description: div(
       div("turns each child into a checklist item"),
-      div(code("argument"), ": the label to display above the list"),
+      div(code("argument"), ": a label"),
       div("items have the attribute ", code("checked"))
     ),
     create(arg) {
