@@ -27,7 +27,7 @@ export default {
   "-ul": {
     description: div(
       div("unordered list"),
-      div(code("ARGUMENT"), ": a label"),
+      div(code("argument"), ": a label"),
       div("this is the default widget")
     ),
     create(arg) {
@@ -43,7 +43,7 @@ export default {
     },
   },
   "-ol": {
-    description: div(div("ordered list"), div(code("ARGUMENT"), ": a label")),
+    description: div(div("ordered list"), div(code("argument"), ": a label")),
     create(arg) {
       let children = ol();
       for (let child of this.childNodes) {
@@ -59,7 +59,7 @@ export default {
   "-hdr": {
     description: div(
       div("large header with the children below"),
-      div(code("ARGUMENT"), ": the header text")
+      div(code("argument"), ": the header text")
     ),
     create(arg) {
       let children = div();
@@ -72,7 +72,7 @@ export default {
   "-lnk": {
     description: div(
       div("a hyperlink"),
-      div(code("ARGUMENT"), ": the link text"),
+      div(code("argument"), ": the link text"),
       div(code("url"), ": The URL the link opens")
     ),
     create(arg) {
@@ -88,7 +88,7 @@ export default {
   "-cl": {
     description: div(
       div("turns each child into a checklist item"),
-      div(code("ARGUMENT"), ": the label to display above the list"),
+      div(code("argument"), ": the label to display above the list"),
       div("items have the attribute ", code("checked"))
     ),
     create(arg) {
@@ -121,7 +121,7 @@ export default {
   "-tbl": {
     description: div(
       div("a table"),
-      div(code("ARGUMENT"), ": a label to display above the table"),
+      div(code("argument"), ": a label to display above the table"),
       div("each childs name is a table header and its children the column")
     ),
     create(arg) {
@@ -160,7 +160,7 @@ export default {
   "-tbs": {
     description: div(
       div("a tab panel"),
-      div(code("ARGUMENT"), ": a label to show above the tabs"),
+      div(code("argument"), ": a label to show above the tabs"),
       div(
         "each child name becomes a tab name and its children the tab content"
       ),
@@ -199,7 +199,7 @@ export default {
   "-ta": {
     description: div(
       div("a textarea"),
-      div(code("ARGUMENT"), ": a label"),
+      div(code("argument"), ": a label"),
       div("children become lines of text")
     ),
     create(arg) {
@@ -228,7 +228,7 @@ export default {
   "-opt": {
     description: div(
       div("option"),
-      div(code("ARGUMENT"), ": a label"),
+      div(code("argument"), ": a label"),
       div(code("value"), ": the selected option"),
       div("children become optinons")
     ),
@@ -255,7 +255,7 @@ export default {
   "-frm": {
     description: div(
       div("form"),
-      div(code("ARGUMENT"), ": a label"),
+      div(code("argument"), ": a label"),
       div("attributes become form fields"),
       div("non-attribute children are rendered below")
     ),
