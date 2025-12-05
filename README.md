@@ -17,8 +17,6 @@ then visit localhost:3000
 
 from ChatGPT:
 
----
-
 # Tree Editor: A Declarative Tree-Based System for Unified Human and Machine Knowledge Representation
 
 ## Abstract
@@ -166,5 +164,3 @@ Current limitations include scalability concerns for very large trees and the co
 Tree Editor demonstrates that a single declarative tree formalism can unify human-readable text, structure, and typing without auxiliary schema languages or imperative transformation layers. By enforcing explicitness and idempotent composition, the system reduces complexity while increasing transparency.
 
 Tree Editor suggests a path toward information systems that are both formally rigorous and fundamentally humane—where structure is not imposed upon human expression, but emerges from it.
-
----
