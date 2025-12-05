@@ -48,40 +48,16 @@ export default class Node {
     this.expand();
   }
 
-  updateLastValues() {
-    this.lastName = this.name.value;
-    let m = this.isAttribute;
-    if (m) {
-      this.lastAttrName = m[1];
+  toElement() {
+    let m = this.name.value.match(Node.widgetRegEx);
+    if (m && widgets[m[1]]) {
+      return widgets[m[1]].create
+        .bind(this)(unescapeArg(m[2]))
+        .e("click", (ev) => ctrlClick(this, ev));
     } else {
-      this.lastAttrName = null;
-    }
-  }
-
-  copy() {
-    let n = new Node(this.name.value);
-    n.lastName = this.lastName;
-    n.lastAttrName = this.lastAttrName;
-    for (let child of this.children.children) {
-      n.appendChild(child.node.copy());
-    }
-    return n;
-  }
-
-  getChild(name) {
-    for (let child of this.children.children) {
-      if (child.node.name.value == name) {
-        return child.node;
-      }
-    }
-  }
-
-  getAttrNode(name) {
-    for (let child of this.children.children) {
-      let m = child.node.isAttribute;
-      if (m && m[1] == name) {
-        return child.node;
-      }
+      return widgets["-ul"].create
+        .bind(this)(unescape(this.name.value))
+        .e("click", (ev) => ctrlClick(this, ev));
     }
   }
 
@@ -151,6 +127,26 @@ export default class Node {
     activeElement.focus();
   }
 
+  traverseUp(callback) {
+    if (callback(this)) {
+      return;
+    } else if (this.parent) {
+      return this.parent.traverseUp(callback);
+    }
+  }
+
+  traverse(callback, includeCollapsed = true) {
+    if (callback(this)) {
+      return true;
+    } else if (includeCollapsed || this.expanded) {
+      for (let child of Array.from(this.children.children)) {
+        if (child.node.traverse(callback, includeCollapsed)) {
+          return true;
+        }
+      }
+    }
+  }
+
   setAttribute(name, value = "", focus = false, escape = true) {
     if (escape) {
       name = name
@@ -188,19 +184,6 @@ export default class Node {
   get isAttribute() {
     this._isAttribute = this.name.value.match(Node.attrRegEx);
     return this._isAttribute;
-  }
-
-  toElement() {
-    let m = this.name.value.match(Node.widgetRegEx);
-    if (m && widgets[m[1]]) {
-      return widgets[m[1]].create
-        .bind(this)(unescapeArg(m[2]))
-        .e("click", (ev) => ctrlClick(this, ev));
-    } else {
-      return widgets["-ul"].create
-        .bind(this)(unescape(this.name.value))
-        .e("click", (ev) => ctrlClick(this, ev));
-    }
   }
 
   get childNodes() {
@@ -248,22 +231,39 @@ export default class Node {
     }
   }
 
-  traverseUp(callback) {
-    if (callback(this)) {
-      return;
-    } else if (this.parent) {
-      return this.parent.traverseUp(callback);
+  updateLastValues() {
+    this.lastName = this.name.value;
+    let m = this.isAttribute;
+    if (m) {
+      this.lastAttrName = m[1];
+    } else {
+      this.lastAttrName = null;
     }
   }
 
-  traverse(callback, includeCollapsed = true) {
-    if (callback(this)) {
-      return true;
-    } else if (includeCollapsed || this.expanded) {
-      for (let child of Array.from(this.children.children)) {
-        if (child.node.traverse(callback, includeCollapsed)) {
-          return true;
-        }
+  copy() {
+    let n = new Node(this.name.value);
+    n.lastName = this.lastName;
+    n.lastAttrName = this.lastAttrName;
+    for (let child of this.children.children) {
+      n.appendChild(child.node.copy());
+    }
+    return n;
+  }
+
+  getChild(name) {
+    for (let child of this.children.children) {
+      if (child.node.name.value == name) {
+        return child.node;
+      }
+    }
+  }
+
+  getAttrNode(name) {
+    for (let child of this.children.children) {
+      let m = child.node.isAttribute;
+      if (m && m[1] == name) {
+        return child.node;
       }
     }
   }
