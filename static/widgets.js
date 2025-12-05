@@ -121,7 +121,7 @@ export default {
   "-tbl": {
     description: div(
       div("a table"),
-      div(code("argument"), ": a label to display above the table"),
+      div(code("argument"), ": a label"),
       div("each childs name is a table header and its children the column")
     ),
     create(arg) {
