@@ -33,7 +33,7 @@ export default {
     create(arg) {
       let children = ul();
       for (let child of this.childNodes) {
-        children.appendChild(li(child.toElement()));
+        children.appendChild(li(child.toWidget()));
       }
       if (children.children.length) {
         return div(div(arg || " "), children);
@@ -47,7 +47,7 @@ export default {
     create(arg) {
       let children = ol();
       for (let child of this.childNodes) {
-        children.appendChild(li(child.toElement()));
+        children.appendChild(li(child.toWidget()));
       }
       if (children.children.length) {
         return div(div(arg || " "), children);
@@ -64,7 +64,7 @@ export default {
     create(arg) {
       let children = div();
       for (let child of this.childNodes) {
-        children.appendChild(child.toElement());
+        children.appendChild(child.toWidget());
       }
       return div(h1(arg), children).c("hdr");
     },
@@ -106,7 +106,7 @@ export default {
           child.setAttribute("checked", "false");
         }
         checklist.appendChild(
-          div(checkbox, div(child.toElement()).c("cl-child"))
+          div(checkbox, div(child.toWidget()).c("cl-child"))
             .c("cl-item")
             .e("click", (ev) => ctrlClick(child, ev))
         );
@@ -142,7 +142,7 @@ export default {
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
           if (cell) {
-            row.appendChild(td(cell.toElement()));
+            row.appendChild(td(cell.toWidget()));
           } else {
             row.appendChild(td());
           }
@@ -173,7 +173,7 @@ export default {
         tabs[child.nameText] = div();
         tabClicked[child._nameText] = (ev) => ctrlClick(child, ev);
         for (let grandchild of child.childNodes) {
-          tabs[child._nameText].appendChild(grandchild.toElement());
+          tabs[child._nameText].appendChild(grandchild.toWidget());
         }
       }
       let tabsObj = new Tabs(
@@ -275,7 +275,7 @@ export default {
         );
       }
       for (let child of this.childNodes) {
-        children.appendChild(child.toElement());
+        children.appendChild(child.toWidget());
       }
       if (arg) {
         return fieldset(legend(arg), form, children).c("frm");

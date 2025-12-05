@@ -107,7 +107,7 @@ class Tree {
   }
 
   updateOutput() {
-    this.output.replaceChildren(this.root.toElement());
+    this.output.replaceChildren(this.root.toWidget());
   }
 
   update() {

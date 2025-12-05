@@ -48,7 +48,7 @@ export default class Node {
     this.expand();
   }
 
-  toElement() {
+  toWidget() {
     let m = this.name.value.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create
