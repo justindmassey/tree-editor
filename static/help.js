@@ -40,7 +40,8 @@ class Help {
             '") at the beginning of a node name',
             div("can be escaped with a backslash.")
           )
-        )
+        ),
+        div("The argument is a label unless stated otherwise.")
       ),
       makeReference(widgets),
 

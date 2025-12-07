@@ -17,6 +17,7 @@ import {
   li,
   fieldset,
   legend,
+  span,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -25,11 +26,7 @@ import ctrlClick from "./ctrl-click.js";
 
 export default {
   "-ul": {
-    description: div(
-      div("unordered list"),
-      div(code("argument"), ": a label"),
-      div("this is the default widget")
-    ),
+    description: div(div("unordered list"), div("this is the default widget")),
     create(arg) {
       let children = ul();
       for (let child of this.childNodes) {
@@ -43,7 +40,7 @@ export default {
     },
   },
   "-ol": {
-    description: div(div("ordered list"), div(code("argument"), ": a label")),
+    description: div(div("ordered list")),
     create(arg) {
       let children = ol();
       for (let child of this.childNodes) {
@@ -53,6 +50,33 @@ export default {
         return div(div(arg || " "), children);
       } else {
         return div(arg || " ");
+      }
+    },
+  },
+  "-hl": {
+    description: div(div("horizontal list")),
+    create(arg) {
+      let list = span();
+      let lastComma;
+      for (let child of this.childNodes) {
+        list.appendChild(
+          span(child.nameText).e("click", (ev) => ctrlClick(child, ev))
+        );
+        lastComma = span(", ");
+        list.appendChild(lastComma);
+      }
+      if (lastComma) {
+        lastComma.remove();
+      }
+
+      if (arg) {
+        let label = span(arg);
+        if (this._childNodes.length) {
+          label.appendChild(span(": "));
+        }
+        return div(label, list);
+      } else {
+        return div(list);
       }
     },
   },
@@ -88,7 +112,6 @@ export default {
   "-cl": {
     description: div(
       div("turns each child into a checklist item"),
-      div(code("argument"), ": a label"),
       div("items have the attribute ", code("checked"))
     ),
     create(arg) {
@@ -121,7 +144,6 @@ export default {
   "-tbl": {
     description: div(
       div("a table"),
-      div(code("argument"), ": a label"),
       div("each childs name is a table header and its children the column")
     ),
     create(arg) {
@@ -160,7 +182,6 @@ export default {
   "-tbs": {
     description: div(
       div("a tab panel"),
-      div(code("argument"), ": a label"),
       div(
         "each child name becomes a tab name and its children the tab content"
       ),
@@ -197,11 +218,7 @@ export default {
     },
   },
   "-ta": {
-    description: div(
-      div("a textarea"),
-      div(code("argument"), ": a label"),
-      div("children become lines of text")
-    ),
+    description: div(div("a textarea"), div("children become lines of text")),
     create(arg) {
       let ta = textarea()
         .a("rows", 8)
@@ -228,7 +245,6 @@ export default {
   "-opt": {
     description: div(
       div("option"),
-      div(code("argument"), ": a label"),
       div(code("value"), ": the selected option"),
       div("children become optinons")
     ),
@@ -255,7 +271,6 @@ export default {
   "-frm": {
     description: div(
       div("form"),
-      div(code("argument"), ": a label"),
       div("attributes become form fields"),
       div("non-attribute children are rendered below")
     ),
