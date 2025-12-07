@@ -60,10 +60,10 @@ export default class Node {
         .bind(this)(unescape(this.name.value))
         .e("click", (ev) => ctrlClick(this, ev));
     }
-    if (!widget.textContent) {
-      return div(" ").e("click", (ev) => ctrlClick(this, ev));
-    } else {
+    if (widget.textContent) {
       return widget;
+    } else {
+      return div(" ").e("click", (ev) => ctrlClick(this, ev));
     }
   }
 
