@@ -33,9 +33,9 @@ export default {
         children.appendChild(li(child.toWidget()));
       }
       if (children.children.length) {
-        return div(div(arg || " "), children);
+        return div(div(arg), children);
       } else {
-        return div(arg || " ");
+        return div(arg);
       }
     },
   },
@@ -47,9 +47,9 @@ export default {
         children.appendChild(li(child.toWidget()));
       }
       if (children.children.length) {
-        return div(div(arg || " "), children);
+        return div(div(arg), children);
       } else {
-        return div(arg || " ");
+        return div(arg);
       }
     },
   },
@@ -295,7 +295,7 @@ export default {
       if (arg) {
         return fieldset(legend(arg), form, children).c("frm");
       } else {
-        return div(" ", form, children).c("frm");
+        return div(form, children).c("frm");
       }
     },
   },

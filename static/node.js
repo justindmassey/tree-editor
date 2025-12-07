@@ -1,6 +1,6 @@
 import registerShortcuts from "./lib/register-shortcuts.js";
 import nodeCommands from "./node-commands.js";
-import { div, input } from "./lib/elements.js";
+import { div, input, span } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
@@ -50,14 +50,20 @@ export default class Node {
 
   toWidget() {
     let m = this.name.value.match(Node.widgetRegEx);
+    let widget;
     if (m && widgets[m[1]]) {
-      return widgets[m[1]].create
+      widget = widgets[m[1]].create
         .bind(this)(unescapeArg(m[2]))
         .e("click", (ev) => ctrlClick(this, ev));
     } else {
-      return widgets["-ul"].create
+      widget = widgets["-ul"].create
         .bind(this)(unescape(this.name.value))
         .e("click", (ev) => ctrlClick(this, ev));
+    }
+    if (!widget.textContent) {
+      return div(" ");
+    } else {
+      return widget;
     }
   }
 
