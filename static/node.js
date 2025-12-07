@@ -61,7 +61,7 @@ export default class Node {
         .e("click", (ev) => ctrlClick(this, ev));
     }
     if (!widget.textContent) {
-      return div(" ");
+      return div(" ").e("click", (ev) => ctrlClick(this, ev));
     } else {
       return widget;
     }
