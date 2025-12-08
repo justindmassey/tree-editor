@@ -28,7 +28,7 @@ class Help {
         div("Widgets are rendered to the output"),
         div("(press Alt+o to toggle the output visibility)."),
         div(
-          'Non-root nodes that start with a hash symbol ("',
+          'Nodes that start with a hash symbol ("',
           code("#"),
           '") ',
           div("are not rendered to the output."),
@@ -66,8 +66,7 @@ class Help {
       div('The colons ("', code(":"), '") can be escaped with a backslash.'),
       div("Type definitions can inherit from other type definitions."),
       div("Types are updated in real time."),
-      div("Type definitions that are not the root node"),
-      div("are not rendered to the output."),
+      div("Type definitions are not rendered to the output."),
       div("Removing a type does not remove inherited nodes."),
 
       h2("Text Export"),

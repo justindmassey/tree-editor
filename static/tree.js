@@ -107,7 +107,15 @@ class Tree {
   }
 
   updateOutput() {
-    this.output.replaceChildren(this.root.toWidget());
+    if (
+      this.root.name.value.startsWith("#") ||
+      this.root.name.value.match(Node.typedefRegEx) ||
+      this.root.name.value.match(Node.attrRegEx)
+    ) {
+      this.output.replaceChildren();
+    } else {
+      this.output.replaceChildren(this.root.toWidget());
+    }
   }
 
   update() {
