@@ -43,6 +43,7 @@ const mimeTypes = {
   ".rar": "application/vnd.rar",
   ".7z": "application/x-7z-compressed",
   ".txt": "text/plain;charset=utf8",
+  ".tree": "text/plain;charset=utf8",
   ".csv": "text/csv",
   ".rtf": "application/rtf",
   ".md": "text/markdown",
