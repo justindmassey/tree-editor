@@ -308,7 +308,7 @@ export default {
     },
   },
   "Alt+a": {
-    description: "collaps all descendants with only attribute children",
+    description: "collapse all descendants with only attribute children",
     action() {
       this.traverse((node) => {
         if (!node.childNodes.length) {

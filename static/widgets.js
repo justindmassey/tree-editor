@@ -147,7 +147,7 @@ export default {
   "-tbl": {
     description: div(
       div("a table"),
-      div("each childs name is a table header and its children the column")
+      div("each child's name is a table header and its children the column")
     ),
     create(arg) {
       let header = tr();
@@ -249,7 +249,7 @@ export default {
     description: div(
       div("option"),
       div(code("value"), ": the selected option"),
-      div("children become optinons")
+      div("children become options")
     ),
     create(arg) {
       let opt = select().e("change", () => {

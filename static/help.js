@@ -75,7 +75,7 @@ class Help {
 
       h2("JSON Export"),
       div("Nodes and attributes become JSON properties."),
-      div("Dublicate names override the last."),
+      div("Duplicate names override the last."),
 
       h2("XML Export"),
       div("Nodes with children become tags."),
