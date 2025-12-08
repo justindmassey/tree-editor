@@ -52,19 +52,14 @@ export default class Node {
     let m = this.name.value.match(Node.widgetRegEx);
     let widget;
     if (m && widgets[m[1]]) {
-      widget = widgets[m[1]].create
-        .bind(this)(unescapeArg(m[2]))
-        .e("click", (ev) => ctrlClick(this, ev));
+      widget = widgets[m[1]].create.bind(this)(unescapeArg(m[2]));
     } else {
-      widget = widgets["-ul"].create
-        .bind(this)(unescape(this.name.value))
-        .e("click", (ev) => ctrlClick(this, ev));
+      widget = widgets["-ul"].create.bind(this)(unescape(this.name.value));
     }
-    if (widget.textContent) {
-      return widget;
-    } else {
-      return div(" ").e("click", (ev) => ctrlClick(this, ev));
+    if (!widget.textContent) {
+      widget = div(" ");
     }
+    return widget.e("click", (ev) => ctrlClick(this, ev));
   }
 
   merge(node, rename = true) {
