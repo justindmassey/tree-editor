@@ -12,6 +12,9 @@ if (localStorage.getItem("help") || localStorage.getItem("help") == null) {
 if (localStorage.getItem("output")) {
   globalCommands["Alt+o"].action.bind(treeEditor)();
 }
+if (localStorage.getItem("showTree") == "") {
+  globalCommands["Alt+t"].action.bind(treeEditor)();
+}
 if (localStorage.getItem("tree")) {
   treeEditor.tree.load(localStorage.getItem("tree"));
 } else {

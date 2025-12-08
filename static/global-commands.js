@@ -113,6 +113,19 @@ export default {
       }
     },
   },
+  "Alt+t": {
+    description: "toggle tree",
+    action() {
+      this.tree.tree.classList.toggle("hidden");
+      if (this.tree.tree.classList.contains("hidden")) {
+        this.tree.output.style.borderLeft = "none";
+        localStorage.setItem("showTree", "");
+      } else {
+        this.tree.output.style.borderLeft = "";
+        localStorage.setItem("showTree", "true");
+      }
+    },
+  },
 };
 
 function flash() {
