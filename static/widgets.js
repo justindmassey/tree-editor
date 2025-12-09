@@ -124,7 +124,7 @@ export default {
   },
   "-lnk": {
     description: div(
-      div("a hyperlink"),
+      div("link"),
       div(code("argument"), ": the link text"),
       div(code("url"), ": The URL the link opens")
     ),
@@ -140,6 +140,7 @@ export default {
   },
   "-cl": {
     description: div(
+      div("checklist"),
       div("turns each child into a checklist item"),
       div("items have the attribute ", code("checked"))
     ),
@@ -172,7 +173,7 @@ export default {
   },
   "-tbl": {
     description: div(
-      div("a table"),
+      div("table"),
       div("each child's name is a table header and its children the column")
     ),
     create(arg) {
@@ -210,7 +211,7 @@ export default {
   },
   "-tbs": {
     description: div(
-      div("a tab panel"),
+      div("tabs"),
       div(
         "each child name becomes a tab name and its children the tab content"
       ),
@@ -247,7 +248,7 @@ export default {
     },
   },
   "-ta": {
-    description: div(div("a textarea"), div("children become lines of text")),
+    description: div(div("textarea"), div("children become lines of text")),
     create(arg) {
       let ta = textarea()
         .a("rows", 8)
