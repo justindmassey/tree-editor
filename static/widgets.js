@@ -101,7 +101,7 @@ export default {
       div("paragraphs"),
       div(code("argument"), ": a header"),
       div("each child becomes a header"),
-      div("grandchildren become paragraphs")
+      div("grandchildren become the paragraph")
     ),
     create(arg) {
       let paragraphs = div();
