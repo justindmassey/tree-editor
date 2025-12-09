@@ -96,6 +96,32 @@ export default {
       return div(h1(arg), children).c("hdr");
     },
   },
+  "-par": {
+    description: div(
+      div("paragraphs"),
+      div(code("argument"), ": a header"),
+      div("each child becomes a header"),
+      div("grandchildren become paragraphs")
+    ),
+    create(arg) {
+      let paragraphs = div();
+      for (let child of this.childNodes) {
+        paragraphs.appendChild(
+          h4(child.nameText).e("click", (ev) => ctrlClick(child, ev))
+        );
+        let paragraph = p();
+        for (let grandchild of child.childNodes) {
+          paragraph.appendChild(grandchild.toWidget());
+        }
+        paragraphs.appendChild(paragraph);
+      }
+      if (arg) {
+        return div(h3(arg), paragraphs);
+      } else {
+        return paragraphs;
+      }
+    },
+  },
   "-lnk": {
     description: div(
       div("a hyperlink"),
@@ -299,32 +325,6 @@ export default {
         return fieldset(legend(arg), form, children).c("frm");
       } else {
         return div(form, children).c("frm");
-      }
-    },
-  },
-  "-par": {
-    description: div(
-      div("paragraphs"),
-      div(code("argument"), ": a header"),
-      div("each child becomes a header"),
-      div("grandchildren become paragraphs")
-    ),
-    create(arg) {
-      let paragraphs = div();
-      for (let child of this.childNodes) {
-        paragraphs.appendChild(
-          h4(child.nameText).e("click", (ev) => ctrlClick(child, ev))
-        );
-        let paragraph = p();
-        for (let grandchild of child.childNodes) {
-          paragraph.appendChild(grandchild.toWidget());
-        }
-        paragraphs.appendChild(paragraph);
-      }
-      if (arg) {
-        return div(h3(arg), paragraphs);
-      } else {
-        return paragraphs;
       }
     },
   },
