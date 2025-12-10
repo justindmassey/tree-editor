@@ -17,7 +17,7 @@
   background: var(--bg);
 }
 
-.menu-label > *,
+.menu-label,
 .menu-items > * {
   white-space: nowrap;
   cursor: default;
