@@ -182,6 +182,13 @@ export default class Node {
     return this._attributes;
   }
 
+  getAttribute(name) {
+    name = unescape(name);
+    if (name in this.attributes) {
+      return this._attributes[name];
+    }
+  }
+
   get isAttribute() {
     this._isAttribute = this.name.value.match(Node.attrRegEx);
     return this._isAttribute;
@@ -195,6 +202,8 @@ export default class Node {
         !child.node.name.value.startsWith("#") &&
         !child.node.name.value.match(Node.typedefRegEx)
       ) {
+        this._childNodes.push(child.node);
+      } else if (child.node.name.value.match(Node.widgetRegEx)) {
         this._childNodes.push(child.node);
       }
     }

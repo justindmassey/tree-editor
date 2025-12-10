@@ -276,26 +276,39 @@ export default {
     description: div(
       div("option"),
       div(code("value"), ": the selected option"),
-      div("children become options")
+      div("children become options"),
+      div("children of the selected option are rendered below")
     ),
     create(arg) {
       let opt = select().e("change", () => {
         this.setAttribute("value", opt.value);
-        history.add(true);
+        history.add();
       });
+      let optChildren = {};
       for (let child of this.childNodes) {
         opt.appendChild(option(child.nameText));
+        if (child.childNodes.length) {
+          optChildren[child._nameText] = div();
+          for (let grandchild of child._childNodes) {
+            optChildren[child._nameText].appendChild(grandchild.toWidget());
+          }
+        }
       }
       if ("value" in this.attributes) {
         opt.value = this._attributes.value;
       } else {
         this.setAttribute("value", opt.value);
       }
+      let elem;
       if (arg) {
-        return div(arg, " ", opt);
+        elem = div(arg, " ", opt);
       } else {
-        return opt;
+        elem = div(opt);
       }
+      if (opt.value in optChildren) {
+        elem.appendChild(optChildren[opt.value]);
+      }
+      return elem;
     },
   },
   "-frm": {
