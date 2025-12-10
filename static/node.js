@@ -182,13 +182,6 @@ export default class Node {
     return this._attributes;
   }
 
-  getAttribute(name) {
-    name = unescape(name);
-    if (name in this.attributes) {
-      return this._attributes[name];
-    }
-  }
-
   get isAttribute() {
     this._isAttribute = this.name.value.match(Node.attrRegEx);
     return this._isAttribute;
