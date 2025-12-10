@@ -19,7 +19,7 @@ class MenuBar {
       treeMenu,
       typedefMenu,
       new Menu(
-        div("Import"),
+        "Import",
         new TextUploader("Tree", ".tree", (text, filename) => {
           tree.root = importText(text, removeExtension(filename));
           tree.root.focus();
@@ -42,7 +42,7 @@ class MenuBar {
         })
       ),
       new Menu(
-        div("Export"),
+        "Export",
         div("Tree").e("click", () => {
           downloadFile(tree.root.name.value + ".tree", exportToText(tree.root));
         }),

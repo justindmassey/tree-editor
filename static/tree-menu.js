@@ -5,7 +5,7 @@ import tree from "./tree.js";
 
 class TreeMenu {
   constructor() {
-    this.menu = new Menu(div("Trees"));
+    this.menu = new Menu("Trees");
     this.elem = this.menu.elem;
     this.update();
   }
