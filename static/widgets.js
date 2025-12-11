@@ -21,6 +21,8 @@ import {
   p,
   h3,
   h4,
+  details,
+  summary,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -310,6 +312,23 @@ export default {
       }
       return elem;
     },
+  },
+  "-det": {
+    description: div(
+      div("details"),
+      div(code("argument"), ": a summary"),
+      div("children can be collapsed")
+    ),
+    create(arg) {
+      let det = details()
+      if(arg) {
+        det.appendChild(summary(arg))
+      }
+      for(let child of this.childNodes) {
+        det.appendChild(child.toWidget())
+      }
+      return det
+    }
   },
   "-frm": {
     description: div(
