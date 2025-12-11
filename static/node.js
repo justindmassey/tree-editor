@@ -14,7 +14,7 @@ export default class Node {
   static typedefRegEx = /^::([^:\.]+)/;
 
   constructor(name = "", ...children) {
-    this.toggleButton = div()
+    this.toggleButton = div("▶")
       .c("button", "toggle-button")
       .e("click", () => this.toggle());
     this.name = input()
@@ -45,7 +45,6 @@ export default class Node {
     for (let child of children) {
       this.appendChild(child, false);
     }
-    this.expand();
   }
 
   toWidget() {
@@ -394,14 +393,7 @@ export default class Node {
 }
 
 function unescape(str) {
-  return str
-    .replace(Node.listTypeRegEx, "")
-    .replace(Node.nodeTypeRegEx, "")
-    .replace(/\\:/g, ":")
-    .replace(/\\\./g, ".")
-    .replace(/^\\-/, "-")
-    .replace(/^\\#/, "#")
-    .replace(/\\=/g, "=");
+  return unescapeArg(str).replace(/^\\-/, "-").replace(/^\\#/, "#");
 }
 
 function unescapeArg(str) {
