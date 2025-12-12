@@ -45,7 +45,6 @@ class Tree {
     let typedefs = {};
     let typedefDeps = {};
     typedefMenu.clearItems();
-    let recursionError = false;
     this.root.traverse((n) => {
       let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
