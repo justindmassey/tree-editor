@@ -72,44 +72,41 @@ class Tree {
       }
     });
 
-    if (!recursionError) {
-      let tempMark = {};
-      let permMark = {};
-      let cyclePath = null;
+    let tempMark = {};
+    let permMark = {};
+    let cyclePath = null;
 
-      const visit = (name, stack) => {
-        if (permMark[name]) return false;
-        if (tempMark[name]) {
-          cyclePath = stack.concat(name);
-          return true;
-        }
-        tempMark[name] = true;
-        stack.push(name);
+    const visit = (name, stack) => {
+      if (permMark[name]) return false;
+      if (tempMark[name]) {
+        cyclePath = stack.concat(name);
+        return true;
+      }
+      tempMark[name] = true;
+      stack.push(name);
 
-        let deps = typedefDeps[name];
-        if (deps) {
-          for (let dep of deps) {
-            if (typedefDeps[dep]) {
-              if (visit(dep, stack)) return true;
-            }
+      let deps = typedefDeps[name];
+      if (deps) {
+        for (let dep of deps) {
+          if (typedefDeps[dep]) {
+            if (visit(dep, stack)) return true;
           }
         }
+      }
 
-        stack.pop();
-        permMark[name] = true;
-        return false;
-      };
+      stack.pop();
+      permMark[name] = true;
+      return false;
+    };
 
-      for (let name in typedefDeps) {
-        if (visit(name, [])) {
-          recursionError = true;
-          alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
-          break;
-        }
+    for (let name in typedefDeps) {
+      if (visit(name, [])) {
+        alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
+        return;
       }
     }
 
-    if (Object.keys(typedefs).length && !recursionError) {
+    if (Object.keys(typedefs).length) {
       this.root.traverse((n) => {
         if (!n.isAttribute) {
           let nodeTypes = n.name.value.match(Node.nodeTypeRegEx);
