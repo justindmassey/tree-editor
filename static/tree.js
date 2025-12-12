@@ -43,22 +43,25 @@ class Tree {
 
   updateTypes() {
     let typedefs = {};
+    let typedefDeps = {};
     typedefMenu.clearItems();
     let recursionError = false;
     this.root.traverse((n) => {
       let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
-        typedefs[m[1]] = n;
+        let typeName = m[1];
+        typedefs[typeName] = n;
+        typedefDeps[typeName] = typedefDeps[typeName] || new Set();
         typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
         n.traverse((n2) => {
           let nodeTypes = n2.name.value.match(Node.nodeTypeRegEx);
           if (nodeTypes) {
             for (let t of nodeTypes) {
-              if (t == "." + m[1]) {
+              let refName = t.slice(1);
+              typedefDeps[typeName].add(refName);
+              if (typeName == refName) {
                 alert("Error: Recursive type definition");
                 recursionError = true;
-                n2.name.value = n2.name.value.replace(t, "");
-                this.updateTypes();
                 return true;
               }
             }
@@ -66,11 +69,11 @@ class Tree {
           let listTypes = n2.name.value.match(Node.listTypeRegEx);
           if (listTypes) {
             for (let t of listTypes) {
-              if (t == ":" + m[1]) {
+              let refName = t.slice(1);
+              typedefDeps[typeName].add(refName);
+              if (refName == typeName) {
                 alert("Error: Recursive type definition");
                 recursionError = true;
-                n2.name.value = n2.name.value.replace(t, "");
-                this.updateTypes();
                 return true;
               }
             }
@@ -78,6 +81,46 @@ class Tree {
         });
       }
     });
+    // After building typedefs and typedefDeps
+    if (!recursionError) {
+      let tempMark = {}; // currently in DFS stack
+      let permMark = {}; // already fully explored
+      let cyclePath = null;
+
+      const visit = (name, stack) => {
+        if (permMark[name]) return false;
+        if (tempMark[name]) {
+          // Found a cycle; stack + name gives the cycle path
+          cyclePath = stack.concat(name);
+          return true;
+        }
+        tempMark[name] = true;
+        stack.push(name);
+
+        let deps = typedefDeps[name];
+        if (deps) {
+          for (let dep of deps) {
+            // only follow dependencies that are actual typedefs
+            if (typedefDeps[dep]) {
+              if (visit(dep, stack)) return true;
+            }
+          }
+        }
+
+        stack.pop();
+        permMark[name] = true;
+        return false;
+      };
+
+      for (let name in typedefDeps) {
+        if (visit(name, [])) {
+          recursionError = true;
+          alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
+          break;
+        }
+      }
+    }
+
     if (Object.keys(typedefs).length && !recursionError) {
       this.root.traverse((n) => {
         if (!n.isAttribute) {
