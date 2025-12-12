@@ -81,16 +81,15 @@ class Tree {
         });
       }
     });
-    // After building typedefs and typedefDeps
+
     if (!recursionError) {
-      let tempMark = {}; // currently in DFS stack
-      let permMark = {}; // already fully explored
+      let tempMark = {};
+      let permMark = {};
       let cyclePath = null;
 
       const visit = (name, stack) => {
         if (permMark[name]) return false;
         if (tempMark[name]) {
-          // Found a cycle; stack + name gives the cycle path
           cyclePath = stack.concat(name);
           return true;
         }
@@ -100,7 +99,6 @@ class Tree {
         let deps = typedefDeps[name];
         if (deps) {
           for (let dep of deps) {
-            // only follow dependencies that are actual typedefs
             if (typedefDeps[dep]) {
               if (visit(dep, stack)) return true;
             }
