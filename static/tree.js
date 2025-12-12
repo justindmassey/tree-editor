@@ -59,11 +59,6 @@ class Tree {
             for (let t of nodeTypes) {
               let refName = t.slice(1);
               typedefDeps[typeName].add(refName);
-              if (typeName == refName) {
-                alert("Error: Recursive type definition");
-                recursionError = true;
-                return true;
-              }
             }
           }
           let listTypes = n2.name.value.match(Node.listTypeRegEx);
@@ -71,11 +66,6 @@ class Tree {
             for (let t of listTypes) {
               let refName = t.slice(1);
               typedefDeps[typeName].add(refName);
-              if (refName == typeName) {
-                alert("Error: Recursive type definition");
-                recursionError = true;
-                return true;
-              }
             }
           }
         });
