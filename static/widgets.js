@@ -317,18 +317,32 @@ export default {
     description: div(
       div("details"),
       div(code("argument"), ": a summary"),
+      div(code("open"), ": if the details are shown"),
       div("children can be collapsed")
     ),
     create(arg) {
-      let det = details()
-      if(arg) {
-        det.appendChild(summary(arg))
+      let det = details();
+      if (arg) {
+        det.appendChild(summary(arg));
       }
-      for(let child of this.childNodes) {
-        det.appendChild(child.toWidget())
+      for (let child of this.childNodes) {
+        det.appendChild(child.toWidget());
       }
-      return det
-    }
+      det.e("toggle", () => {
+        this.setAttribute("open", det.open);
+        history.add(true);
+      });
+      if ("open" in this.attributes) {
+        if (this._attributes.open == "true") {
+          det.open = true;
+        } else {
+          det.open = false;
+        }
+      } else {
+        this.setAttribute("open", "false");
+      }
+      return det;
+    },
   },
   "-frm": {
     description: div(
