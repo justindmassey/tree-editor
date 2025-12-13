@@ -4,7 +4,8 @@ import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import typedefMenu from "./typedef-menu.js";
 
-const nameSize = 40;
+const minNameSize = 40;
+const maxNameSize = 80;
 
 class Tree {
   constructor() {
@@ -162,13 +163,14 @@ class Tree {
         longestName = n.name.value.length;
       }
     });
-    if (longestName > nameSize) {
+    longestName = Math.min(longestName, maxNameSize);
+    if (longestName > minNameSize) {
       this.root.traverse((n) => {
         n.name.size = longestName;
       });
     } else {
       this.root.traverse((n) => {
-        n.name.size = nameSize;
+        n.name.size = minNameSize;
       });
     }
   }
