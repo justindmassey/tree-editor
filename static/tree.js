@@ -104,8 +104,8 @@ class Tree {
         if ("value" in document.activeElement) {
           let t = cyclePath[cyclePath.length - 1];
           document.activeElement.value = document.activeElement.value
-            .replace("." + t, "")
-            .replace(":" + t, "");
+            .replace(new RegExp("(?<!\\\\)" + escapeRegExp("." + t), "g"), "")
+            .replace(new RegExp("(?<!:|\\\\)" + escapeRegExp(":" + t), "g"), "");
           this.updateTypes();
         }
         return;
@@ -156,6 +156,10 @@ class Tree {
     this.updateTypes();
     this.updateOutput();
   }
+}
+
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 export default new Tree();
