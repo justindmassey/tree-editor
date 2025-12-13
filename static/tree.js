@@ -48,23 +48,20 @@ class Tree {
     this.root.traverse((n) => {
       let m = n.name.value.match(Node.typedefRegEx);
       if (m) {
-        let typeName = m[1];
-        typedefs[typeName] = n;
-        typedefDeps[typeName] = typedefDeps[typeName] || new Set();
+        typedefs[m[1]] = n;
+        typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
         typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
         n.traverse((n2) => {
           let nodeTypes = n2.name.value.match(Node.nodeTypeRegEx);
           if (nodeTypes) {
             for (let t of nodeTypes) {
-              let refName = t.slice(1);
-              typedefDeps[typeName].add(refName);
+              typedefDeps[m[1]].add(t.slice(1));
             }
           }
           let listTypes = n2.name.value.match(Node.listTypeRegEx);
           if (listTypes) {
             for (let t of listTypes) {
-              let refName = t.slice(1);
-              typedefDeps[typeName].add(refName);
+              typedefDeps[m[1]].add(t.slice(1));
             }
           }
         });
