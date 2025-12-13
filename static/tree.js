@@ -164,11 +164,11 @@ class Tree {
     });
     if (longestName > nameSize) {
       this.root.traverse((n) => {
-        n.name.a("size", longestName);
+        n.name.size = longestName;
       });
     } else {
       this.root.traverse((n) => {
-        n.name.a("size", nameSize);
+        n.name.size = nameSize;
       });
     }
   }
