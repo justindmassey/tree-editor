@@ -160,10 +160,14 @@ class Tree {
     let longestName = 0;
     this.root.traverse((n) => {
       if (n.name.value.length > longestName) {
-        longestName = n.name.value.length;
+        if (n.name.value.length <= maxNameSize) {
+          longestName = n.name.value.length;
+        } else {
+          longestName = maxNameSize;
+          return true;
+        }
       }
     });
-    longestName = Math.min(longestName, maxNameSize);
     if (longestName > minNameSize) {
       this.root.traverse((n) => {
         n.name.size = longestName;
