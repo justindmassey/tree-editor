@@ -79,7 +79,7 @@ class Tree {
       if (permMark[name]) return false;
       if (tempMark[name]) {
         cyclePath = stack.concat(name);
-        return true;
+        return name;
       }
       tempMark[name] = true;
       stack.push(name);
@@ -88,7 +88,8 @@ class Tree {
       if (deps) {
         for (let dep of deps) {
           if (typedefDeps[dep]) {
-            if (visit(dep, stack)) return true;
+            let t;
+            if ((t = visit(dep, stack))) return t;
           }
         }
       }
@@ -99,14 +100,17 @@ class Tree {
     };
 
     for (let name in typedefDeps) {
-      if (visit(name, [])) {
+      let t;
+      if ((t = visit(name, []))) {
         alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
         if ("value" in document.activeElement) {
-          let t = cyclePath[cyclePath.length - 1];
+          let prevName = document.activeElement.value;
           document.activeElement.value = document.activeElement.value
             .replace(new RegExp("(?<!\\\\)" + regex("." + t), "g"), "")
             .replace(new RegExp("(?<!:|\\\\)" + regex(":" + t), "g"), "");
-          this.updateTypes();
+          if (prevName != document.activeElement.value) {
+            this.updateTypes();
+          }
         }
         return;
       }
