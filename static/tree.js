@@ -101,6 +101,13 @@ class Tree {
     for (let name in typedefDeps) {
       if (visit(name, [])) {
         alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
+        if ("value" in document.activeElement) {
+          let t = cyclePath[cyclePath.length - 1];
+          document.activeElement.value = document.activeElement.value
+            .replace("." + t, "")
+            .replace(":" + t, "");
+          this.updateTypes();
+        }
         return;
       }
     }
