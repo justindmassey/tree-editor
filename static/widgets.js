@@ -67,8 +67,7 @@ export default {
         list.appendChild(
           span(child.nameText).e("click", (ev) => ctrlClick(child, ev))
         );
-        lastComma = span(", ");
-        list.appendChild(lastComma);
+        list.appendChild((lastComma = span(", ")));
       }
       if (lastComma) {
         lastComma.remove();
