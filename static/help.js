@@ -75,6 +75,8 @@ class Help {
 
       h2("JSON Export"),
       div("Nodes and attributes become JSON properties."),
+      div("If node and attribute names form array indexes (0,1,2 ... n-1)"),
+      div("the node is exported as an array."),
       div("Duplicate names override the last."),
 
       h2("XML Export"),
