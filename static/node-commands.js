@@ -353,6 +353,25 @@ export default {
       this.traverse((n) => n.collapse());
     },
   },
+  "Alt+i": {
+    description: "siblings to array (for JSON export)",
+    action() {
+      if (this.parent) {
+        let text = exportToText(this.parent);
+        for (let i = 0; i < this.parent.children.children.length; i++) {
+          let child = this.parent.children.children[i].node;
+          if (child.isAttribute) {
+            child.name.value = i + child._isAttribute[2];
+          } else {
+            child.name.value = i;
+          }
+        }
+        if (exportToText(this.parent) != text) {
+          history.add();
+        }
+      }
+    },
+  },
   "Control+g": {
     description: "clear the current prefix command",
     action() {},
