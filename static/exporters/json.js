@@ -8,7 +8,6 @@ function isArray(node) {
         }
       } else {
         if (child.name.value != i) {
-          console.log(child.name.value, i);
           return false;
         }
       }
