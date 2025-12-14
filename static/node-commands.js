@@ -361,7 +361,7 @@ export default {
         for (let i = 0; i < this.parent.children.children.length; i++) {
           let child = this.parent.children.children[i].node;
           if (child.isAttribute) {
-            child.name.value = i + child._isAttribute[2];
+            child.name.value = i + "=" + child._isAttribute[2];
           } else {
             child.name.value = i;
           }
