@@ -116,24 +116,7 @@ export default {
       }
     },
   },
-  "Alt+f": {
-    description: "flatten node",
-    action() {
-      let text = exportToText(this);
-      let nodes = [];
-      for (let child of this.children.children) {
-        child.node.traverse((n) => {
-          nodes.push(n);
-        });
-      }
-      for (let n of nodes) {
-        this.appendChild(n, false);
-      }
-      if (text != exportToText(this)) {
-        history.add();
-      }
-    },
-  },
+
   "Control+ArrowUp": {
     description: "roll siblings up",
     action() {
