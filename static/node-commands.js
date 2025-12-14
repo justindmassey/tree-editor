@@ -74,7 +74,7 @@ export default {
       }
     },
   },
-  "Shift+ArrowUp, Alt+Shift+P": {
+  "Alt+ArrowUp, Alt+Shift+P": {
     description: "move this node up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
@@ -84,7 +84,7 @@ export default {
       }
     },
   },
-  "Shift+ArrowDown, Alt+Shift+N": {
+  "Alt+ArrowDown, Alt+Shift+N": {
     description: "move this node down",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
@@ -98,7 +98,7 @@ export default {
       }
     },
   },
-  "Control+Shift+ArrowLeft": {
+  "Alt+ArrowLeft": {
     description: "promote node",
     action() {
       if (this.parent && this.parent.parent) {
@@ -107,7 +107,7 @@ export default {
       }
     },
   },
-  "Control+Shift+ArrowRight": {
+  "Alt+ArrowRight": {
     description: "demote node",
     action() {
       if (this.elem.previousSibling) {
