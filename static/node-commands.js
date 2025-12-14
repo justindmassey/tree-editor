@@ -98,6 +98,24 @@ export default {
       }
     },
   },
+  "Control+Shift+ArrowLeft": {
+    description: "promote node",
+    action() {
+      if (this.parent && this.parent.parent) {
+        this.parent.insertAfter(this);
+        history.add();
+      }
+    },
+  },
+  "Control+Shift+ArrowRight": {
+    description: "demote node",
+    action() {
+      if (this.elem.previousSibling) {
+        this.elem.previousSibling.node.appendChild(this);
+        history.add();
+      }
+    },
+  },
   "Control+ArrowUp": {
     description: "roll siblings up",
     action() {
