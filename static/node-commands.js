@@ -102,9 +102,6 @@ export default {
     description: "promote node",
     action() {
       if (this.parent && this.parent.parent) {
-        while (this.elem.nextSibling) {
-          this.appendChild(this.elem.nextSibling.node, false);
-        }
         this.parent.insertAfter(this);
         history.add();
       }
@@ -115,9 +112,6 @@ export default {
     action() {
       if (this.elem.previousSibling) {
         this.elem.previousSibling.node.appendChild(this);
-        while (this.children.firstChild) {
-          this.insertAfter(this.children.firstChild.node, false);
-        }
         history.add();
       }
     },
