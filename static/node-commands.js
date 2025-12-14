@@ -318,14 +318,14 @@ export default {
     description: "sort siblings",
     action() {
       if (this.parent) {
-        let curText = exportToText(this.parent);
+        let text = exportToText(this.parent);
         this.parent.children.replaceChildren(
           ...Array.from(this.parent.children.children).sort((a, b) => {
             return a.node.name.value > b.node.name.value ? 1 : -1;
           })
         );
         this.focus();
-        if (curText != exportToText(this.parent)) {
+        if (text != exportToText(this.parent)) {
           history.add();
         }
       }
