@@ -127,7 +127,7 @@ export default {
         });
       }
       for (let n of nodes) {
-        this.appendChild(n);
+        this.appendChild(n, false);
       }
       if (text != exportToText(this)) {
         history.add();
