@@ -19,7 +19,7 @@
 }
 
 .tab:hover {
-  background: #ddd;
+  background: rgba(0,0,0, 0.133);
 }
 
 .tab:not(:last-child) {

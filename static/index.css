@@ -2,9 +2,9 @@
 
 html {
   --bg: white;
-  --color-1: #666;
-  --color-2: #999;
-  --color-3: #eee;
+  --color-1: rgba(0,0,0, 0.6);
+  --color-2: rgba(0,0,0, 0.4);
+  --color-3: rgba(0,0,0, 0.067);
 }
 
 body {

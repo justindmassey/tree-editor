@@ -14,7 +14,7 @@ export default class Node {
   static typedefRegEx = /^::([^:\.]+)/;
 
   constructor(name = "", ...children) {
-    this.toggleButton = div("▶")
+    this.toggleButton = div("▼")
       .c("button", "toggle-button")
       .e("click", () => this.toggle());
     this.name = input()
