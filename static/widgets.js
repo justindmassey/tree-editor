@@ -215,6 +215,7 @@ export default {
       let tabClicked = {};
       for (let child of this.childNodes) {
         tabs[child.nameText] = child.childrenWidget;
+        tabClicked[child.nameText] = (ev) => ctrlClick(child, ev);
       }
       let tabsObj = new Tabs(
         tabs,
