@@ -318,7 +318,6 @@ export default {
     ),
     create(arg) {
       let form = table().c("frm-form");
-      let children = this.childrenWidget;
       for (let attrNode of this.attrNodes) {
         let entry = input().e("input", () => {
           attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
@@ -332,9 +331,9 @@ export default {
         );
       }
       if (arg) {
-        return fieldset(legend(arg), form, children).c("frm");
+        return fieldset(legend(arg), form, this.childrenWidget).c("frm");
       } else {
-        return div(form, children).c("frm");
+        return div(form, this.childrenWidget).c("frm");
       }
     },
   },
