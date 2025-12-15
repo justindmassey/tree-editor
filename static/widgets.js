@@ -240,7 +240,7 @@ export default {
   "-col": {
     description: div(
       div("color"),
-      div(code("argument"), ": a CSS color name"),
+      div(code("argument"), ": a CSS color"),
       div("colors the background of children")
     ),
     create(arg) {
