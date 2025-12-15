@@ -55,7 +55,7 @@ export default class Node {
       widget = widgets["-ul"].create.bind(this)(unescape(this.name.value));
     }
     if (!widget.textContent) {
-      widget = div(" ");
+      widget = div(" ");
     }
     return widget.e("click", (ev) => ctrlClick(this, ev));
   }

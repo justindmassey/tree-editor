@@ -45,10 +45,9 @@ ul {
 }
 
 select {
-    margin: 1px;
+  margin: 1px;
 }
 
-.hl, .hl-list {
-  display: flex;
-  white-space: pre;
+.hl-list {
+  display: inline-flex;
 }

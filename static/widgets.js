@@ -23,7 +23,6 @@ import {
   h4,
   details,
   summary,
-  pre
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -77,9 +76,9 @@ export default {
         if (this._childNodes.length) {
           label.appendChild(span(": "));
         }
-        return div(label, list).c("hl");
+        return div(label, list);
       } else {
-        return div(list).c("hl");
+        return div(list);
       }
     },
   },
@@ -330,7 +329,6 @@ export default {
     description: div(
       div("details"),
       div(code("argument"), ": a summary"),
-      div(code("open"), ": if the details are shown"),
       div("children can be collapsed")
     ),
     create(arg) {
@@ -340,19 +338,6 @@ export default {
       }
       for (let child of this.childNodes) {
         det.appendChild(child.toWidget());
-      }
-      det.e("toggle", () => {
-        this.setAttribute("open", det.open);
-        history.add(true);
-      });
-      if ("open" in this.attributes) {
-        if (this._attributes.open == "true") {
-          det.open = true;
-        } else {
-          det.open = false;
-        }
-      } else {
-        this.setAttribute("open", "false");
       }
       return det;
     },
