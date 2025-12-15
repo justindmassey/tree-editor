@@ -46,7 +46,7 @@ export default class Node {
     }
   }
 
-  toWidget() {
+  get widget() {
     let m = this.name.value.match(Node.widgetRegEx);
     let widget;
     if (m && widgets[m[1]]) {
@@ -58,6 +58,14 @@ export default class Node {
       widget = div(" ");
     }
     return widget.e("click", (ev) => ctrlClick(this, ev));
+  }
+
+  get childrenWidget() {
+    let cw = div();
+    for (let child of this.childNodes) {
+      cw.appendChild(child.widget);
+    }
+    return cw;
   }
 
   merge(node, rename = true) {

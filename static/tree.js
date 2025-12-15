@@ -152,7 +152,7 @@ class Tree {
     ) {
       this.output.replaceChildren();
     } else {
-      this.output.replaceChildren(this.root.toWidget());
+      this.output.replaceChildren(this.root.widget);
     }
   }
 

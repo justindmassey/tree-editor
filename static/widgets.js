@@ -20,7 +20,7 @@ import {
   span,
   p,
   h3,
-  h4
+  h4,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -33,7 +33,7 @@ export default {
     create(arg) {
       let children = ul();
       for (let child of this.childNodes) {
-        children.appendChild(li(child.toWidget()));
+        children.appendChild(li(child.widget));
       }
       if (children.children.length) {
         return div(div(arg), children);
@@ -47,7 +47,7 @@ export default {
     create(arg) {
       let children = ol();
       for (let child of this.childNodes) {
-        children.appendChild(li(child.toWidget()));
+        children.appendChild(li(child.widget));
       }
       if (children.children.length) {
         return div(div(arg), children);
@@ -62,7 +62,7 @@ export default {
       let list = span().c("hl-list");
       let lastComma;
       for (let child of this.childNodes) {
-        list.appendChild(child.toWidget());
+        list.appendChild(child.widget);
         list.appendChild((lastComma = div(", ")));
       }
       if (lastComma) {
@@ -86,11 +86,7 @@ export default {
       div(code("argument"), ": the header text")
     ),
     create(arg) {
-      let children = div();
-      for (let child of this.childNodes) {
-        children.appendChild(child.toWidget());
-      }
-      return div(h1(arg), children).c("hdr");
+      return div(h1(arg), this.childrenWidget).c("hdr");
     },
   },
   "-par": {
@@ -108,7 +104,7 @@ export default {
         );
         let paragraph = p();
         for (let grandchild of child.childNodes) {
-          paragraph.appendChild(grandchild.toWidget());
+          paragraph.appendChild(grandchild.widget);
         }
         paragraphs.appendChild(paragraph);
       }
@@ -156,7 +152,7 @@ export default {
           child.setAttribute("checked", "false");
         }
         checklist.appendChild(
-          div(checkbox, div(child.toWidget()).c("cl-child"))
+          div(checkbox, div(child.widget).c("cl-child"))
             .c("cl-item")
             .e("click", (ev) => ctrlClick(child, ev))
         );
@@ -191,7 +187,7 @@ export default {
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
           if (cell) {
-            row.appendChild(td(cell.toWidget()));
+            row.appendChild(td(cell.widget));
           } else {
             row.appendChild(td());
           }
@@ -218,11 +214,7 @@ export default {
       let tabs = {};
       let tabClicked = {};
       for (let child of this.childNodes) {
-        tabs[child.nameText] = div();
-        tabClicked[child._nameText] = (ev) => ctrlClick(child, ev);
-        for (let grandchild of child.childNodes) {
-          tabs[child._nameText].appendChild(grandchild.toWidget());
-        }
+        tabs[child.nameText] = child.childrenWidget;
       }
       let tabsObj = new Tabs(
         tabs,
@@ -251,11 +243,8 @@ export default {
       div("colors the background of children")
     ),
     create(arg) {
-      let col = div().c("col");
+      let col = this.childrenWidget.c("col");
       col.style.background = arg;
-      for (let child of this.childNodes) {
-        col.appendChild(child.toWidget());
-      }
       return col;
     },
   },
@@ -300,10 +289,7 @@ export default {
       for (let child of this.childNodes) {
         opt.appendChild(option(child.nameText));
         if (child.childNodes.length) {
-          optChildren[child._nameText] = div();
-          for (let grandchild of child._childNodes) {
-            optChildren[child._nameText].appendChild(grandchild.toWidget());
-          }
+          optChildren[child._nameText] = child.childrenWidget;
         }
       }
       if ("value" in this.attributes) {
@@ -331,7 +317,7 @@ export default {
     ),
     create(arg) {
       let form = table().c("frm-form");
-      let children = div();
+      let children = this.childrenWidget;
       for (let attrNode of this.attrNodes) {
         let entry = input().e("input", () => {
           attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
@@ -343,9 +329,6 @@ export default {
             ctrlClick(attrNode, ev)
           )
         );
-      }
-      for (let child of this.childNodes) {
-        children.appendChild(child.toWidget());
       }
       if (arg) {
         return fieldset(legend(arg), form, children).c("frm");
