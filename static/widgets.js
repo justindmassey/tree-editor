@@ -248,6 +248,21 @@ export default {
       }
     },
   },
+  "-col": {
+    description: div(
+      div("color"),
+      div(code("argument"), ": a CSS color name"),
+      div("colors the background of children")
+    ),
+    create(arg) {
+      let col = div().c("col");
+      col.style.background = arg;
+      for (let child of this.childNodes) {
+        col.appendChild(child.toWidget());
+      }
+      return col;
+    },
+  },
   "-ta": {
     description: div(div("textarea"), div("children become lines of text")),
     create(arg) {
