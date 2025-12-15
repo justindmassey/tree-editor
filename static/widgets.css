@@ -47,3 +47,8 @@ ul {
 select {
     margin: 1px;
 }
+
+.hl, .hl-list {
+  display: flex;
+  white-space: pre;
+}

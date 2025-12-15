@@ -23,6 +23,7 @@ import {
   h4,
   details,
   summary,
+  pre
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -61,13 +62,11 @@ export default {
   "-hl": {
     description: div(div("horizontal list")),
     create(arg) {
-      let list = span();
+      let list = span().c("hl-list");
       let lastComma;
       for (let child of this.childNodes) {
-        list.appendChild(
-          span(child.nameText).e("click", (ev) => ctrlClick(child, ev))
-        );
-        list.appendChild((lastComma = span(", ")));
+        list.appendChild(child.toWidget());
+        list.appendChild((lastComma = div(", ")));
       }
       if (lastComma) {
         lastComma.remove();
@@ -78,9 +77,9 @@ export default {
         if (this._childNodes.length) {
           label.appendChild(span(": "));
         }
-        return div(label, list);
+        return div(label, list).c("hl");
       } else {
-        return div(list);
+        return div(list).c("hl");
       }
     },
   },
