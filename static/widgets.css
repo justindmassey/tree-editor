@@ -32,6 +32,7 @@ ul {
 
 .col {
   width: fit-content;
+  border-radius: 2px;
 }
 
 .frm > table > tr > td {
