@@ -2,12 +2,21 @@
 
 .tree {
   display: flex;
-  margin-bottom: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .tree-container {
   padding: 1em;
   padding-bottom: 0em;
+  overflow: auto;
+  min-height: 0;
+}
+
+.tree-container::after {
+  content: "";
+  display: block;
+  height: 100vh;
 }
 
 .output {
@@ -15,4 +24,14 @@
   padding: 1em;
   padding-bottom: 0em;
   white-space: pre;
+  overflow: auto;
+  min-height: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.output::after {
+  content: "";
+  display: block;
+  height: 100vh;
 }
