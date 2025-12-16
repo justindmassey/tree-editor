@@ -326,7 +326,7 @@ export default {
     },
   },
   "Alt+f": {
-    description: "collapse all except this node",
+    description: "collapse all nodes and show this one",
     action() {
       tree.root.traverse((n) => n.collapse());
       this.focus();
