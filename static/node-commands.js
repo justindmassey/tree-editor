@@ -325,6 +325,13 @@ export default {
       }
     },
   },
+  "Alt+f": {
+    description: "collapse all except this node",
+    action() {
+      tree.root.traverse((n) => n.collapse());
+      this.focus();
+    },
+  },
   "Alt+a": {
     description: "collapse all descendants with only attribute children",
     action() {
