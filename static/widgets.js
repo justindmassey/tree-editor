@@ -43,7 +43,7 @@ export default {
     },
   },
   "-ol": {
-    description: div(div("ordered list")),
+    description: "ordered list",
     create(arg) {
       let children = ol();
       for (let child of this.childNodes) {
@@ -57,7 +57,7 @@ export default {
     },
   },
   "-hl": {
-    description: div(div("horizontal list")),
+    description: "horizontal list",
     create(arg) {
       let list = span().c("hl-list");
       let lastComma;
@@ -205,9 +205,7 @@ export default {
   "-tbs": {
     description: div(
       div("tabs"),
-      div(
-        "each child name becomes a tab name and its children the tab content"
-      ),
+      div("each child name becomes a tab"),
       div(code("tab"), " holds the current tab")
     ),
     create(arg) {
