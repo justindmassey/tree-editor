@@ -25,9 +25,9 @@
   padding-bottom: 0em;
   white-space: pre;
   overflow: auto;
-  min-height: 0;
   flex: 1;
   min-width: 0;
+  min-height: 0;
 }
 
 .output::after {

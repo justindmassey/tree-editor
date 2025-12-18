@@ -28,6 +28,8 @@ class Tree {
         alert(data.error);
       } else {
         this.root = Node.deserialize(data);
+        this.tree.scrollTop = 0;
+        this.output.scrollTop = 0;
         setTimeout(() => history.add(), 0);
         localStorage.setItem("tree", name);
       }
