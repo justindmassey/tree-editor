@@ -10,8 +10,8 @@ export default {
       if (this.tree.root.remove()) {
         history.add();
       }
-      this.tree.tree.scrollTop = 0
-      this.tree.output.scrollTop = 0
+      this.tree.tree.scrollTop = 0;
+      this.tree.output.scrollTop = 0;
       localStorage.setItem("tree", this.tree.root.name.value);
     },
   },
@@ -44,6 +44,8 @@ export default {
             if (this.tree.root.remove()) {
               history.add();
             }
+            this.tree.tree.scrollTop = 0;
+            this.tree.output.scrollTop = 0;
             localStorage.setItem("tree", "");
             flash();
           }
