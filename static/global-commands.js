@@ -3,6 +3,8 @@ import { post, get } from "./lib/ajax.js";
 import treeMenu from "./tree-menu.js";
 import Node from "./node.js";
 
+let activeElement;
+
 export default {
   "Control+Alt+n": {
     description: "new tree",
@@ -120,13 +122,17 @@ export default {
   "Alt+t": {
     description: "toggle tree",
     action() {
+      if (!this.tree.tree.classList.contains("hidden")) {
+        activeElement = document.activeElement;
+      }
       this.tree.tree.classList.toggle("hidden");
       if (this.tree.tree.classList.contains("hidden")) {
-        this.tree.output.style.borderLeft = "none";
         localStorage.setItem("showTree", "");
       } else {
-        this.tree.output.style.borderLeft = "";
         localStorage.setItem("showTree", "true");
+        if (activeElement && activeElement.focus) {
+          activeElement.focus();
+        }
       }
     },
   },

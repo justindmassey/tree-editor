@@ -16,6 +16,7 @@
 .tree-container.hidden + .output {
   display: flex;
   justify-content: center;
+  border: none;
 }
 
 .tree-container::after {
