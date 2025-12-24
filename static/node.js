@@ -52,7 +52,7 @@ export default class Node {
     if (m && widgets[m[1]]) {
       widget = widgets[m[1]].create.bind(this)(unescapeArg(m[2]));
     } else {
-      let arg = unescape(this.name.value)
+      let arg = unescape(this.name.value);
       if (arg) {
         widget = div(div(arg), this.childrenWidget.c("pln-children"));
       } else {
