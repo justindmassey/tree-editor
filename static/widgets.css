@@ -1,5 +1,9 @@
 @import url("./lib/tabs.css");
 
+.pln-children > *{
+  margin-left: 4ex;
+}
+
 .cl-item {
   display: flex;
   align-items: start;

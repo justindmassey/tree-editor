@@ -28,8 +28,18 @@ import Node from "./node.js";
 import ctrlClick from "./ctrl-click.js";
 
 export default {
+  "-pln": {
+    description: div(div("plane"), div("this is the default widget")),
+    create(arg) {
+      if (arg) {
+        return div(div(arg), this.childrenWidget.c("pln-children"));
+      } else {
+        return this.childrenWidget.c("pln-children");
+      }
+    },
+  },
   "-ul": {
-    description: div(div("unordered list"), div("this is the default widget")),
+    description: "unordered list",
     create(arg) {
       let children = ul();
       for (let child of this.childNodes) {

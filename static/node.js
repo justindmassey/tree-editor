@@ -52,7 +52,7 @@ export default class Node {
     if (m && widgets[m[1]]) {
       widget = widgets[m[1]].create.bind(this)(unescapeArg(m[2]));
     } else {
-      widget = widgets["-ul"].create.bind(this)(unescape(this.name.value));
+      widget = widgets["-pln"].create.bind(this)(unescape(this.name.value));
     }
     if (!widget.textContent) {
       widget = div(" ");
