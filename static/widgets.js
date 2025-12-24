@@ -149,7 +149,7 @@ export default {
         if ("checked" in child.attributes) {
           checkbox.checked = child._attributes.checked == "true";
         } else {
-          child.setAttribute("checked", "false");
+          child.setAttribute("checked", checkbox.checked);
         }
         checklist.appendChild(
           div(checkbox, div(child.widget).c("cl-child"))
