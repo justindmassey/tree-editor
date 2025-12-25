@@ -14,7 +14,7 @@ export default {
       }
       this.tree.tree.scrollTop = 0;
       this.tree.output.scrollTop = 0;
-      localStorage.setItem("tree", this.tree.root.name.value);
+      localStorage.setItem("tree", "");
     },
   },
   "Control+s": {
