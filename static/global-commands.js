@@ -57,11 +57,15 @@ export default {
   },
   "Control+z": {
     description: "undo",
-    action: () => history.undo(),
+    action() {
+      history.undo();
+    },
   },
   "Control+y": {
     description: "redo",
-    action: () => history.redo(),
+    action() {
+      history.redo();
+    },
   },
   "Alt+r": {
     description: "focus root node",
