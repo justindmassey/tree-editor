@@ -25,7 +25,7 @@ class Tree {
   load(name) {
     get("/trees/" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
-        alert(data.error);
+        alert("Could not open tree: " + name);
       } else {
         this.root = Node.deserialize(data);
         this.tree.scrollTop = 0;
