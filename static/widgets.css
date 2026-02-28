@@ -1,6 +1,6 @@
 @import url("./lib/tabs.css");
 
-.pln-children > *{
+.pln-children > * {
   margin-left: 4ex;
 }
 
@@ -59,4 +59,9 @@ select {
 
 fieldset {
   width: fit-content;
+}
+
+button {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
