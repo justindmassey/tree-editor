@@ -21,11 +21,13 @@ import {
   p,
   h3,
   h4,
+  button,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
 import Node from "./node.js";
 import ctrlClick from "./ctrl-click.js";
+import tree from "./tree.js";
 
 export default {
   "-ul": {
@@ -83,7 +85,7 @@ export default {
   "-hdr": {
     description: div(
       div("large header with the children below"),
-      div(code("argument"), ": the header text")
+      div(code("argument"), ": the header text"),
     ),
     create(arg) {
       return div(h1(arg), this.childrenWidget).c("hdr");
@@ -94,13 +96,13 @@ export default {
       div("paragraphs"),
       div(code("argument"), ": a header"),
       div("each child becomes a header"),
-      div("grandchildren become the paragraph")
+      div("grandchildren become the paragraph"),
     ),
     create(arg) {
       let paragraphs = div();
       for (let child of this.childNodes) {
         paragraphs.appendChild(
-          h4(child.nameText).e("click", (ev) => ctrlClick(child, ev))
+          h4(child.nameText).e("click", (ev) => ctrlClick(child, ev)),
         );
         let paragraph = p();
         for (let grandchild of child.childNodes) {
@@ -115,11 +117,26 @@ export default {
       }
     },
   },
+  "-tl": {
+    description: div(
+      div("tree link"),
+      div("a link to another tree"),
+      div(code("argument"), ": the name of the tree to link to"),
+    ),
+    create(arg) {
+      return div(
+        button(arg).e("click", () => {
+          tree.load(arg);
+        }),
+        this.childrenWidget,
+      );
+    },
+  },
   "-lnk": {
     description: div(
       div("link"),
       div(code("argument"), ": the link text"),
-      div(code("url"), ": The URL the link opens")
+      div(code("url"), ": The URL the link opens"),
     ),
     create(arg) {
       let link = a(arg).a("target", "_blank");
@@ -135,7 +152,7 @@ export default {
     description: div(
       div("checklist"),
       div("turns each child into a checklist item"),
-      div("items have the attribute ", code("checked"))
+      div("items have the attribute ", code("checked")),
     ),
     create(arg) {
       let checklist = div();
@@ -154,7 +171,7 @@ export default {
         checklist.appendChild(
           div(checkbox, div(child.widget).c("cl-child"))
             .c("cl-item")
-            .e("click", (ev) => ctrlClick(child, ev))
+            .e("click", (ev) => ctrlClick(child, ev)),
         );
       }
       if (arg) {
@@ -167,7 +184,7 @@ export default {
   "-tbl": {
     description: div(
       div("table"),
-      div("each child's name is a table header and its children the column")
+      div("each child's name is a table header and its children the column"),
     ),
     create(arg) {
       let header = tr();
@@ -176,7 +193,7 @@ export default {
 
       for (let child of this.childNodes) {
         header.appendChild(
-          td(child.nameText).e("click", (ev) => ctrlClick(child, ev))
+          td(child.nameText).e("click", (ev) => ctrlClick(child, ev)),
         );
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
@@ -206,7 +223,7 @@ export default {
     description: div(
       div("tabs"),
       div("each child name becomes a tab"),
-      div(code("tab"), " holds the current tab")
+      div(code("tab"), " holds the current tab"),
     ),
     create(arg) {
       let tabs = {};
@@ -221,7 +238,7 @@ export default {
           this.setAttribute("tab", tab);
           history.add(true);
         },
-        tabClicked
+        tabClicked,
       );
       if ("tab" in this.attributes && tabs[this._attributes.tab]) {
         tabsObj.tab = this._attributes.tab;
@@ -239,7 +256,7 @@ export default {
     description: div(
       div("color"),
       div(code("argument"), ": a CSS color"),
-      div("colors the background of children")
+      div("colors the background of children"),
     ),
     create(arg) {
       let col = this.childrenWidget.c("col");
@@ -277,7 +294,7 @@ export default {
       div("option"),
       div(code("value"), ": the selected option"),
       div("children become options"),
-      div("children of the selected option are rendered below")
+      div("children of the selected option are rendered below"),
     ),
     create(arg) {
       let opt = select().e("change", () => {
@@ -312,7 +329,7 @@ export default {
     description: div(
       div("form"),
       div("attributes become form fields"),
-      div("non-attribute children are rendered below")
+      div("non-attribute children are rendered below"),
     ),
     create(arg) {
       let form = table().c("frm-form");
@@ -324,8 +341,8 @@ export default {
         entry.value = attrNode._isAttribute[2];
         form.appendChild(
           tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
-            ctrlClick(attrNode, ev)
-          )
+            ctrlClick(attrNode, ev),
+          ),
         );
       }
       if (arg) {
