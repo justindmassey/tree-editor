@@ -128,7 +128,7 @@ export default {
         button(arg).e("click", () => {
           tree.load(arg);
         }),
-        this.childrenWidget,
+        this.childrenWidget.c("pln-children"),
       );
     },
   },
