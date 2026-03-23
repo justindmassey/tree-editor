@@ -136,14 +136,14 @@ export default {
     description: div(
       div("link"),
       div(code("argument"), ": the link text"),
-      div(code("url"), ": The URL the link opens"),
+      div(code("$url"), ": The URL the link opens"),
     ),
     create(arg) {
       let link = a(arg).a("target", "_blank");
-      if ("url" in this.attributes) {
-        link.href = this._attributes.url;
+      if ("$url" in this.attributes) {
+        link.href = this._attributes.$url;
       } else {
-        this.setAttribute("url");
+        this.setAttribute("$url");
       }
       return div(link);
     },
@@ -152,7 +152,7 @@ export default {
     description: div(
       div("checklist"),
       div("turns each child into a checklist item"),
-      div("items have the attribute ", code("checked")),
+      div("items have the attribute ", code("$checked")),
     ),
     create(arg) {
       let checklist = div();
@@ -160,13 +160,13 @@ export default {
         let checkbox = input()
           .a("type", "checkbox")
           .e("change", () => {
-            child.setAttribute("checked", checkbox.checked);
+            child.setAttribute("$checked", checkbox.checked);
             history.add(true);
           });
-        if ("checked" in child.attributes) {
-          checkbox.checked = child._attributes.checked == "true";
+        if ("$checked" in child.attributes) {
+          checkbox.checked = child._attributes.$checked == "true";
         } else {
-          child.setAttribute("checked", checkbox.checked);
+          child.setAttribute("$checked", checkbox.checked);
         }
         checklist.appendChild(
           div(checkbox, div(child.widget).c("cl-child"))
@@ -235,15 +235,15 @@ export default {
       let tabsObj = new Tabs(
         tabs,
         (tab) => {
-          this.setAttribute("tab", tab);
+          this.setAttribute("$tab", tab);
           history.add(true);
         },
         tabClicked,
       );
-      if ("tab" in this.attributes && tabs[this._attributes.tab]) {
-        tabsObj.tab = this._attributes.tab;
+      if ("$tab" in this.attributes && tabs[this._attributes.$tab]) {
+        tabsObj.tab = this._attributes.$tab;
       } else {
-        this.setAttribute("tab", tabsObj.tab);
+        this.setAttribute("$tab", tabsObj.tab);
       }
       if (arg) {
         return div(div(arg), tabsObj.elem);
@@ -292,13 +292,13 @@ export default {
   "-opt": {
     description: div(
       div("option"),
-      div(code("value"), ": the selected option"),
+      div(code("$value"), ": the selected option"),
       div("children become options"),
       div("children of the selected option are rendered below"),
     ),
     create(arg) {
       let opt = select().e("change", () => {
-        this.setAttribute("value", opt.value);
+        this.setAttribute("$value", opt.value);
         history.add();
       });
       let optChildren = {};
@@ -308,10 +308,10 @@ export default {
           optChildren[child._nameText] = child.childrenWidget;
         }
       }
-      if ("value" in this.attributes) {
-        opt.value = this._attributes.value;
+      if ("$value" in this.attributes) {
+        opt.value = this._attributes.$value;
       } else {
-        this.setAttribute("value", opt.value);
+        this.setAttribute("$value", opt.value);
       }
       let elem;
       if (arg) {
@@ -329,21 +329,24 @@ export default {
     description: div(
       div("form"),
       div("attributes become form fields"),
+      div("attributes that start width ", code("$"), " are ignored"),
       div("non-attribute children are rendered below"),
     ),
     create(arg) {
       let form = table().c("frm-form");
       for (let attrNode of this.attrNodes) {
-        let entry = input().e("input", () => {
-          attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
-          history.add(true);
-        });
-        entry.value = attrNode._isAttribute[2];
-        form.appendChild(
-          tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
-            ctrlClick(attrNode, ev),
-          ),
-        );
+        if (!attrNode._isAttribute[1].startsWith("$")) {
+          let entry = input().e("input", () => {
+            attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
+            history.add(true);
+          });
+          entry.value = attrNode._isAttribute[2];
+          form.appendChild(
+            tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
+              ctrlClick(attrNode, ev),
+            ),
+          );
+        }
       }
       if (arg) {
         return fieldset(legend(arg), form, this.childrenWidget).c("frm");
