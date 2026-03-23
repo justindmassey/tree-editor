@@ -329,7 +329,7 @@ export default {
     description: div(
       div("form"),
       div("attributes become form fields"),
-      div("attributes that start width ", code("$"), " are ignored"),
+      div("attributes that start with ", code("$"), " are ignored"),
       div("non-attribute children are rendered below"),
     ),
     create(arg) {
