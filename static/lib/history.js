@@ -7,13 +7,13 @@ export default class History {
   }
 
   add(skipOnChange) {
+    if (this.onchange && !skipOnChange) {
+      this.onchange(this);
+    }
     this.index++;
     this.history = this.history.slice(-this.maxLength, this.index);
     this.index = Math.min(this.index, this.maxLength);
     this.history.push(this.serialize());
-    if (this.onchange && !skipOnChange) {
-      this.onchange(this);
-    }
   }
 
   undo() {

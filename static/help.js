@@ -67,8 +67,7 @@ class Help {
       div("Type definitions can inherit from other type definitions."),
       div("Types are updated in real time."),
       div("Type definitions are not rendered to the output."),
-      div("Removing a type does not remove inherited nodes."),
-
+   
       h2("Text Export"),
       div("Nodes are structured with indentation."),
       div("Text export is the only lossless one."),

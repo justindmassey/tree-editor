@@ -49,6 +49,34 @@ class Tree {
   updateTypes() {
     let typedefs = {};
     let typedefDeps = {};
+    let getTypeClosure = (typeName, result = new Set()) => {
+      if (result.has(typeName)) return result;
+      result.add(typeName);
+      let deps = typedefDeps[typeName];
+      if (deps) {
+        for (let dep of deps) {
+          if (typedefs[dep]) {
+            getTypeClosure(dep, result);
+          }
+        }
+      }
+      return result;
+    };
+    let removeTypeApplication = (node, typeName) => {
+      let ownerTypes = getTypeClosure(typeName);
+
+      node.traverse((n) => {
+        for (let child of [...n.children.children]) {
+          if (
+            ownerTypes.has(child.node.sourceOwner) &&
+            child.node.sourceType &&
+            child.node.equals(child.node.sourceType)
+          ) {
+            child.node.remove(false);
+          }
+        }
+      });
+    };
     typedefMenu.clearItems();
     this.root.traverse((n) => {
       let m = n.name.value.match(Node.typedefRegEx);
@@ -121,22 +149,44 @@ class Tree {
     if (Object.keys(typedefs).length) {
       this.root.traverse((n) => {
         if (!n.isAttribute) {
-          let nodeTypes = n.name.value.match(Node.nodeTypeRegEx);
+          let nodeTypes = n.name.value.match(Node.nodeTypeRegEx) || [];
+          let nodeTypeNames = nodeTypes.map((t) => t.slice(1));
+          let prevNodeTypeNames = n.appliedNodeTypes || [];
+          for (let t of prevNodeTypeNames) {
+            if (!nodeTypeNames.includes(t)) {
+              removeTypeApplication(n, t);
+            }
+          }
+          n.appliedNodeTypes = [...nodeTypeNames];
           if (nodeTypes) {
             for (let i = nodeTypes.length - 1; i >= 0; i--) {
               let t = nodeTypes[i].slice(1);
               if (typedefs[t]) {
-                n.merge(typedefs[t]);
+                typedefs[t].widget;
+                n.merge(typedefs[t], true, true, t);
               }
             }
           }
-          let listTypes = n.name.value.match(Node.listTypeRegEx);
+          let listTypes = n.name.value.match(Node.listTypeRegEx) || [];
+          let listTypeNames = listTypes.map((t) => t.slice(1));
+          let prevListTypeNames = n.appliedListTypes || [];
+
+          for (let t of prevListTypeNames) {
+            if (!listTypeNames.includes(t)) {
+              for (let child of n.nonAttrChildren) {
+                removeTypeApplication(child, t);
+              }
+            }
+          }
+
+          n.appliedListTypes = [...listTypeNames];
           if (listTypes) {
             for (let i = listTypes.length - 1; i >= 0; i--) {
               let t = listTypes[i].slice(1);
               if (typedefs[t]) {
                 for (let child of n.nonAttrChildren) {
-                  child.merge(typedefs[t]);
+                  typedefs[t].widget;
+                  child.merge(typedefs[t], true, true, t);
                 }
               }
             }

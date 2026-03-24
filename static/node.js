@@ -38,7 +38,7 @@ export default class Node {
       this.toggleButton,
       this.name,
       this.removeButton,
-      this.children
+      this.children,
     ).c("node");
     this.elem.node = this;
     for (let child of children) {
@@ -73,9 +73,22 @@ export default class Node {
     return cw;
   }
 
-  merge(node, rename = true) {
+  merge(node, rename = true, isTypeApplication = false, typeName = null) {
     let activeElement = document.activeElement;
     let n = node.copy();
+
+    if (isTypeApplication) {
+      for (let child of [...this.children.children]) {
+        if (
+          child.node.sourceOwner == typeName &&
+          child.node.sourceType &&
+          child.node.equals(child.node.sourceType)
+        ) {
+          child.node.remove(false);
+        }
+      }
+    }
+
     let children = Array.from(n.children.children);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
@@ -100,6 +113,11 @@ export default class Node {
         }
 
         let attrNode = this.getAttrNode(m[1]);
+        if (isTypeApplication) {
+          attrNode.sourceType = child.node.copy();
+          attrNode.sourceOwner = typeName;
+        }
+
         if (document.activeElement != attrNode.name) {
           attrNode.lastName = child.node.lastName;
           attrNode.lastAttrName = child.node.lastAttrName;
@@ -107,6 +125,10 @@ export default class Node {
         moveElementToIndex(attrNode.elem, i);
       } else {
         if (!this.getChild(child.node.name.value)) {
+          if (isTypeApplication) {
+            child.node.sourceType = child.node.copy();
+            child.node.sourceOwner = typeName;
+          }
           if (prevNode) {
             if (
               prevNode.isAttribute &&
@@ -132,7 +154,7 @@ export default class Node {
     for (let child1 of this.children.children) {
       for (let child2 of n.children.children) {
         if (child1.node.name.value == child2.node.name.value) {
-          child1.node.merge(child2.node, rename);
+          child1.node.merge(child2.node, rename, isTypeApplication, typeName);
         }
       }
     }
@@ -259,10 +281,29 @@ export default class Node {
     let n = new Node(this.name.value);
     n.lastName = this.lastName;
     n.lastAttrName = this.lastAttrName;
+    n.sourceType = this.sourceType;
+    n.sourceOwner = this.sourceOwner;
     for (let child of this.children.children) {
       n.appendChild(child.node.copy());
     }
     return n;
+  }
+
+  equals(node) {
+    if (this.name.value != node.name.value) {
+      return false;
+    }
+    if (this.children.children.length != node.children.children.length) {
+      return false;
+    }
+    for (let i = 0; i < this.children.children.length; i++) {
+      if (
+        !this.children.children[i].node.equals(node.children.children[i].node)
+      ) {
+        return false;
+      }
+    }
+    return true;
   }
 
   getChild(name) {
@@ -287,6 +328,10 @@ export default class Node {
       name: this.name.value,
       collapsed: this.collapsed,
       children: [],
+      sourceOwner: this.sourceOwner,
+      sourceType: this.sourceType ? this.sourceType.serialize() : null,
+      appliedNodeTypes: this.appliedNodeTypes || null,
+      appliedListTypes: this.appliedListTypes || null,
     };
     if (this.name == document.activeElement) {
       node.selectionStart = this.name.selectionStart;
@@ -300,6 +345,10 @@ export default class Node {
 
   static deserialize(node) {
     let n = new Node(node.name);
+    if (node.sourceOwner != undefined) n.sourceOwner = node.sourceOwner;
+    if (node.sourceType) n.sourceType = Node.deserialize(node.sourceType);
+    if (node.appliedNodeTypes) n.appliedNodeTypes = node.appliedNodeTypes;
+    if (node.appliedListTypes) n.appliedListTypes = node.appliedListTypes;
     if (node.collapsed) {
       n.collapse();
     }
