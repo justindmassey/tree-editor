@@ -124,7 +124,8 @@ export default class Node {
         }
         moveElementToIndex(attrNode.elem, i);
       } else {
-        if (!this.getChild(child.node.name.value)) {
+        let existing = this.getChild(child.node.name.value);
+        if (!existing) {
           if (isTypeApplication) {
             child.node.sourceType = child.node.copy();
             child.node.sourceOwner = typeName;
@@ -143,6 +144,9 @@ export default class Node {
             child.node.merge(prevNode, false);
           }
           this.appendChild(child.node, false);
+        } else if (isTypeApplication) {
+          existing.sourceType = child.node.copy();
+          existing.sourceOwner = typeName;
         }
         let mergedChild = this.getChild(child.node.name.value);
         if (document.activeElement != mergedChild.name) {
