@@ -56,10 +56,10 @@ class Help {
       div("Attribute values need no escaping."),
 
       h2("Attribute Substitution"),
-      div("If a non-attribute node name contains ", code("@ATTRIBUTE_NAME")),
+      div("If a non-attribute node name contains ", code(";ATTRIBUTE_NAME;")),
       div(
         "then ",
-        code("@ATTRIBUTE_NAME"),
+        code(";ATTRIBUTE_NAME;"),
         " is replaced with that attribute's value.",
       ),
       div("Attribute search starts at the parent and moves upward."),

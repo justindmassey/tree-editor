@@ -458,7 +458,8 @@ export default class Node {
     }
   }
 
-  attributeSubstitution(str) {
+  attributeSubstitution(str, depth = 0) {
+    let result = str;
     let attributes = {};
     let curNode = this;
     while (curNode) {
@@ -470,9 +471,13 @@ export default class Node {
       curNode = curNode.parent;
     }
     for (let attr in attributes) {
-      str = str.replaceAll("@" + attr, attributes[attr]);
+      result = result.replaceAll(";" + attr + ";", attributes[attr]);
     }
-    return str;
+    if (result != str && depth < 1000) {
+      return this.attributeSubstitution(result, depth + 1);
+    } else {
+      return result;
+    }
   }
 }
 
