@@ -473,7 +473,7 @@ export default class Node {
     for (let attr in attributes) {
       result = result.replaceAll(";" + attr + ";", attributes[attr]);
     }
-    if (result != str && depth < 1000) {
+    if (result != str && depth < 100) {
       return this.attributeSubstitution(result, depth + 1);
     } else {
       return result;
