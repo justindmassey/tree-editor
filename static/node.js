@@ -459,6 +459,9 @@ export default class Node {
   }
 
   attributeSubstitution(str, depth = 0) {
+    if (!str.includes(";")) {
+      return str;
+    }
     let result = str;
     let attributes = {};
     let curNode = this;
