@@ -38,10 +38,10 @@ class Help {
             'The hash symbol and the dash ("',
             code("-"),
             '") at the beginning of a node name',
-            div("can be escaped with a backslash.")
-          )
+            div("can be escaped with a backslash."),
+          ),
         ),
-        div("The argument is a label unless stated otherwise.")
+        div("The argument is a label unless stated otherwise."),
       ),
       makeReference(widgets),
 
@@ -51,9 +51,18 @@ class Help {
         'Equals symbols ("',
         code("="),
         '") ',
-        "can be escaped with a backslash."
+        "can be escaped with a backslash.",
       ),
       div("Attribute values need no escaping."),
+
+      h2("Attribute Substitution"),
+      div("If a non-attribute node name contains ", code("@ATTRIBUTE_NAME")),
+      div(
+        "then ",
+        code("@ATTRIBUTE_NAME"),
+        " is replaced with that attribute's value.",
+      ),
+      div("Attribute search starts at the parent and moves upward."),
 
       h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),
@@ -67,7 +76,7 @@ class Help {
       div("Type definitions can inherit from other type definitions."),
       div("Types are updated in real time."),
       div("Type definitions are not rendered to the output."),
-   
+
       h2("Text Export"),
       div("Nodes are structured with indentation."),
       div("Text export is the only lossless one."),
@@ -82,7 +91,7 @@ class Help {
       div("Nodes with children become tags."),
       div("Attribute nodes become attributes."),
       div("Nodes without children become lines of text."),
-      div("Children of attribute nodes are ignored.")
+      div("Children of attribute nodes are ignored."),
     ).c("help", "hidden");
   }
 }

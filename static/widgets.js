@@ -29,6 +29,9 @@ import Node from "./node.js";
 import ctrlClick from "./ctrl-click.js";
 import tree from "./tree.js";
 
+let editedAttrNode;
+let editedAttrNodeSelectionStart;
+let editedAttrNodeSelectionEnd;
 export default {
   "-ul": {
     description: "unordered list",
@@ -336,16 +339,29 @@ export default {
       let form = table().c("frm-form");
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          let entry = input().e("input", () => {
-            attrNode.name.value = attrNode._isAttribute[1] + "=" + entry.value;
-            history.add(true);
-          });
+          let entry = input()
+            .e("input", () => {
+              editedAttrNode = attrNode;
+              editedAttrNodeSelectionStart = entry.selectionStart;
+              editedAttrNodeSelectionEnd = entry.selectionEnd;
+              attrNode.name.value =
+                attrNode._isAttribute[1] + "=" + entry.value;
+              history.add();
+            })
+            .e("blur", () => (editedAttrNode = null));
           entry.value = attrNode._isAttribute[2];
           form.appendChild(
             tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
               ctrlClick(attrNode, ev),
             ),
           );
+          if (attrNode == editedAttrNode) {
+            setTimeout(() => {
+              entry.focus();
+              entry.selectionStart = editedAttrNodeSelectionStart;
+              entry.selectionEnd = editedAttrNodeSelectionEnd;
+            }, 0);
+          }
         }
       }
       if (arg) {

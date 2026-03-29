@@ -50,9 +50,11 @@ export default class Node {
     let m = this.name.value.match(Node.widgetRegEx);
     let widget;
     if (m && widgets[m[1]]) {
-      widget = widgets[m[1]].create.bind(this)(unescapeArg(m[2]));
+      widget = widgets[m[1]].create.bind(this)(
+        unescapeArg(this.attributeSubstitution(m[2])),
+      );
     } else {
-      let arg = unescape(this.name.value);
+      let arg = unescape(this.attributeSubstitution(this.name.value));
       if (arg) {
         widget = div(div(arg), this.childrenWidget.c("pln-children"));
       } else {
@@ -261,7 +263,7 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = unescape(this.name.value);
+    this._nameText = unescape(this.attributeSubstitution(this.name.value));
     return this._nameText;
   }
 
@@ -454,6 +456,23 @@ export default class Node {
     } else {
       this.collapse();
     }
+  }
+
+  attributeSubstitution(str) {
+    let attributes = {};
+    let curNode = this;
+    while (curNode) {
+      for (let attrNode of curNode.attrNodes) {
+        if (!(attrNode._isAttribute[1] in attributes)) {
+          attributes[attrNode._isAttribute[1]] = attrNode._isAttribute[2];
+        }
+      }
+      curNode = curNode.parent;
+    }
+    for (let attr in attributes) {
+      str = str.replaceAll("@" + attr, attributes[attr]);
+    }
+    return str;
   }
 }
 
