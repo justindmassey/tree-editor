@@ -265,6 +265,8 @@ export default {
       div(code("$url"), ": the url of the image"),
       div(code("$width"), ": the width in pixels"),
       div(code("$height"), ": the height in pixels"),
+      div("You can save images in ", code("tree-editor/static")),
+      div("and then use relative URLs.")
     ),
     create(arg) {
       let image = img();
