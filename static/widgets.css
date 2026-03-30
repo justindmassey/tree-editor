@@ -18,6 +18,15 @@ thead {
   font-weight: bold;
 }
 
+.col {
+  width: fit-content;
+  display: flex;
+  gap: 1em;
+}
+.col-header {
+  font-weight: bold;
+}
+
 .tbl,
 .tabs,
 .frm,
@@ -34,7 +43,7 @@ ul {
   list-style-type: disc;
 }
 
-.col {
+.bg {
   width: fit-content;
   border-radius: 2px;
 }

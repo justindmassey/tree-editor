@@ -23,8 +23,6 @@ import {
   h4,
   button,
   img,
-  figure,
-  figcaption,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -120,6 +118,16 @@ export default {
         return div(h3(arg), paragraphs);
       } else {
         return paragraphs;
+      }
+    },
+  },
+  "-col": {
+    description: div(div("columns"), div("renders children as columns")),
+    create(arg) {
+      if (arg) {
+        return div(div(arg).c("col-header"), this.childrenWidget.c("col"));
+      } else {
+        return this.childrenWidget.c("col");
       }
     },
   },
@@ -266,7 +274,7 @@ export default {
       div(code("$width"), ": the width in pixels"),
       div(code("$height"), ": the height in pixels"),
       div("You can save images in ", code("tree-editor/static")),
-      div("and then use relative URLs.")
+      div("and then use relative URLs."),
     ),
     create(arg) {
       let image = img();
@@ -282,22 +290,25 @@ export default {
         image.height = this._attributes.$height;
       }
       if (arg) {
-        return figure(image, figcaption(arg));
+        return div(image, div(arg));
       } else {
-        return figure(image, " ");
+        return div(image, " ");
       }
     },
   },
-  "-col": {
+  "-bg": {
     description: div(
-      div("color"),
+      div("background"),
       div(code("argument"), ": a CSS color"),
       div("colors the background of children"),
     ),
     create(arg) {
-      let col = this.childrenWidget.c("col");
-      col.style.background = arg;
-      return col;
+      let bg = this.childrenWidget.c("bg");
+      if (arg) {
+        bg.style.background = arg;
+        bg.style.outline = "1px solid " + arg;
+      }
+      return bg;
     },
   },
   "-ta": {
