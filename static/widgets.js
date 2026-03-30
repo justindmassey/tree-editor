@@ -22,6 +22,9 @@ import {
   h3,
   h4,
   button,
+  img,
+  figure,
+  figcaption,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -226,7 +229,7 @@ export default {
     description: div(
       div("tabs"),
       div("each child name becomes a tab"),
-      div(code("tab"), " holds the current tab"),
+      div(code("$tab"), " holds the current tab"),
     ),
     create(arg) {
       let tabs = {};
@@ -252,6 +255,34 @@ export default {
         return div(div(arg), tabsObj.elem);
       } else {
         return tabsObj.elem;
+      }
+    },
+  },
+  "-img": {
+    description: div(
+      div("image"),
+      div(code("argument"), ": image caption"),
+      div(code("$url"), ": the url of the image"),
+      div(code("$width"), ": the width in pixels"),
+      div(code("$height"), ": the height in pixels"),
+    ),
+    create(arg) {
+      let image = img();
+      if ("$url" in this.attributes) {
+        image.src = this._attributes.$url;
+      } else {
+        this.setAttribute("$url");
+      }
+      if (this._attributes.$width) {
+        image.width = this._attributes.$width;
+      }
+      if (this._attributes.$height) {
+        image.height = this._attributes.$height;
+      }
+      if (arg) {
+        return figure(image, figcaption(arg));
+      } else {
+        return figure(image, " ");
       }
     },
   },
