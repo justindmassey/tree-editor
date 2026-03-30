@@ -56,13 +56,16 @@ class Help {
       div("Attribute values need no escaping."),
 
       h2("Attribute Substitution"),
-      div("If a non-attribute node name contains ", code(";ATTRIBUTE_NAME;")),
       div(
-        "then ",
+        "If a non-attribute node name or attribute value contains ",
+        code(";ATTRIBUTE_NAME;"),
+      ),
+      div(
+        " then ",
         code(";ATTRIBUTE_NAME;"),
         " is replaced with that attribute's value.",
       ),
-      div("Attribute search starts at the parent and moves upward."),
+      div("Attribute lookup starts at the parent and moves upward."),
 
       h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),

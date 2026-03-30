@@ -110,7 +110,7 @@ export default class Node {
             this.setAttribute(m[1], lastAttrNode.isAttribute[2], false, false);
           }
         }
-        if (!(unescape(m[1]) in this.attributes)) {
+        if (!this.getAttrNode(m[1])) {
           this.setAttribute(m[1], m[2], false, false);
         }
 
@@ -215,7 +215,7 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        this._attributes[unescape(m[1])] = m[2];
+        this._attributes[unescape(m[1])] = this.attributeSubstitution(m[2]);
       }
     }
     return this._attributes;
