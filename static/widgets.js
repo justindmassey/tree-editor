@@ -371,11 +371,19 @@ export default {
   },
   "-frm": {
     description: div(
-      div("form"),
-      div("attributes become form fields"),
-      div("attributes that start with ", code("$"), " are ignored"),
-      div("non-attribute children are rendered below"),
-    ),
+  div("form"),
+  div("attributes become form fields"),
+  div(code("$type"), " on an attribute node sets the input type (number, date, checkbox)"),
+  div(
+    code("$min"),
+    ", ",
+    code("$max"),
+    ", ",
+    code("$step"),
+    " on a number attribute node set number input options",
+  ),
+  div("non-attribute children are rendered below"),
+),
     create(arg) {
       let form = table().c("frm-form");
       let children = div(this.childrenWidget);
@@ -383,14 +391,43 @@ export default {
         if (!attrNode._isAttribute[1].startsWith("$")) {
           let entry = input()
             .e("input", () => {
-              attrNode.name.value =
-                attrNode._isAttribute[1] + "=" + entry.value;
+              if (entry.type == "checkbox") {
+                attrNode.name.value =
+                  attrNode._isAttribute[1] + "=" + entry.checked;
+              } else {
+                attrNode.name.value =
+                  attrNode._isAttribute[1] + "=" + entry.value;
+              }
               children.replaceChildren();
               children.appendChild(this.childrenWidget);
               history.add(true);
             })
             .e("blur", () => (editedAttrNode = null));
-          entry.value = attrNode._isAttribute[2];
+          if (attrNode.attributes.$type) {
+            if (attrNode._attributes.$type == "date") {
+              entry.type = "date";
+            }
+            if (attrNode._attributes.$type == "checkbox") {
+              entry.type = "checkbox";
+            }
+            if (attrNode._attributes.$type == "number") {
+              entry.type = "number";
+              if (attrNode._attributes.$min) {
+                entry.min = attrNode._attributes.$min;
+              }
+              if (attrNode._attributes.$max) {
+                entry.max = attrNode._attributes.$max;
+              }
+              if (attrNode._attributes.$step) {
+                entry.step = attrNode._attributes.$step;
+              }
+            }
+          }
+          if (entry.type == "checkbox") {
+            entry.checked = attrNode._isAttribute[2] == "true";
+          } else {
+            entry.value = attrNode._isAttribute[2];
+          }
           form.appendChild(
             tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
               ctrlClick(attrNode, ev),
