@@ -96,8 +96,8 @@ export default {
     description: div(
       div("paragraphs"),
       div(code("argument"), ": a header"),
-      div("each child becomes a header"),
-      div("grandchildren become the paragraph"),
+      div("Each child becomes a header."),
+      div("Grandchildren become the paragraph."),
     ),
     create(arg) {
       let paragraphs = div();
@@ -147,7 +147,7 @@ export default {
     description: div(
       div("link"),
       div(code("argument"), ": the link text"),
-      div(code("$url"), ": The URL the link opens"),
+      div(code("$url"), ": the URL the link opens"),
     ),
     create(arg) {
       let link = a(arg).a("target", "_blank");
@@ -162,8 +162,8 @@ export default {
   "-cl": {
     description: div(
       div("checklist"),
-      div("turns each child into a checklist item"),
-      div("items have the attribute ", code("$checked")),
+      div("Turns each child into a checklist item."),
+      div("Items have the attribute ", code("$checked"), "."),
     ),
     create(arg) {
       let checklist = div();
@@ -195,7 +195,7 @@ export default {
   "-tbl": {
     description: div(
       div("table"),
-      div("each child's name is a table header and its children the column"),
+      div("Each child's name is a table header and its children the column."),
     ),
     create(arg) {
       let header = tr();
@@ -233,7 +233,7 @@ export default {
   "-tbs": {
     description: div(
       div("tabs"),
-      div("each child name becomes a tab"),
+      div("Each child name becomes a tab."),
       div(code("$tab"), " holds the current tab"),
     ),
     create(arg) {
@@ -309,7 +309,7 @@ export default {
     },
   },
   "-ta": {
-    description: div(div("textarea"), div("children become lines of text")),
+    description: div(div("textarea"), div("Children become lines of text.")),
     create(arg) {
       let ta = textarea()
         .a("rows", 8)
@@ -338,7 +338,7 @@ export default {
       div("option"),
       div(code("$value"), ": the selected option"),
       div("children become options"),
-      div("children of the selected option are rendered below"),
+      div("Children of the selected option are rendered below."),
     ),
     create(arg) {
       let opt = select().e("change", () => {
@@ -371,19 +371,37 @@ export default {
   },
   "-frm": {
     description: div(
-  div("form"),
-  div("attributes become form fields"),
-  div(code("$type"), " on an attribute node sets the input type (number, date, checkbox)"),
-  div(
-    code("$min"),
-    ", ",
-    code("$max"),
-    ", ",
-    code("$step"),
-    " on a number attribute node set number input options",
-  ),
-  div("non-attribute children are rendered below"),
-),
+      div("form"),
+      div("attributes become form fields"),
+      div("If the ", code("$type"), "-attribute is set on an attribute"),
+      div("then it sets the input type used in the form."),
+      div(
+        "Valid ",
+        code("$type"),
+        " values are: ",
+        code("date"),
+        ", ",
+        code("checkbox"),
+        ", ",
+        code("number"),
+        " and ",
+        code("range"),
+        ".",
+      ),
+      div(
+        code("$min"),
+        ", ",
+        code("$max"),
+        ", ",
+        code("$step"),
+        " on a ",
+        code("number"),
+        " or ",
+        code("range"),
+        " attribute node set the input options.",
+      ),
+      div("Non-attribute children are rendered below."),
+    ),
     create(arg) {
       let form = table().c("frm-form");
       let children = div(this.childrenWidget);
@@ -404,14 +422,12 @@ export default {
             })
             .e("blur", () => (editedAttrNode = null));
           if (attrNode.attributes.$type) {
-            if (attrNode._attributes.$type == "date") {
-              entry.type = "date";
+            let type = attrNode._attributes.$type;
+            if (["date", "checkbox", "number", "range"].includes(type)) {
+              entry.type = attrNode._attributes.$type;
             }
-            if (attrNode._attributes.$type == "checkbox") {
-              entry.type = "checkbox";
-            }
-            if (attrNode._attributes.$type == "number") {
-              entry.type = "number";
+
+            if (["number", "range"].includes(type)) {
               if (attrNode._attributes.$min) {
                 entry.min = attrNode._attributes.$min;
               }
@@ -428,6 +444,7 @@ export default {
           } else {
             entry.value = attrNode._isAttribute[2];
           }
+
           form.appendChild(
             tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
               ctrlClick(attrNode, ev),
