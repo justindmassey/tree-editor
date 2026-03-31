@@ -30,9 +30,6 @@ import Node from "./node.js";
 import ctrlClick from "./ctrl-click.js";
 import tree from "./tree.js";
 
-let editedAttrNode;
-let editedAttrNodeSelectionStart;
-let editedAttrNodeSelectionEnd;
 export default {
   "-ul": {
     description: "unordered list",
@@ -381,16 +378,16 @@ export default {
     ),
     create(arg) {
       let form = table().c("frm-form");
+      let children = div(this.childrenWidget);
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
           let entry = input()
             .e("input", () => {
-              editedAttrNode = attrNode;
-              editedAttrNodeSelectionStart = entry.selectionStart;
-              editedAttrNodeSelectionEnd = entry.selectionEnd;
               attrNode.name.value =
                 attrNode._isAttribute[1] + "=" + entry.value;
-              history.add();
+              children.replaceChildren();
+              children.appendChild(this.childrenWidget);
+              history.add(true);
             })
             .e("blur", () => (editedAttrNode = null));
           entry.value = attrNode._isAttribute[2];
@@ -399,19 +396,12 @@ export default {
               ctrlClick(attrNode, ev),
             ),
           );
-          if (attrNode == editedAttrNode) {
-            setTimeout(() => {
-              entry.focus();
-              entry.selectionStart = editedAttrNodeSelectionStart;
-              entry.selectionEnd = editedAttrNodeSelectionEnd;
-            }, 0);
-          }
         }
       }
       if (arg) {
-        return fieldset(legend(arg), form, this.childrenWidget).c("frm");
+        return fieldset(legend(arg), form, children).c("frm");
       } else {
-        return div(form, this.childrenWidget).c("frm");
+        return div(form, children).c("frm");
       }
     },
   },
