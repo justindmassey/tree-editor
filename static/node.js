@@ -75,6 +75,26 @@ export default class Node {
     return cw;
   }
 
+  getPath(upTo) {
+    let result = [];
+    let curNode = this;
+    while (curNode && curNode != upTo) {
+      if (curNode.isAttribute) {
+        result.unshift(
+          unescape(curNode._isAttribute[1]) +
+            "=" +
+            this.attributeSubstitution(curNode._isAttribute[2]),
+        );
+      } else {
+        result.unshift(
+          unescape(this.attributeSubstitution(curNode.name.value)),
+        );
+      }
+      curNode = curNode.parent;
+    }
+    return result;
+  }
+
   merge(node, rename = true, isTypeApplication = false, typeName = null) {
     let activeElement = document.activeElement;
     let n = node.copy();

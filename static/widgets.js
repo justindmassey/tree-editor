@@ -230,6 +230,42 @@ export default {
       }
     },
   },
+  "-pts": {
+    description: div(
+      div("paths"),
+      div("renders the path (seperated by ", code("$sep"), ") of each leaf node"),
+    ),
+    create(arg) {
+      let separator;
+      let defaultSeparator = " ";
+      if ("$sep" in this.attributes) {
+        separator = this._attributes.$sep;
+      } else {
+        this.setAttribute("$sep", defaultSeparator);
+        separator = defaultSeparator;
+      }
+      let paths = [];
+      for (let child of this.children.children) {
+        if (child.node.isAttribute && child.node._isAttribute[1] == "$sep") {
+          continue;
+        }
+        child.node.traverse((node) => {
+          if (!node.children.children.length) {
+            paths.push(node.getPath(this));
+          }
+        });
+      }
+      let pathsDiv = div();
+      for (let path of paths) {
+        pathsDiv.appendChild(div(path.join(separator)));
+      }
+      if (arg) {
+        return div(div(arg), pathsDiv.c("indented"));
+      } else {
+        return pathsDiv;
+      }
+    },
+  },
   "-tbs": {
     description: div(
       div("tabs"),
@@ -407,19 +443,18 @@ export default {
       let children = div(this.childrenWidget);
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          let entry = input()
-            .e("input", () => {
-              if (entry.type == "checkbox") {
-                attrNode.name.value =
-                  attrNode._isAttribute[1] + "=" + entry.checked;
-              } else {
-                attrNode.name.value =
-                  attrNode._isAttribute[1] + "=" + entry.value;
-              }
-              children.replaceChildren();
-              children.appendChild(this.childrenWidget);
-              history.add(true);
-            })
+          let entry = input().e("input", () => {
+            if (entry.type == "checkbox") {
+              attrNode.name.value =
+                attrNode._isAttribute[1] + "=" + entry.checked;
+            } else {
+              attrNode.name.value =
+                attrNode._isAttribute[1] + "=" + entry.value;
+            }
+            children.replaceChildren();
+            children.appendChild(this.childrenWidget);
+            history.add(true);
+          });
           if (attrNode.attributes.$type) {
             let type = attrNode._attributes.$type;
             if (["date", "checkbox", "number", "range"].includes(type)) {

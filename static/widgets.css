@@ -1,6 +1,6 @@
 @import url("./lib/tabs.css");
 
-.pln-children > * {
+.pln-children > *, .indented {
   margin-left: 4ex;
 }
 
