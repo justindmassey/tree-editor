@@ -5,6 +5,12 @@
   height: 100vh;
   overflow: hidden;
 }
+.tree:has(.tree-container.hidden) {
+  height: auto;
+}
+.tree:has(.tree-container.hidden) .output::after {
+  height: 0;
+}
 
 .tree-container {
   padding: 1em;
