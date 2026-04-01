@@ -234,15 +234,14 @@ export default {
     description: div(
       div("paths"),
       div("renders the path (seperated by ", code("$sep"), ") of each leaf node"),
+      div("If ", code("$sep"), " is not set the seperator defaults to a space.")
     ),
     create(arg) {
       let separator;
-      let defaultSeparator = " ";
       if ("$sep" in this.attributes) {
         separator = this._attributes.$sep;
       } else {
-        this.setAttribute("$sep", defaultSeparator);
-        separator = defaultSeparator;
+        separator = " ";
       }
       let paths = [];
       for (let child of this.children.children) {
