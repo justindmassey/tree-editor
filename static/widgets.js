@@ -420,7 +420,6 @@ export default {
               children.appendChild(this.childrenWidget);
               history.add(true);
             })
-            .e("blur", () => (editedAttrNode = null));
           if (attrNode.attributes.$type) {
             let type = attrNode._attributes.$type;
             if (["date", "checkbox", "number", "range"].includes(type)) {
