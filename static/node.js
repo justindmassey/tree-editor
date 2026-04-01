@@ -466,7 +466,8 @@ export default class Node {
     let attributes = {};
     let curNode = this;
     while (curNode) {
-      for (let attrNode of curNode.attrNodes.reverse()) {
+      for (let i = curNode.attrNodes.length - 1; i >= 0; i--) {
+        let attrNode = curNode._attrNodes[i];
         if (!(attrNode._isAttribute[1] in attributes)) {
           attributes[attrNode._isAttribute[1]] = attrNode._isAttribute[2];
         }
