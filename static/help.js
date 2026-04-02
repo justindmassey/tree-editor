@@ -54,6 +54,7 @@ class Help {
         "can be escaped with a backslash.",
       ),
       div("Attribute values need no escaping."),
+      div(code("$url"), "-attributes don't affect input size."),
 
       h2("Attribute Substitution"),
       div(
