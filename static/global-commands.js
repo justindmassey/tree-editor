@@ -22,7 +22,7 @@ export default {
     action() {
       post(
         "/save/" + encodeURIComponent(this.tree.root.name.value),
-        JSON.stringify(this.tree.root.serialize())
+        JSON.stringify(this.tree.root.serialize()),
       ).then((res) => {
         if (res.error) {
           alert(res.error);
@@ -51,7 +51,7 @@ export default {
             localStorage.setItem("tree", "");
             flash();
           }
-        }
+        },
       );
     },
   },
@@ -105,10 +105,15 @@ export default {
       this.menuBar.elem.classList.toggle("hidden");
       if (this.menuBar.elem.classList.contains("hidden")) {
         localStorage.setItem("menuBar", "");
-        this.tree.elem.style.paddingTop = "0px";
+        this.tree.elem.style.marginTop = "0px";
+        this.tree.elem.style.height = "";
       } else {
         localStorage.setItem("menuBar", "true");
-        this.tree.elem.style.paddingTop = this.menuBar.elem.offsetHeight + "px";
+        this.tree.elem.style.marginTop = this.menuBar.elem.offsetHeight + "px";
+        if (!this.tree.tree.classList.contains("hidden")) {
+          this.tree.elem.style.height =
+            "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
+        }
       }
     },
   },
@@ -132,6 +137,7 @@ export default {
       this.tree.tree.classList.toggle("hidden");
       if (this.tree.tree.classList.contains("hidden")) {
         localStorage.setItem("showTree", "");
+        this.tree.elem.style.height = "";
       } else {
         localStorage.setItem("showTree", "true");
         if (activeElement && activeElement.focus) {
