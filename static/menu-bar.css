@@ -10,3 +10,7 @@
   z-index: 1;
   background: var(--bg);
 }
+
+.menu-items > * {
+  white-space: pre;
+}

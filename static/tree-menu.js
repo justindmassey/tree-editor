@@ -18,7 +18,7 @@ class TreeMenu {
       } else {
         for (let treeName of list) {
           this.menu.addItem(
-            div(treeName).e("click", () => tree.load(treeName))
+            div(treeName || " ").e("click", () => tree.load(treeName))
           );
         }
       }
