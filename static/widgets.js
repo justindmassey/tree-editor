@@ -245,6 +245,7 @@ export default {
     ),
     create(arg) {
       let tbl = table();
+      let longestChild = 0;
       for (let child of this.childNodes) {
         let row = tr(
           td(
@@ -253,10 +254,18 @@ export default {
               .e("click", (ev) => ctrlClick(child, ev)),
           ),
         );
+        if(child.childNodes.length > longestChild) {
+          longestChild = child._childNodes.length
+        }
         for (let grandchild of child.childNodes) {
           row.appendChild(td(grandchild.widget));
         }
         tbl.appendChild(row);
+      }
+      for(let row of tbl.children) {
+        for(let i = row.children.length; i < longestChild + 1; i++) {
+          row.appendChild(td());
+        }
       }
       if (arg) {
         return div(div(arg), tbl.c("indented")).c("tbl");
