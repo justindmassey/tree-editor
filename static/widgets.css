@@ -4,10 +4,13 @@
   margin-left: 4ex;
 }
 
+
+.cl, .rad {
+  padding-left: 1em;
+}
 .cl-item, .rad-item {
   display: flex;
   align-items: start;
-  padding-left: 1em;
 }
 .cl-child, .rad-child {
   display: inline-block;
@@ -16,6 +19,10 @@
 
 thead, .htbl-label {
   font-weight: bold;
+}
+
+.ul, .ol {
+  padding-left: 1em;
 }
 
 .col {

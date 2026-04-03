@@ -39,7 +39,11 @@ export default {
         children.appendChild(li(child.widget));
       }
       if (children.children.length) {
-        return div(div(arg), children);
+        if (arg) {
+          return div(div(arg), children);
+        } else {
+          return children.c("ul");
+        }
       } else {
         return div(arg);
       }
@@ -53,7 +57,11 @@ export default {
         children.appendChild(li(child.widget));
       }
       if (children.children.length) {
-        return div(div(arg), children);
+        if (arg) {
+          return div(div(arg), children);
+        } else {
+          return children.c("ol");
+        }
       } else {
         return div(arg);
       }
@@ -186,7 +194,7 @@ export default {
         );
       }
       if (arg) {
-        return div(div(arg), checklist);
+        return div(div(arg), checklist.c("cl"));
       } else {
         return checklist;
       }
@@ -224,7 +232,7 @@ export default {
       }
       let tbl = table(thead(header), bdy);
       if (arg) {
-        return div(div(arg), tbl).c("tbl");
+        return div(div(arg), tbl.c("indented")).c("tbl");
       } else {
         return tbl.c("tbl");
       }
@@ -251,9 +259,9 @@ export default {
         tbl.appendChild(row);
       }
       if (arg) {
-        return div(div(arg), tbl);
+        return div(div(arg), tbl.c("indented")).c("tbl");
       } else {
-        return tbl;
+        return tbl.c("tbl");
       }
     },
   },
@@ -327,7 +335,7 @@ export default {
         this.setAttribute("$tab", tabsObj.tab);
       }
       if (arg) {
-        return div(div(arg), tabsObj.elem);
+        return div(div(arg), tabsObj.elem.c("indented"));
       } else {
         return tabsObj.elem;
       }
@@ -340,8 +348,6 @@ export default {
       div(code("$url"), ": the url of the image"),
       div(code("$width"), ": the width in pixels"),
       div(code("$height"), ": the height in pixels"),
-      div("You can save images in ", code("tree-editor/static")),
-      div("and then use relative URLs."),
     ),
     create(arg) {
       let image = img();
@@ -397,9 +403,9 @@ export default {
       }
       ta.value = lines.join("\n");
       if (arg) {
-        return div(div(arg), ta);
+        return div(div(arg), ta.c("indented"));
       } else {
-        return ta;
+        return div(ta, " ");
       }
     },
   },
@@ -484,7 +490,7 @@ export default {
         );
       }
       if (arg) {
-        return div(div(arg), radio);
+        return div(div(arg), radio.c("rad"));
       } else {
         return radio;
       }
