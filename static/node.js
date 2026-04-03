@@ -58,7 +58,7 @@ export default class Node {
       if (arg) {
         widget = div(div(arg), this.childrenWidget.c("pln-children"));
       } else {
-        widget = this.childrenWidget.c("pln-children");
+        widget = this.childrenWidget;
       }
     }
     if (!widget.textContent) {
