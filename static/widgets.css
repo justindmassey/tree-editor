@@ -1,9 +1,8 @@
 @import url("./lib/tabs.css");
 
-.pln-children > *, .indented {
+.indented {
   margin-left: 4ex;
 }
-
 
 .cl, .rad {
   padding-left: 1em;
@@ -29,9 +28,6 @@ thead, .htbl-label {
   width: fit-content;
   display: flex;
   gap: 1em;
-}
-.col-header {
-  font-weight: bold;
 }
 
 .tbl,

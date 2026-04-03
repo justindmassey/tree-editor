@@ -130,7 +130,7 @@ export default {
     description: div(div("columns"), div("renders children as columns")),
     create(arg) {
       if (arg) {
-        return div(div(arg).c("col-header"), this.childrenWidget.c("col"));
+        return div(div(arg), this.childrenWidget.c("col", "indented"));
       } else {
         return this.childrenWidget.c("col");
       }
@@ -147,7 +147,7 @@ export default {
         button(arg).e("click", () => {
           tree.load(arg);
         }),
-        this.childrenWidget.c("pln-children"),
+        this.childrenWidget.c("indented"),
       );
     },
   },

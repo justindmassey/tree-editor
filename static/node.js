@@ -56,7 +56,7 @@ export default class Node {
     } else {
       let arg = unescape(this.attributeSubstitution(this.name.value));
       if (arg) {
-        widget = div(div(arg), this.childrenWidget.c("pln-children"));
+        widget = div(div(arg), this.childrenWidget.c("indented"));
       } else {
         widget = this.childrenWidget;
       }
