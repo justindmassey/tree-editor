@@ -461,10 +461,12 @@ export default {
         this.setAttribute("$value");
         value = "";
       }
+      let grouptName = this.getPath().join("/");
+      if (this.parent) {
+        grouptName += "(" + this.parent.childNodes.indexOf(this) + ")";
+      }
       for (let child of this.childNodes) {
-        let radioButton = input()
-          .a("type", "radio")
-          .a("name", this.getPath().join("/"));
+        let radioButton = input().a("type", "radio").a("name", grouptName);
         if ("$name" in child.attributes) {
           radioButton.a("value", child._attributes.$name);
         } else {
