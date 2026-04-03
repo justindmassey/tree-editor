@@ -476,7 +476,9 @@ export default {
         });
         radioButton.checked = value == radioButton.value;
         radio.appendChild(
-          div(radioButton, div(child.widget).c("rad-child")).c("rad-item"),
+          div(radioButton, div(child.widget).c("rad-child"))
+            .c("rad-item")
+            .e("click", (ev) => ctrlClick(child, ev)),
         );
       }
       if (arg) {
