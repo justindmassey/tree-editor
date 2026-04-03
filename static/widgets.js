@@ -230,11 +230,46 @@ export default {
       }
     },
   },
+  "-htbl": {
+    description: div(
+      div("horizontal table"),
+      div("children become row labels and their children the rows"),
+    ),
+    create(arg) {
+      let tbl = table();
+      for (let child of this.childNodes) {
+        let row = tr(
+          td(
+            div(child.nameText)
+              .c("htbl-label")
+              .e("click", (ev) => ctrlClick(child, ev)),
+          ),
+        );
+        for (let grandchild of child.childNodes) {
+          row.appendChild(td(grandchild.widget));
+        }
+        tbl.appendChild(row);
+      }
+      if (arg) {
+        return div(div(arg), tbl);
+      } else {
+        return tbl;
+      }
+    },
+  },
   "-pts": {
     description: div(
       div("paths"),
-      div("renders the path (seperated by ", code("$sep"), ") of each leaf node"),
-      div("If ", code("$sep"), " is not set the seperator defaults to a space.")
+      div(
+        "renders the path (seperated by ",
+        code("$sep"),
+        ") of each leaf node",
+      ),
+      div(
+        "If ",
+        code("$sep"),
+        " is not set the seperator defaults to a space.",
+      ),
     ),
     create(arg) {
       let separator;

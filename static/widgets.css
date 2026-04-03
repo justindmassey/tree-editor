@@ -14,7 +14,7 @@
   margin-left: 0.25em;
 }
 
-thead {
+thead, .htbl-label {
   font-weight: bold;
 }
 
