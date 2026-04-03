@@ -439,6 +439,53 @@ export default {
       return elem;
     },
   },
+  "-rad": {
+    description: div(
+      div("radio buttons"),
+      div("adds a radio button in front of children"),
+      div(
+        "If a child has a ",
+        code("$name"),
+        "-attribute then thats used as ",
+        code("$value"),
+        " for the widget.",
+      ),
+      div("Otherwise the childs node name is used."),
+    ),
+    create(arg) {
+      let radio = div();
+      let value;
+      if ("$value" in this.attributes) {
+        value = this._attributes.$value;
+      } else {
+        this.setAttribute("$value");
+        value = "";
+      }
+      for (let child of this.childNodes) {
+        let radioButton = input()
+          .a("type", "radio")
+          .a("name", this.getPath().join("/"));
+        if ("$name" in child.attributes) {
+          radioButton.a("value", child._attributes.$name);
+        } else {
+          radioButton.a("value", child.nameText);
+        }
+        radioButton.e("click", () => {
+          this.setAttribute("$value", radioButton.value);
+          history.add(true);
+        });
+        radioButton.checked = value == radioButton.value;
+        radio.appendChild(
+          div(radioButton, div(child.widget).c("rad-child")).c("rad-item"),
+        );
+      }
+      if (arg) {
+        return div(div(arg), radio);
+      } else {
+        return radio;
+      }
+    },
+  },
   "-frm": {
     description: div(
       div("form"),

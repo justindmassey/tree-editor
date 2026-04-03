@@ -4,12 +4,12 @@
   margin-left: 4ex;
 }
 
-.cl-item {
+.cl-item, .rad-item {
   display: flex;
   align-items: start;
   padding-left: 1em;
 }
-.cl-child {
+.cl-child, .rad-child {
   display: inline-block;
   margin-left: 0.25em;
 }
