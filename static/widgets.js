@@ -283,8 +283,13 @@ export default {
     ),
     create(arg) {
       let attrTable = table().c("crd-attr-table");
-      for (let attr in this.attributes) {
-        attrTable.appendChild(tr(td(attr), td(this._attributes[attr])));
+      for (let attr of this.attrNodes) {
+        attrTable.appendChild(
+          tr(
+            td(attr.attrNameText),
+            td(attr.attributeSubstitution(attr._isAttribute[2])),
+          ).e("click", (ev) => ctrlClick(attr, ev)),
+        );
       }
       let crd = div().c("crd");
       let crdHeader;
