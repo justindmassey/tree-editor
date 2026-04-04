@@ -466,9 +466,9 @@ export default {
         image.height = this._attributes.$height;
       }
       if (arg) {
-        return div(div(arg), image.c("indented"));
+        return div(div(arg), div(image, this.childrenWidget).c("indented"));
       } else {
-        return div(image, " ");
+        return div(div(image, " "), this.childrenWidget);
       }
     },
   },
