@@ -163,8 +163,13 @@ export default {
         link.href = this._attributes.$url;
       } else {
         this.setAttribute("$url");
+        link.href=""
       }
-      return div(link);
+      if (arg) {
+        return div(div(link), this.childrenWidget.c("indented"));
+      } else {
+        return this.childrenWidget;
+      }
     },
   },
   "-cl": {
