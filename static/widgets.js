@@ -180,7 +180,7 @@ export default {
           .a("type", "checkbox")
           .e("change", () => {
             child.setAttribute("$checked", checkbox.checked);
-            history.add(true);
+            history.add();
           });
         if ("$checked" in child.attributes) {
           checkbox.checked = child._attributes.$checked == "true";
@@ -334,7 +334,7 @@ export default {
         tabs,
         (tab) => {
           this.setAttribute("$tab", tab);
-          history.add(true);
+          history.add();
         },
         tabClicked,
       );
@@ -486,7 +486,7 @@ export default {
         }
         radioButton.e("click", () => {
           this.setAttribute("$value", radioButton.value);
-          history.add(true);
+          history.add();
         });
         radioButton.checked = value == radioButton.value;
         radio.appendChild(
