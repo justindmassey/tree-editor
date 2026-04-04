@@ -254,16 +254,16 @@ export default {
               .e("click", (ev) => ctrlClick(child, ev)),
           ),
         );
-        if(child.childNodes.length > longestChild) {
-          longestChild = child._childNodes.length
+        if (child.childNodes.length > longestChild) {
+          longestChild = child._childNodes.length;
         }
         for (let grandchild of child.childNodes) {
           row.appendChild(td(grandchild.widget));
         }
         tbl.appendChild(row);
       }
-      for(let row of tbl.children) {
-        for(let i = row.children.length; i < longestChild + 1; i++) {
+      for (let row of tbl.children) {
+        for (let i = row.children.length; i < longestChild + 1; i++) {
           row.appendChild(td());
         }
       }
@@ -476,10 +476,7 @@ export default {
         this.setAttribute("$value");
         value = "";
       }
-      let grouptName = this.getPath().join("/");
-      if (this.parent) {
-        grouptName += "(" + this.parent.childNodes.indexOf(this) + ")";
-      }
+      let grouptName = crypto.randomUUID();
       for (let child of this.childNodes) {
         let radioButton = input().a("type", "radio").a("name", grouptName);
         if ("$name" in child.attributes) {
