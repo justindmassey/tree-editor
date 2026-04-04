@@ -4,23 +4,28 @@
   margin-left: 4ex;
 }
 
-.cl, .rad {
+.cl,
+.rad {
   padding-left: 1em;
 }
-.cl-item, .rad-item {
+.cl-item,
+.rad-item {
   display: flex;
   align-items: start;
 }
-.cl-child, .rad-child {
+.cl-child,
+.rad-child {
   display: inline-block;
   margin-left: 0.25em;
 }
 
-thead, .htbl-label {
+thead,
+.htbl-label {
   font-weight: bold;
 }
 
-.ul, .ol {
+.ul,
+.ol {
   padding-left: 1em;
 }
 
@@ -33,6 +38,7 @@ thead, .htbl-label {
 .tbl,
 .tabs,
 .frm,
+.crd,
 .frm-form {
   margin-bottom: 2px;
 }
@@ -76,4 +82,59 @@ fieldset {
 button {
   margin-top: 0.25em;
   margin-bottom: 0.25em;
+}
+
+.crd {
+  width: fit-content;
+  border: 1px solid var(--color-2);
+  border-radius: 0.5em;
+}
+
+.crd-header {
+  font-weight: bold;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  text-align: center;
+}
+
+.crd-header.border {
+  border-bottom: 1px solid var(--color-2);
+}
+
+.crd-body {
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: auto;
+}
+
+.crd-body > * {
+  width: fit-content;
+  display: inline-block;
+  text-align: left;
+}
+
+.crd-attr-table {
+  width: 100%;
+}
+
+.crd-attr-table > tr > td {
+  border: none;
+}
+
+.crd-attr-table > tr {
+  border-top: 1px solid var(--color-2);
+}
+
+.crd-attr-table > tr > td:nth-child(1) {
+  border-right: 1px solid var(--color-2);
+  text-align: right;
+}
+
+.crd-attr-table.no-border>tr:nth-child(1) {
+  border-top: none;
 }

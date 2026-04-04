@@ -274,6 +274,40 @@ export default {
       }
     },
   },
+  "-crd": {
+    description: div(
+      div("card"),
+      div("children become the card body"),
+      div("attributes become a table at the bottom of the card"),
+      div(code("argument"), ": card header"),
+    ),
+    create(arg) {
+      let attrTable = table().c("crd-attr-table");
+      for (let attr in this.attributes) {
+        attrTable.appendChild(tr(td(attr), td(this._attributes[attr])));
+      }
+      let crd = div().c("crd");
+      let crdHeader;
+      if (arg) {
+        crdHeader = div(arg).c("crd-header");
+        crd.appendChild(crdHeader);
+      }
+      let crdBody = div(this.childrenWidget).c("crd-body");
+      if (crdBody.firstChild.children.length) {
+        crd.appendChild(crdBody);
+        if (crdHeader) {
+          crdHeader.c("border");
+        }
+      }
+      if (!crdHeader && !crdBody.firstChild.children.length) {
+        attrTable.c("no-border");
+      }
+      if (attrTable.children.length) {
+        crd.appendChild(attrTable);
+      }
+      return crd;
+    },
+  },
   "-pts": {
     description: div(
       div("paths"),
