@@ -396,11 +396,12 @@ export default {
       div(code("$page"), " holds the current page number."),
     ),
     create(arg) {
-      if (!("$page" in this._attributes)) {
+      if (!("$page" in this.attributes)) {
         this.setAttribute("$page", 1);
       }
+      this.childrenWidget;
       let page;
-      if (this.childNodes[this.attributes.$page - 1]) {
+      if (this.childNodes[this._attributes.$page - 1]) {
         page = this._childNodes[this._attributes.$page - 1].widget;
       } else {
         page = "";
