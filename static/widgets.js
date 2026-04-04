@@ -466,7 +466,7 @@ export default {
         image.height = this._attributes.$height;
       }
       if (arg) {
-        return div(image, div(arg));
+        return div(div(arg), image.c("indented"));
       } else {
         return div(image, " ");
       }
