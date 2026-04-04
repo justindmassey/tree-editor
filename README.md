@@ -8,6 +8,7 @@ Features:
  - built-in manual
 
 Usage:
+
     cd tree-editor
     npm install
     node .
