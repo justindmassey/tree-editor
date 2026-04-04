@@ -138,3 +138,13 @@ button {
 .crd-attr-table.no-border>tr:nth-child(1) {
   border-top: none;
 }
+
+.pgs-page {
+  display: inline-block;
+  min-width: 4em;
+  text-align: center;
+}
+
+.pgs-pager {
+  display: inline-block;
+}

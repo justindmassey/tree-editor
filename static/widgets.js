@@ -389,6 +389,60 @@ export default {
       }
     },
   },
+  "-pgs": {
+    description: div(
+      div("pages"),
+      div("Each child becomes a page."),
+      div(code("$page"), " holds the current page number."),
+    ),
+    create(arg) {
+      if (!("$page" in this._attributes)) {
+        this.setAttribute("$page", 1);
+      }
+      let page;
+      if (this.childNodes[this.attributes.$page - 1]) {
+        page = this._childNodes[this._attributes.$page - 1].widget;
+      } else {
+        page = "";
+      }
+      let pager = div(
+        button("<").e("click", () => {
+          let page = Number(this._attributes.$page);
+          if (isNaN(page)) {
+            this.setAttribute("$page", 1);
+          } else {
+            if (page <= 1 || page > this.childNodes.length) {
+              this.setAttribute("$page", this._childNodes.length || 1);
+            } else {
+              this.setAttribute("$page", page - 1);
+            }
+          }
+          history.add();
+        }),
+        div(this.attributes.$page + " / " + this.childNodes.length).c(
+          "pgs-page",
+        ),
+        button(">").e("click", () => {
+          let page = Number(this._attributes.$page);
+          if (isNaN(page)) {
+            this.setAttribute("$page", 1);
+          } else {
+            if (page < 1 || page >= this._childNodes.length) {
+              this.setAttribute("$page", 1);
+            } else {
+              this.setAttribute("$page", page + 1);
+            }
+          }
+          history.add();
+        }),
+      ).c("pgs-pager");
+      if (arg) {
+        return div(arg, " ", pager, div(page).c("indented"));
+      } else {
+        return div(pager, div(page));
+      }
+    },
+  },
   "-img": {
     description: div(
       div("image"),
