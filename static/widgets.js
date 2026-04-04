@@ -144,7 +144,7 @@ export default {
     ),
     create(arg) {
       return div(
-        button(arg).e("click", () => {
+        button(arg || " ").e("click", () => {
           tree.load(arg);
         }),
         this.childrenWidget.c("indented"),
