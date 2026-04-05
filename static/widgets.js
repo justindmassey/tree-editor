@@ -141,7 +141,7 @@ export default {
       div("tree link"),
       div("a link to another tree"),
       div(code("argument"), ": the name of the tree to link to"),
-      div("If the tree doesn't exist its created (but not saved)."),
+      div("If the tree doesn't exist, it's created (but not saved)."),
     ),
     create(arg) {
       return div(
