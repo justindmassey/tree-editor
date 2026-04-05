@@ -588,11 +588,10 @@ export default {
         elem = div(opt);
       }
       if (opt.value in optChildren) {
-        let optChild = div(optChildren[opt.value]);
         if (arg) {
-          elem.appendChild(optChild.c("indented"));
+          elem.appendChild(optChildren[opt.value].c("indented"));
         } else {
-          elem.appendChild(optChild); 
+          elem.appendChild(optChildren[opt.value]);
         }
       }
       return elem;
