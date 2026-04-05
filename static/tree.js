@@ -25,7 +25,11 @@ class Tree {
   load(name) {
     get("/trees/" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
-        alert("Could not open tree: " + name);
+        this.root = new Node(name);
+        this.root.focus();
+        history.add();
+        this.tree.scrollTop = 0;
+        this.output.scrollTop = 0;
       } else {
         this.root = Node.deserialize(data);
         this.tree.scrollTop = 0;
