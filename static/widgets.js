@@ -284,8 +284,8 @@ export default {
     description: div(
       div("card"),
       div(code("argument"), ": card header"),
-      div("children become the card body"),
-      div("attributes become a table at the bottom of the card"),
+      div("Children become the card body."),
+      div("Attributes become a table at the bottom of the card."),
     ),
     create(arg) {
       let attrTable = table().c("crd-attr-table");
