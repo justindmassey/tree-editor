@@ -135,7 +135,7 @@ button {
   text-align: right;
 }
 
-.crd-attr-table.no-border>tr:nth-child(1) {
+.crd-attr-table.no-border > tr:nth-child(1) {
   border-top: none;
 }
 
@@ -147,4 +147,9 @@ button {
 
 .pgs-pager {
   display: inline-block;
+}
+
+.tgl-icon {
+  cursor: default;
+  user-select: none;
 }

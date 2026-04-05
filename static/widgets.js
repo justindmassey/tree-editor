@@ -449,6 +449,44 @@ export default {
       }
     },
   },
+  "-tgl": {
+    description: div(
+      div("toggle"),
+      div("allows you to toggle the visibility of children"),
+      div(code("$expanded"), ": if the children are visible"),
+    ),
+    create(arg) {
+      let expanded = true;
+      if (!("$expanded" in this.attributes)) {
+        this.setAttribute("$expanded", true);
+      } else {
+        expanded = this._attributes.$expanded == "true";
+      }
+      let children = this.childrenWidget;
+      if(!expanded) {
+        children.classList.add("hidden");
+      }
+      let icon;
+      if (expanded) {
+        icon = "▼";
+      } else {
+        icon = "▶";
+      }
+      let toggleButton = span(icon).c("tgl-icon").e("click", () => {
+        if (expanded) {
+          this.setAttribute("$expanded", false);
+        } else {
+          this.setAttribute("$expanded", true);
+        }
+        history.add();
+      });
+      if (arg) {
+        return div(div(toggleButton, " ", arg), children.c("indented"));
+      } else {
+        return div(div(toggleButton), children);
+      }
+    },
+  },
   "-img": {
     description: div(
       div("image"),
