@@ -141,6 +141,7 @@ export default {
       div("tree link"),
       div("a link to another tree"),
       div(code("argument"), ": the name of the tree to link to"),
+      div("If the tree doesn't exist its created (but not saved)."),
     ),
     create(arg) {
       return div(
@@ -406,7 +407,7 @@ export default {
       }
       this.childrenWidget;
       let page;
-      if (this.childNodes[this._attributes.$page - 1]) {
+      if (this.childNodes[this.attributes.$page - 1]) {
         page = this._childNodes[this._attributes.$page - 1].widget;
       } else {
         page = "";
