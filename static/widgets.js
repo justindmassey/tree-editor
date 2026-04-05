@@ -463,7 +463,7 @@ export default {
         expanded = this._attributes.$expanded == "true";
       }
       let children = this.childrenWidget;
-      if(!expanded) {
+      if (!expanded) {
         children.classList.add("hidden");
       }
       let icon;
@@ -472,14 +472,16 @@ export default {
       } else {
         icon = "▶";
       }
-      let toggleButton = span(icon).c("tgl-icon").e("click", () => {
-        if (expanded) {
-          this.setAttribute("$expanded", false);
-        } else {
-          this.setAttribute("$expanded", true);
-        }
-        history.add();
-      });
+      let toggleButton = span(icon)
+        .c("tgl-icon")
+        .e("click", () => {
+          if (expanded) {
+            this.setAttribute("$expanded", false);
+          } else {
+            this.setAttribute("$expanded", true);
+          }
+          history.add();
+        });
       if (arg) {
         return div(div(toggleButton, " ", arg), children.c("indented"));
       } else {
@@ -586,7 +588,12 @@ export default {
         elem = div(opt);
       }
       if (opt.value in optChildren) {
-        elem.appendChild(optChildren[opt.value]);
+        let optChild = div(optChildren[opt.value]);
+        if (arg) {
+          elem.appendChild(optChild.c("indented"));
+        } else {
+          elem.appendChild(optChild); 
+        }
       }
       return elem;
     },
