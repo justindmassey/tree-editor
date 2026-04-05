@@ -201,11 +201,6 @@ class Tree {
   }
 
   updateOutput() {
-    if(this.root.name.value) {
-      document.title = this.root.name.value + " - Tree Editor"
-    } else {
-      document.title = "Tree Editor"
-    }
     if (
       this.root.name.value.startsWith("#") ||
       this.root.name.value.match(Node.typedefRegEx) ||
@@ -246,6 +241,11 @@ class Tree {
     this.updateTypes();
     this.updateOutput();
     this.updateNameSize();
+    if (this.root.name.value) {
+      document.title = this.root.name.value + " - TE";
+    } else {
+      document.title = "Tree Editor";
+    }
   }
 }
 

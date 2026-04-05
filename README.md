@@ -1,4 +1,4 @@
- # Tree Editor
+ # Tree Editor (TE)
 
 Features:
  - editing commands
