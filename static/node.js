@@ -61,7 +61,7 @@ export default class Node {
         widget = this.childrenWidget;
       }
     }
-    if (!widget.textContent && !widget.querySelector("textarea, input, img")) {
+    if (!widget.textContent && !widget.querySelector("textarea, img")) {
       widget = div(" ");
     }
     return widget.e("click", (ev) => ctrlClick(this, ev));
