@@ -286,6 +286,7 @@ export default {
       div(code("argument"), ": card header"),
       div("Children become the card body."),
       div("Attributes become a table at the bottom of the card."),
+      div(code("$"), "-attributes are ignored.")
     ),
     create(arg) {
       let attrTable = table().c("crd-attr-table");
