@@ -227,7 +227,7 @@ export default class Node {
       }
     }
     let attr = new Node(name + "=" + value);
-    this.appendChild(attr, focus);
+    this.prependChild(attr, focus);
   }
 
   get attributes() {
