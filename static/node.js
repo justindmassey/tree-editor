@@ -81,7 +81,7 @@ export default class Node {
     while (curNode && curNode != upTo) {
       if (curNode.isAttribute) {
         result.unshift(
-          unescape(curNode._isAttribute[1]) +
+          unescapeAttrName(curNode._isAttribute[1]) +
             "=" +
             this.attributeSubstitution(curNode._isAttribute[2]),
         );
@@ -211,10 +211,6 @@ export default class Node {
     if (escape) {
       name = name
         .replace(/=/g, "\\=")
-        .replace(/^-/, "\\-")
-        .replace(/^#/, "\\#")
-        .replace(/\./g, "\\.")
-        .replace(/:/g, "\\:");
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
@@ -235,7 +231,7 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        this._attributes[unescape(m[1])] = this.attributeSubstitution(m[2]);
+        this._attributes[unescapeAttrName(m[1])] = this.attributeSubstitution(m[2]);
       }
     }
     return this._attributes;
@@ -254,8 +250,6 @@ export default class Node {
         !child.node.name.value.startsWith("#") &&
         !child.node.name.value.match(Node.typedefRegEx)
       ) {
-        this._childNodes.push(child.node);
-      } else if (child.node.name.value.match(Node.widgetRegEx)) {
         this._childNodes.push(child.node);
       }
     }
@@ -289,7 +283,7 @@ export default class Node {
 
   get attrNameText() {
     if (this.isAttribute) {
-      return unescape(this._isAttribute[1]);
+      return unescapeAttrName(this._isAttribute[1]);
     }
   }
 
@@ -507,6 +501,10 @@ export default class Node {
 
 function unescape(str) {
   return unescapeArg(str).replace(/^\\-/, "-").replace(/^\\#/, "#");
+}
+
+function unescapeAttrName(str) {
+  return str.replaceAll("\\=", "=");
 }
 
 function unescapeArg(str) {
