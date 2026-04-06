@@ -61,7 +61,7 @@ export default class Node {
         widget = this.childrenWidget;
       }
     }
-    if (!widget.textContent) {
+    if (!widget.textContent && !widget.querySelector("textarea, input, img")) {
       widget = div(" ");
     }
     return widget.e("click", (ev) => ctrlClick(this, ev));
@@ -209,8 +209,7 @@ export default class Node {
 
   setAttribute(name, value = "", focus = false, escape = true) {
     if (escape) {
-      name = name
-        .replace(/=/g, "\\=")
+      name = name.replace(/=/g, "\\=");
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
@@ -231,7 +230,9 @@ export default class Node {
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        this._attributes[unescapeAttrName(m[1])] = this.attributeSubstitution(m[2]);
+        this._attributes[unescapeAttrName(m[1])] = this.attributeSubstitution(
+          m[2],
+        );
       }
     }
     return this._attributes;

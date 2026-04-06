@@ -359,7 +359,7 @@ export default {
       if (attrTable.children.length) {
         crd.appendChild(attrTable);
       }
-      return crd;
+      return crd.c("crd");
     },
   },
   "-pts": {
@@ -517,7 +517,7 @@ export default {
       if (arg) {
         return div(div(arg), div(image, this.childrenWidget).c("indented"));
       } else {
-        return div(div(image, " "), this.childrenWidget);
+        return div(div(image), this.childrenWidget);
       }
     },
   },
@@ -557,7 +557,7 @@ export default {
       if (arg) {
         return div(div(arg), ta.c("indented"));
       } else {
-        return div(ta, " ");
+        return div(ta);
       }
     },
   },
