@@ -51,10 +51,10 @@ export default class Node {
     let widget;
     if (m && widgets[m[1]]) {
       widget = widgets[m[1]].create.bind(this)(
-        unescapeArg(this.attributeSubstitution(m[2])),
+        this.attributeSubstitution(unescapeArg(m[2])),
       );
     } else {
-      let arg = unescape(this.attributeSubstitution(this.name.value));
+      let arg = this.attributeSubstitution(unescape(this.name.value));
       if (arg) {
         widget = div(div(arg), this.childrenWidget.c("indented"));
       } else {
@@ -91,7 +91,7 @@ export default class Node {
         );
       } else {
         result.unshift(
-          unescape(this.attributeSubstitution(curNode.name.value)),
+          this.attributeSubstitution(unescape(curNode.name.value)),
         );
       }
       curNode = curNode.parent;
@@ -282,7 +282,7 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = unescape(this.attributeSubstitution(this.name.value));
+    this._nameText = this.attributeSubstitution(unescape(this.name.value));
     return this._nameText;
   }
 
