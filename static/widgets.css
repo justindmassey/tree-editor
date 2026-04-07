@@ -29,12 +29,6 @@ thead,
   padding-left: 1em;
 }
 
-.col {
-  width: fit-content;
-  display: flex;
-  gap: 1em;
-}
-
 .tbl,
 .tabs,
 .frm,
@@ -71,8 +65,7 @@ select {
 }
 
 .lin {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
 }
 
 fieldset {

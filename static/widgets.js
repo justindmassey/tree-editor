@@ -178,20 +178,6 @@ export default {
       }
     },
   },
-  "-col": {
-    description: div(div("columns"), div("renders children as columns")),
-    create(arg) {
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(arg), this._childrenWidget.c("col", "indented"));
-        } else {
-          return div(arg);
-        }
-      } else {
-        return this.childrenWidget.c("col");
-      }
-    },
-  },
   "-tl": {
     description: div(
       div("tree link"),
