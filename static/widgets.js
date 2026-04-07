@@ -31,6 +31,15 @@ import ctrlClick from "./ctrl-click.js";
 import tree from "./tree.js";
 
 export default {
+  "-hdr": {
+    description: div(
+      div("large header with the children below"),
+      div(code("argument"), ": the header text"),
+    ),
+    create(arg) {
+      return div(h1(arg), this.childrenWidget).c("hdr");
+    },
+  },
   "-ul": {
     description: "unordered list",
     create(arg) {
@@ -64,38 +73,6 @@ export default {
         }
       } else {
         return div(arg);
-      }
-    },
-  },
-  "-lin": {
-    description: div(
-      div("line"),
-      div("renders children as a line separated by ", code("$sep")),
-      div("If ", code("$sep"), " is not set, a space is used.")
-    ),
-    create(arg) {
-      let separator = " ";
-      if ("$sep" in this.attributes) {
-        separator = this._attributes.$sep;
-      }
-      let line = span().c("lin");
-      let lastSep;
-      for (let child of this.childNodes) {
-        line.appendChild(child.widget);
-        line.appendChild((lastSep = div(separator)));
-      }
-      if (lastSep) {
-        lastSep.remove();
-      }
-
-      if (arg) {
-        if (line.children.length) {
-          return div(div(arg), div(line).c("indented"));
-        } else {
-          return div(arg);
-        }
-      } else {
-        return div(line);
       }
     },
   },
@@ -143,13 +120,36 @@ export default {
       }
     },
   },
-  "-hdr": {
+  "-lin": {
     description: div(
-      div("large header with the children below"),
-      div(code("argument"), ": the header text"),
+      div("line"),
+      div("renders children as a line separated by ", code("$sep")),
+      div("If ", code("$sep"), " is not set, a space is used."),
     ),
     create(arg) {
-      return div(h1(arg), this.childrenWidget).c("hdr");
+      let separator = " ";
+      if ("$sep" in this.attributes) {
+        separator = this._attributes.$sep;
+      }
+      let line = span().c("lin");
+      let lastSep;
+      for (let child of this.childNodes) {
+        line.appendChild(child.widget);
+        line.appendChild((lastSep = div(separator)));
+      }
+      if (lastSep) {
+        lastSep.remove();
+      }
+
+      if (arg) {
+        if (line.children.length) {
+          return div(div(arg), div(line).c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else {
+        return div(line);
+      }
     },
   },
   "-par": {
