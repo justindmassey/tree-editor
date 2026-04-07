@@ -67,7 +67,7 @@ class Help {
         " is replaced with that attribute's value.",
       ),
       div("Attribute lookup starts at the parent and moves upward."),
-      div("Substituted attribute values get unescaped with the rest of the node name."),
+      div("Unescaping is performed before attribute substitution."),
 
       h2("Type System"),
       div("Nodes with a name of the form ", code("::TYPE")),
