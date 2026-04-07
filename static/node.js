@@ -56,7 +56,11 @@ export default class Node {
     } else {
       let arg = this.attributeSubstitution(unescape(this.name.value));
       if (arg) {
-        widget = div(div(arg), this.childrenWidget.c("indented"));
+        if (this.childrenWidget.children.length) {
+          widget = div(div(arg), this._childrenWidget.c("indented"));
+        } else {
+          widget = div(arg);
+        }
       } else {
         widget = this.childrenWidget;
       }
@@ -72,11 +76,11 @@ export default class Node {
   }
 
   get childrenWidget() {
-    let cw = div();
+    this._childrenWidget = div();
     for (let child of this.childNodes) {
-      cw.appendChild(child.widget);
+      this._childrenWidget.appendChild(child.widget);
     }
-    return cw;
+    return this._childrenWidget;
   }
 
   getPath(upTo) {

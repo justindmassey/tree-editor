@@ -67,27 +67,35 @@ export default {
       }
     },
   },
-  "-hl": {
-    description: "horizontal list",
+  "-lin": {
+    description: div(
+      div("line"),
+      div("renders children as a line separated by ", code("$sep")),
+      div("If ", code("$sep"), " is not set, a space is used.")
+    ),
     create(arg) {
-      let list = span().c("hl-list");
-      let lastComma;
-      for (let child of this.childNodes) {
-        list.appendChild(child.widget);
-        list.appendChild((lastComma = div(", ")));
+      let separator = " ";
+      if ("$sep" in this.attributes) {
+        separator = this._attributes.$sep;
       }
-      if (lastComma) {
-        lastComma.remove();
+      let line = span().c("lin");
+      let lastSep;
+      for (let child of this.childNodes) {
+        line.appendChild(child.widget);
+        line.appendChild((lastSep = div(separator)));
+      }
+      if (lastSep) {
+        lastSep.remove();
       }
 
       if (arg) {
-        let label = span(arg);
-        if (this._childNodes.length) {
-          label.appendChild(span(": "));
+        if (line.children.length) {
+          return div(div(arg), div(line).c("indented"));
+        } else {
+          return div(arg);
         }
-        return div(label, list);
       } else {
-        return div(list);
+        return div(line);
       }
     },
   },
@@ -125,7 +133,11 @@ export default {
           history.add();
         });
       if (arg) {
-        return div(div(toggleButton, " ", arg), children.c("indented"));
+        if (children.children.length) {
+          return div(div(toggleButton, " ", arg), children.c("indented"));
+        } else {
+          return div(toggleButton, " ", arg);
+        }
       } else {
         return div(div(toggleButton), children);
       }
@@ -170,7 +182,11 @@ export default {
     description: div(div("columns"), div("renders children as columns")),
     create(arg) {
       if (arg) {
-        return div(div(arg), this.childrenWidget.c("col", "indented"));
+        if (this.childrenWidget.children.length) {
+          return div(div(arg), this._childrenWidget.c("col", "indented"));
+        } else {
+          return div(arg);
+        }
       } else {
         return this.childrenWidget.c("col");
       }
@@ -184,12 +200,14 @@ export default {
       div("If the tree doesn't exist, it's created (but not saved)."),
     ),
     create(arg) {
-      return div(
-        button(arg || " ").e("click", () => {
-          tree.load(arg);
-        }),
-        this.childrenWidget.c("indented"),
-      );
+      let btn = button(arg || " ").e("click", () => {
+        tree.load(arg);
+      });
+      if (this.childrenWidget.children.length) {
+        return div(div(btn), this.childrenWidget.c("indented"));
+      } else {
+        return div(btn);
+      }
     },
   },
   "-lnk": {
@@ -207,7 +225,11 @@ export default {
         link.href = "";
       }
       if (arg) {
-        return div(div(link), this.childrenWidget.c("indented"));
+        if (this.childrenWidget.children.length) {
+          return div(div(link), this._childrenWidget.c("indented"));
+        } else {
+          return div(link);
+        }
       } else {
         return this.childrenWidget;
       }
@@ -240,7 +262,11 @@ export default {
         );
       }
       if (arg) {
-        return div(div(arg), checklist.c("cl"));
+        if (checklist.children.length) {
+          return div(div(arg), checklist.c("cl"));
+        } else {
+          return div(arg);
+        }
       } else {
         return checklist;
       }
@@ -278,7 +304,11 @@ export default {
       }
       let tbl = table(thead(header), bdy);
       if (arg) {
-        return div(div(arg), tbl.c("indented")).c("tbl");
+        if (header.children.length) {
+          return div(div(arg), tbl.c("indented")).c("tbl");
+        } else {
+          return div(arg);
+        }
       } else {
         return tbl.c("tbl");
       }
@@ -314,7 +344,11 @@ export default {
         }
       }
       if (arg) {
-        return div(div(arg), tbl.c("indented")).c("tbl");
+        if (tbl.children.length) {
+          return div(div(arg), tbl.c("indented")).c("tbl");
+        } else {
+          return div(arg);
+        }
       } else {
         return tbl.c("tbl");
       }
@@ -366,14 +400,14 @@ export default {
     description: div(
       div("paths"),
       div(
-        "renders the path (seperated by ",
+        "renders the path (separated by ",
         code("$sep"),
         ") of each leaf node",
       ),
       div(
         "If ",
         code("$sep"),
-        " is not set the seperator defaults to a space.",
+        " is not set, the separator defaults to a space.",
       ),
     ),
     create(arg) {
@@ -399,7 +433,11 @@ export default {
         pathsDiv.appendChild(div(path.join(separator)));
       }
       if (arg) {
-        return div(div(arg), pathsDiv.c("indented"));
+        if (pathsDiv.children.length) {
+          return div(div(arg), pathsDiv.c("indented"));
+        } else {
+          return div(arg);
+        }
       } else {
         return pathsDiv;
       }
@@ -452,8 +490,6 @@ export default {
       let page;
       if (this.childNodes[this.attributes.$page - 1]) {
         page = this._childNodes[this._attributes.$page - 1].widget;
-      } else {
-        page = "";
       }
       let pager = div(
         button("<").e("click", () => {
@@ -487,7 +523,11 @@ export default {
         }),
       ).c("pgs-pager");
       if (arg) {
-        return div(arg, " ", pager, div(page).c("indented"));
+        if (page) {
+          return div(arg, " ", pager, div(page).c("indented"));
+        } else {
+          return div(arg, " ", pager);
+        }
       } else {
         return div(pager, div(page));
       }
@@ -593,7 +633,9 @@ export default {
       }
       if (opt.value in optChildren) {
         if (arg) {
-          elem.appendChild(optChildren[opt.value].c("indented"));
+          if (optChildren[opt.value].children.length) {
+            elem.appendChild(optChildren[opt.value].c("indented"));
+          }
         } else {
           elem.appendChild(optChildren[opt.value]);
         }
@@ -608,11 +650,11 @@ export default {
       div(
         "If a child has a ",
         code("$name"),
-        "-attribute then thats used as ",
+        "-attribute then that's used as ",
         code("$value"),
         " for the widget.",
       ),
-      div("Otherwise the childs node name is used."),
+      div("Otherwise the child's node name is used."),
     ),
     create(arg) {
       let radio = div();
@@ -623,9 +665,9 @@ export default {
         this.setAttribute("$value");
         value = "";
       }
-      let grouptName = crypto.randomUUID();
+      let groupName = crypto.randomUUID();
       for (let child of this.childNodes) {
-        let radioButton = input().a("type", "radio").a("name", grouptName);
+        let radioButton = input().a("type", "radio").a("name", groupName);
         if ("$name" in child.attributes) {
           radioButton.a("value", child._attributes.$name);
         } else {
@@ -643,7 +685,11 @@ export default {
         );
       }
       if (arg) {
-        return div(div(arg), radio.c("rad"));
+        if (radio.children.length) {
+          return div(div(arg), radio.c("rad"));
+        } else {
+          return div(arg);
+        }
       } else {
         return radio;
       }
