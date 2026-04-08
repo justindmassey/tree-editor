@@ -41,11 +41,19 @@ export default {
     },
   },
   "-ul": {
-    description: "unordered list",
+    description: div(
+      div("unordered list"),
+      div(code("$bullet"), ": the bullet to be used"),
+      div("If ", code("$bullet"), " is not set, a bullet operator is used.")
+    ),
     create(arg) {
+      let bullet = "∙ "
+      if("$bullet" in this.attributes) {
+        bullet = this._attributes.$bullet
+      }
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
-        children.appendChild(tr(td("∙ "), td(child.widget)));
+        children.appendChild(tr(td(bullet), td(child.widget)));
       }
       if (children.children.length) {
         if (arg) {
