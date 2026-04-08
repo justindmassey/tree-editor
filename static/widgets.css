@@ -147,3 +147,7 @@ button {
   cursor: default;
   user-select: none;
 }
+
+img {
+  display: block;
+}

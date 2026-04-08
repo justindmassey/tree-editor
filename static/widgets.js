@@ -716,7 +716,7 @@ export default {
     ),
     create(arg) {
       let form = table().c("frm-form");
-      let children = div(this.childrenWidget);
+      let children = this.childrenWidget;
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
           let entry = input().e("input", () => {
@@ -727,8 +727,8 @@ export default {
               attrNode.name.value =
                 attrNode._isAttribute[1] + "=" + entry.value;
             }
-            children.replaceChildren();
-            children.appendChild(this.childrenWidget);
+            children.replaceChildren(...this.childrenWidget.children);
+
             history.add(true);
           });
           if (attrNode.attributes.$type) {
@@ -765,7 +765,11 @@ export default {
       if (arg) {
         return fieldset(legend(arg), form, children).c("frm");
       } else {
-        return div(form, children).c("frm");
+        if (form.children.length) {
+          return div(form, children).c("frm");
+        } else {
+          return children;
+        }
       }
     },
   },
