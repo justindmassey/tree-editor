@@ -24,9 +24,17 @@ thead,
   font-weight: bold;
 }
 
-.ul,
-.ol {
+.ul {
   padding-left: 1em;
+}
+
+.ltbl>tr>td {
+  border: none;
+  padding: 0px;
+}
+
+.ltbl>tr>td:nth-child(1) {
+  text-align: right;
 }
 
 .tbl,

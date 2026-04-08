@@ -43,15 +43,15 @@ export default {
   "-ul": {
     description: "unordered list",
     create(arg) {
-      let children = ul();
+      let children = table().c("ltbl");
       for (let child of this.childNodes) {
-        children.appendChild(li(child.widget));
+        children.appendChild(tr(td("∙ "), td(child.widget)));
       }
       if (children.children.length) {
         if (arg) {
-          return div(div(arg), children);
+          return div(div(arg), children.c("indented"));
         } else {
-          return children.c("ul");
+          return children;
         }
       } else {
         return div(arg);
@@ -61,15 +61,17 @@ export default {
   "-ol": {
     description: "ordered list",
     create(arg) {
-      let children = ol();
+      let children = table().c("ltbl");
+      let cnt = 1;
       for (let child of this.childNodes) {
-        children.appendChild(li(child.widget));
+        children.appendChild(tr(td(cnt + ". "), td(child.widget)));
+        cnt++;
       }
       if (children.children.length) {
         if (arg) {
-          return div(div(arg), children);
+          return div(div(arg), children.c("indented"));
         } else {
-          return children.c("ol");
+          return children;
         }
       } else {
         return div(arg);
