@@ -33,7 +33,7 @@ class Help {
           code("#"),
           '") ',
           div("are not rendered to the output."),
-          div("Control-click a widget in the output to focus its node."),
+          div("Control-click a widget in the output to focus it's node."),
           div("The output is updated in real time."),
           div(
             'The hash symbol and the dash ("',
