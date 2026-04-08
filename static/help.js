@@ -20,6 +20,7 @@ class Help {
       makeReference(globalCommands),
 
       h2("Node Commands"),
+      p("There is always one root node."),
       makeReference(nodeCommands),
 
       h2("Widgets"),
@@ -41,7 +42,11 @@ class Help {
             div("can be escaped with a backslash."),
           ),
         ),
-        div("Attributes that start with a ", code("$"), " are used by widgets."),
+        div(
+          "Attributes that start with a ",
+          code("$"),
+          " are used by widgets.",
+        ),
         div("The argument is a label unless stated otherwise."),
       ),
       makeReference(widgets),
