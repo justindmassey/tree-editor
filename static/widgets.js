@@ -156,7 +156,11 @@ export default {
       let lastSep;
       for (let child of this.childNodes) {
         line.appendChild(child.widget);
-        line.appendChild((lastSep = div(separator)));
+        line.appendChild(
+          (lastSep = div(separator).e("click", (ev) =>
+            ctrlClick(this._attrNodes.$sep || child, ev),
+          )),
+        );
       }
       if (lastSep) {
         lastSep.remove();
