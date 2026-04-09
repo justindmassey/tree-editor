@@ -489,7 +489,7 @@ export default {
     ),
     create(arg) {
       if (!("$page" in this.attributes)) {
-        this.setAttribute("$page", 1);
+        this.setAttribute("$page", "last");
       }
       this.childrenWidget;
       let page;
