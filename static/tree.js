@@ -50,6 +50,14 @@ class Tree {
     }
   }
 
+  get name() {
+    if ("$name" in this.root.attributes) {
+      return this.root._attributes.$name;
+    } else {
+      return this.root.name.value;
+    }
+  }
+
   updateTypes() {
     let typedefs = {};
     let typedefDeps = {};
@@ -243,8 +251,9 @@ class Tree {
     this.updateTypes();
     this.updateOutput();
     this.updateNameSize();
-    if (this.root.name.value) {
-      document.title = this.root.name.value + " - TE";
+    let name = this.name;
+    if (name) {
+      document.title = name + " - TE";
     } else {
       document.title = "Tree Editor";
     }

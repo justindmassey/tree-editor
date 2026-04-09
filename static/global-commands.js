@@ -20,14 +20,18 @@ export default {
   "Control+s": {
     description: "save the tree",
     action() {
+      let name = this.tree.name;
+      if ("$name" in this.tree.root.attributes) {
+        name = this.tree.root._attributes.$name;
+      }
       post(
-        "/save/" + encodeURIComponent(this.tree.root.name.value),
+        "/save/" + encodeURIComponent(name),
         JSON.stringify(this.tree.root.serialize()),
       ).then((res) => {
         if (res.error) {
           alert(res.error);
         } else {
-          localStorage.setItem("tree", this.tree.root.name.value);
+          localStorage.setItem("tree", name);
           treeMenu.update();
           flash();
         }
@@ -37,22 +41,20 @@ export default {
   "Control+Alt+d": {
     description: "delete this tree",
     action() {
-      get("/delete/" + encodeURIComponent(this.tree.root.name.value)).then(
-        (res) => {
-          if (res.error) {
-            alert(res.error);
-          } else {
-            treeMenu.update();
-            if (this.tree.root.remove()) {
-              history.add();
-            }
-            this.tree.tree.scrollTop = 0;
-            this.tree.output.scrollTop = 0;
-            localStorage.setItem("tree", "");
-            flash();
+      get("/delete/" + encodeURIComponent(this.tree.name)).then((res) => {
+        if (res.error) {
+          alert(res.error);
+        } else {
+          treeMenu.update();
+          if (this.tree.root.remove()) {
+            history.add();
           }
-        },
-      );
+          this.tree.tree.scrollTop = 0;
+          this.tree.output.scrollTop = 0;
+          localStorage.setItem("tree", "");
+          flash();
+        }
+      });
     },
   },
   "Control+z": {

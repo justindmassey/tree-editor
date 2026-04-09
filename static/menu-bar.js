@@ -44,15 +44,15 @@ class MenuBar {
       new Menu(
         "Export",
         div("Tree").e("click", () => {
-          downloadFile(tree.root.name.value + ".tree", exportToText(tree.root));
+          downloadFile(tree.name + ".tree", exportToText(tree.root));
         }),
         div("JSON").e("click", () => {
-          downloadFile(tree.root.name.value + ".json", exportToJson(tree.root));
+          downloadFile(tree.name + ".json", exportToJson(tree.root));
         }),
         div("XML").e("click", () => {
           let xml = exportToXml(tree.root);
           if (xml) {
-            downloadFile(tree.root.name.value + ".xml", xml);
+            downloadFile(tree.name + ".xml", xml);
           }
         })
       )

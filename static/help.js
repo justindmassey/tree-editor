@@ -18,7 +18,11 @@ class Help {
 
       h2("Global Commands"),
       makeReference(globalCommands),
-
+      p(
+        div("If the root node has the attribute ", code("$name"), ","),
+        div("its value is used as the tree name when saving."),
+        div("Otherwise the name of the root node is used"),
+      ),
       h2("Node Commands"),
       p("There is always one root node."),
       makeReference(nodeCommands),
@@ -33,7 +37,7 @@ class Help {
           code("#"),
           '") ',
           div("are not rendered to the output."),
-          div("Control-click a widget in the output to focus it's node."),
+          div("Control-click a widget in the output to focus its node."),
           div("The output is updated in real time."),
           div(
             'The hash symbol and the dash ("',
