@@ -501,10 +501,12 @@ export default {
       let pager = div(
         button("<").e("click", () => {
           let page = Number(this._attributes.$page);
-          if (isNaN(page)) {
+          if(this._attributes.$page == "last" && this.childNodes.length >= 2) {
+            this.setAttribute("$page", this._childNodes.length - 1)
+          } else if (isNaN(page)) {
             this.setAttribute("$page", 1);
           } else {
-            if (page <= 1 || page > this.childNodes.length) {
+            if (page <= 1 || page > this._childNodes.length) {
               this.setAttribute("$page", this._childNodes.length || 1);
             } else {
               this.setAttribute("$page", page - 1);
