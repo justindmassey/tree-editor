@@ -196,7 +196,7 @@ export default {
       div(code("$label"), ": If set, it is used as the label."),
       div("If the tree doesn't exist, it's created (but not saved)."),
       div("Because the tree name is a widget argument,"),
-      div("trees with leading whitespace in their name can't be linked to.")
+      div("trees with leading whitespace in their name can't be linked to."),
     ),
     create(arg, unescapedArg) {
       let label = unescapedArg;
@@ -484,6 +484,8 @@ export default {
       div("pages"),
       div("Each child becomes a page."),
       div(code("$page"), " holds the current page number."),
+      div("If ", code("$page"), " is set to ", code("last"), ","),
+      div("the last page is always shown."),
     ),
     create(arg) {
       if (!("$page" in this.attributes)) {
@@ -491,7 +493,9 @@ export default {
       }
       this.childrenWidget;
       let page;
-      if (this.childNodes[this.attributes.$page - 1]) {
+      if (this._attributes.$page == "last" && this._childNodes.length) {
+        page = this._childNodes[this._childNodes.length - 1].widget;
+      } else if (this.childNodes[this.attributes.$page - 1]) {
         page = this._childNodes[this._attributes.$page - 1].widget;
       }
       let pager = div(
@@ -532,7 +536,11 @@ export default {
           return div(arg, " ", pager);
         }
       } else {
-        return div(pager, div(page));
+        if (page) {
+          return div(pager, div(page));
+        } else {
+          return div(pager);
+        }
       }
     },
   },
@@ -565,10 +573,7 @@ export default {
     },
   },
   "-tt": {
-    description: div(
-      div("teletype"),
-      div("uses monospace font")
-    ),
+    description: div(div("teletype"), div("uses monospace font")),
     create(arg) {
       if (arg) {
         if (this.childrenWidget.children.length) {
@@ -579,7 +584,7 @@ export default {
       } else {
         return this.childrenWidget.c("tt");
       }
-    }
+    },
   },
   "-bg": {
     description: div(
