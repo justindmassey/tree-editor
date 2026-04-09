@@ -82,15 +82,18 @@ export default class Node {
     let curNode = this;
     while (curNode && curNode != upTo) {
       if (curNode.isAttribute) {
-        result.unshift(
-          unescapeAttrName(curNode._isAttribute[1]) +
+        result.unshift({
+          name:
+            unescapeAttrName(curNode._isAttribute[1]) +
             "=" +
             this.attributeSubstitution(curNode._isAttribute[2]),
-        );
+          node: curNode,
+        });
       } else {
-        result.unshift(
-          this.attributeSubstitution(unescape(curNode.name.value)),
-        );
+        result.unshift({
+          name: this.attributeSubstitution(unescape(curNode.name.value)),
+          node: curNode,
+        });
       }
       curNode = curNode.parent;
     }

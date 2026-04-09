@@ -441,13 +441,25 @@ export default {
         if (child.node.isAttribute && child.node._isAttribute[1] == "$sep") {
           continue;
         }
+
         child.node.traverse((node) => {
           if (!node.children.children.length) {
-            pathsDiv.appendChild(
-              div(node.getPath(this).join(separator)).e("click", (ev) =>
-                ctrlClick(node, ev),
-              ),
-            );
+            let path = div();
+            let lastSep;
+            for (let segment of node.getPath(this)) {
+              path.appendChild(
+                span(segment.name).e("click", (ev) =>
+                  ctrlClick(segment.node, ev),
+                ),
+              );
+              path.appendChild(
+                (lastSep = span(separator).e("click", (ev) =>
+                  ctrlClick(this._attrNodes.$sep || this, ev),
+                )),
+              );
+            }
+            lastSep.remove();
+            pathsDiv.appendChild(path);
           }
         });
       }
