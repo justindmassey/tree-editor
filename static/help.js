@@ -21,7 +21,7 @@ class Help {
       p(
         div("If the root node has the attribute ", code("$name"), ","),
         div("its value is used as the tree name when saving."),
-        div("Otherwise the name of the root node is used"),
+        div("Otherwise the name of the root node is used."),
       ),
       h2("Node Commands"),
       p("There is always one root node."),
