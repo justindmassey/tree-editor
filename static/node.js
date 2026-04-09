@@ -229,9 +229,11 @@ export default class Node {
 
   get attributes() {
     this._attributes = {};
+    this._attrNodes = {};
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
+        this._attrNodes[m[1]] = child.node;
         this._attributes[unescapeAttrName(m[1])] = this.attributeSubstitution(
           m[2],
         );

@@ -54,8 +54,11 @@ export default {
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
         children.appendChild(
-          tr(td(bullet), td(child.widget)).e("click", (ev) =>
-            ctrlClick(child, ev),
+          tr(
+            td(bullet).e("click", (ev) =>
+              ctrlClick(this._attrNodes.$bullet || child, ev),
+            ),
+            td(child.widget),
           ),
         );
       }
