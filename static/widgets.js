@@ -53,7 +53,11 @@ export default {
       }
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
-        children.appendChild(tr(td(bullet), td(child.widget)));
+        children.appendChild(
+          tr(td(bullet), td(child.widget)).e("click", (ev) =>
+            ctrlClick(child, ev),
+          ),
+        );
       }
       if (children.children.length) {
         if (arg) {
@@ -72,7 +76,11 @@ export default {
       let children = table().c("ltbl");
       let cnt = 1;
       for (let child of this.childNodes) {
-        children.appendChild(tr(td(cnt + ". "), td(child.widget)));
+        children.appendChild(
+          tr(td(cnt + ". "), td(child.widget)).e("click", (ev) =>
+            ctrlClick(child, ev),
+          ),
+        );
         cnt++;
       }
       if (children.children.length) {
@@ -501,8 +509,8 @@ export default {
       let pager = div(
         button("<").e("click", () => {
           let page = Number(this._attributes.$page);
-          if(this._attributes.$page == "last" && this.childNodes.length >= 2) {
-            this.setAttribute("$page", this._childNodes.length - 1)
+          if (this._attributes.$page == "last" && this.childNodes.length >= 2) {
+            this.setAttribute("$page", this._childNodes.length - 1);
           } else if (isNaN(page)) {
             this.setAttribute("$page", 1);
           } else {
