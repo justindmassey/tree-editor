@@ -435,21 +435,23 @@ export default {
       } else {
         separator = " ";
       }
-      let paths = [];
+
+      let pathsDiv = div();
       for (let child of this.children.children) {
         if (child.node.isAttribute && child.node._isAttribute[1] == "$sep") {
           continue;
         }
         child.node.traverse((node) => {
           if (!node.children.children.length) {
-            paths.push(node.getPath(this));
+            pathsDiv.appendChild(
+              div(node.getPath(this).join(separator)).e("click", (ev) =>
+                ctrlClick(node, ev),
+              ),
+            );
           }
         });
       }
-      let pathsDiv = div();
-      for (let path of paths) {
-        pathsDiv.appendChild(div(path.join(separator)));
-      }
+
       if (arg) {
         if (pathsDiv.children.length) {
           return div(div(arg), pathsDiv.c("indented"));
