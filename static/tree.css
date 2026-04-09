@@ -19,8 +19,6 @@
 }
 
 .tree-container.hidden + .output:not(.hidden) {
-  display: flex;
-  justify-content: center;
   border: none;
 }
 

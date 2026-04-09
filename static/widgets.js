@@ -619,6 +619,23 @@ export default {
       }
     },
   },
+  "-cen": {
+    description: div(
+      div("center"),
+      div("centers children"),
+    ),
+    create(arg) {
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          return div(div(arg), this._childrenWidget.c("cen"));
+        } else {
+          return div(arg);
+        }
+      } else {
+        return this.childrenWidget.c("cen");
+      }
+    },
+  },
   "-bg": {
     description: div(
       div("background"),

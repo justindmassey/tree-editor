@@ -28,12 +28,12 @@ thead,
   padding-left: 1em;
 }
 
-.ltbl>tr>td {
+.ltbl > tr > td {
   border: none;
   padding: 0px;
 }
 
-.ltbl>tr>td:nth-child(1) {
+.ltbl > tr > td:nth-child(1) {
   text-align: right;
 }
 
@@ -163,4 +163,9 @@ img {
   font-family: monospace;
   color: var(--color-1);
   font-size: 1.25em;
+}
+
+.cen {
+  display: flex;
+  justify-content: center;
 }
