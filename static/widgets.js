@@ -199,7 +199,7 @@ export default {
       div("trees with leading whitespace in their name can't be linked to.")
     ),
     create(arg, unescapedArg) {
-      let label = arg;
+      let label = unescapedArg;
       if ("$label" in this.attributes) {
         label = this._attributes.$label;
       }
