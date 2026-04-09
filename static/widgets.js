@@ -44,12 +44,12 @@ export default {
     description: div(
       div("unordered list"),
       div(code("$bullet"), ": the bullet to be used"),
-      div("If ", code("$bullet"), " is not set, a bullet operator is used.")
+      div("If ", code("$bullet"), " is not set, a bullet operator is used."),
     ),
     create(arg) {
-      let bullet = "∙ "
-      if("$bullet" in this.attributes) {
-        bullet = this._attributes.$bullet
+      let bullet = "∙ ";
+      if ("$bullet" in this.attributes) {
+        bullet = this._attributes.$bullet;
       }
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
@@ -193,11 +193,18 @@ export default {
       div("tree link"),
       div("a link to another tree"),
       div(code("argument"), ": the name of the tree to link to"),
+      div(code("$label"), ": If set, it is used as the label."),
       div("If the tree doesn't exist, it's created (but not saved)."),
+      div("Because the tree name is a widget argument,"),
+      div("trees with leading whitespace in their name can't be linked to.")
     ),
-    create(arg) {
-      let btn = button(arg || " ").e("click", () => {
-        tree.load(arg);
+    create(arg, unescapedArg) {
+      let label = arg;
+      if ("$label" in this.attributes) {
+        label = this._attributes.$label;
+      }
+      let btn = button(label || " ").e("click", () => {
+        tree.load(unescapedArg);
       });
       if (this.childrenWidget.children.length) {
         return div(div(btn), this.childrenWidget.c("indented"));

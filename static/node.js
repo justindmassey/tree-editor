@@ -52,6 +52,7 @@ export default class Node {
     if (m && widgets[m[1]]) {
       widget = widgets[m[1]].create.bind(this)(
         this.attributeSubstitution(unescapeArg(m[2])),
+        m[2],
       );
     } else {
       let arg = this.attributeSubstitution(unescape(this.name.value));
