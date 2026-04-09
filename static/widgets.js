@@ -543,9 +543,11 @@ export default {
           }
           history.add();
         }),
+        " ",
         div(this.attributes.$page + " / " + this.childNodes.length).c(
           "pgs-page",
         ),
+        " ",
         button(">").e("click", () => {
           let page = Number(this._attributes.$page);
           if (isNaN(page)) {
