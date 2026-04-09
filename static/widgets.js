@@ -158,7 +158,7 @@ export default {
         line.appendChild(child.widget);
         line.appendChild(
           (lastSep = div(separator).e("click", (ev) =>
-            ctrlClick(this._attrNodes.$sep || child, ev),
+            ctrlClick(this._attrNodes.$sep || this, ev),
           )),
         );
       }
