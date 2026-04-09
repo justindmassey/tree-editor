@@ -142,6 +142,7 @@ button {
 }
 
 .pgs-page {
+  min-width: 3.75em; 
   display: inline-block;
   text-align: center;
 }

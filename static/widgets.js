@@ -620,19 +620,18 @@ export default {
     },
   },
   "-cen": {
-    description: div(
-      div("center"),
-      div("centers children"),
-    ),
+    description: "center horizontally",
     create(arg) {
       if (arg) {
         if (this.childrenWidget.children.length) {
-          return div(div(arg), this._childrenWidget.c("cen"));
+          return div(div(div(arg), this._childrenWidget.c("indented"))).c(
+            "cen",
+          );
         } else {
-          return div(arg);
+          return div(arg).c("cen");
         }
       } else {
-        return this.childrenWidget.c("cen");
+        return div(this.childrenWidget).c("cen");
       }
     },
   },
