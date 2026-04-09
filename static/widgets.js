@@ -564,6 +564,23 @@ export default {
       }
     },
   },
+  "-tt": {
+    description: div(
+      div("teletype"),
+      div("uses monospace font")
+    ),
+    create(arg) {
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          return div(div(arg), this._childrenWidget.c("indented")).c("tt");
+        } else {
+          return div(arg).c("tt");
+        }
+      } else {
+        return this.childrenWidget.c("tt");
+      }
+    }
+  },
   "-bg": {
     description: div(
       div("background"),

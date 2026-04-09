@@ -159,3 +159,8 @@ button {
 img {
   display: block;
 }
+
+.tt {
+  font-family: monospace;
+  font-size: 1.25em;
+}
