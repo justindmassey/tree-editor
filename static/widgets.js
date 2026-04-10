@@ -474,11 +474,7 @@ export default {
         this.setAttribute("$tab", tab);
         history.add();
       });
-      if ("$tab" in this._attributes && tabs[this._attributes.$tab]) {
-        tabsObj.tab = this._attributes.$tab;
-      } else {
-        this.setAttribute("$tab", tabsObj.tab);
-      }
+      this.setAttribute("$tab", tabsObj.tab);
       if (arg) {
         return div(div(arg), tabsObj.elem.c("indented"));
       } else {
