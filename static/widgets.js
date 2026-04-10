@@ -461,11 +461,15 @@ export default {
     ),
     create(arg) {
       let tabs = new Map();
+      this.attributes;
       for (let child of this.childNodes) {
+        if(child.lastName == this._attributes.$tab) {
+          this.setAttribute("$tab", child.name.value);
+        };
         tabs.set(child.nameText, child.childrenWidget);
         tabs.get(child._nameText).node = child;
       }
-      let tabNames = Array.from(tabs.keys());
+
       let initialTab = tabs.keys().next().value;
       if ("$tab" in this.attributes && tabs.has(this._attributes.$tab)) {
         initialTab = this._attributes.$tab;
