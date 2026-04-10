@@ -509,7 +509,10 @@ export default class Node {
 
 function unescape(str) {
   return unescapeArg(
-    str.replace(/^(?<!\\)\\-/, "-").replace(/^(?<!\\)\\#/, "#"),
+    str
+      .replace(/^(?<!\\)\\-/, "-")
+      .replace(/^(?<!\\)\\#/, "#")
+      .replace(/^(?<!\\)\\::/, "::"),
   );
 }
 
@@ -521,7 +524,7 @@ function unescapeArg(str) {
   return str
     .replace(Node.listTypeRegEx, "")
     .replace(Node.nodeTypeRegEx, "")
-    .replace(/\\:/g, ":")
+    .replace(/\\:(?!:)/g, ":")
     .replace(/\\\./g, ".")
     .replace(/\\=/g, "=")
     .replace(/\\\\/g, "\\");
