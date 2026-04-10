@@ -460,16 +460,22 @@ export default {
       div(code("$tab"), " holds the current tab"),
     ),
     create(arg) {
-      let tabs = {};
+      let tabs = new Map();
       for (let child of this.childNodes) {
-        tabs[child.nameText] = child.childrenWidget;
-        tabs[child._nameText].node = child;
+        tabs.set(child.nameText, child.childrenWidget);
+        tabs.get(child._nameText).node = child;
       }
-      let tabsObj = new Tabs(tabs, (tab) => {
+      let tabNames = Array.from(tabs.keys());
+      let initialTab = tabs.keys().next().value;
+      console.log(console.log(this.attributes.$tab, tabNames));
+      if ("$tab" in this.attributes && tabs.has(this._attributes.$tab)) {
+        initialTab = this._attributes.$tab;
+      }
+      let tabsObj = new Tabs(tabs, initialTab, (tab) => {
         this.setAttribute("$tab", tab);
         history.add();
       });
-      if ("$tab" in this.attributes && tabs[this._attributes.$tab]) {
+      if ("$tab" in this._attributes && tabs[this._attributes.$tab]) {
         tabsObj.tab = this._attributes.$tab;
       } else {
         this.setAttribute("$tab", tabsObj.tab);

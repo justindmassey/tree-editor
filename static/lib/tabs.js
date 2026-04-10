@@ -1,7 +1,8 @@
 import { div } from "./elements.js";
 
 export default class Tabs {
-  constructor(tabs, onchange) {
+  constructor(tabs, initialTab, onchange) {
+    this.initialTab = initialTab;
     this.onchange = onchange;
     this.header = div().c("tabs-header");
     this.headers = {};
@@ -14,12 +15,12 @@ export default class Tabs {
     this._tabs = tabs;
     this.header.replaceChildren();
     this.body.replaceChildren();
-    let tabNames = Object.keys(tabs);
+    let tabNames = Array.from(tabs.keys());
     if (tabNames.length) {
-      for (let name in tabs) {
+      for (let name of tabNames) {
         this.headers[name] = div(name).c("tab");
-        if (tabs[name].node) {
-          this.headers[name].ctrlClick(tabs[name].node);
+        if (tabs.get(name).node) {
+          this.headers[name].ctrlClick(tabs.get(name).node);
         }
         this.headers[name].e("click", (ev) => {
           if (this.tab != name) {
@@ -30,10 +31,10 @@ export default class Tabs {
           }
         });
         this.header.appendChild(this.headers[name]);
-        tabs[name].classList.add("hidden");
-        this.body.appendChild(tabs[name]);
+        tabs.get(name).classList.add("hidden");
+        this.body.appendChild(tabs.get(name));
       }
-      this._tab = tabNames[0];
+      this._tab = this.initialTab;
       this.tab = this._tab;
     }
   }
@@ -43,11 +44,11 @@ export default class Tabs {
   }
 
   set tab(name) {
-    if (this.tabs[name]) {
-      this.tabs[this.tab].classList.add("hidden");
+    if (this.tabs.get(name)) {
+      this.tabs.get(this.tab).classList.add("hidden");
       this.headers[this.tab].classList.remove("active");
       this._tab = name;
-      this.tabs[this.tab].classList.remove("hidden");
+      this.tabs.get(this.tab).classList.remove("hidden");
       this.headers[this.tab].classList.add("active");
     }
   }
