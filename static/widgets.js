@@ -467,7 +467,6 @@ export default {
       }
       let tabNames = Array.from(tabs.keys());
       let initialTab = tabs.keys().next().value;
-      console.log(console.log(this.attributes.$tab, tabNames));
       if ("$tab" in this.attributes && tabs.has(this._attributes.$tab)) {
         initialTab = this._attributes.$tab;
       }
