@@ -44,6 +44,7 @@ class Help {
             code("-"),
             '") at the beginning of a node name',
             div("can be escaped with a backslash."),
+            div("A backslash can be escaped with a backslash.")
           ),
         ),
         div(
@@ -63,6 +64,7 @@ class Help {
         '") ',
         "can be escaped with a backslash.",
       ),
+      div("A backslash can be escaped with a backslash."),
       div("Attribute values need no escaping."),
       div(code("$url"), "-attributes don't affect input size."),
 
@@ -91,6 +93,7 @@ class Help {
       div("Type definitions can inherit from other type definitions."),
       div("Types are updated in real time."),
       div("Type definitions are not rendered to the output."),
+      div("A backslash can be escaped with a backslash."),
 
       h2("Text Export"),
       div("Nodes are structured with indentation."),

@@ -7,10 +7,10 @@ import moveElementToIndex from "./lib/move-element-to-index.js";
 import ctrlClick from "./ctrl-click.js";
 
 export default class Node {
-  static attrRegEx = /^((?:[^=]|\\=)*)(?<!\\)=(.*)$/;
+  static attrRegEx = /^((?:[^=]|(?:(?<!\\)\\=))*)(?<!(?<!\\)\\)=(.*)$/;
   static widgetRegEx = /^(-\S+)\s*(.*)/;
-  static nodeTypeRegEx = /(?<!\\)\.[^\.:\s]+/g;
-  static listTypeRegEx = /(?<!:|\\):[^\.:\s]+/g;
+  static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^\.:\s]+/g;
+  static listTypeRegEx = /(?<!:|((?<!\\)\\)):[^\.:\s]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
 
   constructor(name = "", ...children) {
@@ -214,7 +214,7 @@ export default class Node {
 
   setAttribute(name, value = "", focus = false, escape = true) {
     if (escape) {
-      name = name.replace(/=/g, "\\=");
+      name = name.replace(/\\/g, "\\\\").replace(/=/g, "\\=");
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
@@ -508,11 +508,11 @@ export default class Node {
 }
 
 function unescape(str) {
-  return unescapeArg(str).replace(/^\\-/, "-").replace(/^\\#/, "#");
+  return unescapeArg(str.replace(/^(?<!\\)\\-/, "-").replace(/^\\#/, "#"));
 }
 
 function unescapeAttrName(str) {
-  return str.replaceAll("\\=", "=");
+  return str.replaceAll("(?<!\\)\\=", "=").replace(/\\\\/g, "\\");
 }
 
 function unescapeArg(str) {
@@ -521,5 +521,6 @@ function unescapeArg(str) {
     .replace(Node.nodeTypeRegEx, "")
     .replace(/\\:/g, ":")
     .replace(/\\\./g, ".")
-    .replace(/\\=/g, "=");
+    .replace(/\\=/g, "=")
+    .replace(/\\\\/g, "\\");
 }
