@@ -12,9 +12,6 @@ import {
   textarea,
   select,
   option,
-  ul,
-  ol,
-  li,
   fieldset,
   legend,
   span,
@@ -27,7 +24,6 @@ import {
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
 import Node from "./node.js";
-import ctrlClick from "./ctrl-click.js";
 import tree from "./tree.js";
 
 export default {
@@ -55,9 +51,7 @@ export default {
       for (let child of this.childNodes) {
         children.appendChild(
           tr(
-            td(bullet).e("click", (ev) =>
-              ctrlClick(this._attrNodes.$bullet || child, ev),
-            ),
+            td(bullet).ctrlClick(this._attrNodes.$bullet || child),
             td(child.widget),
           ),
         );
@@ -80,9 +74,7 @@ export default {
       let cnt = 1;
       for (let child of this.childNodes) {
         children.appendChild(
-          tr(td(cnt + ". "), td(child.widget)).e("click", (ev) =>
-            ctrlClick(child, ev),
-          ),
+          tr(td(cnt + ". "), td(child.widget)).ctrlClick(child),
         );
         cnt++;
       }
@@ -157,9 +149,7 @@ export default {
       for (let child of this.childNodes) {
         line.appendChild(child.widget);
         line.appendChild(
-          (lastSep = div(separator).e("click", (ev) =>
-            ctrlClick(this._attrNodes.$sep || this, ev),
-          )),
+          (lastSep = div(separator).ctrlClick(this._attrNodes.$sep || this)),
         );
       }
       if (lastSep) {
@@ -187,9 +177,7 @@ export default {
     create(arg) {
       let paragraphs = div();
       for (let child of this.childNodes) {
-        paragraphs.appendChild(
-          h4(child.nameText).e("click", (ev) => ctrlClick(child, ev)),
-        );
+        paragraphs.appendChild(h4(child.nameText).ctrlClick(child));
         let paragraph = p();
         for (let grandchild of child.childNodes) {
           paragraph.appendChild(grandchild.widget);
@@ -272,11 +260,13 @@ export default {
           checkbox.checked = child._attributes.$checked == "true";
         } else {
           child.setAttribute("$checked", checkbox.checked);
+          child.attributes;
         }
+        checkbox.ctrlClick(child._attrNodes.$checked || child);
         checklist.appendChild(
           div(checkbox, div(child.widget).c("cl-child"))
             .c("cl-item")
-            .e("click", (ev) => ctrlClick(child, ev)),
+            .ctrlClick(child),
         );
       }
       if (arg) {
@@ -301,9 +291,7 @@ export default {
       let longestChild = 0;
 
       for (let child of this.childNodes) {
-        header.appendChild(
-          td(child.nameText).e("click", (ev) => ctrlClick(child, ev)),
-        );
+        header.appendChild(td(child.nameText).ctrlClick(child));
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
@@ -341,13 +329,7 @@ export default {
       let tbl = table();
       let longestChild = 0;
       for (let child of this.childNodes) {
-        let row = tr(
-          td(
-            div(child.nameText)
-              .c("htbl-label")
-              .e("click", (ev) => ctrlClick(child, ev)),
-          ),
-        );
+        let row = tr(td(div(child.nameText).c("htbl-label").ctrlClick(child)));
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
@@ -388,7 +370,7 @@ export default {
             tr(
               td(attr.attrNameText),
               td(attr.attributeSubstitution(attr._isAttribute[2])),
-            ).e("click", (ev) => ctrlClick(attr, ev)),
+            ).ctrlClick(attr),
           );
         }
       }
@@ -447,14 +429,10 @@ export default {
             let path = div();
             let lastSep;
             for (let segment of node.getPath(this)) {
+              path.appendChild(span(segment.name).ctrlClick(segment.node));
               path.appendChild(
-                span(segment.name).e("click", (ev) =>
-                  ctrlClick(segment.node, ev),
-                ),
-              );
-              path.appendChild(
-                (lastSep = span(separator).e("click", (ev) =>
-                  ctrlClick(this._attrNodes.$sep || this, ev),
+                (lastSep = span(separator).ctrlClick(
+                  this._attrNodes.$sep || this,
                 )),
               );
             }
@@ -483,19 +461,14 @@ export default {
     ),
     create(arg) {
       let tabs = {};
-      let tabClicked = {};
       for (let child of this.childNodes) {
         tabs[child.nameText] = child.childrenWidget;
-        tabClicked[child._nameText] = (ev) => ctrlClick(child, ev);
+        tabs[child._nameText].node = child;
       }
-      let tabsObj = new Tabs(
-        tabs,
-        (tab) => {
-          this.setAttribute("$tab", tab);
-          history.add();
-        },
-        tabClicked,
-      );
+      let tabsObj = new Tabs(tabs, (tab) => {
+        this.setAttribute("$tab", tab);
+        history.add();
+      });
       if ("$tab" in this.attributes && tabs[this._attributes.$tab]) {
         tabsObj.tab = this._attributes.$tab;
       } else {
@@ -755,7 +728,7 @@ export default {
         radio.appendChild(
           div(radioButton, div(child.widget).c("rad-child"))
             .c("rad-item")
-            .e("click", (ev) => ctrlClick(child, ev)),
+            .ctrlClick(child),
         );
       }
       if (arg) {
@@ -844,9 +817,7 @@ export default {
           }
 
           form.appendChild(
-            tr(td(attrNode.attrNameText), td(entry)).e("click", (ev) =>
-              ctrlClick(attrNode, ev),
-            ),
+            tr(td(attrNode.attrNameText), td(entry)).ctrlClick(attrNode),
           );
         }
       }

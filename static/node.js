@@ -4,7 +4,18 @@ import { div, input } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
-import ctrlClick from "./ctrl-click.js";
+
+Element.prototype.ctrlClick = function (node) {
+  this.e("click", (ev) => {
+    if (ev.ctrlKey) {
+      ev.stopPropagation();
+      ev.stopImmediatePropagation();
+      ev.preventDefault();
+      node.focus();
+    }
+  });
+  return this;
+};
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|(?:(?<!\\)\\=))*)(?<!(?<!\\)\\)=(.*)$/;
@@ -48,25 +59,24 @@ export default class Node {
 
   get widget() {
     let m = this.name.value.match(Node.widgetRegEx);
-    let widget;
     if (m && widgets[m[1]]) {
-      widget = widgets[m[1]].create.bind(this)(
-        this.attributeSubstitution(unescapeArg(m[2])),
-        m[2],
-      );
+      return widgets[m[1]].create
+        .bind(this)(this.attributeSubstitution(unescapeArg(m[2])), m[2])
+        .ctrlClick(this);
     } else {
       let arg = this.attributeSubstitution(unescape(this.name.value));
       if (arg) {
         if (this.childrenWidget.children.length) {
-          widget = div(div(arg), this._childrenWidget.c("indented"));
+          return div(div(arg), this._childrenWidget.c("indented")).ctrlClick(
+            this,
+          );
         } else {
-          widget = div(arg);
+          return div(arg).ctrlClick(this);
         }
       } else {
-        widget = this.childrenWidget;
+        return this.childrenWidget.ctrlClick(this);
       }
     }
-    return widget.e("click", (ev) => ctrlClick(this, ev));
   }
 
   get childrenWidget() {
