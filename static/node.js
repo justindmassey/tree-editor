@@ -508,7 +508,9 @@ export default class Node {
 }
 
 function unescape(str) {
-  return unescapeArg(str.replace(/^(?<!\\)\\-/, "-").replace(/^\\#/, "#"));
+  return unescapeArg(
+    str.replace(/^(?<!\\)\\-/, "-").replace(/^(?<!\\)\\#/, "#"),
+  );
 }
 
 function unescapeAttrName(str) {
