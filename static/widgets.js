@@ -677,10 +677,13 @@ export default {
       div("Children of the selected option are rendered below."),
     ),
     create(arg) {
-      let opt = select().e("change", () => {
-        this.setAttribute("$value", opt.value);
-        history.add();
-      });
+      this.attributes;
+      let opt = select()
+        .ctrlClick(this._attrNodes.$value || this)
+        .e("change", () => {
+          this.setAttribute("$value", opt.value);
+          history.add();
+        });
       let optChildren = {};
       for (let child of this.childNodes) {
         opt.appendChild(option(child.nameText));
@@ -688,7 +691,7 @@ export default {
           optChildren[child._nameText] = child.childrenWidget;
         }
       }
-      if ("$value" in this.attributes) {
+      if ("$value" in this._attributes) {
         opt.value = this._attributes.$value;
       } else {
         this.setAttribute("$value", opt.value);

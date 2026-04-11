@@ -6,6 +6,14 @@ import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
 
 Element.prototype.ctrlClick = function (node) {
+  this.e("mousedown", (ev) => {
+    if (ev.ctrlKey) {
+      ev.stopPropagation();
+      ev.stopImmediatePropagation();
+      ev.preventDefault();
+      node.focus();
+    }
+  });
   this.e("click", (ev) => {
     if (ev.ctrlKey) {
       ev.stopPropagation();
