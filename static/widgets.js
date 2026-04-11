@@ -40,7 +40,13 @@ export default {
     description: div(
       div("unordered list"),
       div(code("$prefix"), ": added before each item"),
-      div("If ", code("$prefix"), " is not set, a bullet operator is used."),
+      div(
+        "If ",
+        code("$prefix"),
+        " is not set, a bullet operator (",
+        code("∙ "),
+        ") is used.",
+      ),
     ),
     create(arg) {
       let bullet = "∙ ";
