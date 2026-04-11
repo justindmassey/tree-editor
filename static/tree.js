@@ -13,10 +13,10 @@ class Tree {
     this.output = div().c("output", "hidden");
     window.addEventListener("keydown", (ev) => {
       if (ev.key == "Control") {
-        this.output.style.cursor = "default";
+        this.output.classList.add("default-cursor")
       }
     });
-    window.addEventListener("keyup", (ev) => (this.output.style.cursor = ""));
+    window.addEventListener("keyup", (ev) => (this.output.classList.remove("default-cursor")));
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
     this.root = new Node();

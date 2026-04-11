@@ -38,6 +38,10 @@
   min-height: 0;
 }
 
+.output.default-cursor, .output.default-cursor * {
+  cursor: default;
+}
+
 .output::after {
   content: "";
   display: block;
