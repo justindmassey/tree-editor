@@ -745,7 +745,7 @@ export default {
         } else {
           radioButton.a("value", child.nameText);
         }
-        radioButton.ctrlClick(child);
+        radioButton.ctrlClick(this._attrNodes.$value || child);
         radioButton.e("click", () => {
           this.setAttribute("$value", radioButton.value);
           history.add();
