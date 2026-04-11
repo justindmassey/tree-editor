@@ -4,6 +4,7 @@ import { div, input } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
+import tree from "./tree.js";
 
 Element.prototype.ctrlClick = function (node) {
   this.e("mousedown", (ev) => {
@@ -418,6 +419,7 @@ export default class Node {
       this.parent.traverseUp((n) => n.expand());
     }
     this.name.focus();
+    tree.activeElement = this.name;
   }
 
   replaceWith(node, focus = true) {

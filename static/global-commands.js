@@ -134,7 +134,7 @@ export default {
     description: "toggle tree",
     action() {
       if (!this.tree.tree.classList.contains("hidden")) {
-        activeElement = document.activeElement;
+        this.tree.activeElement = document.activeElement;
       }
       this.tree.tree.classList.toggle("hidden");
       if (this.tree.tree.classList.contains("hidden")) {
@@ -142,8 +142,8 @@ export default {
         this.tree.elem.style.height = "";
       } else {
         localStorage.setItem("showTree", "true");
-        if (activeElement && activeElement.focus) {
-          activeElement.focus();
+        if (this.tree.activeElement && this.tree.activeElement.focus) {
+          this.tree.activeElement.focus();
         }
       }
     },
