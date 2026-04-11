@@ -1,9 +1,6 @@
 import history from "./history.js";
 import { post, get } from "./lib/ajax.js";
 import treeMenu from "./tree-menu.js";
-import Node from "./node.js";
-
-let activeElement;
 
 export default {
   "Control+Alt+n": {
