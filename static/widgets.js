@@ -114,6 +114,7 @@ export default {
       }
       let toggleButton = span(icon)
         .c("tgl-icon")
+        .ctrlClick(this._attrNodes.$expanded || this)
         .e("click", () => {
           if (expanded) {
             this.setAttribute("$expanded", false);
@@ -510,39 +511,46 @@ export default {
         page = this._childNodes[this._attributes.$page - 1].widget;
       }
       let pager = div(
-        button("<").e("click", () => {
-          let page = Number(this._attributes.$page);
-          if (this._attributes.$page == "last" && this.childNodes.length >= 2) {
-            this.setAttribute("$page", this._childNodes.length - 1);
-          } else if (isNaN(page)) {
-            this.setAttribute("$page", 1);
-          } else {
-            if (page <= 1 || page > this._childNodes.length) {
-              this.setAttribute("$page", this._childNodes.length || 1);
+        button("<")
+          .ctrlClick(this._attrNodes.$page || this)
+          .e("click", () => {
+            let page = Number(this._attributes.$page);
+            if (
+              this._attributes.$page == "last" &&
+              this.childNodes.length >= 2
+            ) {
+              this.setAttribute("$page", this._childNodes.length - 1);
+            } else if (isNaN(page)) {
+              this.setAttribute("$page", 1);
             } else {
-              this.setAttribute("$page", page - 1);
+              if (page <= 1 || page > this._childNodes.length) {
+                this.setAttribute("$page", this._childNodes.length || 1);
+              } else {
+                this.setAttribute("$page", page - 1);
+              }
             }
-          }
-          history.add();
-        }),
+            history.add();
+          }),
         " ",
         div(this.attributes.$page + " / " + this.childNodes.length).c(
           "pgs-page",
         ),
         " ",
-        button(">").e("click", () => {
-          let page = Number(this._attributes.$page);
-          if (isNaN(page)) {
-            this.setAttribute("$page", 1);
-          } else {
-            if (page < 1 || page >= this._childNodes.length) {
+        button(">")
+          .ctrlClick(this._attrNodes.$page || this)
+          .e("click", () => {
+            let page = Number(this._attributes.$page);
+            if (isNaN(page)) {
               this.setAttribute("$page", 1);
             } else {
-              this.setAttribute("$page", page + 1);
+              if (page < 1 || page >= this._childNodes.length) {
+                this.setAttribute("$page", 1);
+              } else {
+                this.setAttribute("$page", page + 1);
+              }
             }
-          }
-          history.add();
-        }),
+            history.add();
+          }),
       )
         .c("pgs-pager")
         .ctrlClick(this._attrNodes.$page || this);
@@ -731,6 +739,7 @@ export default {
         } else {
           radioButton.a("value", child.nameText);
         }
+        radioButton.ctrlClick(child);
         radioButton.e("click", () => {
           this.setAttribute("$value", radioButton.value);
           history.add();
