@@ -307,7 +307,6 @@ export default class Node {
 
   updateLastValues() {
     this.lastName = this.name.value;
-    this.lastNameText = this.nameText;
     let m = this.isAttribute;
     if (m) {
       this.lastAttrName = m[1];
@@ -320,6 +319,7 @@ export default class Node {
     let n = new Node(this.name.value);
     n.lastName = this.lastName;
     n.lastAttrName = this.lastAttrName;
+    n.lastNameText = this.lastNameText;
     n.sourceType = this.sourceType;
     n.sourceOwner = this.sourceOwner;
     for (let child of this.children.children) {
