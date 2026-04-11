@@ -813,9 +813,7 @@ export default {
       let children = this.childrenWidget;
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          let eventName =
-            attrNode.attributes.$type == "range" ? "change" : "input";
-          let entry = input().e(eventName, () => {
+          let entry = input().e("input", () => {
             if (entry.type == "checkbox") {
               attrNode.name.value =
                 attrNode._isAttribute[1] + "=" + entry.checked;
@@ -827,7 +825,7 @@ export default {
 
             history.add(true);
           });
-          if (attrNode._attributes.$type) {
+          if (attrNode.attributes.$type) {
             let type = attrNode._attributes.$type;
             if (["date", "checkbox", "number", "range"].includes(type)) {
               entry.type = attrNode._attributes.$type;
