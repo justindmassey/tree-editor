@@ -39,19 +39,19 @@ export default {
   "-ul": {
     description: div(
       div("unordered list"),
-      div(code("$bullet"), ": the bullet to be used"),
-      div("If ", code("$bullet"), " is not set, a bullet operator is used."),
+      div(code("$prefix"), ": added before each item"),
+      div("If ", code("$prefix"), " is not set, a bullet operator is used."),
     ),
     create(arg) {
       let bullet = "∙ ";
-      if ("$bullet" in this.attributes) {
-        bullet = this._attributes.$bullet;
+      if ("$prefix" in this.attributes) {
+        bullet = this._attributes.$prefix;
       }
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
         children.appendChild(
           tr(
-            td(bullet).ctrlClick(this._attrNodes.$bullet || child),
+            td(bullet).ctrlClick(this._attrNodes.$prefix || child),
             td(child.widget),
           ),
         );
