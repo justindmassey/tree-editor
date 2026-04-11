@@ -543,7 +543,9 @@ export default {
           }
           history.add();
         }),
-      ).c("pgs-pager");
+      )
+        .c("pgs-pager")
+        .ctrlClick(this._attrNodes.$page || this);
       if (arg) {
         if (page) {
           return div(arg, " ", pager, div(page).c("indented"));
