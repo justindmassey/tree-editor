@@ -112,6 +112,7 @@ export default {
       } else {
         icon = "▶";
       }
+      this.attributes;
       let toggleButton = span(icon)
         .c("tgl-icon")
         .ctrlClick(this._attrNodes.$expanded || this)
