@@ -463,8 +463,8 @@ export default {
       let tabs = new Map();
       this.attributes;
       for (let child of this.childNodes) {
-        if(child.lastName == this._attributes.$tab) {
-          this.setAttribute("$tab", child.name.value);
+        if(child.lastNameText == this._attributes.$tab) {
+          this.setAttribute("$tab", child.nameText);
         };
         tabs.set(child.nameText, child.childrenWidget);
         tabs.get(child._nameText).node = child;

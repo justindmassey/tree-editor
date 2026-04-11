@@ -307,6 +307,7 @@ export default class Node {
 
   updateLastValues() {
     this.lastName = this.name.value;
+    this.lastNameText = this.nameText;
     let m = this.isAttribute;
     if (m) {
       this.lastAttrName = m[1];
