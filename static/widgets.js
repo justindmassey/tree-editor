@@ -208,7 +208,7 @@ export default {
         label = this._attributes.$label;
       }
       let btn = button(label || " ")
-        .ctrlClick(this)
+        .ctrlClick(this._attrNodes.$label || this)
         .e("click", () => {
           tree.load(unescapedArg);
         });
