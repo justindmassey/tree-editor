@@ -466,6 +466,7 @@ export default {
         if(child.lastNameText == this._attributes.$tab) {
           this.setAttribute("$tab", child.nameText);
         };
+        child.lastNameText = child.nameText;
         tabs.set(child.nameText, child.childrenWidget);
         tabs.get(child._nameText).node = child;
       }
