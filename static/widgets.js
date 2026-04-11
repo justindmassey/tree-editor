@@ -207,9 +207,11 @@ export default {
       if ("$label" in this.attributes) {
         label = this._attributes.$label;
       }
-      let btn = button(label || " ").e("click", () => {
-        tree.load(unescapedArg);
-      });
+      let btn = button(label || " ")
+        .ctrlClick(this)
+        .e("click", () => {
+          tree.load(unescapedArg);
+        });
       if (this.childrenWidget.children.length) {
         return div(div(btn), this.childrenWidget.c("indented"));
       } else {
