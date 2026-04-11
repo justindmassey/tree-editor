@@ -36,7 +36,6 @@ export default class Node {
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
-    this.updateLastValues();
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -55,6 +54,7 @@ export default class Node {
     for (let child of children) {
       this.appendChild(child, false);
     }
+    this.updateLastValues();
   }
 
   get widget() {
@@ -119,7 +119,8 @@ export default class Node {
         if (
           child.node.sourceOwner == typeName &&
           child.node.sourceType &&
-          child.node.equals(child.node.sourceType)
+          child.node.equals(child.node.sourceType) &&
+          !node.getChild(child.node.name.value)
         ) {
           child.node.remove(false);
         }
