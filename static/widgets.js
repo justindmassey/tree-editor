@@ -735,6 +735,7 @@ export default {
         value = this._attributes.$value;
       } else {
         this.setAttribute("$value");
+        this.attributes;
         value = "";
       }
       let groupName = crypto.randomUUID();
