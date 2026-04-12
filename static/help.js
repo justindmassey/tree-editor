@@ -94,6 +94,7 @@ class Help {
       div("Types are updated in real time."),
       div("Type definitions are not rendered to the output."),
       div("A backslash can be escaped with a backslash."),
+      div("Dublicate nodes in a type definition get inherited only once"),
 
       h2("Text Export"),
       div("Nodes are structured with indentation."),
