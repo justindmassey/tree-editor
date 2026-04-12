@@ -118,7 +118,6 @@ export default {
       } else {
         icon = "▶";
       }
-      this.attributes;
       let toggleButton = span(icon)
         .c("tgl-icon")
         .ctrlClick(this._attrNodes.$expanded || this)
@@ -270,7 +269,6 @@ export default {
           checkbox.checked = child._attributes.$checked == "true";
         } else {
           child.setAttribute("$checked", checkbox.checked);
-          child.attributes;
         }
         checkbox.ctrlClick(child._attrNodes.$checked || child);
         checklist.appendChild(
@@ -684,13 +682,10 @@ export default {
       div("Children of the selected option are rendered below."),
     ),
     create(arg) {
-      this.attributes;
-      let opt = select()
-        .ctrlClick(this._attrNodes.$value || this)
-        .e("change", () => {
-          this.setAttribute("$value", opt.value);
-          history.add();
-        });
+      let opt = select().e("change", () => {
+        this.setAttribute("$value", opt.value);
+        history.add();
+      });
       let optChildren = {};
       for (let child of this.childNodes) {
         opt.appendChild(option(child.nameText));
@@ -698,11 +693,12 @@ export default {
           optChildren[child._nameText] = child.childrenWidget;
         }
       }
-      if ("$value" in this._attributes) {
+      if ("$value" in this.attributes) {
         opt.value = this._attributes.$value;
       } else {
         this.setAttribute("$value", opt.value);
       }
+      opt.ctrlClick(this._attrNodes.$value || this);
       let elem;
       if (arg) {
         elem = div(arg, " ", opt);
@@ -741,7 +737,6 @@ export default {
         value = this._attributes.$value;
       } else {
         this.setAttribute("$value");
-        this.attributes;
         value = "";
       }
       let groupName = crypto.randomUUID();
