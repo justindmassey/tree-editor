@@ -785,8 +785,10 @@ export default {
         code("checkbox"),
         ", ",
         code("number"),
-        " and ",
+        ", ",
         code("range"),
+        " and ",
+        code("color"),
         ".",
       ),
       div(
@@ -822,7 +824,9 @@ export default {
           });
           if (attrNode.attributes.$type) {
             let type = attrNode._attributes.$type;
-            if (["date", "checkbox", "number", "range"].includes(type)) {
+            if (
+              ["date", "checkbox", "number", "range", "color"].includes(type)
+            ) {
               entry.type = attrNode._attributes.$type;
             }
 
