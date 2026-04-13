@@ -188,7 +188,7 @@ export default class Node {
           attrNode.lastName = child.node.lastName;
           attrNode.lastAttrName = child.node.lastAttrName;
         }
-        moveElementToIndex(attrNode.elem, i);
+        moveElementToIndex(attrNode.elem, uniqueChildren.length - 1);
       } else {
         let existing = this.getChild(child.node.name.value);
         if (!existing) {
@@ -197,16 +197,6 @@ export default class Node {
             child.node.sourceOwner = typeName;
           }
           if (prevNode) {
-            if (
-              prevNode.isAttribute &&
-              node.getAttrNode(prevNode._isAttribute[1])
-            ) {
-              this.appendChild(prevNode, false);
-              moveElementToIndex(prevNode.elem, i - 1);
-            } else if (node.getChild(prevNode.name.value)) {
-              this.appendChild(prevNode, false);
-              moveElementToIndex(prevNode.elem, i - 1);
-            }
             child.node.merge(prevNode, false);
           }
           this.appendChild(child.node, false);
@@ -218,7 +208,7 @@ export default class Node {
         if (document.activeElement != mergedChild.name) {
           mergedChild.lastName = child.node.lastName;
         }
-        moveElementToIndex(mergedChild.elem, i);
+        moveElementToIndex(mergedChild.elem, uniqueChildren.length - 1);
       }
     }
     let foundChildren = Object.create(null);
