@@ -135,10 +135,24 @@ export default class Node {
         }
       }
     }
-
     let children = Array.from(n.children.children);
+    let uniqueChildren = [];
+    let found = Object.create(null);
+    let foundAtts = Object.create(null);
     for (let i = 0; i < children.length; i++) {
       let child = children[i];
+      if (child.node.isAttribute) {
+        if (child.node._isAttribute[1] in foundAtts) {
+          continue;
+        }
+        foundAtts[child.node._isAttribute[1]] = true;
+      } else {
+        if (child.node.name.value in found) {
+          continue;
+        }
+        found[child.node.name.value] = true;
+      }
+      uniqueChildren.push(child);
       let prevNode;
       if (rename && child.node.lastName != child.node.name.value) {
         prevNode = this.getChild(child.node.lastName);
@@ -202,8 +216,13 @@ export default class Node {
         moveElementToIndex(mergedChild.elem, i);
       }
     }
+    let foundChildren = Object.create(null);
     for (let child1 of this.children.children) {
-      for (let child2 of n.children.children) {
+      if (child1.node.name.value in foundChildren) {
+        continue;
+      }
+      foundChildren[child1.node.name.value] = true;
+      for (let child2 of uniqueChildren) {
         if (child1.node.name.value == child2.node.name.value) {
           child1.node.merge(child2.node, rename, isTypeApplication, typeName);
         }
