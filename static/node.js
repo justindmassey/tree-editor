@@ -162,7 +162,7 @@ export default class Node {
       if (rename && child.node.lastName != child.node.name.value) {
         prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
-          prevNode.remove(false);
+          prevNode.name.value = child.node.name.value;
         }
       }
       let m = child.node._isAttribute;
