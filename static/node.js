@@ -131,7 +131,12 @@ export default class Node {
           child.node.equals(child.node.sourceType) &&
           !node.getChild(child.node.name.value)
         ) {
-          child.node.remove(false);
+          if (
+            !child.node.isAttribute ||
+            !node.getAttrNode(child.node._isAttribute[1])
+          ) {
+            child.node.remove(false);
+          }
         }
       }
     }
@@ -160,7 +165,7 @@ export default class Node {
           prevNode.remove(false);
         }
       }
-      let m = child.node.isAttribute;
+      let m = child.node._isAttribute;
       if (m) {
         if (rename && m[1] != child.node.lastAttrName) {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
