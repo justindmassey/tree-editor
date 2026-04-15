@@ -270,7 +270,7 @@ export default {
         }
         checkbox.ctrlClick(child._attrNodes.$checked || child);
         checklist.appendChild(
-          div(checkbox, div(child.widget).c("cl-child"))
+          div(checkbox, div(child.widget))
             .c("cl-item")
             .ctrlClick(child),
         );
@@ -752,7 +752,7 @@ export default {
         });
         radioButton.checked = value == radioButton.value;
         radio.appendChild(
-          div(radioButton, div(child.widget).c("rad-child"))
+          div(radioButton, div(child.widget))
             .c("rad-item")
             .ctrlClick(child),
         );

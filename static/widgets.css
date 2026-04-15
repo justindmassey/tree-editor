@@ -8,11 +8,7 @@
 .rad-item {
   display: flex;
   align-items: start;
-}
-.cl-child,
-.rad-child {
-  display: inline-block;
-  margin-left: 0.25em;
+  gap: 0.25em;
 }
 
 thead,
