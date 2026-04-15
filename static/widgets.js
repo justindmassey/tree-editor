@@ -49,15 +49,15 @@ export default {
       ),
     ),
     create(arg) {
-      let bullet = "∙ ";
+      let prefix = "∙ ";
       if ("$prefix" in this.attributes) {
-        bullet = this._attributes.$prefix;
+        prefix = this._attributes.$prefix;
       }
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
         children.appendChild(
           tr(
-            td(bullet).ctrlClick(this._attrNodes.$prefix || child),
+            td(prefix).ctrlClick(this._attrNodes.$prefix || child),
             td(child.widget),
           ),
         );
@@ -109,14 +109,12 @@ export default {
         expanded = this._attributes.$expanded == "true";
       }
       let children = this.childrenWidget;
-      if (!expanded) {
-        children.classList.add("hidden");
-      }
       let icon;
       if (expanded) {
         icon = "▼";
       } else {
         icon = "▶";
+        children.classList.add("hidden");
       }
       let toggleButton = span(icon)
         .c("tgl-icon")
