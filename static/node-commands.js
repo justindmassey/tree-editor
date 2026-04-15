@@ -179,6 +179,10 @@ export default {
       } else if (this.children.children.length == 1) {
         this.replaceWith(this.children.children[0].node);
         history.add();
+      } else if (this.name.value) {
+        this.name.value = "";
+        this.updateLastValues();
+        history.add();
       }
     },
   },
@@ -316,7 +320,7 @@ export default {
         this.parent.children.replaceChildren(
           ...Array.from(this.parent.children.children).sort((a, b) => {
             return a.node.name.value > b.node.name.value ? 1 : -1;
-          })
+          }),
         );
         this.focus();
         if (text != exportToText(this.parent)) {
@@ -363,8 +367,10 @@ export default {
           let child = this.parent.children.children[i].node;
           if (child.isAttribute) {
             child.name.value = i + "=" + child._isAttribute[2];
+            child.updateLastValues();
           } else {
             child.name.value = i;
+            child.updateLastValues();
           }
         }
         if (exportToText(this.parent) != text) {

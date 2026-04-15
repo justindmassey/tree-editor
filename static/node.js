@@ -465,6 +465,7 @@ export default class Node {
     } else if (this.name.value != "" || this.children.children.length) {
       this.children.replaceChildren();
       this.name.value = "";
+      this.updateLastValues();
       return true;
     }
   }
