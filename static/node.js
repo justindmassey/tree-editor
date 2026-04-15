@@ -163,6 +163,7 @@ export default class Node {
         prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
           prevNode.name.value = child.node.name.value;
+          prevNode.updateLastValues();
         }
       }
       let m = child.node._isAttribute;
