@@ -4,10 +4,6 @@
   margin-left: 4ex;
 }
 
-.cl,
-.rad {
-  padding-left: 1em;
-}
 .cl-item,
 .rad-item {
   display: flex;

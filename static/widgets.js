@@ -277,7 +277,7 @@ export default {
       }
       if (arg) {
         if (checklist.children.length) {
-          return div(div(arg), checklist.c("cl"));
+          return div(div(arg), checklist.c("indented"));
         } else {
           return div(arg);
         }
@@ -759,7 +759,7 @@ export default {
       }
       if (arg) {
         if (radio.children.length) {
-          return div(div(arg), radio.c("rad"));
+          return div(div(arg), radio.c("indented"));
         } else {
           return div(arg);
         }
