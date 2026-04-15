@@ -1,14 +1,14 @@
 @import url("./lib/tabs.css");
 
 .indented {
-  margin-left: 4ex;
+  margin-left: 3ch;
 }
 
 .cl-item,
 .rad-item {
   display: flex;
   align-items: start;
-  gap: 0.25em;
+  gap: 0.25ch;
 }
 
 thead,
