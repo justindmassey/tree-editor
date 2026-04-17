@@ -397,8 +397,6 @@ export default class Node {
       children: [],
       sourceOwner: this.sourceOwner,
       sourceType: this.sourceType ? this.sourceType.serialize() : null,
-      appliedNodeTypes: this.appliedNodeTypes || null,
-      appliedListTypes: this.appliedListTypes || null,
     };
     if (this.name == document.activeElement) {
       node.selectionStart = this.name.selectionStart;
@@ -414,8 +412,6 @@ export default class Node {
     let n = new Node(node.name);
     if (node.sourceOwner != undefined) n.sourceOwner = node.sourceOwner;
     if (node.sourceType) n.sourceType = Node.deserialize(node.sourceType);
-    if (node.appliedNodeTypes) n.appliedNodeTypes = node.appliedNodeTypes;
-    if (node.appliedListTypes) n.appliedListTypes = node.appliedListTypes;
     if (node.collapsed) {
       n.collapse();
     }
