@@ -18,9 +18,6 @@ export default {
     description: "save the tree",
     action() {
       let name = this.tree.name;
-      if ("$name" in this.tree.root.attributes) {
-        name = this.tree.root._attributes.$name;
-      }
       post(
         "/save/" + encodeURIComponent(name),
         JSON.stringify(this.tree.root.serialize()),
