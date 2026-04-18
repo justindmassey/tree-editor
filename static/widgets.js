@@ -205,16 +205,18 @@ export default {
       div("If the tree doesn't exist, it's created (but not saved)."),
       div("Because the tree name is a widget argument,"),
       div("trees with leading whitespace in their name can't be linked to."),
+      div("The ", code("argument"), "is not unescaped, but attribute substitution is performed.")
     ),
     create(arg, unescapedArg) {
-      let label = unescapedArg;
+      let treeName = this.attributeSubstitution(unescapedArg);
+      let label = treeName;
       if ("$label" in this.attributes) {
         label = this._attributes.$label;
       }
       let btn = button(label || " ")
         .ctrlClick(this._attrNodes.$label || this)
         .e("click", () => {
-          tree.load(unescapedArg);
+          tree.load(treeName);
         });
       if (this.childrenWidget.children.length) {
         return div(div(btn), this.childrenWidget.c("indented"));
