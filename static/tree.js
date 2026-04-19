@@ -22,10 +22,13 @@ class Tree {
     this.root = new Node();
   }
 
-  load(name) {
+  load(name, escapedName) {
+    if(escapedName == undefined) {
+      escapedName = name;
+    }
     get("/trees/" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
-        this.root = new Node(name);
+        this.root = new Node(escapedName);
         this.root.focus();
         history.add();
         this.tree.scrollTop = 0;
@@ -54,7 +57,7 @@ class Tree {
     if ("$name" in this.root.attributes) {
       return this.root._attributes.$name;
     } else {
-      return this.root.name.value;
+      return this.root.nameText;
     }
   }
 
