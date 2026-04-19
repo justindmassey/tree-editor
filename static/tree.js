@@ -22,10 +22,7 @@ class Tree {
     this.root = new Node();
   }
 
-  load(name, escapedName) {
-    if(escapedName == undefined) {
-      escapedName = name;
-    }
+  load(name, escapedName = name) {
     get("/trees/" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
         this.root = new Node(escapedName);
