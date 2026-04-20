@@ -272,8 +272,8 @@ export default class Node {
   }
 
   get attributes() {
-    this._attributes = {};
-    this._attrNodes = {};
+    this._attributes = Object.create(null);
+    this._attrNodes = Object.create(null);
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
