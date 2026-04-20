@@ -255,6 +255,7 @@ export default class Node {
       let child = this.children.children[i];
       if (child.node.name.value.startsWith(name + "=")) {
         child.node.name.value = name + "=" + value;
+        child.node.updateLastValues();
         if (focus) {
           child.node.focus();
         }

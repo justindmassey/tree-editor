@@ -270,9 +270,7 @@ export default {
         }
         checkbox.ctrlClick(child._attrNodes.$checked || child);
         checklist.appendChild(
-          div(checkbox, div(child.widget))
-            .c("cl-item")
-            .ctrlClick(child),
+          div(checkbox, div(child.widget)).c("cl-item").ctrlClick(child),
         );
       }
       if (arg) {
@@ -752,9 +750,7 @@ export default {
         });
         radioButton.checked = value == radioButton.value;
         radio.appendChild(
-          div(radioButton, div(child.widget))
-            .c("rad-item")
-            .ctrlClick(child),
+          div(radioButton, div(child.widget)).c("rad-item").ctrlClick(child),
         );
       }
       if (arg) {
@@ -812,9 +808,11 @@ export default {
             if (entry.type == "checkbox") {
               attrNode.name.value =
                 attrNode._isAttribute[1] + "=" + entry.checked;
+              attrNode.updateLastValues();
             } else {
               attrNode.name.value =
                 attrNode._isAttribute[1] + "=" + entry.value;
+              attrNode.updateLastValues();
             }
             children.replaceChildren(...this.childrenWidget.children);
 
