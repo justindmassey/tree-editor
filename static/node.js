@@ -263,6 +263,9 @@ export default class Node {
     }
     let attr = new Node(name + "=" + value);
     this.prependChild(attr, focus);
+    if(this._attributes) {
+      this._attributes[name] = value;
+    }
     if (this._attrNodes) {
       this._attrNodes[name] = attr;
     }
