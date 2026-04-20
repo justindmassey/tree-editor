@@ -42,7 +42,8 @@ export default class Node {
       .e("input", () => {
         history.add();
         this.updateLastValues();
-      });
+      })
+      .e("focus", () => this.updateLastValues());
     registerShortcuts(this.name, nodeCommands, this);
     this.name.value = name;
     this.removeButton = div("✕")
@@ -264,7 +265,7 @@ export default class Node {
     }
     let attr = new Node(name + "=" + value);
     this.prependChild(attr, focus);
-    if(this._attributes) {
+    if (this._attributes) {
       this._attributes[name] = value;
     }
     if (this._attrNodes) {
