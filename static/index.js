@@ -15,7 +15,7 @@ if (localStorage.getItem("output")) {
 if (localStorage.getItem("showTree") == "") {
   globalCommands["Alt+t"].action.bind(treeEditor)();
 }
-if (localStorage.getItem("tree")) {
+if (localStorage.getItem("tree") != null) {
   treeEditor.tree.load(localStorage.getItem("tree"));
 } else {
   treeEditor.tree.root.focus();

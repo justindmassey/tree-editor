@@ -11,7 +11,7 @@ export default {
       }
       this.tree.tree.scrollTop = 0;
       this.tree.output.scrollTop = 0;
-      localStorage.setItem("tree", "");
+      localStorage.removeItem("tree");
     },
   },
   "Control+s": {
@@ -45,7 +45,7 @@ export default {
           }
           this.tree.tree.scrollTop = 0;
           this.tree.output.scrollTop = 0;
-          localStorage.setItem("tree", "");
+          localStorage.removeItem("tree");
           flash();
         }
       });
