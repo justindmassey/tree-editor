@@ -11,7 +11,6 @@ export default {
       }
       this.tree.tree.scrollTop = 0;
       this.tree.output.scrollTop = 0;
-      localStorage.removeItem("tree");
     },
   },
   "Control+s": {
