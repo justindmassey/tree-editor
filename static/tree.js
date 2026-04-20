@@ -13,10 +13,12 @@ class Tree {
     this.output = div().c("output", "hidden");
     window.addEventListener("keydown", (ev) => {
       if (ev.key == "Control") {
-        this.output.classList.add("default-cursor")
+        this.output.classList.add("default-cursor");
       }
     });
-    window.addEventListener("keyup", (ev) => (this.output.classList.remove("default-cursor")));
+    window.addEventListener("keyup", (ev) =>
+      this.output.classList.remove("default-cursor"),
+    );
     this.elem = div(this.tree, this.output).c("tree");
     this.clipboard = null;
     this.root = new Node();
@@ -247,9 +249,11 @@ class Tree {
     }
   }
 
-  update() {
+  update(skipUpdateOutput) {
     this.updateTypes();
-    this.updateOutput();
+    if (!skipUpdateOutput) {
+      this.updateOutput();
+    }
     this.updateNameSize();
     let name = this.name;
     if (name) {

@@ -6,9 +6,9 @@ export default class History {
     this.index = -1;
   }
 
-  add(skipOnChange) {
-    if (this.onchange && !skipOnChange) {
-      this.onchange(this);
+  add(...onchangeArgs) {
+    if (this.onchange) {
+      this.onchange(...onchangeArgs);
     }
     this.index++;
     this.history = this.history.slice(-this.maxLength, this.index);
@@ -16,22 +16,22 @@ export default class History {
     this.history.push(this.serialize());
   }
 
-  undo() {
+  undo(...onchangeArgs) {
     if (this.index > 0) {
       this.index--;
       this.deserialize(this.history[this.index]);
       if (this.onchange) {
-        this.onchange(this);
+        this.onchange(...onchangeArgs);
       }
     }
   }
 
-  redo() {
+  redo(...onchangeArgs) {
     if (this.index < this.history.length - 1) {
       this.index++;
       this.deserialize(this.history[this.index]);
       if (this.onchange) {
-        this.onchange(this);
+        this.onchange(...onchangeArgs);
       }
     }
   }
