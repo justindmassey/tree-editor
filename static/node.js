@@ -525,7 +525,7 @@ export default class Node {
       return str;
     }
     let result = str;
-    let attributes = {};
+    let attributes = Object.create(null);
     let curNode = this;
     while (curNode) {
       for (let i = curNode.attrNodes.length - 1; i >= 0; i--) {

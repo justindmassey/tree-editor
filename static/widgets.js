@@ -684,7 +684,7 @@ export default {
         this.setAttribute("$value", opt.value);
         history.add();
       });
-      let optChildren = {};
+      let optChildren = Object.create(null);
       for (let child of this.childNodes) {
         opt.appendChild(option(child.nameText));
         if (child.childNodes.length) {
