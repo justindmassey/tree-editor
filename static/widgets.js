@@ -214,7 +214,7 @@ export default {
       let btn = button(label || " ")
         .ctrlClick(this._attrNodes.$label || this)
         .e("click", () => {
-          tree.load(arg, escapedArg);
+          tree.load(arg, this.attributeSubstitution(escapedArg));
         });
       if (this.childrenWidget.children.length) {
         return div(div(btn), this.childrenWidget.c("indented"));
