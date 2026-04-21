@@ -170,7 +170,7 @@ export default class Node {
       }
       let m = child.node._isAttribute;
       if (m) {
-        if (rename && m[1] != child.node.lastAttrName && prevNodeInType) {
+        if (rename && m[1] != child.node.lastAttrName && !prevNodeInType) {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode) {
             lastAttrNode.remove(false);
