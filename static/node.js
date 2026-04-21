@@ -171,16 +171,16 @@ export default class Node {
         (!hasLastAttr || attrNameSame)
       ) {
         prevNode = this.getChild(child.node.lastName);
-        if (prevNode) {
+        if (prevNode && prevNode.sourceOwner == typeName) {
           prevNode.name.value = child.node.name.value;
           prevNode.updateLastValues();
         }
       }
       let m = child.node._isAttribute;
       if (m) {
-        if (rename && m[1] != child.node.lastAttrName && !hasLastAttr) {
+        if (rename && m[1] != child.node.lastAttrName) { // && !hasLastAttr
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
-          if (lastAttrNode) {
+          if (lastAttrNode && lastAttrNode.sourceOwner == typeName) {
             lastAttrNode.remove(false);
             this.setAttribute(m[1], lastAttrNode.isAttribute[2], false, false);
           }
