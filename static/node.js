@@ -160,8 +160,16 @@ export default class Node {
       }
       uniqueChildren.push(child);
       let prevNode;
-      let prevNodeInType = node.getChild(child.node.lastName)
-      if (rename && child.node.lastName != child.node.name.value && !prevNodeInType) {
+      let attrNameSame =
+        child.node.isAttribute &&
+        child.node._isAttribute[1] == child.node.lastAttrName;
+      let hasLastAttr = node.getAttrNode(child.node.lastAttrName);
+      if (
+        rename &&
+        child.node.lastName != child.node.name.value &&
+        !node.getChild(child.node.lastName) &&
+        (!hasLastAttr || attrNameSame)
+      ) {
         prevNode = this.getChild(child.node.lastName);
         if (prevNode) {
           prevNode.name.value = child.node.name.value;
@@ -170,7 +178,7 @@ export default class Node {
       }
       let m = child.node._isAttribute;
       if (m) {
-        if (rename && m[1] != child.node.lastAttrName && !prevNodeInType) {
+        if (rename && m[1] != child.node.lastAttrName && !hasLastAttr) {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode) {
             lastAttrNode.remove(false);
