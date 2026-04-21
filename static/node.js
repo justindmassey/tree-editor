@@ -178,7 +178,7 @@ export default class Node {
       }
       let m = child.node._isAttribute;
       if (m) {
-        if (rename && m[1] != child.node.lastAttrName) { // && !hasLastAttr
+        if (rename && m[1] != child.node.lastAttrName && !hasLastAttr) {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode && lastAttrNode.sourceOwner == typeName) {
             lastAttrNode.remove(false);
