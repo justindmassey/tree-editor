@@ -223,13 +223,28 @@ export default class Node {
       }
     }
     let foundChildren = Object.create(null);
+    let uniqueAtts = Object.create(null);
     for (let child1 of this.children.children) {
-      if (child1.node.name.value in foundChildren) {
-        continue;
+      if (child1.node.isAttribute) {
+        if (child1.node._isAttribute[1] in uniqueAtts) {
+          continue;
+        }
+        uniqueAtts[child1.node._isAttribute[1]] = true;
+      } else {
+        if (child1.node.name.value in foundChildren) {
+          continue;
+        }
+        foundChildren[child1.node.name.value] = true;
       }
-      foundChildren[child1.node.name.value] = true;
       for (let child2 of uniqueChildren) {
-        if (child1.node.name.value == child2.node.name.value) {
+        let attributesMatch =
+          child1.node._isAttribute &&
+          child2.node._isAttribute &&
+          child1.node._isAttribute[1] == child2.node._isAttribute[1];
+        if (
+          child1.node.name.value == child2.node.name.value ||
+          attributesMatch
+        ) {
           child1.node.merge(child2.node, rename, isTypeApplication, typeName);
         }
       }
