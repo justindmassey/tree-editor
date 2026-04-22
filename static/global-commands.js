@@ -35,15 +35,13 @@ export default {
     description: "delete this tree",
     action() {
       get("/delete/" + encodeURIComponent(this.tree.name)).then((res) => {
-        if (res.error) {
-          alert(res.error);
-        } else {
+        if (this.tree.root.remove()) {
+          history.add();
+        }
+        this.tree.tree.scrollTop = 0;
+        this.tree.output.scrollTop = 0;
+        if (!res.error) {
           treeMenu.update();
-          if (this.tree.root.remove()) {
-            history.add();
-          }
-          this.tree.tree.scrollTop = 0;
-          this.tree.output.scrollTop = 0;
           localStorage.removeItem("tree");
           flash();
         }
