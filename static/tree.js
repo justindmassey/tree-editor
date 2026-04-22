@@ -151,9 +151,11 @@ class Tree {
         alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
         if ("value" in document.activeElement) {
           let prevName = document.activeElement.value;
+          let re1 = new RegExp("(?<!(?<!\\\\)\\\\)" + regex("." + t), "g");
+          let re2 = new RegExp("(?<!:|((?<!\\\\)\\\\))" + regex(":" + t), "g");
           document.activeElement.value = document.activeElement.value
-            .replace(new RegExp("(?<!\\\\)" + regex("." + t), "g"), "")
-            .replace(new RegExp("(?<!:|\\\\)" + regex(":" + t), "g"), "");
+            .replace(re1, "")
+            .replace(re2, "");
           if (prevName != document.activeElement.value) {
             this.updateTypes();
           }
