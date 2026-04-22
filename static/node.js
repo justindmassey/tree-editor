@@ -120,11 +120,11 @@ export default class Node {
     return result;
   }
 
-  merge(node, rename = true, isTypeApplication = false, typeName = null) {
+  merge(node, typeName) {
     let activeElement = document.activeElement;
     let n = node.copy();
 
-    if (isTypeApplication) {
+    if (typeName) {
       for (let child of [...this.children.children]) {
         if (
           child.node.sourceOwner == typeName &&
@@ -165,7 +165,7 @@ export default class Node {
         child.node._isAttribute[1] == child.node.lastAttrName;
       let hasLastAttr = node.getAttrNode(child.node.lastAttrName);
       if (
-        rename &&
+        typeName &&
         child.node.lastName != child.node.name.value &&
         !node.getChild(child.node.lastName) &&
         (!hasLastAttr || attrNameSame)
@@ -178,7 +178,7 @@ export default class Node {
       }
       let m = child.node._isAttribute;
       if (m) {
-        if (rename && m[1] != child.node.lastAttrName && !hasLastAttr) {
+        if (typeName && m[1] != child.node.lastAttrName && !hasLastAttr) {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode && lastAttrNode.sourceOwner == typeName) {
             lastAttrNode.remove(false);
@@ -190,7 +190,7 @@ export default class Node {
         }
 
         let attrNode = this.getAttrNode(m[1]);
-        if (isTypeApplication) {
+        if (typeName) {
           attrNode.sourceType = child.node.copy();
           attrNode.sourceOwner = typeName;
         }
@@ -203,7 +203,7 @@ export default class Node {
       } else {
         let existing = this.getChild(child.node.name.value);
         if (!existing) {
-          if (isTypeApplication) {
+          if (typeName) {
             child.node.sourceType = child.node.copy();
             child.node.sourceOwner = typeName;
           }
@@ -211,7 +211,7 @@ export default class Node {
             child.node.merge(prevNode, false);
           }
           this.appendChild(child.node, false);
-        } else if (isTypeApplication) {
+        } else if (typeName) {
           existing.sourceType = child.node.copy();
           existing.sourceOwner = typeName;
         }
@@ -245,7 +245,7 @@ export default class Node {
           child1.node.name.value == child2.node.name.value ||
           attributesMatch
         ) {
-          child1.node.merge(child2.node, rename, isTypeApplication, typeName);
+          child1.node.merge(child2.node, typeName);
         }
       }
     }

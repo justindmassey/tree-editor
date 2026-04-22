@@ -179,7 +179,7 @@ class Tree {
               let t = nodeTypes[i].slice(1);
               if (typedefs[t]) {
                 typedefs[t].widget;
-                n.merge(typedefs[t], true, true, t);
+                n.merge(typedefs[t], t);
               }
             }
           }
@@ -202,7 +202,7 @@ class Tree {
               if (typedefs[t]) {
                 for (let child of n.nonAttrChildren) {
                   typedefs[t].widget;
-                  child.merge(typedefs[t], true, true, t);
+                  child.merge(typedefs[t], t);
                 }
               }
             }
