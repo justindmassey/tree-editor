@@ -148,7 +148,7 @@ class Tree {
     for (let name in typedefDeps) {
       let t;
       if ((t = visit(name, []))) {
-        alert("Error: Recursive type definitions: " + cyclePath.join(" -> "));
+        alert("Fixing recursive type: " + cyclePath.join(" → "));
         if ("value" in document.activeElement) {
           let prevName = document.activeElement.value;
           let re1 = new RegExp("(?<!(?<!\\\\)\\\\)" + regex("." + t), "g");
