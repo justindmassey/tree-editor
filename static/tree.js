@@ -150,7 +150,7 @@ class Tree {
       if ((t = visit(name, []))) {
         alert("Fixing recursive type: " + cyclePath.join(" → "));
         let cycleTypes = new Set(cyclePath);
-        
+
         if ("value" in document.activeElement) {
           let prevName = document.activeElement.value;
           let matches = [
@@ -276,10 +276,6 @@ class Tree {
       document.title = "Tree Editor";
     }
   }
-}
-
-function regex(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 export default new Tree();
