@@ -146,8 +146,7 @@ class Tree {
     };
 
     for (let name in typedefDeps) {
-      let t;
-      if ((t = visit(name, []))) {
+      if (visit(name, [])) {
         alert("Fixing recursive type: " + cyclePath.join(" → "));
         let cycleTypes = new Set(cyclePath);
 
