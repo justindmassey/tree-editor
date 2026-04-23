@@ -149,13 +149,25 @@ class Tree {
       let t;
       if ((t = visit(name, []))) {
         alert("Fixing recursive type: " + cyclePath.join(" → "));
+        let cycleTypes = new Set(cyclePath);
+        
         if ("value" in document.activeElement) {
           let prevName = document.activeElement.value;
-          let re1 = new RegExp("(?<!(?<!\\\\)\\\\)" + regex("." + t), "g");
-          let re2 = new RegExp("(?<!:|((?<!\\\\)\\\\))" + regex(":" + t), "g");
-          document.activeElement.value = document.activeElement.value
-            .replace(re1, "")
-            .replace(re2, "");
+          let matches = [
+            ...prevName.matchAll(Node.nodeTypeRegEx),
+            ...prevName.matchAll(Node.listTypeRegEx),
+          ].sort((a, b) => b.index - a.index);
+
+          for (let m of matches) {
+            let typeName = m[0].slice(1);
+            if (cycleTypes.has(typeName)) {
+              document.activeElement.value =
+                prevName.slice(0, m.index) +
+                prevName.slice(m.index + m[0].length);
+              break;
+            }
+          }
+
           if (prevName != document.activeElement.value) {
             this.updateTypes();
           }
