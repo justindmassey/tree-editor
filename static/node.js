@@ -424,8 +424,6 @@ export default class Node {
       name: this.name.value,
       collapsed: this.collapsed,
       children: [],
-      sourceOwner: this.sourceOwner,
-      sourceType: this.sourceType ? this.sourceType.serialize() : null,
     };
     if (this.name == document.activeElement) {
       node.selectionStart = this.name.selectionStart;
@@ -439,8 +437,6 @@ export default class Node {
 
   static deserialize(node) {
     let n = new Node(node.name);
-    if (node.sourceOwner != undefined) n.sourceOwner = node.sourceOwner;
-    if (node.sourceType) n.sourceType = Node.deserialize(node.sourceType);
     if (node.collapsed) {
       n.collapse();
     }
