@@ -552,7 +552,7 @@ export default class Node {
     }
     let result = str;
     let attributes = Object.create(null);
-    let curNode = this;
+    let curNode = this.parent;
     while (curNode) {
       for (let i = curNode.attrNodes.length - 1; i >= 0; i--) {
         let attrNode = curNode._attrNodes[i];
