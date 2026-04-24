@@ -32,4 +32,15 @@
 
 .tabs-body {
   padding: 0.25em;
+  display: grid;
+}
+
+.tabs-body > * {
+  grid-area: 1 / 1;
+}
+
+.tabs-body>.hidden {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
 }
