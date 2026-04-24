@@ -231,12 +231,10 @@ export default {
     ),
     create(arg) {
       let link = a(arg).a("target", "_blank");
-      if ("$url" in this.attributes) {
-        link.href = this._attributes.$url;
-      } else {
+      if (!("$url" in this.attributes)) {
         this.setAttribute("$url");
-        link.href = "";
       }
+      link.href = this._attributes.$url;
       if (arg) {
         if (this.childrenWidget.children.length) {
           return div(div(link), this._childrenWidget.c("indented"));
