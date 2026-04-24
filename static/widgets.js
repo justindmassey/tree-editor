@@ -104,7 +104,7 @@ export default {
     create(arg) {
       let expanded = true;
       if (!("$expanded" in this.attributes)) {
-        this.setAttribute("$expanded", true);
+        this.setAttribute("$expanded", expanded);
       } else {
         expanded = this._attributes.$expanded == "true";
       }
