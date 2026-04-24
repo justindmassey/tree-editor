@@ -135,6 +135,10 @@ export default {
         localStorage.setItem("showTree", "");
         this.tree.elem.style.height = "";
       } else {
+        if (!this.menuBar.elem.classList.contains("hidden")) {
+          this.tree.elem.style.height =
+            "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
+        }
         localStorage.setItem("showTree", "true");
         if (this.tree.activeElement && this.tree.activeElement.focus) {
           this.tree.activeElement.focus();
