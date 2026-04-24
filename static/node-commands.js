@@ -139,7 +139,7 @@ export default {
   "Control+Enter": {
     description: "add a new parent node",
     action() {
-      parent = new Node();
+      let parent = new Node();
       this.replaceWith(parent);
       parent.appendChild(this, false);
       history.add();
