@@ -579,7 +579,7 @@ function unescape(str) {
 }
 
 function unescapeAttrName(str) {
-  return str.replaceAll("(?<!\\)\\=", "=").replace(/\\\\/g, "\\");
+  return str.replaceAll(/(?<!\\)\\=/g, "=").replace(/\\\\/g, "\\");
 }
 
 function unescapeArg(str) {
