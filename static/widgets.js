@@ -486,9 +486,15 @@ export default {
       });
       this.setAttribute("$tab", tabsObj.tab);
       if (arg) {
-        return div(div(arg), tabsObj.elem.c("indented"));
-      } else {
+        if (tabsObj.elem.firstChild.children.length) {
+          return div(div(arg), tabsObj.elem.c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else if (tabsObj.elem.firstChild.children.length) {
         return tabsObj.elem;
+      } else {
+        return div();
       }
     },
   },
