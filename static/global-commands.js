@@ -34,7 +34,8 @@ export default {
   "Control+Alt+d": {
     description: "delete this tree",
     action() {
-      get("/delete/" + encodeURIComponent(this.tree.name)).then((res) => {
+      let name = this.tree.name;
+      get("/delete/" + encodeURIComponent(name)).then((res) => {
         if (this.tree.root.remove()) {
           history.add();
         }
@@ -42,7 +43,9 @@ export default {
         this.tree.output.scrollTop = 0;
         if (!res.error) {
           treeMenu.update();
-          localStorage.removeItem("tree");
+          if (localStorage.getItem("tree") == name) {
+            localStorage.removeItem("tree");
+          }
           flash();
         }
       });
