@@ -32,6 +32,7 @@ export default class Tabs {
         });
         this.header.appendChild(this.headers[name]);
         tabs.get(name).classList.add("hidden");
+        tabs.get(name).inert = true;
         this.body.appendChild(tabs.get(name));
       }
       this._tab = this.initialTab;
@@ -46,9 +47,11 @@ export default class Tabs {
   set tab(name) {
     if (this.tabs.get(name)) {
       this.tabs.get(this.tab).classList.add("hidden");
+      this.tabs.get(this.tab).inert = true;
       this.headers[this.tab].classList.remove("active");
       this._tab = name;
       this.tabs.get(this.tab).classList.remove("hidden");
+      this.tabs.get(this.tab).inert = false;
       this.headers[this.tab].classList.add("active");
     }
   }
