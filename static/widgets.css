@@ -37,15 +37,6 @@ thead,
   margin-bottom: 2px;
 }
 
-ol {
-  margin: 0em;
-}
-
-ul {
-  margin: 0em;
-  list-style-type: disc;
-}
-
 .bg {
   width: fit-content;
   border-radius: 2px;
