@@ -3,6 +3,7 @@ const path = require("path");
 const fastifyStatic = require("@fastify/static");
 const fs = require("fs/promises");
 const fss = require("fs");
+const sep = " > ";
 
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, "static"),
@@ -17,7 +18,7 @@ if (!fss.existsSync(treesDir)) {
 fastify.get("/list", async function (req, res) {
   try {
     return (await fs.readdir(treesDir)).map((filename) => {
-      return filename.replace(/ > /g, "/").replace(/\.[^\.]*$/, "");
+      return filename.replaceAll(sep, path.sep).replace(/\.[^\.]*$/, "");
     });
   } catch (e) {
     return { error: e.message };
@@ -62,6 +63,6 @@ function getFilename(treeName) {
   return path.join(
     __dirname,
     "trees",
-    treeName.replace(/\//g, " > ") + ".json"
+    treeName.replaceAll(path.sep, sep) + ".json",
   );
 }
