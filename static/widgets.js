@@ -694,14 +694,21 @@ export default {
       });
       let optChildren = Object.create(null);
       for (let child of this.childNodes) {
-        opt.appendChild(option(child.nameText));
+        if (
+          child.lastNameText != undefined &&
+          this.attributes.$value == child.lastNameText
+        ) {
+          this.setAttribute("$value", child.nameText);
+        }
+        child.lastNameText = child.nameText;
+        opt.appendChild(option(child._nameText));
         if (child.childNodes.length) {
           optChildren[child._nameText] = child.childrenWidget;
         }
       }
       if ("$value" in this.attributes) {
         opt.value = this._attributes.$value;
-      } else {
+      } else if (this._childNodes.length) {
         this.setAttribute("$value", opt.value);
       }
       opt.ctrlClick(this._attrNodes.$value || this);
@@ -738,14 +745,8 @@ export default {
     ),
     create(arg) {
       let radio = div();
-      let value;
-      if ("$value" in this.attributes) {
-        value = this._attributes.$value;
-      } else {
-        this.setAttribute("$value");
-        value = "";
-      }
       let groupName = crypto.randomUUID();
+      this.attributes;
       for (let child of this.childNodes) {
         let radioButton = input().a("type", "radio").a("name", groupName);
         if ("$name" in child.attributes) {
@@ -758,7 +759,7 @@ export default {
           this.setAttribute("$value", radioButton.value);
           history.add();
         });
-        radioButton.checked = value == radioButton.value;
+        radioButton.checked = this._attributes.$value == radioButton.value;
         radio.appendChild(
           div(radioButton, div(child.widget)).c("rad-item").ctrlClick(child),
         );
