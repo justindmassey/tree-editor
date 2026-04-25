@@ -524,16 +524,13 @@ export default {
           .ctrlClick(this._attrNodeMap.$page || this)
           .e("click", () => {
             let page = Number(this._attributes.$page);
-            if (
-              this._attributes.$page == "last" &&
-              this.childNodes.length >= 2
-            ) {
-              this.setAttribute("$page", this._childNodes.length - 1);
+            if (this._attributes.$page == "last") {
+              this.setAttribute("$page", this._childNodes.length || "last");
             } else if (isNaN(page)) {
-              this.setAttribute("$page", 1);
+              this.setAttribute("$page", "last");
             } else {
               if (page <= 1 || page > this._childNodes.length) {
-                this.setAttribute("$page", this._childNodes.length || 1);
+                this.setAttribute("$page", "last");
               } else {
                 this.setAttribute("$page", page - 1);
               }
@@ -541,7 +538,7 @@ export default {
             history.add();
           }),
         " ",
-        div(this.attributes.$page + " / " + this.childNodes.length).c(
+        div(this.attributes.$page + " / " + this._childNodes.length).c(
           "pgs-page",
         ),
         " ",
@@ -549,11 +546,13 @@ export default {
           .ctrlClick(this._attrNodeMap.$page || this)
           .e("click", () => {
             let page = Number(this._attributes.$page);
-            if (isNaN(page)) {
+            if (this._attributes.$page == "last" && this._childNodes.length) {
               this.setAttribute("$page", 1);
+            } else if (isNaN(page)) {
+              this.setAttribute("$page", "last");
             } else {
               if (page < 1 || page >= this._childNodes.length) {
-                this.setAttribute("$page", 1);
+                this.setAttribute("$page", "last");
               } else {
                 this.setAttribute("$page", page + 1);
               }
