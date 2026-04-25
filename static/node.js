@@ -272,14 +272,21 @@ export default class Node {
     }
   }
 
-  setAttribute(name, value = "", focus = false, escape = true) {
+  setAttribute(unescapedName, value = "", focus = false, escape = true) {
+    let name;
     if (escape) {
-      name = name.replace(/\\/g, "\\\\").replace(/=/g, "\\=");
+      name = unescapedName.replace(/\\/g, "\\\\").replace(/=/g, "\\=");
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
       if (child.node.name.value.startsWith(name + "=")) {
         child.node.name.value = name + "=" + value;
+        if (this._attributes) {
+          this._attributes[unescapedName] = value;
+        }
+        if (this._attrNodeMap) {
+          this._attrNodeMap[unescapedName] = child;
+        }
         child.node.updateLastValues();
         if (focus) {
           child.node.focus();
@@ -290,23 +297,22 @@ export default class Node {
     let attr = new Node(name + "=" + value);
     this.prependChild(attr, focus);
     if (this._attributes) {
-      this._attributes[name] = value;
+      this._attributes[unescapedName] = value;
     }
-    if (this._attrNodes) {
-      this._attrNodes[name] = attr;
+    if (this._attrNodeMap) {
+      this._attrNodeMap[unescapedName] = attr;
     }
   }
 
   get attributes() {
     this._attributes = Object.create(null);
-    this._attrNodes = Object.create(null);
+    this._attrNodeMap = Object.create(null);
     for (let child of this.children.children) {
       let m = child.node.isAttribute;
       if (m) {
-        this._attrNodes[m[1]] = child.node;
-        this._attributes[unescapeAttrName(m[1])] = this.attributeSubstitution(
-          m[2],
-        );
+        let name = unescapeAttrName(m[1]);
+        this._attrNodeMap[name] = child.node;
+        this._attributes[name] = this.attributeSubstitution(m[2]);
       }
     }
     return this._attributes;

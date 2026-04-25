@@ -57,7 +57,7 @@ export default {
       for (let child of this.childNodes) {
         children.appendChild(
           tr(
-            td(prefix).ctrlClick(this._attrNodes.$prefix || child),
+            td(prefix).ctrlClick(this._attrNodeMap.$prefix || child),
             td(child.widget),
           ),
         );
@@ -118,7 +118,7 @@ export default {
       }
       let toggleButton = span(icon)
         .c("tgl-icon")
-        .ctrlClick(this._attrNodes.$expanded || this)
+        .ctrlClick(this._attrNodeMap.$expanded || this)
         .e("click", () => {
           if (expanded) {
             this.setAttribute("$expanded", false);
@@ -154,7 +154,7 @@ export default {
       for (let child of this.childNodes) {
         line.appendChild(child.widget);
         line.appendChild(
-          (lastSep = div(separator).ctrlClick(this._attrNodes.$sep || this)),
+          (lastSep = div(separator).ctrlClick(this._attrNodeMap.$sep || this)),
         );
       }
       if (lastSep) {
@@ -212,7 +212,7 @@ export default {
         label = this._attributes.$label;
       }
       let btn = button(label || " ")
-        .ctrlClick(this._attrNodes.$label || this)
+        .ctrlClick(this._attrNodeMap.$label || this)
         .e("click", () => {
           tree.load(arg, this.attributeSubstitution(escapedArg));
         });
@@ -266,7 +266,7 @@ export default {
         } else {
           child.setAttribute("$checked", checkbox.checked);
         }
-        checkbox.ctrlClick(child._attrNodes.$checked || child);
+        checkbox.ctrlClick(child._attrNodeMap.$checked || child);
         checklist.appendChild(
           div(checkbox, div(child.widget)).c("cl-item").ctrlClick(child),
         );
@@ -434,7 +434,7 @@ export default {
               path.appendChild(span(segment.name).ctrlClick(segment.node));
               path.appendChild(
                 (lastSep = span(separator).ctrlClick(
-                  this._attrNodes.$sep || this,
+                  this._attrNodeMap.$sep || this,
                 )),
               );
             }
@@ -477,7 +477,7 @@ export default {
       }
 
       let initialTab = tabs.keys().next().value;
-      if ("$tab" in this.attributes && tabs.has(this._attributes.$tab)) {
+      if ("$tab" in this._attributes && tabs.has(this._attributes.$tab)) {
         initialTab = this._attributes.$tab;
       }
       let tabsObj = new Tabs(tabs, initialTab, (tab) => {
@@ -521,7 +521,7 @@ export default {
       }
       let pager = div(
         button("<")
-          .ctrlClick(this._attrNodes.$page || this)
+          .ctrlClick(this._attrNodeMap.$page || this)
           .e("click", () => {
             let page = Number(this._attributes.$page);
             if (
@@ -546,7 +546,7 @@ export default {
         ),
         " ",
         button(">")
-          .ctrlClick(this._attrNodes.$page || this)
+          .ctrlClick(this._attrNodeMap.$page || this)
           .e("click", () => {
             let page = Number(this._attributes.$page);
             if (isNaN(page)) {
@@ -562,7 +562,7 @@ export default {
           }),
       )
         .c("pgs-pager")
-        .ctrlClick(this._attrNodes.$page || this);
+        .ctrlClick(this._attrNodeMap.$page || this);
       if (arg) {
         if (page) {
           return div(arg, " ", pager, div(page).c("indented"));
@@ -713,7 +713,7 @@ export default {
       } else if (this._childNodes.length) {
         this.setAttribute("$value", opt.value);
       }
-      opt.ctrlClick(this._attrNodes.$value || this);
+      opt.ctrlClick(this._attrNodeMap.$value || this);
       let elem;
       if (arg) {
         elem = div(arg, " ", opt);
@@ -765,12 +765,12 @@ export default {
         }
         child.lastNameText = name;
         radioButton.a("value", name);
-        radioButton.ctrlClick(this._attrNodes.$value || child);
+        radioButton.ctrlClick(this._attrNodeMap.$value || child);
         radioButton.e("click", () => {
           this.setAttribute("$value", radioButton.value);
           history.add();
         });
-        radioButton.checked = this.attributes.$value == radioButton.value;
+        radioButton.checked = this._attributes.$value == radioButton.value;
         radio.appendChild(
           div(radioButton, div(child.widget)).c("rad-item").ctrlClick(child),
         );
