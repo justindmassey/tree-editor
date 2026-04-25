@@ -285,7 +285,7 @@ export default class Node {
           this._attributes[unescapedName] = value;
         }
         if (this._attrNodeMap) {
-          this._attrNodeMap[unescapedName] = child;
+          this._attrNodeMap[unescapedName] = child.node;
         }
         child.node.updateLastValues();
         if (focus) {
