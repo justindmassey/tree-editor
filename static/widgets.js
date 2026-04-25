@@ -484,7 +484,9 @@ export default {
         this.setAttribute("$tab", tab);
         history.add();
       });
-      this.setAttribute("$tab", tabsObj.tab);
+      if (this._childNodes.length) {
+        this.setAttribute("$tab", tabsObj.tab);
+      }
       if (arg) {
         if (tabsObj.elem.firstChild.children.length) {
           return div(div(arg), tabsObj.elem.c("indented"));
