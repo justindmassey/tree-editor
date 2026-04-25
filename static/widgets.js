@@ -703,7 +703,7 @@ export default {
           this.setAttribute("$value", child.nameText);
         }
         child.lastNameText = child.nameText;
-        opt.appendChild(option(child._nameText));
+        opt.appendChild(option(child._nameText).a("value", child._nameText));
         if (child.childNodes.length) {
           optChildren[child._nameText] = child.childrenWidget;
         }
