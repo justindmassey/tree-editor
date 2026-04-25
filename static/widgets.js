@@ -601,7 +601,7 @@ export default {
         if (this._attributes.$url) {
           return div(div(arg), div(image, this.childrenWidget).c("indented"));
         } else if (this.childrenWidget.children.length) {
-          return div(div(arg), this.childrenWidget.c("indented"));
+          return div(div(arg), this._childrenWidget.c("indented"));
         } else {
           return div(arg);
         }
