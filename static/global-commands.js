@@ -18,7 +18,7 @@ export default {
     action() {
       let name = this.tree.name;
       post(
-        "/save/" + encodeURIComponent(name),
+        "/save?name=" + encodeURIComponent(name),
         JSON.stringify(this.tree.root.serialize()),
       ).then((res) => {
         if (res.error) {
@@ -35,7 +35,7 @@ export default {
     description: "delete this tree",
     action() {
       let name = this.tree.name;
-      get("/delete/" + encodeURIComponent(name)).then((res) => {
+      get("/delete?name=" + encodeURIComponent(name)).then((res) => {
         if (this.tree.root.remove()) {
           history.add();
         }

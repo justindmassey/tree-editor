@@ -15,7 +15,7 @@ if (!fss.existsSync(treesDir)) {
   fss.mkdirSync(treesDir);
 }
 
-fastify.get("/list", async function (req, res) {
+fastify.get("/list", async function () {
   try {
     return (await fs.readdir(treesDir)).map((filename) => {
       return filename.replaceAll(sep, path.sep).replace(/\.[^\.]*$/, "");
@@ -25,26 +25,26 @@ fastify.get("/list", async function (req, res) {
   }
 });
 
-fastify.get("/trees/:name", async function (req, res) {
+fastify.get("/trees", async function (req) {
   try {
-    return fs.readFile(getFilename(req.params.name));
+    return fs.readFile(getFilename(req.query.name));
   } catch (e) {
     return { error: e.message };
   }
 });
 
-fastify.post("/save/:name", async function (req, res) {
+fastify.post("/save", async function (req) {
   try {
-    await fs.writeFile(getFilename(req.params.name), req.body);
+    await fs.writeFile(getFilename(req.query.name), req.body);
     return {};
   } catch (e) {
     return { error: e.message };
   }
 });
 
-fastify.get("/delete/:name", async function (req, res) {
+fastify.get("/delete", async function (req) {
   try {
-    await fs.unlink(getFilename(req.params.name));
+    await fs.unlink(getFilename(req.query.name));
     return {};
   } catch (e) {
     return { error: e.message };
