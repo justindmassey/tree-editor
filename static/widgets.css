@@ -121,7 +121,7 @@ button {
 }
 
 .pgs-page {
-  min-width: 3.75em; 
+  min-width: 6.3ch;
   display: inline-block;
   text-align: center;
 }
