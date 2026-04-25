@@ -749,17 +749,26 @@ export default {
       this.attributes;
       for (let child of this.childNodes) {
         let radioButton = input().a("type", "radio").a("name", groupName);
+        let name;
         if ("$name" in child.attributes) {
-          radioButton.a("value", child._attributes.$name);
+          name = child._attributes.$name;
         } else {
-          radioButton.a("value", child.nameText);
+          name = child.nameText;
         }
+        if (
+          child.lastNameText != undefined &&
+          child.lastNameText == this._attributes.$value
+        ) {
+          this.setAttribute("$value", name);
+        }
+        child.lastNameText = name;
+        radioButton.a("value", name);
         radioButton.ctrlClick(this._attrNodes.$value || child);
         radioButton.e("click", () => {
           this.setAttribute("$value", radioButton.value);
           history.add();
         });
-        radioButton.checked = this._attributes.$value == radioButton.value;
+        radioButton.checked = this.attributes.$value == radioButton.value;
         radio.appendChild(
           div(radioButton, div(child.widget)).c("rad-item").ctrlClick(child),
         );
