@@ -25,7 +25,7 @@ fastify.get("/list", async function () {
   }
 });
 
-fastify.get("/trees", async function (req) {
+fastify.get("/tree", async function (req) {
   try {
     return fs.readFile(getFilename(req.query.name));
   } catch (e) {

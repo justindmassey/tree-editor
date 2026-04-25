@@ -25,7 +25,7 @@ class Tree {
   }
 
   load(name, escapedName = name) {
-    get("/trees?name=" + encodeURIComponent(name)).then((data) => {
+    get("/tree?name=" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
         this.root = new Node(escapedName);
         this.root.focus();
