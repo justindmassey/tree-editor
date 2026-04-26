@@ -484,7 +484,7 @@ export default {
         this.setAttribute("$tab", tab);
         history.add();
       });
-      if (this._childNodes.length) {
+      if (this._childNodes.length && !("$tab" in this._attributes)) {
         this.setAttribute("$tab", tabsObj.tab);
       }
       if (arg) {

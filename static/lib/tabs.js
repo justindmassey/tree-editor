@@ -45,7 +45,7 @@ export default class Tabs {
   }
 
   set tab(name) {
-    if (this.tabs.get(name)) {
+    if (this.tabs.get(name) && this.tabs.get(this.tab)) {
       this.tabs.get(this.tab).classList.add("hidden");
       this.tabs.get(this.tab).inert = true;
       this.headers[this.tab].classList.remove("active");
