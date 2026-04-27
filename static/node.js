@@ -590,6 +590,7 @@ export default class Node {
 function unescape(str) {
   return unescapeArg(
     str
+      .replace(/^-\S+\s*/, "")
       .replace(/^(?<!\\)\\-/, "-")
       .replace(/^(?<!\\)\\#/, "#")
       .replace(/^(?<!\\)\\::/, "::"),
