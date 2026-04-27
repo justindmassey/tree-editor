@@ -47,3 +47,11 @@
   display: block;
   height: 100vh;
 }
+
+.error {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  color: red;
+  padding: 1em;
+}

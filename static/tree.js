@@ -11,15 +11,16 @@ class Tree {
   constructor() {
     this.tree = div().c("tree-container");
     this.output = div().c("output", "hidden");
-    window.addEventListener("keydown", (ev) => {
-      if (ev.key == "Control") {
-        this.output.classList.add("default-cursor");
-      }
-    });
+    ((this.error = div().c("error", "hidden")),
+      window.addEventListener("keydown", (ev) => {
+        if (ev.key == "Control") {
+          this.output.classList.add("default-cursor");
+        }
+      }));
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
-    this.elem = div(this.tree, this.output).c("tree");
+    this.elem = div(this.tree, this.output, this.error).c("tree");
     this.clipboard = null;
     this.root = new Node();
   }
@@ -147,31 +148,11 @@ class Tree {
 
     for (let name in typedefDeps) {
       if (visit(name, [])) {
-        alert("Recursive type: " + cyclePath.join(" → "));
-        let cycleTypes = new Set(cyclePath);
-
-        if ("value" in document.activeElement) {
-          let prevName = document.activeElement.value;
-          let matches = [
-            ...prevName.matchAll(Node.nodeTypeRegEx),
-            ...prevName.matchAll(Node.listTypeRegEx),
-          ].sort((a, b) => b.index - a.index);
-
-          for (let m of matches) {
-            let typeName = m[0].slice(1);
-            if (cycleTypes.has(typeName)) {
-              document.activeElement.value =
-                prevName.slice(0, m.index) +
-                prevName.slice(m.index + m[0].length);
-              break;
-            }
-          }
-
-          if (prevName != document.activeElement.value) {
-            this.updateTypes();
-          }
-        }
+        this.error.textContent = "Recursive type: " + cyclePath.join(" → ");
+        this.error.classList.remove("hidden");
         return;
+      } else {
+        this.error.classList.add("hidden");
       }
     }
 
