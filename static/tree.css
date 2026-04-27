@@ -49,11 +49,15 @@
 }
 
 .error {
+  border-radius: 2px;
   position: fixed;
   bottom: 0px;
   left: 0px;
   color: red;
-  padding: 1em;
+  outline: 1px solid red;
+  padding: 0.5em;
+  margin: 0.5em;
+  background: var(--bg);
 }
 .error>code{
   color: red;
