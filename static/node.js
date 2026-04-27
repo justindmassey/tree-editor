@@ -111,7 +111,7 @@ export default class Node {
         });
       } else {
         result.unshift({
-          name: this.attributeSubstitution(unescape(curNode.name.value)),
+          name: curNode.nameText,
           node: curNode,
         });
       }
