@@ -1,5 +1,5 @@
 import Node from "./node.js";
-import { div } from "./lib/elements.js";
+import { div, code, span } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import typedefMenu from "./typedef-menu.js";
@@ -11,12 +11,12 @@ class Tree {
   constructor() {
     this.tree = div().c("tree-container");
     this.output = div().c("output", "hidden");
-    ((this.error = div().c("error", "hidden")),
-      window.addEventListener("keydown", (ev) => {
-        if (ev.key == "Control") {
-          this.output.classList.add("default-cursor");
-        }
-      }));
+    this.error = div().c("error", "hidden");
+    window.addEventListener("keydown", (ev) => {
+      if (ev.key == "Control") {
+        this.output.classList.add("default-cursor");
+      }
+    });
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
@@ -148,7 +148,10 @@ class Tree {
 
     for (let name in typedefDeps) {
       if (visit(name, [])) {
-        this.error.textContent = "Recursive type: " + cyclePath.join(" → ");
+        this.error.replaceChildren(
+          span("Recursive type: "),
+          code(cyclePath.join(" → ")),
+        );
         this.error.classList.remove("hidden");
         return;
       } else {

@@ -55,3 +55,6 @@
   color: red;
   padding: 1em;
 }
+.error>code{
+  color: red;
+}
