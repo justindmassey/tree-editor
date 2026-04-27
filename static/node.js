@@ -20,7 +20,6 @@ Element.prototype.ctrlClick = function (node) {
       ev.stopPropagation();
       ev.stopImmediatePropagation();
       ev.preventDefault();
-      node.focus();
     }
   });
   return this;
