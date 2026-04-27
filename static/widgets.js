@@ -421,13 +421,9 @@ export default {
       }
 
       let pathsDiv = div();
-      for (let child of this.children.children) {
-        if (child.node.isAttribute && child.node._isAttribute[1] == "$sep") {
-          continue;
-        }
-
-        child.node.traverse((node) => {
-          if (!node.children.children.length) {
+      for (let child of this.childNodes) {
+        child.traverseChildNodes((node) => {
+          if (!node.childNodes.length) {
             let path = div();
             let lastSep;
             for (let segment of node.getPath(this)) {

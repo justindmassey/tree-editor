@@ -272,6 +272,18 @@ export default class Node {
     }
   }
 
+  traverseChildNodes(callback, includeCollapsed = true) {
+    if (callback(this)) {
+      return true;
+    } else if (includeCollapsed || this.expanded) {
+      for (let child of this.childNodes) {
+        if (child.traverseChildNodes(callback, includeCollapsed)) {
+          return true;
+        }
+      }
+    }
+  }
+
   setAttribute(unescapedName, value = "", focus = false, escape = true) {
     let name;
     if (escape) {
