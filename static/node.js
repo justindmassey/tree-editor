@@ -188,7 +188,6 @@ export default class Node {
         if (!this.getAttrNode(m[1])) {
           this.setAttribute(m[1], m[2], false, false);
         }
-        console.log(m[1])
         let attrNode = this.getAttrNode(m[1]);
         if (typeName) {
           attrNode.sourceType = child.node.copy();
