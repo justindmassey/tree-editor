@@ -146,14 +146,12 @@ class Tree {
       permMark[name] = true;
       return false;
     };
-
+    this.error.classList.add("hidden");
     for (let name in typedefDeps) {
       if (visit(name, [])) {
         this.errorPath.textContent = cyclePath.join(" → ");
         this.error.classList.remove("hidden");
         return;
-      } else {
-        this.error.classList.add("hidden");
       }
     }
 
