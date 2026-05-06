@@ -209,7 +209,7 @@ export default class Node {
           if (prevNode) {
             child.node.merge(prevNode, false);
           }
-          if (child.node.lastName in lastNameTexts) {
+          if (typeName && (child.node.lastName in lastNameTexts)) {
             child.node.lastNameText = lastNameTexts[child.node.lastName];
           }
           this.appendChild(child.node, false);
