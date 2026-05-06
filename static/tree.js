@@ -99,6 +99,7 @@ class Tree {
         let m = n.name.value.match(Node.typedefRegEx);
         if (m) {
           typedefs[m[1]] = n;
+          n.widget;
           typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
           typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
           n.traverse((n2) => {
@@ -171,7 +172,6 @@ class Tree {
             for (let i = nodeTypes.length - 1; i >= 0; i--) {
               let t = nodeTypes[i].slice(1);
               if (typedefs[t]) {
-                typedefs[t].widget;
                 n.merge(typedefs[t], t);
               }
             }
@@ -194,7 +194,6 @@ class Tree {
               let t = listTypes[i].slice(1);
               if (typedefs[t]) {
                 for (let child of n.nonAttrChildren) {
-                  typedefs[t].widget;
                   child.merge(typedefs[t], t);
                 }
               }

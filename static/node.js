@@ -122,6 +122,15 @@ export default class Node {
   merge(node, typeName) {
     let activeElement = document.activeElement;
     let n = node.copy();
+    let hasChildOrRenamedChild = (node, oldName) => {
+      if (node.getChild(oldName)) return true;
+
+      for (let child of node.childNodes) {
+        if (child.lastName == oldName) return true;
+      }
+
+      return false;
+    };
 
     if (typeName) {
       for (let child of [...this.children.children]) {
@@ -129,7 +138,7 @@ export default class Node {
           child.node.sourceOwner == typeName &&
           child.node.sourceType &&
           child.node.equals(child.node.sourceType) &&
-          !node.getChild(child.node.name.value)
+          !hasChildOrRenamedChild(node, child.node.name.value)
         ) {
           if (
             !child.node.isAttribute ||
