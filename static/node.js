@@ -122,28 +122,20 @@ export default class Node {
   merge(node, typeName) {
     let activeElement = document.activeElement;
     let n = node.copy();
-    let hasChildOrRenamedChild = (node, oldName) => {
-      if (node.getChild(oldName)) return true;
-
-      for (let child of node.childNodes) {
-        if (child.lastName == oldName) return true;
-      }
-
-      return false;
-    };
-
+    let lastNameTexts = Object.create(null);
     if (typeName) {
       for (let child of [...this.children.children]) {
         if (
           child.node.sourceOwner == typeName &&
           child.node.sourceType &&
           child.node.equals(child.node.sourceType) &&
-          !hasChildOrRenamedChild(node, child.node.name.value)
+          !node.getChild(child.node.name.value)
         ) {
           if (
             !child.node.isAttribute ||
             !node.getAttrNode(child.node._isAttribute[1])
           ) {
+            lastNameTexts[child.node.name.value] = child.node.lastNameText;
             child.node.remove(false);
           }
         }
@@ -216,6 +208,9 @@ export default class Node {
           }
           if (prevNode) {
             child.node.merge(prevNode, false);
+          }
+          if (child.node.lastName in lastNameTexts) {
+            child.node.lastNameText = lastNameTexts[child.node.lastName];
           }
           this.appendChild(child.node, false);
         } else if (typeName) {
