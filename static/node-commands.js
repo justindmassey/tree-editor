@@ -78,7 +78,11 @@ export default {
     description: "move this node up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
-        this.parent.children.insertBefore(this.elem, this.elem.previousSibling);
+        if (this.elem.previousSibling) {
+          this.elem.previousSibling.before(this.elem);
+        } else {
+          this.parent.appendChild(this);
+        }
         this.focus();
         history.add();
       }
