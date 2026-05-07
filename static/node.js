@@ -44,7 +44,7 @@ export default class Node {
       })
       .e("focus", () => this.updateLastValues());
     registerShortcuts(this.name, nodeCommands, this);
-    this.name.value = name;
+    this.nameValue = name;
     this.removeButton = div("✕")
       .c("button", "remove-button")
       .e("click", () => {
@@ -63,7 +63,6 @@ export default class Node {
     for (let child of children) {
       this.appendChild(child, false);
     }
-    this.updateLastValues();
   }
 
   get widget() {
@@ -172,8 +171,7 @@ export default class Node {
       ) {
         prevNode = this.getChild(child.node.lastName);
         if (prevNode && prevNode.sourceOwner == typeName) {
-          prevNode.name.value = child.node.name.value;
-          prevNode.updateLastValues();
+          prevNode.nameValue = child.node.name.value;
         }
       }
       let m = child.node._isAttribute;
@@ -294,14 +292,13 @@ export default class Node {
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
       if (child.node.name.value.startsWith(name + "=")) {
-        child.node.name.value = name + "=" + value;
+        child.node.nameValue = name + "=" + value;
         if (this._attributes) {
           this._attributes[unescapedName] = value;
         }
         if (this._attrNodeMap) {
           this._attrNodeMap[unescapedName] = child.node;
         }
-        child.node.updateLastValues();
         if (focus) {
           child.node.focus();
         }
@@ -380,6 +377,15 @@ export default class Node {
     if (this.isAttribute) {
       return unescapeAttrName(this._isAttribute[1]);
     }
+  }
+
+  get nameValue() {
+    return this.name.value;
+  }
+
+  set nameValue(newName) {
+    this.name.value = newName;
+    this.updateLastValues();
   }
 
   updateLastValues() {
@@ -506,8 +512,7 @@ export default class Node {
       return true;
     } else if (this.name.value != "" || this.children.children.length) {
       this.children.replaceChildren();
-      this.name.value = "";
-      this.updateLastValues();
+      this.nameValue = "";
       return true;
     }
   }

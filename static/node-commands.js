@@ -184,8 +184,7 @@ export default {
         this.replaceWith(this.children.children[0].node);
         history.add();
       } else if (this.name.value) {
-        this.name.value = "";
-        this.updateLastValues();
+        this.nameValue = "";
         history.add();
       }
     },
@@ -370,11 +369,9 @@ export default {
         for (let i = 0; i < this.parent.children.children.length; i++) {
           let child = this.parent.children.children[i].node;
           if (child.isAttribute) {
-            child.name.value = i + "=" + child._isAttribute[2];
-            child.updateLastValues();
+            child.nameValue = i + "=" + child._isAttribute[2];
           } else {
-            child.name.value = i;
-            child.updateLastValues();
+            child.nameValue = i;
           }
         }
         if (exportToText(this.parent) != text) {

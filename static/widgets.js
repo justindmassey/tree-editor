@@ -823,13 +823,11 @@ export default {
         if (!attrNode._isAttribute[1].startsWith("$")) {
           let entry = input().e("input", () => {
             if (entry.type == "checkbox") {
-              attrNode.name.value =
+              attrNode.nameValue =
                 attrNode._isAttribute[1] + "=" + entry.checked;
-              attrNode.updateLastValues();
             } else {
-              attrNode.name.value =
+              attrNode.nameValue =
                 attrNode._isAttribute[1] + "=" + entry.value;
-              attrNode.updateLastValues();
             }
             children.replaceChildren(...this.childrenWidget.children);
 
