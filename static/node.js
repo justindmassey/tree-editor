@@ -28,8 +28,8 @@ Element.prototype.ctrlClick = function (node) {
 export default class Node {
   static attrRegEx = /^((?:[^=]|(?:(?<!\\)\\=))*)(?<!(?<!\\)\\)=(.*)$/;
   static widgetRegEx = /^(-[^\s.:]+)\s*(.*)/;
-  static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^\.:\s]+/g;
-  static listTypeRegEx = /(?<!:|((?<!\\)\\)):[^\.:\s]+/g;
+  static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^.:]+/g;
+  static listTypeRegEx = /(?<!:|((?<!\\)\\)):[^.:]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
 
   constructor(name = "", ...children) {
