@@ -1,5 +1,9 @@
  # Tree Editor (TE)
 
+<p align="center">
+  <img src="static/arch.png" width="500">
+</p>
+
 Features:
  - editing commands
  - output tree with widgets (updates as you edit)
