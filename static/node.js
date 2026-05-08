@@ -27,7 +27,7 @@ Element.prototype.ctrlClick = function (node) {
 
 export default class Node {
   static attrRegEx = /^((?:[^=]|(?:(?<!\\)\\=))*)(?<!(?<!\\)\\)=(.*)$/;
-  static widgetRegEx = /^(-\S+)\s*(.*)/;
+  static widgetRegEx = /^(-[^\s.:]+)\s*(.*)/;
   static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^\.:\s]+/g;
   static listTypeRegEx = /(?<!:|((?<!\\)\\)):[^\.:\s]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
@@ -597,7 +597,7 @@ export default class Node {
 function unescape(str) {
   return unescapeArg(
     str
-      .replace(/^-\S+\s*/, "")
+      .replace(/^-[^\s.:]+\s*/, "")
       .replace(/^(?<!\\)\\-/, "-")
       .replace(/^(?<!\\)\\#/, "#")
       .replace(/^(?<!\\)\\::/, "::"),
