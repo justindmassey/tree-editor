@@ -66,13 +66,13 @@ export default class Node {
   }
 
   get widget() {
-    let m = this.name.value.match(Node.widgetRegEx);
+    let m = this.nameValue.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
       return widgets[m[1]].create
         .bind(this)(this.attributeSubstitution(unescapeArg(m[2])), m[2])
         .ctrlClick(this);
     } else {
-      let arg = this.attributeSubstitution(unescape(this.name.value));
+      let arg = this.attributeSubstitution(unescape(this.nameValue));
       if (arg) {
         if (this.childrenWidget.children.length) {
           return div(div(arg), this._childrenWidget.c("indented")).ctrlClick(
@@ -128,13 +128,13 @@ export default class Node {
           child.node.sourceOwner == typeName &&
           child.node.sourceType &&
           child.node.equals(child.node.sourceType) &&
-          !node.getChild(child.node.name.value)
+          !node.getChild(child.node.nameValue)
         ) {
           if (
             !child.node.isAttribute ||
             !node.getAttrNode(child.node._isAttribute[1])
           ) {
-            lastNameTexts[child.node.name.value] = child.node.lastNameText;
+            lastNameTexts[child.node.nameValue] = child.node.lastNameText;
             child.node.remove(false);
           }
         }
@@ -152,10 +152,10 @@ export default class Node {
         }
         foundAtts[child.node._isAttribute[1]] = true;
       } else {
-        if (child.node.name.value in found) {
+        if (child.node.nameValue in found) {
           continue;
         }
-        found[child.node.name.value] = true;
+        found[child.node.nameValue] = true;
       }
       uniqueChildren.push(child);
       let prevNode;
@@ -165,13 +165,13 @@ export default class Node {
       let hasLastAttr = node.getAttrNode(child.node.lastAttrName);
       if (
         typeName &&
-        child.node.lastName != child.node.name.value &&
+        child.node.lastName != child.node.nameValue &&
         !node.getChild(child.node.lastName) &&
         (!hasLastAttr || attrNameSame)
       ) {
         prevNode = this.getChild(child.node.lastName);
         if (prevNode && prevNode.sourceOwner == typeName) {
-          prevNode.nameValue = child.node.name.value;
+          prevNode.nameValue = child.node.nameValue;
         }
       }
       let m = child.node._isAttribute;
@@ -198,7 +198,7 @@ export default class Node {
         }
         moveElementToIndex(attrNode.elem, uniqueChildren.length - 1);
       } else {
-        let existing = this.getChild(child.node.name.value);
+        let existing = this.getChild(child.node.nameValue);
         if (!existing) {
           if (typeName) {
             child.node.sourceType = child.node.copy();
@@ -215,7 +215,7 @@ export default class Node {
           existing.sourceType = child.node.copy();
           existing.sourceOwner = typeName;
         }
-        let mergedChild = this.getChild(child.node.name.value);
+        let mergedChild = this.getChild(child.node.nameValue);
         if (document.activeElement != mergedChild.name) {
           mergedChild.lastName = child.node.lastName;
         }
@@ -231,10 +231,10 @@ export default class Node {
         }
         uniqueAtts[child1.node._isAttribute[1]] = true;
       } else {
-        if (child1.node.name.value in foundChildren) {
+        if (child1.node.nameValue in foundChildren) {
           continue;
         }
-        foundChildren[child1.node.name.value] = true;
+        foundChildren[child1.node.nameValue] = true;
       }
       for (let child2 of uniqueChildren) {
         let attributesMatch =
@@ -242,7 +242,7 @@ export default class Node {
           child2.node._isAttribute &&
           child1.node._isAttribute[1] == child2.node._isAttribute[1];
         if (
-          child1.node.name.value == child2.node.name.value ||
+          child1.node.nameValue == child2.node.nameValue ||
           attributesMatch
         ) {
           child1.node.merge(child2.node, typeName);
@@ -291,7 +291,7 @@ export default class Node {
     }
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
-      if (child.node.name.value.startsWith(name + "=")) {
+      if (child.node.nameValue.startsWith(name + "=")) {
         child.node.nameValue = name + "=" + value;
         if (this._attributes) {
           this._attributes[unescapedName] = value;
@@ -330,7 +330,7 @@ export default class Node {
   }
 
   get isAttribute() {
-    this._isAttribute = this.name.value.match(Node.attrRegEx);
+    this._isAttribute = this.nameValue.match(Node.attrRegEx);
     return this._isAttribute;
   }
 
@@ -339,8 +339,8 @@ export default class Node {
     for (let child of this.children.children) {
       if (
         !child.node.isAttribute &&
-        !child.node.name.value.startsWith("#") &&
-        !child.node.name.value.match(Node.typedefRegEx)
+        !child.node.nameValue.startsWith("#") &&
+        !child.node.nameValue.match(Node.typedefRegEx)
       ) {
         this._childNodes.push(child.node);
       }
@@ -361,7 +361,7 @@ export default class Node {
   get attrNodes() {
     this._attrNodes = [];
     for (let child of this.children.children) {
-      if (child.node.isAttribute && !child.node.name.value.startsWith("#")) {
+      if (child.node.isAttribute && !child.node.nameValue.startsWith("#")) {
         this._attrNodes.push(child.node);
       }
     }
@@ -369,7 +369,7 @@ export default class Node {
   }
 
   get nameText() {
-    this._nameText = this.attributeSubstitution(unescape(this.name.value));
+    this._nameText = this.attributeSubstitution(unescape(this.nameValue));
     return this._nameText;
   }
 
@@ -389,7 +389,7 @@ export default class Node {
   }
 
   updateLastValues() {
-    this.lastName = this.name.value;
+    this.lastName = this.nameValue;
     let m = this.isAttribute;
     if (m) {
       this.lastAttrName = m[1];
@@ -399,7 +399,7 @@ export default class Node {
   }
 
   copy() {
-    let n = new Node(this.name.value);
+    let n = new Node(this.nameValue);
     n.lastName = this.lastName;
     n.lastAttrName = this.lastAttrName;
     n.lastNameText = this.lastNameText;
@@ -412,7 +412,7 @@ export default class Node {
   }
 
   equals(node) {
-    if (this.name.value != node.name.value) {
+    if (this.nameValue != node.nameValue) {
       return false;
     }
     if (this.children.children.length != node.children.children.length) {
@@ -430,7 +430,7 @@ export default class Node {
 
   getChild(name) {
     for (let child of this.children.children) {
-      if (child.node.name.value == name) {
+      if (child.node.nameValue == name) {
         return child.node;
       }
     }
@@ -447,7 +447,7 @@ export default class Node {
 
   serialize() {
     let node = {
-      name: this.name.value,
+      name: this.nameValue,
       collapsed: this.collapsed,
       children: [],
     };
@@ -510,7 +510,7 @@ export default class Node {
     if (this.parent) {
       this.elem.remove();
       return true;
-    } else if (this.name.value != "" || this.children.children.length) {
+    } else if (this.nameValue != "" || this.children.children.length) {
       this.children.replaceChildren();
       this.nameValue = "";
       return true;

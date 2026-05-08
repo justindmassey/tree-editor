@@ -667,7 +667,7 @@ export default {
         });
       let lines = [];
       for (let child of this.children.children) {
-        lines.push(child.node.name.value);
+        lines.push(child.node.nameValue);
       }
       ta.value = lines.join("\n");
       if (arg) {

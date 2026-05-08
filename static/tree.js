@@ -96,20 +96,20 @@ class Tree {
     typedefMenu.clearItems();
     this.root.traverse((n) => {
       if (!n.isAttribute) {
-        let m = n.name.value.match(Node.typedefRegEx);
+        let m = n.nameValue.match(Node.typedefRegEx);
         if (m) {
           typedefs[m[1]] = n;
           n.widget;
           typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
           typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
           n.traverse((n2) => {
-            let nodeTypes = n2.name.value.match(Node.nodeTypeRegEx);
+            let nodeTypes = n2.nameValue.match(Node.nodeTypeRegEx);
             if (nodeTypes) {
               for (let t of nodeTypes) {
                 typedefDeps[m[1]].add(t.slice(1));
               }
             }
-            let listTypes = n2.name.value.match(Node.listTypeRegEx);
+            let listTypes = n2.nameValue.match(Node.listTypeRegEx);
             if (listTypes) {
               for (let t of listTypes) {
                 typedefDeps[m[1]].add(t.slice(1));
@@ -159,7 +159,7 @@ class Tree {
     if (Object.keys(typedefs).length) {
       this.root.traverse((n) => {
         if (!n.isAttribute) {
-          let nodeTypes = n.name.value.match(Node.nodeTypeRegEx) || [];
+          let nodeTypes = n.nameValue.match(Node.nodeTypeRegEx) || [];
           let nodeTypeNames = nodeTypes.map((t) => t.slice(1));
           let prevNodeTypeNames = n.appliedNodeTypes || [];
           for (let t of prevNodeTypeNames) {
@@ -176,7 +176,7 @@ class Tree {
               }
             }
           }
-          let listTypes = n.name.value.match(Node.listTypeRegEx) || [];
+          let listTypes = n.nameValue.match(Node.listTypeRegEx) || [];
           let listTypeNames = listTypes.map((t) => t.slice(1));
           let prevListTypeNames = n.appliedListTypes || [];
 
@@ -206,9 +206,9 @@ class Tree {
 
   updateOutput() {
     if (
-      this.root.name.value.startsWith("#") ||
-      this.root.name.value.match(Node.typedefRegEx) ||
-      this.root.name.value.match(Node.attrRegEx)
+      this.root.nameValue.startsWith("#") ||
+      this.root.nameValue.match(Node.typedefRegEx) ||
+      this.root.nameValue.match(Node.attrRegEx)
     ) {
       this.output.replaceChildren();
     } else {
@@ -219,10 +219,10 @@ class Tree {
   updateNameSize() {
     let longestName = 0;
     this.root.traverse((n) => {
-      if (!n.name.value.startsWith("$url=")) {
-        if (n.name.value.length > longestName) {
-          if (n.name.value.length <= maxNameSize) {
-            longestName = n.name.value.length;
+      if (!n.nameValue.startsWith("$url=")) {
+        if (n.nameValue.length > longestName) {
+          if (n.nameValue.length <= maxNameSize) {
+            longestName = n.nameValue.length;
           } else {
             longestName = maxNameSize;
             return true;

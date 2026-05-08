@@ -183,7 +183,7 @@ export default {
       } else if (this.children.children.length == 1) {
         this.replaceWith(this.children.children[0].node);
         history.add();
-      } else if (this.name.value) {
+      } else if (this.nameValue) {
         this.nameValue = "";
         history.add();
       }
@@ -322,7 +322,7 @@ export default {
         let text = exportToText(this.parent);
         this.parent.children.replaceChildren(
           ...Array.from(this.parent.children.children).sort((a, b) => {
-            return a.node.name.value > b.node.name.value ? 1 : -1;
+            return a.node.nameValue > b.node.nameValue ? 1 : -1;
           }),
         );
         this.focus();

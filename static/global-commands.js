@@ -75,7 +75,7 @@ export default {
       let find = prompt("Focus first node containing:").toUpperCase();
       this.tree.root.traverse((n) => {
         if (
-          n.name.value.toUpperCase().includes(find) &&
+          n.nameValue.toUpperCase().includes(find) &&
           document.activeElement != n.name
         ) {
           n.focus();

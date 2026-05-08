@@ -1,12 +1,11 @@
-import Node from "../node.js";
-
 function exportNode(node) {
-  if (node.children.children.length) {
+  if (node.children.children.length || !node.parent) {
     let n;
     try {
-      n = document.createElement(node.name.value);
+      console.log(node.nameValue);
+      n = document.createElement(node.nameValue);
     } catch (e) {
-      alert("Invalid tagname: " + node.name.value);
+      alert("Invalid tagname: " + node.nameValue);
       return;
     }
     for (let child of node.children.children) {
@@ -24,13 +23,13 @@ function exportNode(node) {
     }
     return n;
   } else {
-    return new Text(node.name.value + "\n");
+    return new Text(node.nameValue + "\n");
   }
 }
 
 export default function exportToXml(node) {
   let xml = exportNode(node);
   if (xml) {
-    return '<?xml version="1.0" encoding="UTF-8"?>\n' + xml.outerHTML;
+      return '<?xml version="1.0" encoding="UTF-8"?>\n' + xml.outerHTML;
   }
 }

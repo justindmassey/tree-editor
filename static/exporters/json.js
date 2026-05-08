@@ -7,7 +7,7 @@ function isArray(node) {
           return false;
         }
       } else {
-        if (child.name.value != i) {
+        if (child.nameValue != i) {
           return false;
         }
       }
@@ -35,7 +35,7 @@ function exportNode(node) {
       if (child.node.isAttribute) {
         n[child.node._isAttribute[1]] = child.node._isAttribute[2];
       } else {
-        n[child.node.name.value] = exportNode(child.node);
+        n[child.node.nameValue] = exportNode(child.node);
       }
     }
   }
@@ -50,10 +50,10 @@ export default function exportToJson(node) {
       return JSON.stringify({ [node._isAttribute[1]]: node._isAttribute[2] });
     }
   } else {
-    if (node.name.value == "0") {
+    if (node.nameValue == "0") {
       return JSON.stringify([exportNode(node)], null, 4);
     } else {
-      return JSON.stringify({ [node.name.value]: exportNode(node) }, null, 4);
+      return JSON.stringify({ [node.nameValue]: exportNode(node) }, null, 4);
     }
   }
 }
