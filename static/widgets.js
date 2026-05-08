@@ -141,7 +141,7 @@ export default {
   "-lin": {
     description: div(
       div("line"),
-      div("renders children as a line separated by ", code("$sep")),
+      div("Renders children as a line separated by ", code("$sep"), "."),
       div("If ", code("$sep"), " is not set, a space is used."),
     ),
     create(arg) {
