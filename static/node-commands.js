@@ -339,16 +339,6 @@ export default {
       this.focus();
     },
   },
-  "Alt+a": {
-    description: "collapse all descendants with only attribute children",
-    action() {
-      this.traverse((node) => {
-        if (!node.childNodes.length) {
-          node.collapse();
-        }
-      }, false);
-    },
-  },
   "Alt+d x": {
     description: "expand all descendants",
     action() {
