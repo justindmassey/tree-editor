@@ -278,23 +278,6 @@ export default {
       }
     },
   },
-  "Alt+d a": {
-    description: "delete all attribute children",
-    action() {
-      let removed = false;
-      let children = Array.from(this.children.children);
-      for (let child of children) {
-        if (child.node.isAttribute) {
-          if (child.node.remove(false)) {
-            removed = true;
-          }
-        }
-      }
-      if (removed) {
-        history.add();
-      }
-    },
-  },
   "Alt+d r": {
     description: "replace root with this node",
     action() {
