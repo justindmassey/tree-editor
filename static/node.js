@@ -29,7 +29,7 @@ export default class Node {
   static attrRegEx = /^((?:[^=]|(?:(?<!\\)\\=))*)(?<!(?<!\\)\\)=(.*)$/;
   static widgetRegEx = /^(-[^\s.:]+)\s*(.*)/;
   static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^.:]+/g;
-  static listTypeRegEx = /(?<!:|((?<!\\)\\)):[^.:]+/g;
+  static listTypeRegEx = /(?<!(?:^:)|((?<!\\)\\)):[^.:]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
 
   constructor(name = "", ...children) {
