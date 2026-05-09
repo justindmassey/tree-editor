@@ -612,8 +612,8 @@ function unescapeArg(str) {
   return str
     .replace(Node.listTypeRegEx, "")
     .replace(Node.nodeTypeRegEx, "")
-    .replace(/\\:(?!:)/g, ":")
-    .replace(/\\\./g, ".")
+    .replace(/\\:(?=[^:.])/g, ":")
+    .replace(/\\\.(?=[^:.])/g, ".")
     .replace(/\\=/g, "=")
     .replace(/\\\\/g, "\\");
 }
