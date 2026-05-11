@@ -65,35 +65,6 @@ class Tree {
   updateTypes() {
     let typedefs = {};
     let typedefDeps = {};
-
-    function getTypeClosure(typeName, result = new Set()) {
-      if (result.has(typeName)) return result;
-      result.add(typeName);
-      let deps = typedefDeps[typeName];
-      if (deps) {
-        for (let dep of deps) {
-          if (typedefs[dep]) {
-            getTypeClosure(dep, result);
-          }
-        }
-      }
-      return result;
-    }
-    function removeTypeApplication(node, typeName) {
-      let ownerTypes = getTypeClosure(typeName);
-
-      node.traverse((n) => {
-        for (let child of [...n.children.children]) {
-          if (
-            ownerTypes.has(child.node.sourceOwner) &&
-            child.node.sourceType &&
-            child.node.equals(child.node.sourceType)
-          ) {
-            child.node.remove(false);
-          }
-        }
-      });
-    }
     typedefMenu.clearItems();
     this.root.traverse((n) => {
       if (!n.isAttribute) {
@@ -258,6 +229,20 @@ class Tree {
       document.title = "Tree Editor";
     }
   }
+}
+
+function removeTypeApplication(node, typeName) {
+  node.traverse((n) => {
+    for (let child of [...n.children.children]) {
+      if (
+        child.node.sourceOwner == typeName &&
+        child.node.sourceType &&
+        child.node.equals(child.node.sourceType)
+      ) {
+        child.node.remove(false);
+      }
+    }
+  });
 }
 
 export default new Tree();
