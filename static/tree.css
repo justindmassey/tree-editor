@@ -59,6 +59,3 @@
   margin: 0.5em;
   background: var(--bg);
 }
-.error>code{
-  color: red;
-}
