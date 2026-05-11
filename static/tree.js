@@ -65,7 +65,8 @@ class Tree {
   updateTypes() {
     let typedefs = {};
     let typedefDeps = {};
-    let getTypeClosure = (typeName, result = new Set()) => {
+
+    function getTypeClosure(typeName, result = new Set()) {
       if (result.has(typeName)) return result;
       result.add(typeName);
       let deps = typedefDeps[typeName];
@@ -77,8 +78,8 @@ class Tree {
         }
       }
       return result;
-    };
-    let removeTypeApplication = (node, typeName) => {
+    }
+    function removeTypeApplication(node, typeName) {
       let ownerTypes = getTypeClosure(typeName);
 
       node.traverse((n) => {
@@ -92,16 +93,17 @@ class Tree {
           }
         }
       });
-    };
+    }
     typedefMenu.clearItems();
     this.root.traverse((n) => {
       if (!n.isAttribute) {
         let m = n.nameValue.match(Node.typedefRegEx);
         if (m) {
-          typedefs[m[1]] = n;
-          n.widget;
-          typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
           typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
+          typedefs[m[1]] = n;
+          typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
+          n.widget;
+          
           n.traverse((n2) => {
             let nodeTypes = n2.nameValue.match(Node.nodeTypeRegEx);
             if (nodeTypes) {
@@ -124,11 +126,11 @@ class Tree {
     let permMark = {};
     let cyclePath = null;
 
-    const visit = (name, stack) => {
+    function hasCycle(name, stack = []) {
       if (permMark[name]) return false;
       if (tempMark[name]) {
         cyclePath = stack.concat(name);
-        return name;
+        return true;
       }
       tempMark[name] = true;
       stack.push(name);
@@ -137,8 +139,9 @@ class Tree {
       if (deps) {
         for (let dep of deps) {
           if (typedefDeps[dep]) {
-            let t;
-            if ((t = visit(dep, stack))) return t;
+            if (hasCycle(dep, stack)) {
+              return true;
+            }
           }
         }
       }
@@ -146,10 +149,10 @@ class Tree {
       stack.pop();
       permMark[name] = true;
       return false;
-    };
+    }
     this.error.classList.add("hidden");
     for (let name in typedefDeps) {
-      if (visit(name, [])) {
+      if (hasCycle(name)) {
         this.errorPath.textContent = cyclePath.join(" → ");
         this.error.classList.remove("hidden");
         return;
