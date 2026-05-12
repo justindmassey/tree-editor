@@ -199,8 +199,6 @@ export default {
       div(code("argument"), ": the name of the tree to link to"),
       div(code("$label"), ": If set, it is used as the label."),
       div("If the tree doesn't exist, it's created (but not saved)."),
-      div("Because the tree name is a widget argument,"),
-      div("trees with leading whitespace in their name can't be linked to."),
     ),
     create(arg, escapedArg) {
       let label = arg;
