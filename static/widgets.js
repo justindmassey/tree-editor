@@ -684,6 +684,7 @@ export default {
         history.add();
       });
       let optChildren = Object.create(null);
+      let options = Object.create(null);
       for (let child of this.childNodes) {
         if (
           child.lastNameText != undefined &&
@@ -692,7 +693,14 @@ export default {
           this.setAttribute("$value", child.nameText);
         }
         child.lastNameText = child.nameText;
-        opt.appendChild(option(child._nameText).a("value", child._nameText));
+        if (options[child._nameText]) {
+          options[child._nameText].remove();
+        }
+        options[child._nameText] = option(child._nameText).a(
+          "value",
+          child._nameText,
+        );
+        opt.appendChild(options[child._nameText]);
         if (child.childNodes.length) {
           optChildren[child._nameText] = child.childrenWidget;
         }
@@ -820,8 +828,7 @@ export default {
               attrNode.nameValue =
                 attrNode._isAttribute[1] + "=" + entry.checked;
             } else {
-              attrNode.nameValue =
-                attrNode._isAttribute[1] + "=" + entry.value;
+              attrNode.nameValue = attrNode._isAttribute[1] + "=" + entry.value;
             }
             children.replaceChildren(...this.childrenWidget.children);
 
