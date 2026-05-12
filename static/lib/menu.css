@@ -15,6 +15,7 @@
 
 .menu-items {
   background: var(--bg);
+  min-width: 100%;
 }
 
 .menu-label,
