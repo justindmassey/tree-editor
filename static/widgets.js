@@ -601,51 +601,6 @@ export default {
       }
     },
   },
-  "-tt": {
-    description: div(div("teletype"), div("uses monospace font")),
-    create(arg) {
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(arg), this._childrenWidget.c("indented")).c("tt");
-        } else {
-          return div(arg).c("tt");
-        }
-      } else {
-        return this.childrenWidget.c("tt");
-      }
-    },
-  },
-  "-cen": {
-    description: "center horizontally",
-    create(arg) {
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(div(arg), this._childrenWidget.c("indented"))).c(
-            "cen",
-          );
-        } else {
-          return div(arg).c("cen");
-        }
-      } else {
-        return div(this.childrenWidget).c("cen");
-      }
-    },
-  },
-  "-bg": {
-    description: div(
-      div("background"),
-      div(code("argument"), ": a CSS color"),
-      div("colors the background of children"),
-    ),
-    create(arg) {
-      let bg = this.childrenWidget.c("bg");
-      if (arg) {
-        bg.style.background = arg;
-        bg.style.outline = "1px solid " + arg;
-      }
-      return bg;
-    },
-  },
   "-ta": {
     description: div(div("textarea"), div("Children become lines of text.")),
     create(arg) {
@@ -732,7 +687,7 @@ export default {
   "-rad": {
     description: div(
       div("radio buttons"),
-      div("adds a radio button in front of children"),
+      div("Adds a radio button in front of children."),
       div(
         "If a child has a ",
         code("$name"),
@@ -873,6 +828,51 @@ export default {
         } else {
           return children;
         }
+      }
+    },
+  },
+  "-bg": {
+    description: div(
+      div("background"),
+      div(code("argument"), ": a CSS color"),
+      div("colors the background of children"),
+    ),
+    create(arg) {
+      let bg = this.childrenWidget.c("bg");
+      if (arg) {
+        bg.style.background = arg;
+        bg.style.outline = "1px solid " + arg;
+      }
+      return bg;
+    },
+  },
+  "-cen": {
+    description: "center horizontally",
+    create(arg) {
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          return div(div(div(arg), this._childrenWidget.c("indented"))).c(
+            "cen",
+          );
+        } else {
+          return div(arg).c("cen");
+        }
+      } else {
+        return div(this.childrenWidget).c("cen");
+      }
+    },
+  },
+  "-tt": {
+    description: div(div("teletype"), div("uses monospace font")),
+    create(arg) {
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          return div(div(arg), this._childrenWidget.c("indented")).c("tt");
+        } else {
+          return div(arg).c("tt");
+        }
+      } else {
+        return this.childrenWidget.c("tt");
       }
     },
   },
