@@ -120,11 +120,7 @@ export default {
         .c("tgl-icon")
         .ctrlClick(this._attrNodeMap.$expanded || this)
         .e("click", () => {
-          if (expanded) {
-            this.setAttribute("$expanded", false);
-          } else {
-            this.setAttribute("$expanded", true);
-          }
+          this.setAttribute("$expanded", !expanded);
           history.add();
         });
       if (arg) {
