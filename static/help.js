@@ -1,14 +1,14 @@
-import { div, table, tr, td, h1, h2, code, p, a } from "./lib/elements.js";
+import { div, table, tr, td, h1, h2, code, p } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
 
-function makeReference(items) {
-  let reference = table();
+function reference(items) {
+  let ref = table();
   for (let item in items) {
-    reference.appendChild(tr(td(code(item)), td(items[item].description)));
+    ref.appendChild(tr(td(code(item)), td(items[item].description)));
   }
-  return reference;
+  return ref;
 }
 
 let toc = p();
@@ -16,16 +16,14 @@ let toc = p();
 function section(title) {
   let header = h2(title);
   toc.appendChild(
-    div(
-      a(title)
-        .c("anchor")
-        .e("click", () =>
-          header.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          }),
-        ),
-    ),
+    div(title)
+      .c("anchor")
+      .e("click", () =>
+        header.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        }),
+      ),
   );
   return header;
 }
@@ -34,7 +32,7 @@ export default div(
   h1("Help"),
   toc,
   section("Global Commands"),
-  makeReference(globalCommands),
+  reference(globalCommands),
   p(
     div("If the root node has the attribute ", code("$name"), ","),
     div("its value is used as the tree name when saving."),
@@ -42,7 +40,7 @@ export default div(
   ),
   section("Node Commands"),
   p("There is always one root node."),
-  makeReference(nodeCommands),
+  reference(nodeCommands),
 
   section("Widgets"),
   p(
@@ -67,7 +65,7 @@ export default div(
     div("Attributes that start with a ", code("$"), " are used by widgets."),
     div("The argument is a label unless stated otherwise."),
   ),
-  makeReference(widgets),
+  reference(widgets),
 
   section("Attributes"),
   div("Attributes have the form ", code("NAME=VALUE"), "."),
@@ -129,7 +127,7 @@ export default div(
   div("Nodes without children become lines of text."),
   div("Children of attribute nodes are ignored."),
   p(
-    a("Table of contents")
+    div("Table of contents")
       .c("anchor")
       .e("click", () => {
         toc.scrollIntoView({
