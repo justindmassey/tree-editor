@@ -19,7 +19,7 @@ export default {
       let name = this.tree.name;
       get("/list").then((list) => {
         if (list.error) {
-          alert(error);
+          alert(list.error);
         } else {
           if (
             localStorage.getItem("tree") != name &&
