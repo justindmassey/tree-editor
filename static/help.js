@@ -30,10 +30,8 @@ function section(title) {
   return header;
 }
 
-let top;
-
 export default div(
-  (top = h1("Help")),
+  h1("Help"),
   toc,
   section("Global Commands"),
   makeReference(globalCommands),
@@ -83,7 +81,7 @@ export default div(
   div("Attribute values need no escaping."),
   div(code("$url"), "-attributes don't affect input size."),
 
-  h2("Attribute Substitution"),
+  section("Attribute Substitution"),
   div(
     "If a non-attribute node name or attribute value contains ",
     code(";ATTRIBUTE_NAME;"),
@@ -131,10 +129,10 @@ export default div(
   div("Nodes without children become lines of text."),
   div("Children of attribute nodes are ignored."),
   p(
-    a("top")
+    a("Table of contents")
       .c("anchor")
       .e("click", () => {
-        top.scrollIntoView({
+        toc.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
