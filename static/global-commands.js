@@ -43,20 +43,28 @@ export default {
     description: "delete this tree",
     action() {
       let name = this.tree.name;
-      get("/delete?name=" + encodeURIComponent(name)).then((res) => {
-        if (this.tree.root.remove()) {
-          history.add();
-        }
-        this.tree.tree.scrollTop = 0;
-        this.tree.output.scrollTop = 0;
-        if (!res.error) {
-          treeMenu.update();
-          if (localStorage.getItem("tree") == name) {
-            localStorage.removeItem("tree");
+      if (
+        !(
+          localStorage.getItem("tree") != name &&
+          treeMenu.trees.includes(name) &&
+          !confirm(`The existing tree "${name}" will be deleted.`)
+        )
+      ) {
+        get("/delete?name=" + encodeURIComponent(name)).then((res) => {
+          if (this.tree.root.remove()) {
+            history.add();
           }
-          flash();
-        }
-      });
+          this.tree.tree.scrollTop = 0;
+          this.tree.output.scrollTop = 0;
+          if (!res.error) {
+            treeMenu.update();
+            if (localStorage.getItem("tree") == name) {
+              localStorage.removeItem("tree");
+            }
+            flash();
+          }
+        });
+      }
     },
   },
   "Control+z": {
