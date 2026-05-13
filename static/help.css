@@ -27,7 +27,7 @@ code {
 }
 
 .anchor {
-  color: blue;
+  color: var(--color-1);
   text-decoration: underline;
   cursor: pointer;
 }
