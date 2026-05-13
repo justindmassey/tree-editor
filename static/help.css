@@ -26,7 +26,7 @@ code {
   color: var(--color-1)
 }
 
-.toc-item {
+.anchor {
   color: blue;
   text-decoration: underline;
   cursor: pointer;

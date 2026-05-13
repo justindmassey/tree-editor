@@ -18,7 +18,7 @@ function section(title) {
   toc.appendChild(
     div(
       a(title)
-        .c("toc-item")
+        .c("anchor")
         .e("click", () =>
           header.scrollIntoView({
             behavior: "smooth",
@@ -30,8 +30,10 @@ function section(title) {
   return header;
 }
 
+let top;
+
 export default div(
-  h1("Help"),
+  (top = h1("Help")),
   toc,
   section("Global Commands"),
   makeReference(globalCommands),
@@ -128,4 +130,14 @@ export default div(
   div("Attribute nodes become attributes."),
   div("Nodes without children become lines of text."),
   div("Children of attribute nodes are ignored."),
+  p(
+    a("top")
+      .c("anchor")
+      .e("click", () => {
+        top.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }),
+  ),
 ).c("help", "hidden");
