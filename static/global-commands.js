@@ -17,16 +17,32 @@ export default {
     description: "save the tree",
     action() {
       let name = this.tree.name;
-      post(
-        "/save?name=" + encodeURIComponent(name),
-        JSON.stringify(this.tree.root.serialize()),
-      ).then((res) => {
-        if (res.error) {
-          alert(res.error);
+      get("/list").then((list) => {
+        if (list.error) {
+          alert(error);
         } else {
-          localStorage.setItem("tree", name);
-          treeMenu.update();
-          flash();
+          if (
+            localStorage.getItem("tree") != name &&
+            list.includes(name) &&
+            !confirm(
+              `The tree "${name}" already exists and will be overwritten.`,
+            )
+          ) {
+            return;
+          } else {
+            post(
+              "/save?name=" + encodeURIComponent(name),
+              JSON.stringify(this.tree.root.serialize()),
+            ).then((res) => {
+              if (res.error) {
+                alert(res.error);
+              } else {
+                localStorage.setItem("tree", name);
+                treeMenu.update();
+                flash();
+              }
+            });
+          }
         }
       });
     },
