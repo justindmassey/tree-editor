@@ -17,34 +17,26 @@ export default {
     description: "save the tree",
     action() {
       let name = this.tree.name;
-      get("/list").then((list) => {
-        if (list.error) {
-          alert(list.error);
-        } else {
-          if (
-            localStorage.getItem("tree") != name &&
-            list.includes(name) &&
-            !confirm(
-              `The tree "${name}" already exists and will be overwritten.`,
-            )
-          ) {
-            return;
+      if (
+        !(
+          localStorage.getItem("tree") != name &&
+          treeMenu.trees.includes(name) &&
+          !confirm(`The tree "${name}" already exists and will be overwritten.`)
+        )
+      ) {
+        post(
+          "/save?name=" + encodeURIComponent(name),
+          JSON.stringify(this.tree.root.serialize()),
+        ).then((res) => {
+          if (res.error) {
+            alert(res.error);
           } else {
-            post(
-              "/save?name=" + encodeURIComponent(name),
-              JSON.stringify(this.tree.root.serialize()),
-            ).then((res) => {
-              if (res.error) {
-                alert(res.error);
-              } else {
-                localStorage.setItem("tree", name);
-                treeMenu.update();
-                flash();
-              }
-            });
+            localStorage.setItem("tree", name);
+            treeMenu.update();
+            flash();
           }
-        }
-      });
+        });
+      }
     },
   },
   "Control+Alt+d": {

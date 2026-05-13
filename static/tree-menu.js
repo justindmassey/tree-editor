@@ -7,6 +7,7 @@ class TreeMenu {
   constructor() {
     this.menu = new Menu("Trees");
     this.elem = this.menu.elem;
+    this.trees = [];
     this.update();
   }
 
@@ -16,6 +17,7 @@ class TreeMenu {
       if (list.error) {
         alert(list.error);
       } else {
+        this.trees = list;
         for (let treeName of list) {
           this.menu.addItem(
             div(treeName || " ").e("click", () => tree.load(treeName))
