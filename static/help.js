@@ -1,4 +1,4 @@
-import { div, table, tr, td, h1, h2, code, p } from "./lib/elements.js";
+import { div, table, tr, td, h1, h2, code, p, a } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
@@ -11,109 +11,121 @@ function makeReference(items) {
   return reference;
 }
 
-class Help {
-  constructor() {
-    this.elem = div(
-      h1("Help"),
+let toc = p();
 
-      h2("Global Commands"),
-      makeReference(globalCommands),
-      p(
-        div("If the root node has the attribute ", code("$name"), ","),
-        div("its value is used as the tree name when saving."),
-        div("Otherwise the unescaped name of the root node is used."),
-      ),
-      h2("Node Commands"),
-      p("There is always one root node."),
-      makeReference(nodeCommands),
-
-      h2("Widgets"),
-      p(
-        div("Widgets begin with ", code("-WIDGET ARGUMENT"), "."),
-        div("Widgets are rendered to the output"),
-        div("(press Alt+o to toggle the output visibility)."),
-        div(
-          'Nodes that start with a hash symbol ("',
-          code("#"),
-          '") ',
-          div("are not rendered to the output."),
-          div("Control-click a widget in the output to focus its node."),
-          div("The output is updated in real time."),
-          div(
-            'The hash symbol and the dash ("',
-            code("-"),
-            '") at the beginning of a node name',
-            div("can be escaped with a backslash."),
-            div("A backslash can be escaped with a backslash.")
-          ),
+function section(title) {
+  let header = h2(title);
+  toc.appendChild(
+    div(
+      a(title)
+        .c("toc-item")
+        .e("click", () =>
+          header.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          }),
         ),
-        div(
-          "Attributes that start with a ",
-          code("$"),
-          " are used by widgets.",
-        ),
-        div("The argument is a label unless stated otherwise."),
-      ),
-      makeReference(widgets),
-
-      h2("Attributes"),
-      div("Attributes have the form ", code("NAME=VALUE"), "."),
-      div(
-        'Equals symbols ("',
-        code("="),
-        '") ',
-        "can be escaped with a backslash.",
-      ),
-      div("A backslash can be escaped with a backslash."),
-      div("Attribute values need no escaping."),
-      div(code("$url"), "-attributes don't affect input size."),
-
-      h2("Attribute Substitution"),
-      div(
-        "If a non-attribute node name or attribute value contains ",
-        code(";ATTRIBUTE_NAME;"),
-      ),
-      div(
-        " then ",
-        code(";ATTRIBUTE_NAME;"),
-        " is replaced with that attribute's value.",
-      ),
-      div("Attribute lookup starts at the parent and moves upward."),
-      div("Unescaping is performed before attribute substitution."),
-
-      h2("Type System"),
-      div("Nodes with a name of the form ", code("::TYPE")),
-      div("are type definitions."),
-      div("Nodes with ", code(".TYPE"), " in their name"),
-      div("inherit from that type definition."),
-      div('The dots ("', code("."), '") can be escaped with a backslash.'),
-      div("Children of nodes with ", code(":TYPE"), " in their name"),
-      div("inherit from that type definition."),
-      div('The colons ("', code(":"), '") can be escaped with a backslash.'),
-      div("Type definitions can inherit from other type definitions."),
-      div("Subtypes should come after base types."),
-      div("Types are updated in real time."),
-      div("Type definitions are not rendered to the output."),
-      div("A backslash can be escaped with a backslash."),
-      div("Duplicate nodes in a type definition are ignored after the first occurrence."),
-
-      h2("Text Export"),
-      div("Nodes are structured with indentation."),
-      div("Text export is the only lossless one."),
-
-      h2("JSON Export"),
-      div("Nodes and attributes become JSON properties."),
-      div("Duplicate names override the last."),
-      div("If node and attribute names form array indexes ({0..n-1})"),
-      div("the node is exported as an array."),
-
-      h2("XML Export"),
-      div("Nodes with children become tags."),
-      div("Attribute nodes become attributes."),
-      div("Nodes without children become lines of text."),
-      div("Children of attribute nodes are ignored."),
-    ).c("help", "hidden");
-  }
+    ),
+  );
+  return header;
 }
 
-export default new Help();
+export default div(
+  h1("Help"),
+  toc,
+  section("Global Commands"),
+  makeReference(globalCommands),
+  p(
+    div("If the root node has the attribute ", code("$name"), ","),
+    div("its value is used as the tree name when saving."),
+    div("Otherwise the unescaped name of the root node is used."),
+  ),
+  section("Node Commands"),
+  p("There is always one root node."),
+  makeReference(nodeCommands),
+
+  section("Widgets"),
+  p(
+    div("Widgets begin with ", code("-WIDGET ARGUMENT"), "."),
+    div("Widgets are rendered to the output"),
+    div("(press Alt+o to toggle the output visibility)."),
+    div(
+      'Nodes that start with a hash symbol ("',
+      code("#"),
+      '") ',
+      div("are not rendered to the output."),
+      div("Control-click a widget in the output to focus its node."),
+      div("The output is updated in real time."),
+      div(
+        'The hash symbol and the dash ("',
+        code("-"),
+        '") at the beginning of a node name',
+        div("can be escaped with a backslash."),
+        div("A backslash can be escaped with a backslash."),
+      ),
+    ),
+    div("Attributes that start with a ", code("$"), " are used by widgets."),
+    div("The argument is a label unless stated otherwise."),
+  ),
+  makeReference(widgets),
+
+  section("Attributes"),
+  div("Attributes have the form ", code("NAME=VALUE"), "."),
+  div(
+    'Equals symbols ("',
+    code("="),
+    '") ',
+    "can be escaped with a backslash.",
+  ),
+  div("A backslash can be escaped with a backslash."),
+  div("Attribute values need no escaping."),
+  div(code("$url"), "-attributes don't affect input size."),
+
+  h2("Attribute Substitution"),
+  div(
+    "If a non-attribute node name or attribute value contains ",
+    code(";ATTRIBUTE_NAME;"),
+  ),
+  div(
+    " then ",
+    code(";ATTRIBUTE_NAME;"),
+    " is replaced with that attribute's value.",
+  ),
+  div("Attribute lookup starts at the parent and moves upward."),
+  div("Unescaping is performed before attribute substitution."),
+
+  section("Type System"),
+  div("Nodes with a name of the form ", code("::TYPE")),
+  div("are type definitions."),
+  div("Nodes with ", code(".TYPE"), " in their name"),
+  div("inherit from that type definition."),
+  div('The dots ("', code("."), '") can be escaped with a backslash.'),
+  div("Children of nodes with ", code(":TYPE"), " in their name"),
+  div("inherit from that type definition."),
+  div('The colons ("', code(":"), '") can be escaped with a backslash.'),
+  div("Type definitions can inherit from other type definitions."),
+  div("Subtypes should come after base types."),
+  div("Types are updated in real time."),
+  div("Type definitions are not rendered to the output."),
+  div("A backslash can be escaped with a backslash."),
+  div(
+    "Duplicate nodes in a type definition are ignored after the first occurrence.",
+  ),
+
+  section("Text Export"),
+  div("Nodes are structured with indentation."),
+  div("Text export is the only lossless one."),
+
+  section("JSON Export"),
+  div("Nodes and attributes become JSON properties."),
+  div("Children of attribute nodes are ignored."),
+  div("Duplicate names override the last."),
+  div("If node and attribute names form array indexes ({0..n-1})"),
+  div("the node is exported as an array."),
+
+  section("XML Export"),
+  div("Nodes with children become tags."),
+  div("Attribute nodes become attributes."),
+  div("Nodes without children become lines of text."),
+  div("Children of attribute nodes are ignored."),
+).c("help", "hidden");

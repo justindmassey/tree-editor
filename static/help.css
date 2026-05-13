@@ -25,3 +25,9 @@ code {
   font-size: 1.25em;
   color: var(--color-1)
 }
+
+.toc-item {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

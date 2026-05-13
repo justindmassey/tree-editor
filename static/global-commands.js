@@ -95,8 +95,8 @@ export default {
   "Alt+h": {
     description: "toggle help display",
     action() {
-      this.help.elem.classList.toggle("hidden");
-      if (this.help.elem.classList.contains("hidden")) {
+      this.help.classList.toggle("hidden");
+      if (this.help.classList.contains("hidden")) {
         localStorage.setItem("help", "");
       } else {
         localStorage.setItem("help", "true");
