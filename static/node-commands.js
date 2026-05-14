@@ -34,10 +34,10 @@ export default {
     },
   },
   "Alt+Enter": {
-    description: "append child to grandparent",
+    description: "insert a new node after the parent node",
     action() {
       if (this.parent && this.parent.parent) {
-        this.parent.parent.appendChild(new Node());
+        this.parent.insertAfter(new Node());
         history.add();
       }
     },
