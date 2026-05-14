@@ -266,6 +266,13 @@ export default {
       history.add();
     },
   },
+  "Alt+f": {
+    description: "collapse all nodes and show this one",
+    action() {
+      tree.root.traverse((n) => n.collapse());
+      this.focus();
+    },
+  },
   "Alt+s c": {
     description: "collapse siblings",
     action() {
@@ -276,6 +283,18 @@ export default {
       } else {
         this.collapse();
       }
+    },
+  },
+  "Alt+d x": {
+    description: "expand all descendants",
+    action() {
+      this.traverse((n) => n.expand());
+    },
+  },
+  "Alt+d c": {
+    description: "collapse all descendants",
+    action() {
+      this.traverse((n) => n.collapse());
     },
   },
   "Alt+s s": {
@@ -293,25 +312,6 @@ export default {
           history.add();
         }
       }
-    },
-  },
-  "Alt+f": {
-    description: "collapse all nodes and show this one",
-    action() {
-      tree.root.traverse((n) => n.collapse());
-      this.focus();
-    },
-  },
-  "Alt+d x": {
-    description: "expand all descendants",
-    action() {
-      this.traverse((n) => n.expand());
-    },
-  },
-  "Alt+d c": {
-    description: "collapse all descendants",
-    action() {
-      this.traverse((n) => n.collapse());
     },
   },
   "Alt+i": {
