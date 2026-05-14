@@ -123,6 +123,28 @@ export default {
       }
     },
   },
+  "Control+k": {
+    description: "delete this node but keep the children",
+    action() {
+      if (this.parent) {
+        if (this.children.children.length) {
+          for (let i = this.children.children.length - 1; i >= 0; i--) {
+            this.insertAfter(this.children.children[i].node);
+          }
+          this.remove(false);
+        } else {
+          this.remove();
+        }
+        history.add();
+      } else if (this.children.children.length == 1) {
+        this.replaceWith(this.children.children[0].node);
+        history.add();
+      } else if (this.nameValue) {
+        this.nameValue = "";
+        history.add();
+      }
+    },
+  },
   "Alt+ArrowUp, Control+Alt+p": {
     description: "focus previous sibling",
     action() {
@@ -163,28 +185,6 @@ export default {
       if (this.parent && this.parent.children.children.length > 1) {
         this.parent.prependChild(this.parent.children.lastChild.node, false);
         this.focus();
-        history.add();
-      }
-    },
-  },
-  "Control+k": {
-    description: "remove this node but keep the children",
-    action() {
-      if (this.parent) {
-        if (this.children.children.length) {
-          for (let i = this.children.children.length - 1; i >= 0; i--) {
-            this.insertAfter(this.children.children[i].node);
-          }
-          this.remove(false);
-        } else {
-          this.remove();
-        }
-        history.add();
-      } else if (this.children.children.length == 1) {
-        this.replaceWith(this.children.children[0].node);
-        history.add();
-      } else if (this.nameValue) {
-        this.nameValue = "";
         history.add();
       }
     },
