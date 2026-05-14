@@ -81,7 +81,7 @@ export default div(
 
   section("Attribute Substitution"),
   div(
-    "If a non-attribute node name or attribute value contains ",
+    "If a node name or attribute value contains ",
     code(";ATTRIBUTE_NAME;"),
   ),
   div(
