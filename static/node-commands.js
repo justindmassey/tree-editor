@@ -43,7 +43,7 @@ export default {
     },
   },
   "Control+Enter": {
-    description: "add this node to new parent node",
+    description: "add this node to a new parent node",
     action() {
       let parent = new Node();
       this.replaceWith(parent);
@@ -52,7 +52,7 @@ export default {
     },
   },
   "Control+Shift+Enter": {
-    description: "add siblings to new parent node",
+    description: "add siblings to a new parent node",
     action() {
       if (this.parent) {
         let newParent = new Node();
