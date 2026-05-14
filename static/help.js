@@ -28,7 +28,7 @@ function section(title) {
   return header;
 }
 
-export default div(
+let help = div(
   h1("Tree Editor"),
   toc,
   section("Global Commands"),
@@ -80,10 +80,7 @@ export default div(
   div(code("$url"), "-attributes don't affect input size."),
 
   section("Attribute Substitution"),
-  div(
-    "If a node name or attribute value contains ",
-    code(";ATTRIBUTE_NAME;"),
-  ),
+  div("If a node name or attribute value contains ", code(";ATTRIBUTE_NAME;")),
   div(
     " then ",
     code(";ATTRIBUTE_NAME;"),
@@ -126,13 +123,15 @@ export default div(
   div("Nodes without children become text content."),
   div("Children of attribute nodes are ignored."),
   p(
-    div("Table of contents")
+    div("Back to top")
       .c("anchor")
       .e("click", () => {
-        toc.scrollIntoView({
+        help.scrollTo({
+          top: 0,
           behavior: "smooth",
-          block: "start",
         });
       }),
   ),
 ).c("help", "hidden");
+
+export default help;

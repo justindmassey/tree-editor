@@ -148,7 +148,7 @@ export default {
     },
   },
   "Alt+j": {
-    description: "focus first node with string in its name",
+    description: "focus first node containing text",
     action() {
       let find = prompt("Focus first node containing:").toUpperCase();
       this.tree.root.traverse((n) => {
