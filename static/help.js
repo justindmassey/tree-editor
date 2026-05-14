@@ -123,7 +123,7 @@ export default div(
   section("XML Export"),
   div("Nodes with children become tags."),
   div("Attribute nodes become attributes."),
-  div("Nodes without children become lines of text."),
+  div("Nodes without children become text content."),
   div("Children of attribute nodes are ignored."),
   p(
     div("Table of contents")
