@@ -3,6 +3,68 @@ import { post, get } from "./lib/ajax.js";
 import treeMenu from "./tree-menu.js";
 
 export default {
+  "Alt+h": {
+    description: "toggle help display",
+    action() {
+      this.help.classList.toggle("hidden");
+      if (this.help.classList.contains("hidden")) {
+        localStorage.setItem("help", "");
+      } else {
+        localStorage.setItem("help", "true");
+      }
+    },
+  },
+  "Alt+m": {
+    description: "toggle menu bar",
+    action() {
+      this.menuBar.elem.classList.toggle("hidden");
+      if (this.menuBar.elem.classList.contains("hidden")) {
+        localStorage.setItem("menuBar", "");
+        this.tree.elem.style.marginTop = "0px";
+        this.tree.elem.style.height = "";
+      } else {
+        localStorage.setItem("menuBar", "true");
+        this.tree.elem.style.marginTop = this.menuBar.elem.offsetHeight + "px";
+        if (!this.tree.tree.classList.contains("hidden")) {
+          this.tree.elem.style.height =
+            "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
+        }
+      }
+    },
+  },
+  "Alt+o": {
+    description: "toggle output",
+    action() {
+      this.tree.output.classList.toggle("hidden");
+      if (this.tree.output.classList.contains("hidden")) {
+        localStorage.setItem("output", "");
+      } else {
+        localStorage.setItem("output", "true");
+      }
+    },
+  },
+  "Alt+t": {
+    description: "toggle tree",
+    action() {
+      if (!this.tree.tree.classList.contains("hidden")) {
+        this.tree.activeElement = document.activeElement;
+      }
+      this.tree.tree.classList.toggle("hidden");
+      if (this.tree.tree.classList.contains("hidden")) {
+        localStorage.setItem("showTree", "");
+        this.tree.elem.style.height = "";
+      } else {
+        if (!this.menuBar.elem.classList.contains("hidden")) {
+          this.tree.elem.style.height =
+            "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
+        }
+        localStorage.setItem("showTree", "true");
+        if (this.tree.activeElement && this.tree.activeElement.focus) {
+          this.tree.activeElement.focus();
+        }
+      }
+    },
+  },
   "Control+Alt+n": {
     description: "new tree",
     action() {
@@ -98,68 +160,6 @@ export default {
           return true;
         }
       });
-    },
-  },
-  "Alt+h": {
-    description: "toggle help display",
-    action() {
-      this.help.classList.toggle("hidden");
-      if (this.help.classList.contains("hidden")) {
-        localStorage.setItem("help", "");
-      } else {
-        localStorage.setItem("help", "true");
-      }
-    },
-  },
-  "Alt+m": {
-    description: "toggle menu bar",
-    action() {
-      this.menuBar.elem.classList.toggle("hidden");
-      if (this.menuBar.elem.classList.contains("hidden")) {
-        localStorage.setItem("menuBar", "");
-        this.tree.elem.style.marginTop = "0px";
-        this.tree.elem.style.height = "";
-      } else {
-        localStorage.setItem("menuBar", "true");
-        this.tree.elem.style.marginTop = this.menuBar.elem.offsetHeight + "px";
-        if (!this.tree.tree.classList.contains("hidden")) {
-          this.tree.elem.style.height =
-            "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
-        }
-      }
-    },
-  },
-  "Alt+o": {
-    description: "toggle output",
-    action() {
-      this.tree.output.classList.toggle("hidden");
-      if (this.tree.output.classList.contains("hidden")) {
-        localStorage.setItem("output", "");
-      } else {
-        localStorage.setItem("output", "true");
-      }
-    },
-  },
-  "Alt+t": {
-    description: "toggle tree",
-    action() {
-      if (!this.tree.tree.classList.contains("hidden")) {
-        this.tree.activeElement = document.activeElement;
-      }
-      this.tree.tree.classList.toggle("hidden");
-      if (this.tree.tree.classList.contains("hidden")) {
-        localStorage.setItem("showTree", "");
-        this.tree.elem.style.height = "";
-      } else {
-        if (!this.menuBar.elem.classList.contains("hidden")) {
-          this.tree.elem.style.height =
-            "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
-        }
-        localStorage.setItem("showTree", "true");
-        if (this.tree.activeElement && this.tree.activeElement.focus) {
-          this.tree.activeElement.focus();
-        }
-      }
     },
   },
 };

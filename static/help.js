@@ -29,7 +29,7 @@ function section(title) {
 }
 
 export default div(
-  h1("Help"),
+  h1("Tree Editor"),
   toc,
   section("Global Commands"),
   reference(globalCommands),
