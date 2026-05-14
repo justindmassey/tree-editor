@@ -42,36 +42,31 @@ export default {
       }
     },
   },
-  "Control+d": {
-    description: "delete this node",
+  "Control+Enter": {
+    description: "add a new parent node",
     action() {
-      if (this.remove()) {
-        history.add();
-      }
+      let parent = new Node();
+      this.replaceWith(parent);
+      parent.appendChild(this, false);
+      history.add();
     },
   },
-  "Alt+ArrowUp, Control+Alt+p": {
-    description: "focus previous sibling",
+  "Control+Shift+Enter": {
+    description: "wrap siblings with new node",
     action() {
       if (this.parent) {
-        if (this.elem.previousSibling) {
-          this.elem.previousSibling.node.focus();
-        } else {
-          this.parent.children.lastChild.node.focus();
+        let newParent = new Node();
+        newParent.children.replaceChildren(...this.parent.children.children);
+        this.parent.appendChild(newParent);
+        for (let child of newParent.children.children) {
+          child.node.parent = newParent;
         }
+      } else {
+        parent = new Node();
+        this.replaceWith(parent);
+        parent.appendChild(this, false);
       }
-    },
-  },
-  "Alt+ArrowDown, Control+Alt+n": {
-    description: "focus next sibling",
-    action() {
-      if (this.parent) {
-        if (this.elem.nextSibling) {
-          this.elem.nextSibling.node.focus();
-        } else {
-          this.parent.children.firstChild.node.focus();
-        }
-      }
+      history.add();
     },
   },
   "Alt+ArrowUp, Alt+Shift+P": {
@@ -120,6 +115,38 @@ export default {
       }
     },
   },
+  "Control+d": {
+    description: "delete this node",
+    action() {
+      if (this.remove()) {
+        history.add();
+      }
+    },
+  },
+  "Alt+ArrowUp, Control+Alt+p": {
+    description: "focus previous sibling",
+    action() {
+      if (this.parent) {
+        if (this.elem.previousSibling) {
+          this.elem.previousSibling.node.focus();
+        } else {
+          this.parent.children.lastChild.node.focus();
+        }
+      }
+    },
+  },
+  "Alt+ArrowDown, Control+Alt+n": {
+    description: "focus next sibling",
+    action() {
+      if (this.parent) {
+        if (this.elem.nextSibling) {
+          this.elem.nextSibling.node.focus();
+        } else {
+          this.parent.children.firstChild.node.focus();
+        }
+      }
+    },
+  },
   "Control+ArrowUp": {
     description: "roll siblings up",
     action() {
@@ -138,33 +165,6 @@ export default {
         this.focus();
         history.add();
       }
-    },
-  },
-  "Control+Enter": {
-    description: "add a new parent node",
-    action() {
-      let parent = new Node();
-      this.replaceWith(parent);
-      parent.appendChild(this, false);
-      history.add();
-    },
-  },
-  "Control+Shift+Enter": {
-    description: "add new parent to siblings",
-    action() {
-      if (this.parent) {
-        let newParent = new Node();
-        newParent.children.replaceChildren(...this.parent.children.children);
-        this.parent.appendChild(newParent);
-        for (let child of newParent.children.children) {
-          child.node.parent = newParent;
-        }
-      } else {
-        parent = new Node();
-        this.replaceWith(parent);
-        parent.appendChild(this, false);
-      }
-      history.add();
     },
   },
   "Control+k": {
@@ -228,7 +228,7 @@ export default {
       }
     },
   },
-  "Control+p": {
+  "Alt+p": {
     description: "focus the parent node",
     action() {
       if (this.parent) {
