@@ -145,6 +145,15 @@ export default {
       }
     },
   },
+  "Alt+d d": {
+    description: "delete descendants",
+    action() {
+      if (this.children.firstChild) {
+        this.children.replaceChildren();
+        history.add();
+      }
+    },
+  },
   ArrowUp: {
     description: "focus previous node",
     action() {
@@ -245,15 +254,6 @@ export default {
     action() {
       if (tree.clipboard) {
         this.merge(Node.deserialize(tree.clipboard), false);
-        history.add();
-      }
-    },
-  },
-  "Alt+d d": {
-    description: "delete descendants",
-    action() {
-      if (this.children.firstChild) {
-        this.children.replaceChildren();
         history.add();
       }
     },
