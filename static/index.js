@@ -3,6 +3,7 @@ import history from "./history.js";
 import globalCommands from "./global-commands.js";
 
 document.body.appendChild(treeEditor.elem);
+
 if (localStorage.getItem("menuBar")) {
   globalCommands["Alt+m"].action.bind(treeEditor)();
 }
