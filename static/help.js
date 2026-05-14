@@ -39,9 +39,11 @@ let help = div(
     div("Otherwise the unescaped name of the root node is used."),
   ),
   section("Node Commands"),
-  p("There is always one root node."),
+  p(
+    div("There is always one root node."),
+    div("Pasting multiple lines into a node adds a node for each line of text.")
+  ),
   reference(nodeCommands),
-
   section("Widgets"),
   p(
     div("Widgets begin with ", code("-WIDGET ARGUMENT"), "."),

@@ -1,10 +1,11 @@
 import registerShortcuts from "./lib/register-shortcuts.js";
 import nodeCommands from "./node-commands.js";
-import { div, input } from "./lib/elements.js";
+import { a, div, input } from "./lib/elements.js";
 import widgets from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
 import tree from "./tree.js";
+import importTree from "./importers/tree.js";
 
 Element.prototype.ctrlClick = function (node) {
   this.e("mousedown", (ev) => {
@@ -42,7 +43,17 @@ export default class Node {
         history.add();
         this.updateLastValues();
       })
-      .e("focus", () => this.updateLastValues());
+      .e("focus", () => this.updateLastValues())
+      .e("paste", (ev) => {
+        let text = ev.clipboardData.getData("text/plain");
+        if (text.includes("\n")) {
+          ev.preventDefault();
+          for (let node of importTree(text, false)) {
+            this.appendChild(node, false);
+          }
+          history.add();
+        }
+      });
     registerShortcuts(this.name, nodeCommands, this);
     this.nameValue = name;
     this.removeButton = div("✕")
@@ -207,7 +218,7 @@ export default class Node {
           if (prevNode) {
             child.node.merge(prevNode, false);
           }
-          if (typeName && (child.node.lastName in lastNameTexts)) {
+          if (typeName && child.node.lastName in lastNameTexts) {
             child.node.lastNameText = lastNameTexts[child.node.lastName];
           }
           this.appendChild(child.node, false);
@@ -241,10 +252,7 @@ export default class Node {
           child1.node._isAttribute &&
           child2.node._isAttribute &&
           child1.node._isAttribute[1] == child2.node._isAttribute[1];
-        if (
-          child1.node.nameValue == child2.node.nameValue ||
-          attributesMatch
-        ) {
+        if (child1.node.nameValue == child2.node.nameValue || attributesMatch) {
           child1.node.merge(child2.node, typeName);
         }
       }

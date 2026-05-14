@@ -1,10 +1,7 @@
 export default function parseIndentedText(text, addedRootLine = "") {
-  let lines = text.split(/\r?\n/);
+  let lines = text.replace(/\n$/, "").split(/\r?\n/);
   var nodes = [{ indent: -1, line: addedRootLine, children: [] }];
   for (let line of lines) {
-    if (!line) {
-      continue;
-    }
     let m = line.match(/^(\s*)(.*)/);
     let node = {
       indent: m[1].length,
@@ -18,9 +15,13 @@ export default function parseIndentedText(text, addedRootLine = "") {
     nodes[nodes.length - 1].children.push(node);
     nodes.push(node);
   }
-  if (nodes[0].children.length == 1) {
-    return nodes[0].children[0];
+  if (addedRootLine === false) {
+    return nodes[0].children;
   } else {
-    return nodes[0];
+    if (nodes[0].children.length == 1) {
+      return nodes[0].children[0];
+    } else {
+      return nodes[0];
+    }
   }
 }

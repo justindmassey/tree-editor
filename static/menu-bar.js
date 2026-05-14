@@ -1,10 +1,10 @@
 import { div } from "./lib/elements.js";
 import TextUploader from "./lib/text-uploader.js";
 import downloadFile from "./lib/download-file.js";
-import importText from "./importers/text.js";
+import importTree from "./importers/tree.js";
 import importJson from "./importers/json.js";
 import importXml from "./importers/xml.js";
-import exportToText from "./exporters/text.js";
+import exportToTree from "./exporters/tree.js";
 import exportToJson from "./exporters/json.js";
 import exportToXml from "./exporters/xml.js";
 import tree from "./tree.js";
@@ -21,7 +21,7 @@ class MenuBar {
       new Menu(
         "Import",
         new TextUploader("Tree", ".tree", (text, filename) => {
-          tree.root = importText(text, removeExtension(filename));
+          tree.root = importTree(text, removeExtension(filename));
           tree.root.focus();
           history.add();
         }),
@@ -44,7 +44,7 @@ class MenuBar {
       new Menu(
         "Export",
         div("Tree").e("click", () => {
-          downloadFile(tree.name + ".tree", exportToText(tree.root));
+          downloadFile(tree.name + ".tree", exportToTree(tree.root));
         }),
         div("JSON").e("click", () => {
           downloadFile(tree.name + ".json", exportToJson(tree.root));
