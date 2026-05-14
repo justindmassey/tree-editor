@@ -145,51 +145,7 @@ export default {
       }
     },
   },
-  "Alt+ArrowUp, Control+Alt+p": {
-    description: "focus previous sibling",
-    action() {
-      if (this.parent) {
-        if (this.elem.previousSibling) {
-          this.elem.previousSibling.node.focus();
-        } else {
-          this.parent.children.lastChild.node.focus();
-        }
-      }
-    },
-  },
-  "Alt+ArrowDown, Control+Alt+n": {
-    description: "focus next sibling",
-    action() {
-      if (this.parent) {
-        if (this.elem.nextSibling) {
-          this.elem.nextSibling.node.focus();
-        } else {
-          this.parent.children.firstChild.node.focus();
-        }
-      }
-    },
-  },
-  "Control+ArrowUp": {
-    description: "roll siblings up",
-    action() {
-      if (this.parent && this.parent.children.children.length > 1) {
-        this.parent.appendChild(this.parent.children.firstChild.node, false);
-        this.focus();
-        history.add();
-      }
-    },
-  },
-  "Control+ArrowDown": {
-    description: "roll siblings down",
-    action() {
-      if (this.parent && this.parent.children.children.length > 1) {
-        this.parent.prependChild(this.parent.children.lastChild.node, false);
-        this.focus();
-        history.add();
-      }
-    },
-  },
-  "ArrowUp, Alt+p": {
+  ArrowUp: {
     description: "focus previous node",
     action() {
       if (this.elem.previousSibling) {
@@ -209,7 +165,7 @@ export default {
       }
     },
   },
-  "ArrowDown, Alt+n": {
+  ArrowDown: {
     description: "focus next node",
     action() {
       if (this.children.children.length && this.expanded) {
@@ -225,6 +181,30 @@ export default {
             tree.root.focus();
           }
         });
+      }
+    },
+  },
+  "Control+ArrowUp, Control+Alt+p": {
+    description: "focus previous sibling",
+    action() {
+      if (this.parent) {
+        if (this.elem.previousSibling) {
+          this.elem.previousSibling.node.focus();
+        } else {
+          this.parent.children.lastChild.node.focus();
+        }
+      }
+    },
+  },
+  "Control+ArrowDown, Control+Alt+n": {
+    description: "focus next sibling",
+    action() {
+      if (this.parent) {
+        if (this.elem.nextSibling) {
+          this.elem.nextSibling.node.focus();
+        } else {
+          this.parent.children.firstChild.node.focus();
+        }
       }
     },
   },

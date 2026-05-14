@@ -65,7 +65,7 @@ export default {
       }
     },
   },
-  "Control+Alt+n": {
+  "Alt+n": {
     description: "new tree",
     action() {
       if (this.tree.root.remove()) {
