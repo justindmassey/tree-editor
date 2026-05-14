@@ -110,9 +110,8 @@ export default div(
     "Duplicate nodes in a type definition are ignored after the first occurrence.",
   ),
 
-  section("Text Export"),
-  div("Nodes are structured with indentation."),
-  div("Text export is the only lossless one."),
+  section("Tree Export"),
+  div("Nodes become indented lines of text."),
 
   section("JSON Export"),
   div("Nodes and attributes become JSON properties."),
