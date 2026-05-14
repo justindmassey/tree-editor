@@ -22,5 +22,3 @@ if (localStorage.getItem("tree") != null) {
   treeEditor.tree.root.focus();
   history.add();
 }
-
-window.treeEditor = treeEditor;
