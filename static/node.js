@@ -55,9 +55,9 @@ export default class Node {
             }
             history.add();
           } else if (tree.pasteMode == "replace") {
-            let text = exportToTree(this);
-            if (text != clipText) {
-              this.replaceWith(importTree(clipText));
+            let imported = importTree(clipText);
+            if (!this.equals(imported)) {
+              this.replaceWith(imported);
               history.add();
             }
           } else if (tree.pasteMode == "merge") {
@@ -80,7 +80,7 @@ export default class Node {
         if (this.name.selectionStart == this.name.selectionEnd) {
           ev.preventDefault();
           ev.clipboardData.setData("text/plain", exportToTree(this));
-          if(this.remove()) {
+          if (this.remove()) {
             history.add();
           }
         }
