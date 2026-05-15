@@ -4,12 +4,6 @@ import history from "./history.js";
 import exportToText from "./exporters/tree.js";
 
 export default {
-  Tab: {
-    description: "toggle visibility of children",
-    action() {
-      this.toggle();
-    },
-  },
   "Shift+Enter": {
     description: "append child",
     action() {
@@ -264,6 +258,12 @@ export default {
       tree.root = this;
       this.focus();
       history.add();
+    },
+  },
+  Tab: {
+    description: "toggle visibility of children",
+    action() {
+      this.toggle();
     },
   },
   "Alt+f": {
