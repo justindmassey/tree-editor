@@ -33,7 +33,7 @@ export default class Node {
   static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^.:]+/g;
   static listTypeRegEx = /(?<!(?:^:)|((?<!\\)\\)):[^.:]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
-  
+
   constructor(name = "", ...children) {
     this.toggleButton = div("▼")
       .c("button", "toggle-button")
@@ -64,9 +64,24 @@ export default class Node {
             let textBefore = exportToTree(this);
             this.merge(importTree(clipText));
             let textAfter = exportToTree(this);
-            if(textBefore != textAfter) {
+            if (textBefore != textAfter) {
               history.add();
             }
+          }
+        }
+      })
+      .e("copy", (ev) => {
+        if (this.name.selectionStart == this.name.selectionEnd) {
+          ev.preventDefault();
+          ev.clipboardData.setData("text/plain", exportToTree(this));
+        }
+      })
+      .e("cut", (ev) => {
+        if (this.name.selectionStart == this.name.selectionEnd) {
+          ev.preventDefault();
+          ev.clipboardData.setData("text/plain", exportToTree(this));
+          if(this.remove()) {
+            history.add();
           }
         }
       });

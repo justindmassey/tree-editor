@@ -219,23 +219,6 @@ export default {
       }
     },
   },
-
-  "Alt+c": {
-    description: "copy node to clipboard as text",
-    action() {
-      navigator.clipboard.writeText(exportToTree(this));
-    },
-  },
-  "Alt+x": {
-    description: "cut node to clipboard as text",
-    action() {
-      navigator.clipboard.writeText(exportToTree(this)).then(() => {
-        if (this.remove()) {
-          history.add();
-        }
-      });
-    },
-  },
   "Alt+d r": {
     description: "replace root with this node",
     action() {

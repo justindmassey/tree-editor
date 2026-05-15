@@ -43,7 +43,10 @@ let help = div(
     ),
   ),
   section("Node Commands"),
-  p(div("There is always one root node.")),
+  p(
+    div("There is always one root node."),
+    div("Copy and cut work on the entire node when no text is selected.")
+  ),
   reference(nodeCommands),
 
   section("Widgets"),
@@ -126,7 +129,7 @@ let help = div(
   div("Attribute nodes become attributes."),
   div("Nodes without children become text content."),
   div("Children of attribute nodes are ignored."),
-  
+
   p(
     div("Back to top")
       .c("anchor")
