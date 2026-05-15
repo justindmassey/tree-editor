@@ -6,6 +6,7 @@ import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
 import tree from "./tree.js";
 import importTree from "./importers/tree.js";
+import exportToTree from "./exporters/tree.js";
 
 Element.prototype.ctrlClick = function (node) {
   this.e("mousedown", (ev) => {
@@ -32,7 +33,7 @@ export default class Node {
   static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^.:]+/g;
   static listTypeRegEx = /(?<!(?:^:)|((?<!\\)\\)):[^.:]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
-
+  
   constructor(name = "", ...children) {
     this.toggleButton = div("▼")
       .c("button", "toggle-button")
@@ -45,13 +46,28 @@ export default class Node {
       })
       .e("focus", () => this.updateLastValues())
       .e("paste", (ev) => {
-        let text = ev.clipboardData.getData("text/plain");
-        if (text.includes("\n")) {
+        let clipText = ev.clipboardData.getData("text/plain");
+        if (clipText.includes("\n")) {
           ev.preventDefault();
-          for (let node of importTree(text, false)) {
-            this.appendChild(node, false);
+          if (tree.pasteMode == "append") {
+            for (let node of importTree(clipText, false)) {
+              this.appendChild(node, false);
+            }
+            history.add();
+          } else if (tree.pasteMode == "replace") {
+            let text = exportToTree(this);
+            if (text != clipText) {
+              this.replaceWith(importTree(clipText));
+              history.add();
+            }
+          } else if (tree.pasteMode == "merge") {
+            let textBefore = exportToTree(this);
+            this.merge(importTree(clipText));
+            let textAfter = exportToTree(this);
+            if(textBefore != textAfter) {
+              history.add();
+            }
           }
-          history.add();
         }
       });
     registerShortcuts(this.name, nodeCommands, this);

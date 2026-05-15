@@ -31,19 +31,21 @@ function section(title) {
 let help = div(
   h1("Tree Editor"),
   toc,
+
   section("Global Commands"),
   reference(globalCommands),
   p(
     div("If the root node has the attribute ", code("$name"), ","),
     div("its value is used as the tree name when saving."),
     div("Otherwise the unescaped name of the root node is used."),
+    div(
+      "If pasted text contains a newline, it's pasted according to paste mode.",
+    ),
   ),
   section("Node Commands"),
-  p(
-    div("There is always one root node."),
-    div("Pasting multiple lines into a node imports them as child nodes.")
-  ),
+  p(div("There is always one root node.")),
   reference(nodeCommands),
+
   section("Widgets"),
   p(
     div("Widgets begin with ", code("-WIDGET ARGUMENT"), "."),
@@ -124,6 +126,7 @@ let help = div(
   div("Attribute nodes become attributes."),
   div("Nodes without children become text content."),
   div("Children of attribute nodes are ignored."),
+  
   p(
     div("Back to top")
       .c("anchor")

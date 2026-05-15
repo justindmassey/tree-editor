@@ -162,6 +162,24 @@ export default {
       });
     },
   },
+  "Alt+a": {
+    description: 'set paste mode to "append" (the default)',
+    action() {
+      this.tree.pasteMode = "append";
+    },
+  },
+  "Alt+e": {
+    description: 'set paste mode to "replace" (exchange)',
+    action() {
+      this.tree.pasteMode = "replace";
+    },
+  },
+  "Alt+u": {
+    description: 'set paste mode to "merge" (unify)',
+    action() {
+      this.tree.pasteMode = "merge";
+    },
+  },
 };
 
 function flash() {
