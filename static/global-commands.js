@@ -4,7 +4,7 @@ import treeMenu from "./tree-menu.js";
 
 export default {
   "Alt+h": {
-    description: "toggle help display",
+    description: "show/hide help",
     action() {
       this.help.classList.toggle("hidden");
       if (this.help.classList.contains("hidden")) {
@@ -15,7 +15,7 @@ export default {
     },
   },
   "Alt+m": {
-    description: "toggle menu bar",
+    description: "show/hide menu bar",
     action() {
       this.menuBar.elem.classList.toggle("hidden");
       if (this.menuBar.elem.classList.contains("hidden")) {
@@ -33,7 +33,7 @@ export default {
     },
   },
   "Alt+o": {
-    description: "toggle output",
+    description: "show/hide output",
     action() {
       this.tree.output.classList.toggle("hidden");
       if (this.tree.output.classList.contains("hidden")) {
@@ -44,7 +44,7 @@ export default {
     },
   },
   "Alt+t": {
-    description: "toggle tree",
+    description: "show/hide tree",
     action() {
       if (!this.tree.tree.classList.contains("hidden")) {
         this.tree.activeElement = document.activeElement;
