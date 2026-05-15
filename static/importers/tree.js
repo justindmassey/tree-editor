@@ -11,11 +11,7 @@ function convertNode(node) {
 
 export default function importTree(text, addedRootName = "") {
   if (addedRootName === false) {
-    let nodes = [];
-    for (let node of parseIndentedText(text, false)) {
-      nodes.push(convertNode(node));
-    }
-    return nodes;
+    return parseIndentedText(text, false).map(convertNode);
   } else {
     return convertNode(parseIndentedText(text, addedRootName));
   }
