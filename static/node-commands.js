@@ -1,7 +1,8 @@
 import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
-import exportToText from "./exporters/tree.js";
+import exportToTree from "./exporters/tree.js";
+import importTree from "./importers/tree.js";
 
 export default {
   "Shift+Enter": {
@@ -220,36 +221,50 @@ export default {
     },
   },
   "Alt+c": {
-    description: "copy node to clipboard",
+    description: "copy node to clipboard as text",
     action() {
-      tree.clipboard = this.serialize();
+      navigator.clipboard.writeText(exportToTree(this)).catch(() => 0);
     },
   },
   "Alt+x": {
-    description: "cut node to clipboard",
+    description: "cut node to clipboard as text",
     action() {
-      tree.clipboard = this.serialize();
-      if (this.remove()) {
-        history.add();
-      }
+      navigator.clipboard
+        .writeText(exportToTree(this))
+        .then(() => {
+          if (this.remove()) {
+            history.add();
+          }
+        })
+        .catch(() => 0);
     },
   },
   "Alt+v": {
     description: "replace node with clipboard",
     action() {
-      if (tree.clipboard) {
-        this.replaceWith(Node.deserialize(tree.clipboard));
-        history.add();
-      }
+      navigator.clipboard
+        .readText()
+        .then((clipText) => {
+          let textBefore = exportToTree(this);
+          if (clipText != textBefore) {
+            this.replaceWith(importTree(clipText));
+            history.add();
+          }
+        })
+        .catch(() => 0);
     },
   },
   "Alt+y": {
     description: "merge clipboard into this node",
     action() {
-      if (tree.clipboard) {
-        this.merge(Node.deserialize(tree.clipboard), false);
-        history.add();
-      }
+      navigator.clipboard.readText().then((clipText) => {
+        let textBefore = exportToTree(this);
+        this.merge(importTree(clipText));
+        let textAfter = exportToTree(this);
+        if (textBefore != textAfter) {
+          history.add();
+        }
+      });
     },
   },
   "Alt+d r": {
@@ -301,14 +316,14 @@ export default {
     description: "sort siblings",
     action() {
       if (this.parent) {
-        let text = exportToText(this.parent);
+        let text = exportToTree(this.parent);
         this.parent.children.replaceChildren(
           ...Array.from(this.parent.children.children).sort((a, b) => {
             return a.node.nameValue > b.node.nameValue ? 1 : -1;
           }),
         );
         this.focus();
-        if (text != exportToText(this.parent)) {
+        if (text != exportToTree(this.parent)) {
           history.add();
         }
       }
@@ -318,7 +333,7 @@ export default {
     description: "siblings to array (for JSON export)",
     action() {
       if (this.parent) {
-        let text = exportToText(this.parent);
+        let text = exportToTree(this.parent);
         for (let i = 0; i < this.parent.children.children.length; i++) {
           let child = this.parent.children.children[i].node;
           if (child.isAttribute) {
@@ -327,7 +342,7 @@ export default {
             child.nameValue = i;
           }
         }
-        if (exportToText(this.parent) != text) {
+        if (exportToTree(this.parent) != text) {
           history.add();
         }
       }

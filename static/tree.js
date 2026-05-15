@@ -22,7 +22,6 @@ class Tree {
       this.output.classList.remove("default-cursor"),
     );
     this.elem = div(this.tree, this.output, this.error).c("tree");
-    this.clipboard = null;
     this.root = new Node();
   }
 
