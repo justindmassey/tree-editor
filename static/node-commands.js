@@ -257,14 +257,17 @@ export default {
   "Alt+y": {
     description: "merge clipboard into this node",
     action() {
-      navigator.clipboard.readText().then((clipText) => {
-        let textBefore = exportToTree(this);
-        this.merge(importTree(clipText));
-        let textAfter = exportToTree(this);
-        if (textBefore != textAfter) {
-          history.add();
-        }
-      });
+      navigator.clipboard
+        .readText()
+        .then((clipText) => {
+          let textBefore = exportToTree(this);
+          this.merge(importTree(clipText));
+          let textAfter = exportToTree(this);
+          if (textBefore != textAfter) {
+            history.add();
+          }
+        })
+        .catch(() => 0);
     },
   },
   "Alt+d r": {
