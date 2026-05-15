@@ -55,7 +55,7 @@ export default class Node {
             }
             history.add();
           } else if (tree.pasteMode == "replace") {
-            let imported = importTree(clipText);
+            let imported = importTree(clipText, this.nameValue);
             if (!this.equals(imported)) {
               this.replaceWith(imported);
               history.add();
