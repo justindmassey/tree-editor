@@ -41,7 +41,7 @@ let help = div(
   section("Node Commands"),
   p(
     div("There is always one root node."),
-    div("Pasting multiple lines into a node adds a node for each line of text.")
+    div("Pasting multiple lines into a node imports them as child nodes.")
   ),
   reference(nodeCommands),
   section("Widgets"),
