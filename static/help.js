@@ -41,11 +41,12 @@ let help = div(
     div(
       "If pasted text contains a newline, it's pasted according to paste mode.",
     ),
+    div("The default paste mode is ", code("replace"), "."),
   ),
   section("Node Commands"),
   p(
     div("There is always one root node."),
-    div("Copy and cut work on the entire node when no text is selected.")
+    div("Copy and cut work on the entire node when no text is selected."),
   ),
   reference(nodeCommands),
 

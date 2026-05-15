@@ -23,7 +23,7 @@ class Tree {
     );
     this.elem = div(this.tree, this.output, this.error).c("tree");
     this.root = new Node();
-    this.pasteMode = "append";
+    this.pasteMode = "replace";
   }
 
   load(name, escapedName = name) {

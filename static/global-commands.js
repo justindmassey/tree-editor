@@ -1,6 +1,7 @@
 import history from "./history.js";
 import { post, get } from "./lib/ajax.js";
 import treeMenu from "./tree-menu.js";
+import { div, code } from "./lib/elements.js";
 
 export default {
   "Alt+h": {
@@ -162,20 +163,20 @@ export default {
       });
     },
   },
-  "Alt+a": {
-    description: 'set paste mode to "append" (the default)',
-    action() {
-      this.tree.pasteMode = "append";
-    },
-  },
   "Alt+e": {
-    description: 'set paste mode to "replace" (exchange)',
+    description: div("set paste mode to ", code("replace"), " (exchange)"),
     action() {
       this.tree.pasteMode = "replace";
     },
   },
+  "Alt+a": {
+    description: div("set paste mode to ", code("append")),
+    action() {
+      this.tree.pasteMode = "append";
+    },
+  },
   "Alt+u": {
-    description: 'set paste mode to "merge" (unify)',
+    description: div("set paste mode to ", code("merge"), " (unify)"),
     action() {
       this.tree.pasteMode = "merge";
     },
