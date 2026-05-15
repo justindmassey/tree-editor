@@ -148,3 +148,7 @@ img {
   display: flex;
   justify-content: center;
 }
+
+a {
+  color: var(--color-1);
+}
