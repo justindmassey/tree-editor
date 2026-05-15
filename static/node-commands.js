@@ -3,6 +3,7 @@ import tree from "./tree.js";
 import history from "./history.js";
 import exportToTree from "./exporters/tree.js";
 import importTree from "./importers/tree.js";
+import { a, b } from "./lib/elements.js";
 
 export default {
   "Shift+Enter": {
@@ -220,54 +221,46 @@ export default {
       }
     },
   },
+
   "Alt+c": {
     description: "copy node to clipboard as text",
     action() {
-      navigator.clipboard.writeText(exportToTree(this)).catch(() => 0);
+      navigator.clipboard.writeText(exportToTree(this));
     },
   },
   "Alt+x": {
     description: "cut node to clipboard as text",
     action() {
-      navigator.clipboard
-        .writeText(exportToTree(this))
-        .then(() => {
-          if (this.remove()) {
-            history.add();
-          }
-        })
-        .catch(() => 0);
+      navigator.clipboard.writeText(exportToTree(this)).then(() => {
+        if (this.remove()) {
+          history.add();
+        }
+      });
     },
   },
   "Alt+v": {
     description: "replace node with clipboard",
     action() {
-      navigator.clipboard
-        .readText()
-        .then((clipText) => {
-          let textBefore = exportToTree(this);
-          if (clipText != textBefore) {
-            this.replaceWith(importTree(clipText));
-            history.add();
-          }
-        })
-        .catch(() => 0);
+      navigator.clipboard.readText().then((clipText) => {
+        let textBefore = exportToTree(this);
+        if (clipText != textBefore) {
+          this.replaceWith(importTree(clipText));
+          history.add();
+        }
+      });
     },
   },
   "Alt+y": {
     description: "merge clipboard into this node",
     action() {
-      navigator.clipboard
-        .readText()
-        .then((clipText) => {
-          let textBefore = exportToTree(this);
-          this.merge(importTree(clipText));
-          let textAfter = exportToTree(this);
-          if (textBefore != textAfter) {
-            history.add();
-          }
-        })
-        .catch(() => 0);
+      navigator.clipboard.readText().then((clipText) => {
+        let textBefore = exportToTree(this);
+        this.merge(importTree(clipText));
+        let textAfter = exportToTree(this);
+        if (textBefore != textAfter) {
+          history.add();
+        }
+      });
     },
   },
   "Alt+d r": {
