@@ -263,6 +263,18 @@ export default {
       this.focus();
     },
   },
+  "Alt+s x": {
+    description: "expand siblings",
+    action() {
+      if (this.parent) {
+        for (let sibling of this.parent.children.children) {
+          sibling.node.expand();
+        }
+      } else {
+        this.expand();
+      }
+    },
+  },
   "Alt+s c": {
     description: "collapse siblings",
     action() {
