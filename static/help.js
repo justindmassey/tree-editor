@@ -46,7 +46,7 @@ let help = div(
   section("Node Commands"),
   p(
     div("There is always one root node."),
-    div("You can copy or cut the whole node when there’s no text selected."),
+    div("You can copy or cut a whole node when there’s no text selected."),
   ),
   reference(nodeCommands),
 
