@@ -243,9 +243,11 @@ export default {
   "Alt+d r": {
     description: "replace root with this node",
     action() {
-      tree.root = this;
-      this.focus();
-      history.add();
+      if (this.parent) {
+        tree.root = this;
+        this.focus();
+        history.add();
+      }
     },
   },
   Tab: {
