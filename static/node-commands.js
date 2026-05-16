@@ -271,7 +271,7 @@ export default {
       if (this.parent) {
         let text = exportToTree(this.parent);
         this.parent.children.replaceChildren(
-          ...Array.from(this.parent.children.children).sort((a, b) => {
+          ...Array.from(this.parent.children.children).toSorted((a, b) => {
             return a.node.nameValue.localeCompare(b.node.nameValue);
           }),
         );
