@@ -299,12 +299,12 @@ export default {
         }
       } else {
         if (this.isAttribute) {
-          if (this._isAttribute[1] != 0) {
+          if (this._isAttribute[1] != "0") {
             this.nameValue = 0 + "=" + this._isAttribute[2];
             history.add();
           }
         } else {
-          if (this.nameValue != 0) {
+          if (this.nameValue != "0") {
             this.nameValue = 0;
             history.add();
           }

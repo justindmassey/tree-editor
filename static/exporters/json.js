@@ -3,11 +3,11 @@ export function isArray(node) {
     for (let i = 0; i < node.children.children.length; i++) {
       let child = node.children.children[i].node;
       if (child.isAttribute) {
-        if (child._isAttribute[1] != i) {
+        if (child._isAttribute[1] != String(i)) {
           return false;
         }
       } else {
-        if (child.nameValue != i) {
+        if (child.nameValue != String(i)) {
           return false;
         }
       }
