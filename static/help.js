@@ -117,6 +117,7 @@ let help = div(
 
   section("Tree Export"),
   div("Nodes become indented lines of text."),
+  div("This format is also used when a node is copied."),
 
   section("JSON Export"),
   div("Nodes and attributes become JSON properties."),
