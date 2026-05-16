@@ -1,4 +1,15 @@
-import { div, table, tr, td, h1, h2, code, p } from "./lib/elements.js";
+import {
+  div,
+  table,
+  tr,
+  td,
+  h1,
+  h2,
+  code,
+  p,
+  a,
+  span,
+} from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
@@ -12,20 +23,26 @@ function reference(items) {
 }
 
 let toc = p();
+let sectionLinks = Object.create(null);
 
 function section(title) {
   let header = h2(title);
-  toc.appendChild(
-    div(title)
+  sectionLinks[title] = () => {
+    return a(title)
       .c("anchor")
       .e("click", () =>
         header.scrollIntoView({
           behavior: "smooth",
           block: "start",
         }),
-      ),
-  );
+      );
+  };
+  toc.appendChild(div(sectionLinks[title]()));
   return header;
+}
+
+function crossRef(sectionTitle) {
+  return span("(see ", sectionLinks[sectionTitle](), ")");
 }
 
 let help = div(
@@ -44,7 +61,11 @@ let help = div(
   p(
     div("There is always one root node."),
     div("You can copy or cut a whole node when there’s no text selected."),
-    div("How a node is pasted depends on paste mode."),
+    div(
+      "How a node is pasted depends on paste mode ",
+      crossRef("Global Commands"),
+      ".",
+    ),
     div("Any clipboard text containing a newline is treated as a node."),
   ),
   reference(nodeCommands),
@@ -116,7 +137,11 @@ let help = div(
 
   section("Tree Export"),
   div("Nodes become indented lines of text."),
-  div("This format is also used when a node is copied."),
+  div(
+    "This format is also used when a node is copied ",
+    crossRef("Node Commands"),
+    ".",
+  ),
 
   section("JSON Export"),
   div("Nodes and attributes become JSON properties."),
