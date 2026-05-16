@@ -38,15 +38,14 @@ let help = div(
     div("If the root node has the attribute ", code("$name"), ","),
     div("its value is used as the tree name when saving."),
     div("Otherwise the unescaped name of the root node is used."),
-    div(
-      "If pasted text contains a newline, it's pasted according to paste mode.",
-    ),
     div("The default paste mode is ", code("replace"), "."),
   ),
   section("Node Commands"),
   p(
     div("There is always one root node."),
     div("You can copy or cut a whole node when there’s no text selected."),
+    div("How a node is pasted depends on paste mode."),
+    div("Any clipboard text containing a newline is treated as a node."),
   ),
   reference(nodeCommands),
 
