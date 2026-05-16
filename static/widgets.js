@@ -25,6 +25,7 @@ import history from "./history.js";
 import Tabs from "./lib/tabs.js";
 import Node from "./node.js";
 import tree from "./tree.js";
+import crossRef from "./cross-ref.js";
 
 export default {
   "-hdr": {
@@ -741,7 +742,7 @@ export default {
   "-frm": {
     description: div(
       div("form"),
-      div("Attributes become form fields."),
+      div("Attributes become form fields ", crossRef("Attributes"), "."),
       div("If the ", code("$type"), "-attribute is set on an attribute"),
       div("then it sets the input type used in the form."),
       div(

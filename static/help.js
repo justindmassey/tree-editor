@@ -1,18 +1,8 @@
-import {
-  div,
-  table,
-  tr,
-  td,
-  h1,
-  h2,
-  code,
-  p,
-  a,
-  span,
-} from "./lib/elements.js";
+import { div, table, tr, td, h1, h2, code, p } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
+import crossRef from "./cross-ref.js";
 
 function reference(items) {
   let ref = table();
@@ -23,26 +13,21 @@ function reference(items) {
 }
 
 let toc = p();
-let sectionLinks = Object.create(null);
 
 function section(title) {
   let header = h2(title);
-  sectionLinks[title] = () => {
-    return a(title)
+  header.id = title;
+  toc.appendChild(
+    div(title)
       .c("anchor")
       .e("click", () =>
         header.scrollIntoView({
           behavior: "smooth",
           block: "start",
         }),
-      );
-  };
-  toc.appendChild(div(sectionLinks[title]()));
+      ),
+  );
   return header;
-}
-
-function crossRef(sectionTitle) {
-  return span("(see ", sectionLinks[sectionTitle](), ")");
 }
 
 let help = div(
