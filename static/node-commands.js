@@ -272,7 +272,7 @@ export default {
         let text = exportToTree(this.parent);
         this.parent.children.replaceChildren(
           ...Array.from(this.parent.children.children).sort((a, b) => {
-            return a.node.nameValue > b.node.nameValue ? 1 : -1;
+            return a.node.nameValue.localeCompare(b.node.nameValue);
           }),
         );
         this.focus();
