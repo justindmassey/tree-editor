@@ -741,7 +741,7 @@ export default {
   "-frm": {
     description: div(
       div("form"),
-      div("attributes become form fields"),
+      div("Attributes become form fields."),
       div("If the ", code("$type"), "-attribute is set on an attribute"),
       div("then it sets the input type used in the form."),
       div(
