@@ -92,6 +92,24 @@ export default {
       }
     },
   },
+  "Alt+ArrowLeft": {
+    description: "promote node",
+    action() {
+      if (this.parent && this.parent.parent) {
+        this.parent.insertAfter(this);
+        history.add();
+      }
+    },
+  },
+  "Alt+ArrowRight": {
+    description: "demote node",
+    action() {
+      if (this.elem.previousSibling) {
+        this.elem.previousSibling.node.appendChild(this);
+        history.add();
+      }
+    },
+  },
   "Alt+Shift+ArrowUp": {
     description: "move siblings up",
     action() {
@@ -108,24 +126,6 @@ export default {
       if (this.parent && this.parent.children.children.length > 1) {
         this.parent.prependChild(this.parent.children.lastChild.node, false);
         this.focus();
-        history.add();
-      }
-    },
-  },
-  "Alt+ArrowLeft": {
-    description: "promote node",
-    action() {
-      if (this.parent && this.parent.parent) {
-        this.parent.insertAfter(this);
-        history.add();
-      }
-    },
-  },
-  "Alt+ArrowRight": {
-    description: "demote node",
-    action() {
-      if (this.elem.previousSibling) {
-        this.elem.previousSibling.node.appendChild(this);
         history.add();
       }
     },
