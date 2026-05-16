@@ -61,10 +61,9 @@ export default class Node {
               history.add();
             }
           } else if (tree.pasteMode == "merge") {
-            let textBefore = exportToTree(this);
-            this.merge(importTree(clipText));
-            let textAfter = exportToTree(this);
-            if (textBefore != textAfter) {
+            let imported = importTree(clipText);
+            if (!this.equals(imported, true)) {
+              this.merge(imported);
               history.add();
             }
           }
@@ -450,8 +449,8 @@ export default class Node {
     return n;
   }
 
-  equals(node) {
-    if (this.nameValue != node.nameValue) {
+  equals(node, ignoreName) {
+    if (this.nameValue != node.nameValue && !ignoreName) {
       return false;
     }
     if (this.children.children.length != node.children.children.length) {
