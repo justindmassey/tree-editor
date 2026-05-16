@@ -31,6 +31,7 @@ class Tree {
       if (data.error) {
         this.root = new Node(escapedName);
         this.root.focus();
+        history.clear();
         history.add();
         this.tree.scrollTop = 0;
         this.output.scrollTop = 0;
@@ -38,6 +39,7 @@ class Tree {
         this.root = Node.deserialize(data);
         this.tree.scrollTop = 0;
         this.output.scrollTop = 0;
+        history.clear();
         setTimeout(() => history.add(), 0);
         localStorage.setItem("tree", name);
       }

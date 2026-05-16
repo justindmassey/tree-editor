@@ -2,6 +2,10 @@ export default class History {
   constructor(onchange, maxLength = 100) {
     this.maxLength = maxLength;
     this.onchange = onchange;
+    this.clear();
+  }
+
+  clear() {
     this.history = [];
     this.index = -1;
   }

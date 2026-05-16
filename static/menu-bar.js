@@ -23,6 +23,7 @@ class MenuBar {
         new TextUploader("Tree", ".tree", (text, filename) => {
           tree.root = importTree(text, removeExtension(filename));
           tree.root.focus();
+          history.clear();
           history.add();
         }),
         new TextUploader("JSON", ".json", (json, filename) => {
@@ -33,11 +34,13 @@ class MenuBar {
             return;
           }
           tree.root.focus();
+          history.clear();
           history.add();
         }),
         new TextUploader("XML", ".xml", (xml) => {
           tree.root = importXml(xml);
           tree.root.focus();
+          history.clear();
           history.add();
         })
       ),
