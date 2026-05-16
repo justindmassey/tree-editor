@@ -269,15 +269,18 @@ export default {
     description: "sort siblings",
     action() {
       if (this.parent) {
-        let text = exportToTree(this.parent);
+        let childrenBefore = Array.from(this.parent.children.children);
         this.parent.children.replaceChildren(
-          ...Array.from(this.parent.children.children).toSorted((a, b) => {
+          ...childrenBefore.toSorted((a, b) => {
             return a.node.nameValue.localeCompare(b.node.nameValue);
           }),
         );
         this.focus();
-        if (text != exportToTree(this.parent)) {
-          history.add();
+        for (let i = 0; i < childrenBefore.length; i++) {
+          if (childrenBefore[i] != this.parent.children.children[i]) {
+            history.add();
+            return;
+          }
         }
       }
     },
