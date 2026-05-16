@@ -1,4 +1,4 @@
-function isArray(node) {
+export function isArray(node) {
   if (node.children.children.length) {
     for (let i = 0; i < node.children.children.length; i++) {
       let child = node.children.children[i].node;

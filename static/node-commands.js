@@ -2,6 +2,7 @@ import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
 import exportToTree from "./exporters/tree.js";
+import { isArray } from "./exporters/json.js";
 
 export default {
   "Shift+Enter": {
@@ -285,17 +286,28 @@ export default {
     description: "siblings to array (for JSON export)",
     action() {
       if (this.parent) {
-        let text = exportToTree(this.parent);
-        for (let i = 0; i < this.parent.children.children.length; i++) {
-          let child = this.parent.children.children[i].node;
-          if (child.isAttribute) {
-            child.nameValue = i + "=" + child._isAttribute[2];
-          } else {
-            child.nameValue = i;
+        if (!isArray(this.parent)) {
+          for (let i = 0; i < this.parent.children.children.length; i++) {
+            let child = this.parent.children.children[i].node;
+            if (child.isAttribute) {
+              child.nameValue = i + "=" + child._isAttribute[2];
+            } else {
+              child.nameValue = i;
+            }
           }
-        }
-        if (exportToTree(this.parent) != text) {
           history.add();
+        }
+      } else {
+        if (this.isAttribute) {
+          if (this._isAttribute[1] != 0) {
+            this.nameValue = 0 + "=" + this._isAttribute[2];
+            history.add();
+          }
+        } else {
+          if (this.nameValue != 0) {
+            this.nameValue = 0;
+            history.add();
+          }
         }
       }
     },
