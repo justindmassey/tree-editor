@@ -1,4 +1,4 @@
-import { div, table, tr, td, h1, h2, code, p } from "./lib/elements.js";
+import { div, table, tr, td, h1, h2, code, p, ul, li } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
@@ -45,7 +45,7 @@ let help = div(
       ",",
     ),
     div("its value is used as the tree name when saving."),
-    div("Otherwise the unescaped name of the root node is used."),
+    div("Otherwise the unescaped name of the root node is used ", crossRef("Node Names"), "."),
     div("The default paste mode is ", code("replace"), "."),
   ),
   section("Node Commands"),
@@ -128,6 +128,19 @@ let help = div(
   div("A backslash can be escaped with a backslash."),
   div(
     "Duplicate nodes in a type definition are ignored after the first occurrence.",
+  ),
+
+  section("Node Names"),
+  div("A node's name is the text in its input field."),
+  div("When a node name is displayed in the output or used as tree name,"),
+  div("it is unescaped."),
+  div("Unescaping removes:"),
+  ul(
+    li("widget prefixes ", crossRef("Widgets")),
+    li("type application suffixes ", crossRef("Types")),
+    li("backslashes that escape syntax"),
+    li("comment prefixes (", code("#"), ")"),
+    li("type definition prefixes (", code("::"), ")"),
   ),
 
   section("Tree Export"),
