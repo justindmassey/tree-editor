@@ -113,7 +113,7 @@ let help = div(
   div("Attribute lookup starts at the parent and moves upward."),
   div("Unescaping is performed before attribute substitution."),
 
-  section("Type System"),
+  section("Types"),
   div("Nodes with a name of the form ", code("::TYPE")),
   div("are type definitions."),
   div("Nodes with ", code(".TYPE"), " in their name"),
