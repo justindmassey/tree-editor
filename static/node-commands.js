@@ -1,7 +1,6 @@
 import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
-import exportToTree from "./exporters/tree.js";
 import { isArray } from "./exporters/json.js";
 
 export default {

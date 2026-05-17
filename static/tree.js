@@ -75,7 +75,6 @@ class Tree {
           typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
           typedefs[m[1]] = n;
           typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
-          //n.widget;
 
           n.traverse((n2) => {
             let nodeTypes = n2.nameValue.match(Node.nodeTypeRegEx);
