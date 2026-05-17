@@ -163,7 +163,6 @@ export default class Node {
   merge(node, typeName) {
     let activeElement = document.activeElement;
     let n = node.copy();
-    let lastNameTexts = Object.create(null);
     if (typeName) {
       for (let child of [...this.children.children]) {
         if (
@@ -176,7 +175,6 @@ export default class Node {
             !child.node.isAttribute ||
             !node.getAttrNode(child.node._isAttribute[1])
           ) {
-            lastNameTexts[child.node.nameValue] = child.node.lastNameText;
             child.node.remove(false);
           }
         }
@@ -248,9 +246,6 @@ export default class Node {
           }
           if (prevNode) {
             child.node.merge(prevNode, false);
-          }
-          if (typeName && child.node.lastName in lastNameTexts) {
-            child.node.lastNameText = lastNameTexts[child.node.lastName];
           }
           this.appendChild(child.node, false);
         } else if (typeName) {
@@ -376,12 +371,15 @@ export default class Node {
   get childNodes() {
     this._childNodes = [];
     for (let child of this.children.children) {
+      let isTypedef = child.node.nameValue.match(Node.typedefRegEx)
       if (
         !child.node.isAttribute &&
         !child.node.nameValue.startsWith("#") &&
-        !child.node.nameValue.match(Node.typedefRegEx)
+        !isTypedef
       ) {
         this._childNodes.push(child.node);
+      } else if (isTypedef) {
+        child.node.widget;
       }
     }
     return this._childNodes;
