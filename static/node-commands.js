@@ -28,6 +28,15 @@ export default {
       }
     },
   },
+  "Control+Alt+Enter": {
+    description: "insert a new node at the bottom",
+    action() {
+      if (this.parent) {
+        this.parent.appendChild(new Node());
+        history.add();
+      }
+    },
+  },
   "Alt+Enter": {
     description: "insert a new node after the parent node",
     action() {
