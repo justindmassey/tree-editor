@@ -80,8 +80,14 @@ let help = div(
         div("A backslash can be escaped with a backslash."),
       ),
     ),
-    div("Attributes that start with a ", code("$"), " are used by widgets."),
-    div("The argument is a label unless stated otherwise."),
+    div(
+      "Attributes used by widgets start with a ",
+      code("$"),
+      " ",
+      crossRef("Attributes"),
+      ".",
+    ),
+    div("The ", code("argument"), " is a label unless stated otherwise."),
   ),
   reference(widgets),
 
