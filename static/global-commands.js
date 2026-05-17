@@ -96,6 +96,7 @@ export default {
           } else {
             localStorage.setItem("tree", name);
             treeMenu.update();
+            this.tree.toast.pop(`Saved "${name}"`);
             flash();
           }
         });
@@ -125,6 +126,7 @@ export default {
               localStorage.removeItem("tree");
             }
             flash();
+            this.tree.toast.pop(`Deleted "${name}"`);
           }
         });
       }
@@ -167,18 +169,21 @@ export default {
     description: div("set paste mode to ", code("replace"), " (exchange)"),
     action() {
       this.tree.pasteMode = "replace";
+      this.tree.toast.pop('Paste mode: "replace"');
     },
   },
   "Alt+a": {
     description: div("set paste mode to ", code("append")),
     action() {
       this.tree.pasteMode = "append";
+      this.tree.toast.pop('Paste mode: "append"');
     },
   },
   "Alt+u": {
     description: div("set paste mode to ", code("merge"), " (unify)"),
     action() {
       this.tree.pasteMode = "merge";
+      this.tree.toast.pop('Paste mode: "merge"');
     },
   },
 };

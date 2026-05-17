@@ -3,6 +3,7 @@ import { div, span } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import typedefMenu from "./typedef-menu.js";
+import Toast from "./lib/toast.js";
 
 const minNameSize = 40;
 const maxNameSize = 80;
@@ -13,6 +14,7 @@ class Tree {
     this.output = div().c("output", "hidden");
     this.errorPath = span();
     this.error = div("Recursive type: ", this.errorPath).c("error", "hidden");
+    this.toast = new Toast();
     window.addEventListener("keydown", (ev) => {
       if (ev.key == "Control") {
         this.output.classList.add("default-cursor");
@@ -21,7 +23,7 @@ class Tree {
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
-    this.elem = div(this.tree, this.output, this.error).c("tree");
+    this.elem = div(this.tree, this.output, this.error, this.toast).c("tree");
     this.root = new Node();
     this.pasteMode = "replace";
   }

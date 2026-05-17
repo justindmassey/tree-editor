@@ -1,4 +1,5 @@
 @import url("./widgets.css");
+@import url("./lib/toast.css");
 
 .tree {
   display: flex;

@@ -1,0 +1,37 @@
+.toast {
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  pointer-events: none;
+}
+
+.toast.pop {
+    animation: pop 1200ms ease-out;
+}
+
+.toast-message {
+  background: #eeeeee;
+  padding: 0.5em;
+  border-radius: 2px;
+  border: 1px solid var(--color-2);
+  width: fit-content;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
