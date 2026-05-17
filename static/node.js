@@ -164,7 +164,7 @@ export default class Node {
     let activeElement = document.activeElement;
     let n = node.copy();
     if (typeName) {
-      for (let child of [...this.children.children]) {
+      for (let child of Array.from(this.children.children)) {
         if (
           child.node.sourceOwner == typeName &&
           child.node.sourceType &&

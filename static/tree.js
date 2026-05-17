@@ -143,7 +143,7 @@ class Tree {
               removeTypeApplication(n, t);
             }
           }
-          n.appliedNodeTypes = [...nodeTypeNames];
+          n.appliedNodeTypes = Array.from(nodeTypeNames);
           if (nodeTypes) {
             for (let i = nodeTypes.length - 1; i >= 0; i--) {
               let t = nodeTypes[i].slice(1);
@@ -164,7 +164,7 @@ class Tree {
             }
           }
 
-          n.appliedListTypes = [...listTypeNames];
+          n.appliedListTypes = Array.from(listTypeNames);
           if (listTypes) {
             for (let i = listTypes.length - 1; i >= 0; i--) {
               let t = listTypes[i].slice(1);
