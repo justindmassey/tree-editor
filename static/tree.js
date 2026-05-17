@@ -182,14 +182,16 @@ class Tree {
   }
 
   updateOutput() {
-    if (
-      this.root.nameValue.startsWith("#") ||
-      this.root.nameValue.match(Node.typedefRegEx) ||
-      this.root.nameValue.match(Node.attrRegEx)
-    ) {
+    if (this.root.nameValue.match(Node.typedefRegEx)) {
+      this.root.widget;
       this.output.replaceChildren();
-    } else {
+    } else if (
+      !this.root.nameValue.startsWith("#") &&
+      !this.root.nameValue.match(Node.attrRegEx)
+    ) {
       this.output.replaceChildren(this.root.widget);
+    } else {
+      this.output.replaceChildren();
     }
   }
 
