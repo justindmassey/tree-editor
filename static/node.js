@@ -371,7 +371,7 @@ export default class Node {
   get childNodes() {
     this._childNodes = [];
     for (let child of this.children.children) {
-      let isTypedef = child.node.nameValue.match(Node.typedefRegEx)
+      let isTypedef = child.node.nameValue.match(Node.typedefRegEx);
       if (
         !child.node.isAttribute &&
         !child.node.nameValue.startsWith("#") &&
