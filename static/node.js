@@ -371,15 +371,13 @@ export default class Node {
   get childNodes() {
     this._childNodes = [];
     for (let child of this.children.children) {
-      let isTypedef = child.node.nameValue.match(Node.typedefRegEx);
-      if (
+      if (child.node.nameValue.match(Node.typedefRegEx)) {
+        child.node.widget;
+      } else if (
         !child.node.isAttribute &&
-        !child.node.nameValue.startsWith("#") &&
-        !isTypedef
+        !child.node.nameValue.startsWith("#")
       ) {
         this._childNodes.push(child.node);
-      } else if (isTypedef) {
-        child.node.widget;
       }
     }
     return this._childNodes;
