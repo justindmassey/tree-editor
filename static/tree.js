@@ -236,7 +236,7 @@ class Tree {
 
 function removeTypeApplication(node, typeName) {
   node.traverse((n) => {
-    for (let child of [...n.children.children]) {
+    for (let child of Array.from(n.children.children)) {
       if (
         child.node.sourceOwner == typeName &&
         child.node.sourceType &&
