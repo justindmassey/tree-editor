@@ -72,7 +72,6 @@ let help = div(
       '") ',
       div("are not rendered to the output."),
       div("Control-click a widget in the output to focus its node."),
-      div("The output is updated in real time."),
       div(
         'The hash symbol and the dash ("',
         code("-"),
@@ -119,7 +118,6 @@ let help = div(
   div('The colons ("', code(":"), '") can be escaped with a backslash.'),
   div("Type definitions can inherit from other type definitions."),
   div("Subtypes should come after base types."),
-  div("Types are updated in real time."),
   div("Type definitions are not rendered to the output."),
   div("A backslash can be escaped with a backslash."),
   div(
