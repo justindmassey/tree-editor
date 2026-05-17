@@ -17,6 +17,7 @@
 .toast-message {
   background: #eeeeee;
   padding: 0.5em;
+  margin: 0.5em;
   border-radius: 2px;
   border: 1px solid var(--color-2);
   width: fit-content;
