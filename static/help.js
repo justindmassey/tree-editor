@@ -37,7 +37,13 @@ let help = div(
   section("Global Commands"),
   reference(globalCommands),
   p(
-    div("If the root node has the attribute ", code("$name"), ","),
+    div(
+      "If the root node has the attribute ",
+      code("$name"),
+      " ",
+      crossRef("Attributes"),
+      ",",
+    ),
     div("its value is used as the tree name when saving."),
     div("Otherwise the unescaped name of the root node is used."),
     div("The default paste mode is ", code("replace"), "."),
