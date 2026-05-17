@@ -634,7 +634,9 @@ function unescape(str) {
     str
       .replace(/^-[^\s.:]+\s*/, "")
       .replace(/^(?<!\\)\\-/, "-")
+      .replace(/^#/, "")
       .replace(/^(?<!\\)\\#/, "#")
+      .replace(/^::/, "")
       .replace(/^(?<!\\)\\::/, "::"),
   );
 }
