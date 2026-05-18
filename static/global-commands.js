@@ -67,7 +67,7 @@ export default {
     },
   },
   "Alt+c": {
-    description: "new tree",
+    description: "clear tree",
     action() {
       if (this.tree.root.remove()) {
         history.add();
