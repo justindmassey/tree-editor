@@ -118,7 +118,7 @@ export default {
       }
     },
   },
-  "Alt+Shift+ArrowUp": {
+  "Shift+ArrowUp": {
     description: "move siblings up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
@@ -128,7 +128,7 @@ export default {
       }
     },
   },
-  "Alt+Shift+ArrowDown": {
+  "Shift+ArrowDown": {
     description: "move siblings down",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
