@@ -177,7 +177,7 @@ export default {
       }
     },
   },
-  ArrowUp: {
+  "ArrowUp, Alt+p": {
     description: "focus previous node",
     action() {
       if (this.elem.previousSibling) {
@@ -197,7 +197,7 @@ export default {
       }
     },
   },
-  ArrowDown: {
+  "ArrowDown, Alt+n": {
     description: "focus next node",
     action() {
       if (this.children.children.length && this.expanded) {
@@ -248,7 +248,7 @@ export default {
       }
     },
   },
-  "Alt+p": {
+  "Control+u": {
     description: "focus the parent node",
     action() {
       if (this.parent) {
