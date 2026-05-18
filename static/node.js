@@ -645,7 +645,9 @@ function unescape(str) {
 }
 
 function unescapeAttrName(str) {
-  return str.replaceAll(/(?<!\\)\\=/g, "=").replace(/\\\\/g, "\\");
+  return str
+    .replaceAll(/(?<!\\)\\=/g, "=")
+    .replace(/\\\\|\\/g, replaceBackslash);
 }
 
 function unescapeArg(str) {
@@ -655,5 +657,13 @@ function unescapeArg(str) {
     .replace(/\\:(?=[^:.])/g, ":")
     .replace(/\\\.(?=[^:.])/g, ".")
     .replace(/\\=/g, "=")
-    .replace(/\\\\/g, "\\");
+    .replace(/\\\\|\\/g, replaceBackslash);
+}
+
+function replaceBackslash(m) {
+  if (m == "\\\\") {
+    return "\\";
+  } else {
+    return "";
+  }
 }
