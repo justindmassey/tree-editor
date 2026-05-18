@@ -47,9 +47,6 @@ export default {
   "Alt+t": {
     description: "show/hide tree",
     action() {
-      if (!this.tree.tree.classList.contains("hidden")) {
-        this.tree.activeElement = document.activeElement;
-      }
       this.tree.tree.classList.toggle("hidden");
       if (this.tree.tree.classList.contains("hidden")) {
         localStorage.setItem("showTree", "");

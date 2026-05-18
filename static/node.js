@@ -44,7 +44,10 @@ export default class Node {
         history.add();
         this.updateLastValues();
       })
-      .e("focus", () => this.updateLastValues())
+      .e("focus", () => {
+        this.updateLastValues();
+        tree.activeElement = this.name;
+      })
       .e("paste", (ev) => {
         let clipText = ev.clipboardData.getData("text/plain");
         if (clipText.includes("\n")) {
