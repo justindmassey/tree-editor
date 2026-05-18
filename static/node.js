@@ -522,7 +522,6 @@ export default class Node {
       this.parent.traverseUp((n) => n.expand());
     }
     this.name.focus();
-    tree.activeElement = this.name;
   }
 
   replaceWith(node, focus = true) {
