@@ -47,6 +47,10 @@ export default class Node {
       .e("focus", () => {
         this.updateLastValues();
         tree.activeNode = this;
+        tree.activeNodeBlured = false;
+      })
+      .e("blur", () => {
+        tree.activeNodeBlured = true;
       })
       .e("paste", (ev) => {
         let clipText = ev.clipboardData.getData("text/plain");
@@ -523,6 +527,7 @@ export default class Node {
     }
     this.name.focus();
     tree.activeNode = this;
+    tree.activeNodeBlured = false;
   }
 
   replaceWith(node, focus = true) {

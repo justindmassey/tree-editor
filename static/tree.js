@@ -14,7 +14,8 @@ class Tree {
     this.tree = div()
       .c("tree-container")
       .e("wheel", (ev) => {
-        if (ev.shiftKey && this.activeNode) {
+        if (ev.shiftKey && this.activeNode && !this.activeNodeBlured) {
+          ev.preventDefault();
           if (ev.deltaY < 0) {
             nodeCommands["Alt+ArrowUp, Alt+Shift+P"].action.bind(
               this.activeNode,
