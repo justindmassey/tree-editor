@@ -240,6 +240,14 @@ export default {
       }
     },
   },
+  "Alt+l": {
+    description: "focus last sibling",
+    action() {
+      if (this.parent) {
+        this.parent.children.lastChild.node.focus();
+      }
+    },
+  },
   "Alt+p": {
     description: "focus the parent node",
     action() {
