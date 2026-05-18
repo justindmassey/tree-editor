@@ -20,14 +20,22 @@ class Tree {
           document.activeElement == this.activeNode.name
         ) {
           ev.preventDefault();
-          if (ev.deltaY < 0) {
-            nodeCommands["Alt+ArrowUp, Alt+Shift+P"].action.bind(
-              this.activeNode,
-            )();
-          } else if (ev.deltaY > 0) {
-            nodeCommands["Alt+ArrowDown, Alt+Shift+N"].action.bind(
-              this.activeNode,
-            )();
+          if (ev.altKey) {
+            if (ev.deltaY < 0) {
+              nodeCommands["Shift+ArrowUp"].action.bind(this.activeNode)();
+            } else if (ev.deltaY > 0) {
+              nodeCommands["Shift+ArrowDown"].action.bind(this.activeNode)();
+            }
+          } else {
+            if (ev.deltaY < 0) {
+              nodeCommands["Alt+ArrowUp, Alt+Shift+P"].action.bind(
+                this.activeNode,
+              )();
+            } else if (ev.deltaY > 0) {
+              nodeCommands["Alt+ArrowDown, Alt+Shift+N"].action.bind(
+                this.activeNode,
+              )();
+            }
           }
         }
       });

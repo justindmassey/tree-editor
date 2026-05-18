@@ -65,9 +65,16 @@ let help = div(
   ),
   reference(nodeCommands),
   p(
-    "A node can also be moved up or down with ",
-    code("Shift+Mousewheel"),
-    " over the tree.",
+    div(
+      "A node can also be moved up or down with ",
+      code("Shift+Mousewheel"),
+      " over the tree.",
+    ),
+    div(
+      "Siblings can be moved up or down with ",
+      code("Alt+Shift+Mousewheel"),
+      " over the tree.",
+    ),
   ),
 
   section("Widgets"),
