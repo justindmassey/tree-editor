@@ -28,10 +28,10 @@ export default {
     },
   },
   "Control+Alt+Enter": {
-    description: "insert a new node at the bottom",
+    description: "insert a new node at the top",
     action() {
       if (this.parent) {
-        this.parent.appendChild(new Node());
+        this.parent.prependChild(new Node());
         history.add();
       }
     },
