@@ -4,13 +4,28 @@ import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import typedefMenu from "./typedef-menu.js";
 import Toast from "./lib/toast.js";
+import nodeCommands from "./node-commands.js";
 
 const minNameSize = 40;
 const maxNameSize = 80;
 
 class Tree {
   constructor() {
-    this.tree = div().c("tree-container");
+    this.tree = div()
+      .c("tree-container")
+      .e("wheel", (ev) => {
+        if (ev.shiftKey && this.activeNode) {
+          if (ev.deltaY < 0) {
+            nodeCommands["Alt+ArrowUp, Alt+Shift+P"].action.bind(
+              this.activeNode,
+            )();
+          } else if (ev.deltaY > 0) {
+            nodeCommands["Alt+ArrowDown, Alt+Shift+N"].action.bind(
+              this.activeNode,
+            )();
+          }
+        }
+      });
     this.output = div().c("output", "hidden");
     this.errorPath = span();
     this.error = div("Recursive type: ", this.errorPath).c("error", "hidden");

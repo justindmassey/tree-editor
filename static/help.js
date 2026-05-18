@@ -45,7 +45,11 @@ let help = div(
       ",",
     ),
     div("its value is used as the tree name when saving."),
-    div("Otherwise the unescaped name of the root node is used ", crossRef("Node Names"), "."),
+    div(
+      "Otherwise the unescaped name of the root node is used ",
+      crossRef("Node Names"),
+      ".",
+    ),
     div("The default paste mode is ", code("replace"), "."),
   ),
   section("Node Commands"),
@@ -60,6 +64,11 @@ let help = div(
     div("Any clipboard text containing a newline is treated as a node."),
   ),
   reference(nodeCommands),
+  p(
+    "A node can also be moved up or down with ",
+    code("Shift+Mousewheel"),
+    " over the tree.",
+  ),
 
   section("Widgets"),
   p(
