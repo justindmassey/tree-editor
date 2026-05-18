@@ -183,7 +183,7 @@ export default {
       this.tree.toast.pop('Paste mode: "merge"');
     },
   },
-  "Alt+x s": {
+  "Alt+x w": {
     description: "toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;

@@ -70,7 +70,7 @@ let help = div(
       crossRef("Global Commands"),
     ),
     div(
-      "a node can also be moved up or down with ",
+      "a node can be moved up or down with ",
       code("Shift+Mousewheel"),
       " over the tree",
     ),
