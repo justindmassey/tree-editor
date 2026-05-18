@@ -183,6 +183,23 @@ export default {
       this.tree.toast.pop('Paste mode: "merge"');
     },
   },
+  "Alt+x s": {
+    description: "toggle mousewheel node movement",
+    action() {
+      this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;
+      localStorage.setItem("wheelNodeMovement", this.tree.wheelNodeMovement || "");
+      this.tree.toast.pop(
+        "Mousewheel node movement: " +
+          { true: "on", false: "off" }[this.tree.wheelNodeMovement],
+      );
+    },
+  },
+  "Control+g": {
+    description: "clear prefix command",
+    action() {
+      this.tree.toast.pop("Prefix command cleared");
+    },
+  },
 };
 
 function flash() {

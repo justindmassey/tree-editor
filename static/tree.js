@@ -11,10 +11,17 @@ const maxNameSize = 80;
 
 class Tree {
   constructor() {
+    let wheelNodeMovement = localStorage.getItem("wheelNodeMovement");
+    if (wheelNodeMovement == null) {
+      this.wheelNodeMovement = true;
+    } else {
+      this.wheelNodeMovement = wheelNodeMovement;
+    }
     this.tree = div()
       .c("tree-container")
       .e("wheel", (ev) => {
         if (
+          this.wheelNodeMovement &&
           ev.shiftKey &&
           this.activeNode &&
           document.activeElement == this.activeNode.name

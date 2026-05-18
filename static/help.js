@@ -66,12 +66,16 @@ let help = div(
   reference(nodeCommands),
   p(
     div(
-      "A node can also be moved up or down with ",
-      code("Shift+Mousewheel"),
-      " over the tree.",
+      "If mousewheel node movement is turned on ",
+      crossRef("Global Commands"),
     ),
     div(
-      "Siblings can be moved up or down with ",
+      "a node can also be moved up or down with ",
+      code("Shift+Mousewheel"),
+      " over the tree",
+    ),
+    div(
+      "and siblings can be moved up or down with ",
       code("Alt+Shift+Mousewheel"),
       " over the tree.",
     ),
