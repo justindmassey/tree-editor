@@ -183,7 +183,7 @@ export default {
       this.tree.toast.pop('Paste mode: "merge"');
     },
   },
-  "Alt+x w": {
+  "Alt+w": {
     description: "toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;
@@ -192,12 +192,6 @@ export default {
         "Mousewheel node movement: " +
           { true: "on", false: "off" }[this.tree.wheelNodeMovement],
       );
-    },
-  },
-  "Control+g": {
-    description: "clear prefix command",
-    action() {
-      this.tree.toast.pop("Prefix command cleared");
     },
   },
 };
