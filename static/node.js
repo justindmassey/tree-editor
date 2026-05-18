@@ -661,9 +661,9 @@ function unescapeArg(str) {
 }
 
 function replaceBackslash(m) {
-  if (m == "\\\\") {
-    return "\\";
-  } else {
+  if (m == "\\") {
     return "";
+  } else {
+    return "\\";
   }
 }
