@@ -19,6 +19,13 @@
   min-height: 0;
 }
 
+.tree-container:has(+ .output:not(.hidden)) {
+  max-width: 61.8%;
+}
+.tree-container:has(+ .output.hidden) {
+  width: 100%;
+}
+
 .tree-container.hidden + .output:not(.hidden) {
   border: none;
 }
@@ -39,7 +46,8 @@
   min-height: 0;
 }
 
-.output.default-cursor, .output.default-cursor * {
+.output.default-cursor,
+.output.default-cursor * {
   cursor: default;
 }
 
