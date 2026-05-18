@@ -367,6 +367,8 @@ export default {
   },
   "Control+g": {
     description: "clear the current prefix command",
-    action() {},
+    action() {
+      tree.toast.pop("Prefix command cleared");
+    },
   },
 };
