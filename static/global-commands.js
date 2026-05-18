@@ -57,8 +57,8 @@ export default {
             "calc(100vh - " + this.menuBar.elem.offsetHeight + "px)";
         }
         localStorage.setItem("showTree", "true");
-        if (this.tree.activeElement && this.tree.activeElement.focus) {
-          this.tree.activeElement.focus();
+        if (this.tree.activeNode) {
+          this.tree.activeNode.focus();
         }
       }
     },

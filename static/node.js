@@ -46,7 +46,7 @@ export default class Node {
       })
       .e("focus", () => {
         this.updateLastValues();
-        tree.activeElement = this.name;
+        tree.activeNode = this;
       })
       .e("paste", (ev) => {
         let clipText = ev.clipboardData.getData("text/plain");
@@ -522,6 +522,7 @@ export default class Node {
       this.parent.traverseUp((n) => n.expand());
     }
     this.name.focus();
+    tree.activeNode = this;
   }
 
   replaceWith(node, focus = true) {
