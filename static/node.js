@@ -637,7 +637,7 @@ export default class Node {
 
   set lastModified(date) {
     this._lastModified = date;
-    this.name.title = "Last modified: " + this.lastModified.toLocaleString();
+    this.name.title = "Last edit: " + this.lastModified.toLocaleString();
   }
 
   get lastModified() {
