@@ -75,6 +75,7 @@ class Tree {
         this.output.scrollTop = 0;
       } else {
         this.root = Node.deserialize(data);
+        this.root.focus();
         this.tree.scrollTop = 0;
         this.output.scrollTop = 0;
         history.clear();
