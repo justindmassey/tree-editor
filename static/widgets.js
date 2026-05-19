@@ -281,6 +281,21 @@ export default {
     description: div(
       div("table"),
       div("Each child's name is a table header and its children the column."),
+      div(
+        "If a child has the attribute ",
+        code("$align"),
+        ", its children are aligned.",
+      ),
+      div(
+        code("$align"),
+        " can be ",
+        code("left"),
+        ", ",
+        code("right"),
+        " or ",
+        code("center"),
+        ".",
+      ),
     ),
     create(arg) {
       let header = tr();
@@ -297,8 +312,9 @@ export default {
         let row = tr();
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
+          let align = child.attributes.$align || "";
           if (cell) {
-            row.appendChild(td(cell.widget));
+            row.appendChild(td(cell.widget).a("align", align));
           } else {
             row.appendChild(td());
           }
@@ -321,17 +337,30 @@ export default {
     description: div(
       div("horizontal table"),
       div("children become row labels and their children the rows"),
+      div("If the table has the attribute ", code("$align"), ", "),
+      div("all grandchildren get alligned accordingly."),
+      div(
+        code("$align"),
+        " can be ",
+        code("left"),
+        ", ",
+        code("right"),
+        " or ",
+        code("center"),
+        ".",
+      ),
     ),
     create(arg) {
       let tbl = table();
       let longestChild = 0;
+      let align = this.attributes.$align || "";
       for (let child of this.childNodes) {
         let row = tr(td(div(child.nameText).c("htbl-label").ctrlClick(child)));
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
         for (let grandchild of child.childNodes) {
-          row.appendChild(td(grandchild.widget));
+          row.appendChild(td(grandchild.widget).a("align", align));
         }
         tbl.appendChild(row);
       }
@@ -743,6 +772,7 @@ export default {
     description: div(
       div("form"),
       div("Attributes become form fields ", crossRef("Attributes"), "."),
+      div(code("$"), "-attributes are ignored."),
       div("If the ", code("$type"), "-attribute is set on an attribute"),
       div("then it sets the input type used in the form."),
       div(
