@@ -288,6 +288,20 @@ export default {
       }
     },
   },
+  "Alt+v": {
+    description: "focus next edited node",
+    action() {
+      let nodes = [];
+      tree.root.traverse((node) => {
+        nodes.push(node);
+      });
+      nodes.sort((a, b) => a.lastModified - b.lastModified);
+      let nextEdited = nodes[nodes.indexOf(this) + 1];
+      if (nextEdited) {
+        nextEdited.focus();
+      }
+    },
+  },
   "Alt+d r": {
     description: "replace root with this node",
     action() {
