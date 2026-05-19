@@ -33,13 +33,16 @@ export default class Node {
   static nodeTypeRegEx = /(?<!(?<!\\)\\)\.[^.:]+/g;
   static listTypeRegEx = /(?<!(?:^:)|((?<!\\)\\)):[^.:]+/g;
   static typedefRegEx = /^::([^:\.]+)/;
-
+  static minNameSize = 40;
+  static maxNameSize = 80;
+  
   constructor(name = "", ...children) {
     this.toggleButton = div("▼")
       .c("button", "toggle-button")
       .e("click", () => this.toggle());
     this.name = input()
       .c("name")
+      .a("size", Node.minNameSize)
       .e("input", () => {
         history.add();
         this.updateLastValues();

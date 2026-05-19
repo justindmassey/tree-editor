@@ -26,11 +26,7 @@ class TypedefMenu {
       this.menu.addItem(div(type).e("click", () => node.focus()));
     }
     if (!this.menu.items.children.length) {
-      this.menu.addItem(
-        div("No types defined")
-          .c("inactive")
-          .e("click", (ev) => ev.stopPropagation()),
-      );
+      this.menu.addItem(Menu.inactiveItem("No types defined"));
     }
   }
 }

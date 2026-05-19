@@ -37,3 +37,9 @@
 .menu-items > *:hover {
   background: var(--color-3);
 }
+
+.inactive-item,
+.inactive-item:hover {
+  background: var(--bg);
+  color: var(--color-2);
+}

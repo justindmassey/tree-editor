@@ -14,8 +14,8 @@ function createElement(tag) {
   };
 }
 
-Element.prototype.e = function (event, callback) {
-  this.addEventListener(event, callback);
+Element.prototype.e = function (...args) {
+  this.addEventListener(...args);
   return this;
 };
 

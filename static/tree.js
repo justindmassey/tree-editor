@@ -5,9 +5,6 @@ import { get } from "./lib/ajax.js";
 import Toast from "./lib/toast.js";
 import nodeCommands from "./node-commands.js";
 
-const minNameSize = 40;
-const maxNameSize = 80;
-
 class Tree {
   constructor() {
     let wheelNodeMovement = localStorage.getItem("wheelNodeMovement");
@@ -235,22 +232,22 @@ class Tree {
     this.root.traverse((n) => {
       if (!n.nameValue.startsWith("$url=")) {
         if (n.nameValue.length > longestName) {
-          if (n.nameValue.length <= maxNameSize) {
+          if (n.nameValue.length <= Node.maxNameSize) {
             longestName = n.nameValue.length;
           } else {
-            longestName = maxNameSize;
+            longestName = Node.maxNameSize;
             return true;
           }
         }
       }
     });
-    if (longestName > minNameSize) {
+    if (longestName > Node.minNameSize) {
       this.root.traverse((n) => {
         n.name.size = longestName;
       });
     } else {
       this.root.traverse((n) => {
-        n.name.size = minNameSize;
+        n.name.size = Node.minNameSize;
       });
     }
   }

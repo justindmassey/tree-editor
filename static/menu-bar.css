@@ -14,9 +14,3 @@
 .menu-items > * {
   white-space: pre;
 }
-
-.inactive,
-.inactive:hover {
-  background: var(--bg);
-  color: var(--color-2);
-}
