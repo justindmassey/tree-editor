@@ -22,6 +22,7 @@ class RecentlyEditedMenu {
       this.menu.addItem(
         div(node.nameValue || " ")
           .c("tt")
+          .a("title", "Last edited: " + node.lastModified.toLocaleString())
           .e("click", () => node.focus()),
       );
     }
