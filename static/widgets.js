@@ -286,6 +286,7 @@ export default {
         code("$align"),
         ", its children are aligned.",
       ),
+      div(code("$align"), " can also be set for the whole table."),
       div(
         code("$align"),
         " can be ",
@@ -296,12 +297,18 @@ export default {
         code("center"),
         ".",
       ),
+      div("If the attribute ", code("$numbered"), " is set on the table,"),
+      div("the rows get numbered."),
     ),
     create(arg) {
       let header = tr();
       let bdy = tbody();
       let longestChild = 0;
-
+      let numbered = "$numbered" in this.attributes;
+      let tableAlign = this._attributes.$align || "";
+      if (numbered) {
+        header.appendChild(td("#").a("align", "center"));
+      }
       for (let child of this.childNodes) {
         header.appendChild(td(child.nameText).ctrlClick(child));
         if (child.childNodes.length > longestChild) {
@@ -310,9 +317,12 @@ export default {
       }
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
+        if (numbered) {
+          row.appendChild(td(i + 1).a("align", "right"));
+        }
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
-          let align = child.attributes.$align || "";
+          let align = child.attributes.$align || tableAlign;
           if (cell) {
             row.appendChild(td(cell.widget).a("align", align));
           } else {
@@ -349,11 +359,18 @@ export default {
         code("center"),
         ".",
       ),
+      div("If the attribute ", code("$numbered"), " is set on the table,"),
+      div("the columns get numbered."),
     ),
     create(arg) {
       let tbl = table();
       let longestChild = 0;
       let align = this.attributes.$align || "";
+      let numbered = "$numbered" in this._attributes;
+      let numbersRow;
+      if (numbered) {
+        numbersRow = tr(td("#").c("htbl-label").a("align", "center"));
+      }
       for (let child of this.childNodes) {
         let row = tr(td(div(child.nameText).c("htbl-label").ctrlClick(child)));
         if (child.childNodes.length > longestChild) {
@@ -363,6 +380,12 @@ export default {
           row.appendChild(td(grandchild.widget).a("align", align));
         }
         tbl.appendChild(row);
+      }
+      if (numbersRow) {
+        for (let i = 1; i <= longestChild; i++) {
+          numbersRow.appendChild(td(i));
+        }
+        tbl.prepend(numbersRow);
       }
       for (let row of tbl.children) {
         for (let i = row.children.length; i < longestChild + 1; i++) {
