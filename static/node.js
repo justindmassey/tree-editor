@@ -94,6 +94,7 @@ export default class Node {
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.nameValue = name;
+    this.updateLastValues();
     this.lastModified = new Date();
     this.removeButton = div("✕")
       .c("button", "remove-button")
@@ -429,9 +430,9 @@ export default class Node {
   set nameValue(newName) {
     if (newName != this.nameValue) {
       this.lastModified = new Date();
+      this.name.value = newName;
+      this.updateLastValues();
     }
-    this.name.value = newName;
-    this.updateLastValues();
   }
 
   updateLastValues() {
