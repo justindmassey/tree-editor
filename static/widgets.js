@@ -307,7 +307,9 @@ export default {
       let numbered = "$numbered" in this.attributes;
       let tableAlign = this._attributes.$align || "";
       if (numbered) {
-        header.appendChild(td("#").a("align", "center"));
+        header.appendChild(
+          td("#").a("align", "center").ctrlClick(this._attrNodeMap.$numbered),
+        );
       }
       for (let child of this.childNodes) {
         header.appendChild(td(child.nameText).ctrlClick(child));
@@ -318,7 +320,11 @@ export default {
       for (let i = 0; i < longestChild; i++) {
         let row = tr();
         if (numbered) {
-          row.appendChild(td(i + 1).a("align", "right"));
+          row.appendChild(
+            td(i + 1)
+              .a("align", "right")
+              .ctrlClick(this._attrNodeMap.$numbered),
+          );
         }
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
@@ -374,7 +380,12 @@ export default {
       let numbered = "$numbered" in this._attributes;
       let numbersRow;
       if (numbered) {
-        numbersRow = tr(td("#").c("htbl-label").a("align", "center"));
+        numbersRow = tr(
+          td("#")
+            .c("htbl-label")
+            .a("align", "center")
+            .ctrlClick(this._attrNodeMap.$numbered),
+        );
       }
       for (let child of this.childNodes) {
         let row = tr(td(div(child.nameText).c("htbl-label").ctrlClick(child)));
@@ -388,7 +399,7 @@ export default {
       }
       if (numbersRow) {
         for (let i = 1; i <= longestChild; i++) {
-          numbersRow.appendChild(td(i));
+          numbersRow.appendChild(td(i).ctrlClick(this._attrNodeMap.$numbered));
         }
         tbl.prepend(numbersRow);
       }
