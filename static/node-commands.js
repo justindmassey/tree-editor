@@ -275,7 +275,7 @@ export default {
     },
   },
   "Alt+b": {
-    description: "focus previously edited node",
+    description: "focus the node edited before this one",
     action() {
       let nodes = [];
       tree.root.traverse((node) => {
@@ -289,7 +289,7 @@ export default {
     },
   },
   "Alt+v": {
-    description: "focus next edited node",
+    description: "focus the node edited after this one",
     action() {
       let nodes = [];
       tree.root.traverse((node) => {
