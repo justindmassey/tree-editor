@@ -100,7 +100,7 @@ export default {
       }
     },
   },
-  "Alt+Shift+ArrowUp": {
+  "Shift+ArrowUp": {
     description: "move this node to the top",
     action() {
       if (this.parent && this.parent.children.firstChild != this.elem) {
@@ -109,7 +109,7 @@ export default {
       }
     },
   },
-  "Alt+Shift+ArrowDown": {
+  "Shift+ArrowDown": {
     description: "move this node to the bottom",
     action() {
       if (this.parent && this.parent.children.lastChild != this.elem) {
@@ -136,7 +136,7 @@ export default {
       }
     },
   },
-  "Shift+ArrowUp": {
+  "Alt+Shift+ArrowUp": {
     description: "move siblings up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
@@ -146,7 +146,7 @@ export default {
       }
     },
   },
-  "Shift+ArrowDown": {
+  "Alt+Shift+ArrowDown": {
     description: "move siblings down",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
