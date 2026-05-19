@@ -5,7 +5,7 @@ function exportNode(node) {
       console.log(node.nameValue);
       n = document.createElement(node.nameValue);
     } catch (e) {
-      alert("Invalid tagname: " + node.nameValue);
+      alert(`Invalid tagname: "${node.nameValue}"`);
       return;
     }
     for (let child of node.children.children) {
@@ -14,7 +14,7 @@ function exportNode(node) {
         try {
           n.setAttribute(m[1], m[2]);
         } catch (e) {
-          alert("Invalid attribute name: " + m[1]);
+          alert(`Invalid attribute name: "${m[1]}"`);
           return n;
         }
       } else {
