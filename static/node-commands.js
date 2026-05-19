@@ -100,6 +100,24 @@ export default {
       }
     },
   },
+  "Alt+Shift+ArrowUp": {
+    description: "move this node to the top",
+    action() {
+      if (this.parent && this.parent.children.firstChild != this.elem) {
+        this.parent.prependChild(this);
+        history.add();
+      }
+    },
+  },
+  "Alt+Shift+ArrowDown": {
+    description: "move this node to the bottom",
+    action() {
+      if (this.parent && this.parent.children.lastChild != this.elem) {
+        this.parent.appendChild(this);
+        history.add();
+      }
+    },
+  },
   "Alt+ArrowLeft": {
     description: "promote node",
     action() {
