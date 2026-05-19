@@ -43,6 +43,7 @@ export default class Node {
       .e("input", () => {
         history.add();
         this.updateLastValues();
+        this.lastModified = new Date();
       })
       .e("focus", () => {
         this.updateLastValues();
@@ -424,6 +425,7 @@ export default class Node {
   set nameValue(newName) {
     this.name.value = newName;
     this.updateLastValues();
+    this.lastModified = new Date();
   }
 
   updateLastValues() {
@@ -486,6 +488,7 @@ export default class Node {
   serialize() {
     let node = {
       name: this.nameValue,
+      lastModified: this.lastModified,
       collapsed: this.collapsed,
       children: [],
     };
@@ -501,6 +504,7 @@ export default class Node {
 
   static deserialize(node) {
     let n = new Node(node.name);
+    n.lastModified = new Date(node.lastModified);
     if (node.collapsed) {
       n.collapse();
     }
@@ -629,6 +633,15 @@ export default class Node {
     } else {
       return result;
     }
+  }
+
+  set lastModified(date) {
+    this._lastModified = date;
+    this.name.title = "Last modified: " + this.lastModified.toLocaleString();
+  }
+
+  get lastModified() {
+    return this._lastModified;
   }
 }
 
