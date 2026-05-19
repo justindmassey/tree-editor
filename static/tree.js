@@ -2,7 +2,6 @@ import Node from "./node.js";
 import { div, span } from "./lib/elements.js";
 import history from "./history.js";
 import { get } from "./lib/ajax.js";
-import typedefMenu from "./typedef-menu.js";
 import Toast from "./lib/toast.js";
 import nodeCommands from "./node-commands.js";
 
@@ -106,12 +105,10 @@ class Tree {
   updateTypes() {
     let typedefs = {};
     let typedefDeps = {};
-    typedefMenu.clearItems();
     this.root.traverse((n) => {
       if (!n.isAttribute) {
         let m = n.nameValue.match(Node.typedefRegEx);
         if (m) {
-          typedefMenu.addItem(div(m[1]).e("click", () => n.focus()));
           typedefs[m[1]] = n;
           typedefDeps[m[1]] = typedefDeps[m[1]] || new Set();
 
@@ -132,7 +129,6 @@ class Tree {
         }
       }
     });
-
     let tempMark = {};
     let permMark = {};
     let cyclePath = null;

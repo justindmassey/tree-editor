@@ -18,10 +18,14 @@ class TreeMenu {
         alert(list.error);
       } else {
         this.trees = list;
-        for (let treeName of list) {
-          this.menu.addItem(
-            div(treeName || " ").e("click", () => tree.load(treeName))
-          );
+        if (list.length) {
+          for (let treeName of list) {
+            this.menu.addItem(
+              div(treeName || " ").e("click", () => tree.load(treeName)),
+            );
+          }
+        } else {
+          this.menu.addItem(div("No trees saved").c("inactive"));
         }
       }
     });
