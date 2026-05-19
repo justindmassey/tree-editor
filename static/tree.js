@@ -29,9 +29,11 @@ class Tree {
           ev.preventDefault();
           if (ev.altKey) {
             if (ev.deltaY < 0) {
-              nodeCommands["Shift+ArrowUp"].action.bind(this.activeNode)();
+              nodeCommands["Alt+Shift+ArrowUp"].action.bind(this.activeNode)();
             } else if (ev.deltaY > 0) {
-              nodeCommands["Shift+ArrowDown"].action.bind(this.activeNode)();
+              nodeCommands["Alt+Shift+ArrowDown"].action.bind(
+                this.activeNode,
+              )();
             }
           } else {
             if (ev.deltaY < 0) {
