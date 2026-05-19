@@ -322,7 +322,12 @@ export default {
         }
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
-          let align = child.attributes.$align || tableAlign;
+          let align;
+          if ("$align" in child.attributes) {
+            align = child._attributes.$align;
+          } else {
+            align = tableAlign;
+          }
           if (cell) {
             row.appendChild(td(cell.widget).a("align", align));
           } else {
