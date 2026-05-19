@@ -714,7 +714,7 @@ export default {
         if (
           child.lastNameText != undefined &&
           child.lastNameText != child.nameText &&
-          this.attributes.$value == child.lastNameText
+          child.lastNameText == this.attributes.$value
         ) {
           this.setAttribute("$value", child._nameText);
         }
