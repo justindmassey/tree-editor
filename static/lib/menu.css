@@ -13,6 +13,10 @@
   display: block;
 }
 
+.menu:hover > .menu-items.hidden {
+  display: none;
+}
+
 .menu-items {
   background: var(--bg);
   min-width: 100%;
