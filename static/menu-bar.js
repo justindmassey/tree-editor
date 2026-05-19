@@ -12,13 +12,13 @@ import history from "./history.js";
 import Menu from "./lib/menu.js";
 import treeMenu from "./tree-menu.js";
 import typedefMenu from "./typedef-menu.js";
-import recentlyEditedMenu from "./recently-edited-menu.js";
+import lastEditedMenu from "./last-edited-menu.js";
 
 class MenuBar {
   constructor() {
     this.elem = div(
       treeMenu,
-      recentlyEditedMenu,
+      lastEditedMenu,
       typedefMenu,
       new Menu(
         "Import",

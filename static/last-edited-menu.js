@@ -2,9 +2,9 @@ import Menu from "./lib/menu.js";
 import tree from "./tree.js";
 import { div } from "./lib/elements.js";
 
-class RecentlyEditedMenu {
+class LastEditedMenu {
   constructor() {
-    this.menu = new Menu("Recently Edited");
+    this.menu = new Menu("Last Edited");
     this.elem = this.menu.elem;
     this.elem.e("mouseenter", () => this.update());
   }
@@ -28,4 +28,4 @@ class RecentlyEditedMenu {
   }
 }
 
-export default new RecentlyEditedMenu();
+export default new LastEditedMenu();
