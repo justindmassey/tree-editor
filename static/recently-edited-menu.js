@@ -15,14 +15,13 @@ class RecentlyEditedMenu {
     tree.root.traverse((node) => {
       nodes.push(node);
     });
-    console.log(nodes);
     for (let node of nodes
       .toSorted((a, b) => b.lastModified - a.lastModified)
       .slice(0, 16)) {
       this.menu.addItem(
         div(node.nameValue || " ")
           .c("tt")
-          .a("title", "Last edited: " + node.lastModified.toLocaleString())
+          .a("title", node.name.title)
           .e("click", () => node.focus()),
       );
     }
