@@ -526,9 +526,10 @@ export default {
       for (let child of this.childNodes) {
         if (
           child.lastNameText != undefined &&
+          child.lastNameText != child.nameText &&
           child.lastNameText == this._attributes.$tab
         ) {
-          this.setAttribute("$tab", child.nameText);
+          this.setAttribute("$tab", child._nameText);
         }
         child.lastNameText = child.nameText;
         tabs.set(child.nameText, child.childrenWidget);
@@ -712,9 +713,10 @@ export default {
       for (let child of this.childNodes) {
         if (
           child.lastNameText != undefined &&
+          child.lastNameText != child.nameText &&
           this.attributes.$value == child.lastNameText
         ) {
-          this.setAttribute("$value", child.nameText);
+          this.setAttribute("$value", child._nameText);
         }
         child.lastNameText = child.nameText;
         if (options[child._nameText]) {
@@ -780,6 +782,7 @@ export default {
         }
         if (
           child.lastNameText != undefined &&
+          child.lastNameText != name &&
           child.lastNameText == this._attributes.$value
         ) {
           this.setAttribute("$value", name);
