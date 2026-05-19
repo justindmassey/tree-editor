@@ -25,7 +25,11 @@ class TreeMenu {
             );
           }
         } else {
-          this.menu.addItem(div("No trees saved").c("inactive"));
+          this.menu.addItem(
+            div("No trees saved")
+              .c("inactive")
+              .e("click", (ev) => ev.stopPropagation()),
+          );
         }
       }
     });
