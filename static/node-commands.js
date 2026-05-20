@@ -364,13 +364,34 @@ export default {
   "Alt+s s": {
     description: "sort siblings",
     action() {
-      if (this.parent) {
+      if (this.parent && this.parent.children.children.length > 1) {
         let childrenBefore = Array.from(this.parent.children.children);
         this.parent.children.replaceChildren(
           ...childrenBefore.toSorted((a, b) => {
             return a.node.nameValue.localeCompare(b.node.nameValue);
           }),
         );
+        this.focus();
+        for (let i = 0; i < childrenBefore.length; i++) {
+          if (childrenBefore[i] != this.parent.children.children[i]) {
+            history.add();
+            return;
+          }
+        }
+      }
+    },
+  },
+  "Alt+s r": {
+    description: "shuffle siblings",
+    action() {
+      if (this.parent && this.parent.children.children.length > 1) {
+        let childrenBefore = Array.from(this.parent.children.children);
+        let shuffled = Array.from(childrenBefore);
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        this.parent.children.replaceChildren(...shuffled);
         this.focus();
         for (let i = 0; i < childrenBefore.length; i++) {
           if (childrenBefore[i] != this.parent.children.children[i]) {
