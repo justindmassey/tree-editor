@@ -23,7 +23,11 @@ class TypedefMenu {
       }
     });
     for (let [type, node] of typedefs) {
-      this.menu.addItem(div(type).e("click", () => node.focus()));
+      this.menu.addItem(
+        div(type)
+          .a("title", node.nameValue)
+          .e("click", () => node.focus()),
+      );
     }
     if (!this.menu.items.children.length) {
       this.menu.addItem(Menu.inactiveItem("No types defined"));
