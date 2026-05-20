@@ -406,19 +406,20 @@ export default {
     description: "flatten siblings",
     action() {
       if (this.parent) {
-        let descendants = [];
-        this.parent.traverse((node) => {
-          descendants.push(node);
-        });
-        descendants.shift();
         let flatten = false;
-        for (let node of descendants) {
-          if (node.children.children.length) {
+        for (let child of this.parent.children.children) {
+          if (child.node.children.children.length) {
             flatten = true;
             break;
           }
         }
         if (flatten) {
+          let descendants = [];
+          this.parent.traverse((node) => {
+            descendants.push(node);
+          });
+          descendants.shift();
+
           this.parent.children.replaceChildren();
           for (let node of descendants) {
             this.parent.appendChild(node, false);
