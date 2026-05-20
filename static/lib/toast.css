@@ -11,7 +11,7 @@
 }
 
 .toast.pop {
-  animation: pop 1200ms ease-out;
+  animation: pop 1500ms ease-out;
 }
 
 .toast-message {
@@ -30,6 +30,7 @@
 
   50% {
     opacity: 1;
+    bottom: 0px;
   }
 
   100% {
