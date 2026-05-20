@@ -548,14 +548,12 @@ export default class Node {
 
   remove(focus = true) {
     if (focus) {
-      if (this.elem.nextSibling && this.elem.nextSibling.node) {
+      if (this.elem.nextSibling) {
         this.elem.nextSibling.node.focus();
-      } else if (this.elem.previousSibling && this.elem.previousSibling.node) {
+      } else if (this.elem.previousSibling) {
         this.elem.previousSibling.node.focus();
       } else if (this.parent) {
         this.parent.focus();
-      } else {
-        this.focus();
       }
     }
     if (this.parent) {
