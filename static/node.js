@@ -644,7 +644,12 @@ export default class Node {
 
   set lastModified(date) {
     this._lastModified = date;
-    this.name.title = "Last edited: " + this.lastModified.toLocaleString();
+    this.name.title =
+      "Last edited: " +
+      this.lastModified.toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
   }
 
   get lastModified() {
