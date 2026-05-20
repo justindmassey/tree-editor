@@ -12,11 +12,11 @@ class TreeMenu {
   }
 
   update() {
-    this.menu.clearItems();
     get("/list").then((list) => {
       if (list.error) {
         alert(list.error);
       } else {
+        this.menu.clearItems();
         this.trees = list;
         if (list.length) {
           for (let treeName of list) {
