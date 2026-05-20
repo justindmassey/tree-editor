@@ -195,6 +195,22 @@ export default {
       }
     },
   },
+  "Alt+s d": {
+    description: "delete siblings",
+    action() {
+      if (this.parent) {
+        if (this.parent.children.children.length) {
+          this.parent.children.replaceChildren();
+          this.parent.focus();
+          history.add();
+        }
+      } else {
+        if (this.remove()) {
+          history.add();
+        }
+      }
+    },
+  },
   "ArrowUp, Alt+p": {
     description: "focus previous node",
     action() {

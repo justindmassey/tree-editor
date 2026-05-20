@@ -3,4 +3,5 @@ Tree Editor Changelog
 
 May 20, 2026
   - Added changelog
-  - Added "recover last session" command (Alt+x r)
+  - Added "recover last session" global command (Alt+x r)
+  - Added "delete siblings" node command (Alt+s d)
