@@ -1,4 +1,4 @@
-Tree Editor changelog
+Tree Editor Changelog
 =====================
 
 May 20, 2026
