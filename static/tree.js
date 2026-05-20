@@ -15,7 +15,7 @@ class Tree {
     } else {
       this.wheelNodeMovement = wheelNodeMovement;
     }
-    
+
     this.tree = div()
       .c("tree-container")
       .e("wheel", (ev) => {
@@ -47,7 +47,6 @@ class Tree {
           }
         }
       });
-
     this.output = div().c("output", "hidden");
     this.errorPath = span();
     this.error = div("Recursive type: ", this.errorPath).c("error", "hidden");
@@ -66,7 +65,6 @@ class Tree {
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
-    
   }
 
   load(name, escapedName = name) {
