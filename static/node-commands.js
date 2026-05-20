@@ -377,23 +377,20 @@ export default {
       this.traverse((n) => n.collapse());
     },
   },
+  "Alt+c s": {
+    description: "sort children",
+    action() {
+      if (sortNode(this)) {
+        history.add();
+      }
+    },
+  },
   "Alt+s s": {
     description: "sort siblings",
     action() {
-      if (this.parent && this.parent.children.children.length > 1) {
-        let childrenBefore = Array.from(this.parent.children.children);
-        this.parent.children.replaceChildren(
-          ...childrenBefore.toSorted((a, b) => {
-            return a.node.nameValue.localeCompare(b.node.nameValue);
-          }),
-        );
+      if (this.parent && sortNode(this.parent)) {
         this.focus();
-        for (let i = 0; i < childrenBefore.length; i++) {
-          if (childrenBefore[i] != this.parent.children.children[i]) {
-            history.add();
-            return;
-          }
-        }
+        history.add();
       }
     },
   },
@@ -446,7 +443,7 @@ export default {
       }
     },
   },
-  "Alt+i": {
+  "Alt+s a": {
     description: "siblings to array (for JSON export)",
     action() {
       if (this.parent) {
@@ -483,3 +480,18 @@ export default {
     },
   },
 };
+
+function sortNode(node) {
+  if (node.children.children.length > 1) {
+    let childrenBefore = Array.from(node.children.children);
+    let sorted = childrenBefore.toSorted((a, b) => {
+      return a.node.nameValue.localeCompare(b.node.nameValue);
+    });
+    for (let i = 0; i < childrenBefore.length; i++) {
+      if (childrenBefore[i] != sorted[i]) {
+        node.children.replaceChildren(...sorted);
+        return true;
+      }
+    }
+  }
+}
