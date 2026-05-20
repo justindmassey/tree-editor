@@ -1,0 +1,5 @@
+Tree Editor changelog
+=====================
+
+May 20, 2026
+  - Added changelog

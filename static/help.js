@@ -1,4 +1,16 @@
-import { div, table, tr, td, h1, h2, code, p, ul, li } from "./lib/elements.js";
+import {
+  div,
+  table,
+  tr,
+  td,
+  h1,
+  h2,
+  code,
+  p,
+  ul,
+  li,
+  a,
+} from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import globalCommands from "./global-commands.js";
 import widgets from "./widgets.js";
@@ -196,4 +208,10 @@ let help = div(
   ),
 ).c("help", "hidden");
 
+toc.appendChild(div(a("Changelog").a("href", "./changelog.txt")));
+
 export default help;
+
+window.logDate = () => {
+  console.log(new Date().toLocaleString(undefined, { dateStyle: "medium" }));
+};
