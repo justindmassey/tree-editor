@@ -3,3 +3,4 @@ Tree Editor Changelog
 
 May 20, 2026
   - Added changelog
+  - Added "recover last session from autosave" command (Alt+x r)

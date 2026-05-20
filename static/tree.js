@@ -65,6 +65,9 @@ class Tree {
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("autosave", JSON.stringify(this.root.serialize()));
+    });
   }
 
   load(name, escapedName = name) {
@@ -74,13 +77,9 @@ class Tree {
         this.root.focus();
         history.clear();
         history.add();
-        this.tree.scrollTop = 0;
-        this.output.scrollTop = 0;
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();
-        this.tree.scrollTop = 0;
-        this.output.scrollTop = 0;
         history.clear();
         setTimeout(() => history.add(), 0);
         localStorage.setItem("tree", name);
@@ -90,6 +89,8 @@ class Tree {
 
   set root(node) {
     this.tree.replaceChildren(node.elem);
+    this.tree.scrollTop = 0;
+    this.output.scrollTop = 0;
   }
 
   get root() {

@@ -2,6 +2,7 @@ import history from "./history.js";
 import { post, get } from "./lib/ajax.js";
 import treeMenu from "./tree-menu.js";
 import { div, code } from "./lib/elements.js";
+import Node from "./node.js";
 
 export default {
   "Alt+h": {
@@ -183,17 +184,37 @@ export default {
       this.tree.toast.pop('Paste mode: "merge"');
     },
   },
+  "Alt+x r": {
+    description: "recover last session from autosave",
+    action() {
+      let lastSession = localStorage.getItem("autosave");
+      if (lastSession) {
+        this.tree.root = Node.deserialize(JSON.parse(lastSession));
+        this.tree.root.focus();
+        setTimeout(() => history.add(), 0);
+      }
+    },
+  },
   "Alt+w": {
     description: "toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;
-      localStorage.setItem("wheelNodeMovement", this.tree.wheelNodeMovement || "");
+      localStorage.setItem(
+        "wheelNodeMovement",
+        this.tree.wheelNodeMovement || "",
+      );
       this.tree.toast.pop(
         "Mousewheel node movement: " +
           { true: "on", false: "off" }[this.tree.wheelNodeMovement],
       );
     },
   },
+    "Control+g": {
+      description: "clear the current prefix command",
+      action() {
+        this.tree.toast.pop("Prefix command cleared");
+      },
+    },
 };
 
 function flash() {
