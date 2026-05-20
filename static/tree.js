@@ -4,6 +4,8 @@ import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import Toast from "./lib/toast.js";
 import nodeCommands from "./node-commands.js";
+import typedefMenu from "./typedef-menu.js";
+import lastEditedMenu from "./last-edited-menu.js";
 
 class Tree {
   constructor() {
@@ -258,6 +260,12 @@ class Tree {
       this.updateOutput();
     }
     this.updateNameSize();
+    if (typedefMenu.menu.open) {
+      typedefMenu.update();
+    }
+    if (lastEditedMenu.menu.open) {
+      lastEditedMenu.update();
+    }
     let name = this.name;
     if (name) {
       document.title = name + " - TE";
