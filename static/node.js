@@ -39,6 +39,7 @@ export default class Node {
   constructor(name = "", ...children) {
     this.toggleButton = div("▼")
       .c("button", "toggle-button")
+      .a("title", "Collapse this node")
       .e("click", () => this.toggle());
     this.name = input()
       .c("name")
@@ -97,6 +98,7 @@ export default class Node {
     this.updateLastValues();
     this.lastModified = new Date();
     this.removeButton = div("✕")
+      .a("title", "Remove this node")
       .c("button", "remove-button")
       .e("click", () => {
         if (this.remove()) {
@@ -593,11 +595,13 @@ export default class Node {
   collapse() {
     this.children.classList.add("hidden");
     this.toggleButton.textContent = "▶";
+    this.toggleButton.title = "Expand this node";
   }
 
   expand() {
     this.children.classList.remove("hidden");
     this.toggleButton.textContent = "▼";
+    this.toggleButton.title = "Collapse this node";
   }
 
   get collapsed() {
