@@ -185,7 +185,7 @@ export default {
     },
   },
   "Alt+x r": {
-    description: "recover last session from autosave",
+    description: "recover last session",
     action() {
       let lastSession = localStorage.getItem("autosave");
       if (lastSession) {
