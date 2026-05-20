@@ -15,6 +15,7 @@ class Tree {
     } else {
       this.wheelNodeMovement = wheelNodeMovement;
     }
+    
     this.tree = div()
       .c("tree-container")
       .e("wheel", (ev) => {
@@ -61,7 +62,7 @@ class Tree {
         this.output.classList.add("default-cursor");
       }
     });
-    
+
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
