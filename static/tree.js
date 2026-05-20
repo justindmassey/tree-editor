@@ -46,21 +46,26 @@ class Tree {
           }
         }
       });
+
     this.output = div().c("output", "hidden");
     this.errorPath = span();
     this.error = div("Recursive type: ", this.errorPath).c("error", "hidden");
     this.toast = new Toast();
+    this.elem = div(this.tree, this.output, this.error, this.toast).c("tree");
+
+    this.root = new Node();
+    this.pasteMode = "replace";
+
     window.addEventListener("keydown", (ev) => {
       if (ev.key == "Control") {
         this.output.classList.add("default-cursor");
       }
     });
+    
     window.addEventListener("keyup", (ev) =>
       this.output.classList.remove("default-cursor"),
     );
-    this.elem = div(this.tree, this.output, this.error, this.toast).c("tree");
-    this.root = new Node();
-    this.pasteMode = "replace";
+    
   }
 
   load(name, escapedName = name) {
