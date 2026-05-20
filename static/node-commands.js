@@ -415,8 +415,8 @@ export default {
         for (let node of descendants) {
           if (node.children.children.length) {
             flatten = true;
+            break;
           }
-          break;
         }
         if (flatten) {
           this.parent.children.replaceChildren();
