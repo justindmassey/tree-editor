@@ -191,6 +191,7 @@ export default {
       if (lastSession) {
         this.tree.root = Node.deserialize(JSON.parse(lastSession));
         this.tree.root.focus();
+        history.clear();
         setTimeout(() => history.add(), 0);
       }
     },
@@ -209,12 +210,12 @@ export default {
       );
     },
   },
-    "Control+g": {
-      description: "clear the current prefix command",
-      action() {
-        this.tree.toast.pop("Prefix command cleared");
-      },
+  "Control+g": {
+    description: "clear the current prefix command",
+    action() {
+      this.tree.toast.pop("Prefix command cleared");
     },
+  },
 };
 
 function flash() {
