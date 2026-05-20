@@ -402,6 +402,33 @@ export default {
       }
     },
   },
+  "Alt+s f": {
+    description: "flatten siblings",
+    action() {
+      if (this.parent) {
+        let descendants = [];
+        this.parent.traverse((node) => {
+          descendants.push(node);
+        });
+        descendants.shift();
+        let flatten = false;
+        for (let node of descendants) {
+          if (node.children.children.length) {
+            flatten = true;
+          }
+          break;
+        }
+        if (flatten) {
+          this.parent.children.replaceChildren();
+          for (let node of descendants) {
+            this.parent.appendChild(node, false);
+          }
+          this.focus();
+          history.add();
+        }
+      }
+    },
+  },
   "Alt+i": {
     description: "siblings to array (for JSON export)",
     action() {
