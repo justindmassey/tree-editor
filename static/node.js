@@ -554,6 +554,8 @@ export default class Node {
         this.elem.previousSibling.node.focus();
       } else if (this.parent) {
         this.parent.focus();
+      } else {
+        this.focus();
       }
     }
     if (this.parent) {
