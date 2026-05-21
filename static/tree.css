@@ -13,6 +13,11 @@
   height: 0;
 }
 
+.tree.default-cursor,
+.tree.default-cursor * {
+  cursor: default;
+}
+
 .tree-container {
   padding: 1em;
   overflow: auto;
@@ -44,11 +49,6 @@
   flex: 1;
   min-width: 0;
   min-height: 0;
-}
-
-.output.default-cursor,
-.output.default-cursor * {
-  cursor: default;
 }
 
 .output::after {

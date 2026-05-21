@@ -16,6 +16,7 @@ May 21, 2026
   - Changed Fonts
   - Moved default widget into widgets ("-txt")
   - Allow widgets in "-pts" widget
+  - Added Ctrl+Click selection for the widgets -opt, -rad, -tbs and -pgs
 
 May 20, 2026
   - Added changelog to help

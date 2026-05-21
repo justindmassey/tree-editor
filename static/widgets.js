@@ -636,6 +636,7 @@ export default {
       div("Tabs"),
       div("Each child name becomes a tab."),
       div(code("$tab"), " holds the current tab"),
+      div(code("Control+Click"), "ing a child node sets the tab."),
     ),
     create(arg) {
       let tabs = new Map();
@@ -684,6 +685,7 @@ export default {
       div(code("$page"), " holds the current page number."),
       div("If ", code("$page"), " is set to ", code("last"), ","),
       div("the last page is always shown."),
+      div(code("Control+Click"), "ing a child node sets the page."),
     ),
     create(arg) {
       if (!("$page" in this.attributes)) {
@@ -760,6 +762,7 @@ export default {
       div(code("$value"), ": the selected option"),
       div("children become options"),
       div("Children of the selected option are rendered below."),
+      div(code("Control+Click"), "ing a child node sets the selection."),
     ),
     create(arg) {
       let opt = select().e("change", () => {
@@ -825,6 +828,7 @@ export default {
         " for the widget.",
       ),
       div("Otherwise the child's node name is used."),
+      div(code("Control+Click"), "ing a child node sets the selection."),
     ),
     create(arg) {
       let radio = div();
@@ -1033,3 +1037,30 @@ export default {
     },
   },
 };
+
+export function updateSelection(ev) {
+  if (ev.ctrlKey && this.parent && this.parent.childNodes.includes(this)) {
+    ev.preventDefault();
+    let m = this.parent.nameValue.match(Node.widgetRegEx);
+    if (m) {
+      let widget = m[1];
+      if (widget == "-opt") {
+        this.parent.updateAttribute("$value", this.nameText);
+      }
+      if (widget == "-tbs") {
+        this.parent.updateAttribute("$tab", this.nameText);
+      }
+      if (widget == "-pgs") {
+        let page = this.parent.childNodes.indexOf(this) + 1;
+        this.parent.updateAttribute("$page", page);
+      }
+      if (widget == "-rad") {
+        if ("$name" in this.attributes) {
+          this.parent.updateAttribute("$value", this._attributes.$name);
+        } else {
+          this.parent.updateAttribute("$value", this.nameText);
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import registerShortcuts from "./lib/register-shortcuts.js";
 import nodeCommands from "./node-commands.js";
 import { div, input } from "./lib/elements.js";
 import widgets from "./widgets.js";
+import { updateSelection } from "./widgets.js";
 import history from "./history.js";
 import moveElementToIndex from "./lib/move-element-to-index.js";
 import tree from "./tree.js";
@@ -105,7 +106,8 @@ export default class Node {
             }
           });
         }
-      });
+      })
+      .e("click", updateSelection.bind(this));
     registerShortcuts(this.name, nodeCommands, this);
     this.nameValue = name;
     this.updateLastValues();
@@ -372,6 +374,13 @@ export default class Node {
     }
     if (this._attrNodeMap) {
       this._attrNodeMap[unescapedName] = attr;
+    }
+  }
+
+  updateAttribute(name, value) {
+    if (this.attributes[name] != value) {
+      this.setAttribute(name, value);
+      history.add();
     }
   }
 

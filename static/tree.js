@@ -58,12 +58,12 @@ class Tree {
 
     window.addEventListener("keydown", (ev) => {
       if (ev.key == "Control") {
-        this.output.classList.add("default-cursor");
+        this.elem.classList.add("default-cursor");
       }
     });
 
     window.addEventListener("keyup", (ev) =>
-      this.output.classList.remove("default-cursor"),
+      this.elem.classList.remove("default-cursor"),
     );
     window.addEventListener("beforeunload", () => {
       localStorage.setItem("autosave", JSON.stringify(this.root.serialize()));
