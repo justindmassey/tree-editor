@@ -17,7 +17,7 @@ May 21, 2026
   - Moved default widget into widgets (-txt)
   - Allow widgets in "-pts" widget
   - Added Ctrl+Click selection for the widgets -opt, -rad, -tbs and -pgs
-  - Added the ability to create an index for the -par widget (via $index)
+  - Added the ability to create a table of contents for the -par widget (via $toc)
 
 May 20, 2026
   - Added changelog to help
