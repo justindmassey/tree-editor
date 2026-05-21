@@ -140,7 +140,7 @@ export default {
         }
         checkbox.ctrlClick(child._attrNodeMap.$checked || child);
         checklist.appendChild(
-          div(checkbox, div(child.widget)).c("cl-item").ctrlClick(child),
+          div(checkbox, div(child.widget)).c("item").ctrlClick(child),
         );
       }
       if (arg) {
@@ -530,14 +530,14 @@ export default {
           if (node.nameValue.match(Node.widgetRegEx)) {
             outline.appendChild(
               div(span(number).c("tt"), " ", node.widget)
-                .c("out-item")
+                .c("item")
                 .ctrlClick(node),
             );
             return 1;
           } else {
             outline.appendChild(
               div(div(number).c("tt"), div(node.nameText))
-                .c("out-item")
+                .c("item")
                 .ctrlClick(node),
             );
           }
@@ -854,7 +854,7 @@ export default {
         });
         radioButton.checked = this._attributes.$value == radioButton.value;
         radio.appendChild(
-          div(radioButton, div(child.widget)).c("rad-item").ctrlClick(child),
+          div(radioButton, div(child.widget)).c("item").ctrlClick(child),
         );
       }
       if (arg) {

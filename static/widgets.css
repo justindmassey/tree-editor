@@ -4,9 +4,7 @@
   margin-left: 3ch;
 }
 
-.cl-item,
-.rad-item,
-.out-item {
+.item {
   display: flex;
   align-items: start;
   gap: 0.25ch;
@@ -15,6 +13,14 @@
 thead,
 .htbl-label {
   font-weight: bold;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  margin-top: 4px;
+}
+
+input[type="range"] {
+  margin-top: 8px;
 }
 
 .ltbl > tr > td {
