@@ -27,6 +27,7 @@ class MenuBar {
           tree.root.focus();
           history.clear();
           history.add();
+          tree.scrollToTop();
         }),
         new TextUploader("JSON", ".json", (json, filename) => {
           try {
@@ -38,13 +39,15 @@ class MenuBar {
           tree.root.focus();
           history.clear();
           history.add();
+          tree.scrollToTop();
         }),
         new TextUploader("XML", ".xml", (xml) => {
           tree.root = importXml(xml);
           tree.root.focus();
           history.clear();
           history.add();
-        })
+          tree.scrollToTop();
+        }),
       ),
       new Menu(
         "Export",
@@ -59,8 +62,8 @@ class MenuBar {
           if (xml) {
             downloadFile(tree.name + ".xml", xml);
           }
-        })
-      )
+        }),
+      ),
     ).c("menu-bar", "hidden");
   }
 }

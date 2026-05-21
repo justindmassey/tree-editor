@@ -75,11 +75,13 @@ class Tree {
       if (data.error) {
         this.root = new Node(escapedName);
         this.root.focus();
+        this.scrollToTop();
         history.clear();
         history.add();
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();
+        this.scrollToTop();
         history.clear();
         setTimeout(() => history.add(), 0);
         localStorage.setItem("tree", name);
@@ -89,14 +91,17 @@ class Tree {
 
   set root(node) {
     this.tree.replaceChildren(node.elem);
-    this.tree.scrollTop = 0;
-    this.output.scrollTop = 0;
   }
 
   get root() {
     if (this.tree.firstChild) {
       return this.tree.firstChild.node;
     }
+  }
+
+  scrollToTop() {
+    this.tree.scrollTop = 0;
+    this.output.scrollTop = 0;
   }
 
   get name() {

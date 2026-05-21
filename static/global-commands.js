@@ -70,8 +70,7 @@ export default {
       if (this.tree.root.remove()) {
         history.add();
       }
-      this.tree.tree.scrollTop = 0;
-      this.tree.output.scrollTop = 0;
+      this.tree.scrollToTop();
     },
   },
   "Control+s": {
@@ -116,8 +115,7 @@ export default {
           if (this.tree.root.remove()) {
             history.add();
           }
-          this.tree.tree.scrollTop = 0;
-          this.tree.output.scrollTop = 0;
+          this.tree.scrollToTop();
           if (!res.error) {
             treeMenu.update();
             if (localStorage.getItem("tree") == name) {
