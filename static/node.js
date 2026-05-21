@@ -612,9 +612,6 @@ export default class Node {
   }
 
   expand() {
-    if (this.parent) {
-      this.parent.traverseUp((n) => n.expand());
-    }
     this.children.classList.remove("hidden");
     this.toggleButton.textContent = "▼";
     this.toggleButton.title = "Collapse this node";
