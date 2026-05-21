@@ -15,6 +15,7 @@ May 21, 2026
   - Added "-out" widget (outline)
   - Changed Fonts
   - Moved default widget into widgets ("-txt")
+  - Allow widgets in "-pts" widget
 
 May 20, 2026
   - Added changelog to help

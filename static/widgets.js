@@ -579,8 +579,32 @@ export default {
       let pathsDiv = div();
       for (let child of this.childNodes) {
         child.traverseChildNodes((node) => {
-          if (!node.childNodes.length) {
-            let path = div();
+          if (node.nameValue.match(Node.widgetRegEx)) {
+            let path = div().c("lin");
+            let lastSep;
+            let segments = node.getPath(this);
+            let lastSegment = segments.pop();
+            for (let segment of segments) {
+              path.appendChild(span(segment.name).ctrlClick(segment.node));
+              path.appendChild(
+                (lastSep = span(separator).ctrlClick(
+                  this._attrNodeMap.$sep || this,
+                )),
+              );
+            }
+            if (lastSegment) {
+              path.appendChild(lastSegment.node.widget);
+              path.appendChild(
+                (lastSep = span(separator).ctrlClick(
+                  this._attrNodeMap.$sep || this,
+                )),
+              );
+            }
+            lastSep.remove();
+            pathsDiv.appendChild(path);
+            return 1;
+          } else if (!node.childNodes.length) {
+            let path = div().c("lin");
             let lastSep;
             for (let segment of node.getPath(this)) {
               path.appendChild(span(segment.name).ctrlClick(segment.node));
