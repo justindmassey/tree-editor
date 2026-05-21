@@ -341,6 +341,22 @@ export default {
       this.focus();
     },
   },
+  "Alt+c x": {
+    description: "expand children",
+    action() {
+      for (let child of this.children.children) {
+        child.node.expand();
+      }
+    },
+  },
+  "Alt+c c": {
+    description: "collapse children",
+    action() {
+      for (let child of this.children.children) {
+        child.node.collapse();
+      }
+    },
+  },
   "Alt+s x": {
     description: "expand siblings",
     action() {
@@ -404,10 +420,10 @@ export default {
   "Alt+c a": {
     description: "children to array (for JSON export)",
     action() {
-      if(nodeToArray(this)) {
+      if (nodeToArray(this)) {
         history.add();
       }
-    }
+    },
   },
   "Alt+s s": {
     description: "sort siblings",

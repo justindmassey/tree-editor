@@ -5,6 +5,8 @@ May 21, 2026
   - Added "shuffle children" node command (Alt+c r)
   - Added "flatten children" node command (Alt+c f)
   - Added "children to array" node command (Alt+c a)
+  - Added "collapse children" node command (Alt+c c)
+  - Added "expand children" node command (Alt+c x)
 
 May 20, 2026
   - Added changelog to help
