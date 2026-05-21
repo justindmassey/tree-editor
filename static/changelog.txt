@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+May 21, 2026
+  - Added "shuffle children" node command (Alt+c r)
+
 May 20, 2026
   - Added changelog to help
   - Added "recover last session" global command (Alt+x r)

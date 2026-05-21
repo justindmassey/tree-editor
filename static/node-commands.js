@@ -385,6 +385,14 @@ export default {
       }
     },
   },
+  "Alt+c r": {
+    description: "shuffle children",
+    action() {
+      if (shuffleNode(this)) {
+        history.add();
+      }
+    },
+  },
   "Alt+s s": {
     description: "sort siblings",
     action() {
@@ -397,21 +405,9 @@ export default {
   "Alt+s r": {
     description: "shuffle siblings",
     action() {
-      if (this.parent && this.parent.children.children.length > 1) {
-        let childrenBefore = Array.from(this.parent.children.children);
-        let shuffled = Array.from(childrenBefore);
-        for (let i = shuffled.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        this.parent.children.replaceChildren(...shuffled);
+      if (this.parent && shuffleNode(this.parent)) {
         this.focus();
-        for (let i = 0; i < childrenBefore.length; i++) {
-          if (childrenBefore[i] != this.parent.children.children[i]) {
-            history.add();
-            return;
-          }
-        }
+        history.add();
       }
     },
   },
@@ -490,6 +486,23 @@ function sortNode(node) {
     for (let i = 0; i < childrenBefore.length; i++) {
       if (childrenBefore[i] != sorted[i]) {
         node.children.replaceChildren(...sorted);
+        return true;
+      }
+    }
+  }
+}
+
+function shuffleNode(node) {
+  if (node.children.children.length > 1) {
+    let childrenBefore = Array.from(node.children.children);
+    let shuffled = Array.from(childrenBefore);
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    for (let i = 0; i < childrenBefore.length; i++) {
+      if (childrenBefore[i] != shuffled[i]) {
+        node.children.replaceChildren(...shuffled);
         return true;
       }
     }
