@@ -595,14 +595,8 @@ function nodeToArray(node) {
 }
 
 function getNodesOnLevel(node) {
-  let nodeLevel;
+  let nodeLevel = node.level;
   let nodesOnLevel = [];
-  tree.root.traverse((n, level) => {
-    if (n == node) {
-      nodeLevel = level;
-      return true;
-    }
-  });
   tree.root.traverse((node, level) => {
     if (level == nodeLevel) {
       nodesOnLevel.push(node);

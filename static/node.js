@@ -543,6 +543,16 @@ export default class Node {
     return n;
   }
 
+  get level() {
+    let level = 1;
+    let parent = this.parent;
+    while (parent) {
+      level++;
+      parent = parent.parent;
+    }
+    return level;
+  }
+
   focus() {
     if (this.parent) {
       this.parent.traverseUp((n) => n.expand());
