@@ -97,6 +97,42 @@ export default {
       }
     },
   },
+  "-cl": {
+    description: div(
+      div("Checklist"),
+      div("Turns each child into a checklist item."),
+      div("Items have the attribute ", code("$checked"), "."),
+    ),
+    create(arg) {
+      let checklist = div();
+      for (let child of this.childNodes) {
+        let checkbox = input()
+          .a("type", "checkbox")
+          .e("change", () => {
+            child.setAttribute("$checked", checkbox.checked);
+            history.add();
+          });
+        if ("$checked" in child.attributes) {
+          checkbox.checked = child._attributes.$checked == "true";
+        } else {
+          child.setAttribute("$checked", checkbox.checked);
+        }
+        checkbox.ctrlClick(child._attrNodeMap.$checked || child);
+        checklist.appendChild(
+          div(checkbox, div(child.widget)).c("cl-item").ctrlClick(child),
+        );
+      }
+      if (arg) {
+        if (checklist.children.length) {
+          return div(div(arg), checklist.c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else {
+        return checklist;
+      }
+    },
+  },
   "-tgl": {
     description: div(
       div("Toggle"),
@@ -133,31 +169,6 @@ export default {
         }
       } else {
         return div(div(toggleButton), children);
-      }
-    },
-  },
-  "-out": {
-    description: div(
-      div("Outline"),
-      div("Displays children as numbered outline."),
-    ),
-    create(arg) {
-      let outline = div();
-      this.traverseChildNodes((node, number) => {
-        if (node.parent) {
-          outline.appendChild(
-            div(span(number).c("tt"), " ", node.nameText).ctrlClick(node),
-          );
-        }
-      });
-      if (arg) {
-        if (outline.children.length) {
-          return div(div(arg), outline.c("indented"));
-        } else {
-          return div(arg);
-        }
-      } else {
-        return outline;
       }
     },
   },
@@ -219,6 +230,29 @@ export default {
       }
     },
   },
+  "-lnk": {
+    description: div(
+      div("Link"),
+      div(code("argument"), ": the link text"),
+      div(code("$url"), ": the URL the link opens"),
+    ),
+    create(arg) {
+      let link = a(arg).a("target", "_blank");
+      if (!("$url" in this.attributes)) {
+        this.setAttribute("$url");
+      }
+      link.href = this._attributes.$url;
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          return div(div(link), this._childrenWidget.c("indented"));
+        } else {
+          return div(link);
+        }
+      } else {
+        return this.childrenWidget;
+      }
+    },
+  },
   "-tl": {
     description: div(
       div("Tree link"),
@@ -244,62 +278,37 @@ export default {
       }
     },
   },
-  "-lnk": {
+  "-img": {
     description: div(
-      div("Link"),
-      div(code("argument"), ": the link text"),
-      div(code("$url"), ": the URL the link opens"),
+      div("Image"),
+      div(code("argument"), ": image caption"),
+      div(code("$url"), ": the url of the image"),
+      div(code("$width"), ": the width in pixels"),
+      div(code("$height"), ": the height in pixels"),
     ),
     create(arg) {
-      let link = a(arg).a("target", "_blank");
-      if (!("$url" in this.attributes)) {
+      let image = img();
+      if ("$url" in this.attributes) {
+        image.src = this._attributes.$url;
+      } else {
         this.setAttribute("$url");
       }
-      link.href = this._attributes.$url;
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(link), this._childrenWidget.c("indented"));
-        } else {
-          return div(link);
-        }
-      } else {
-        return this.childrenWidget;
+      if (this._attributes.$width) {
+        image.width = this._attributes.$width;
       }
-    },
-  },
-  "-cl": {
-    description: div(
-      div("Checklist"),
-      div("Turns each child into a checklist item."),
-      div("Items have the attribute ", code("$checked"), "."),
-    ),
-    create(arg) {
-      let checklist = div();
-      for (let child of this.childNodes) {
-        let checkbox = input()
-          .a("type", "checkbox")
-          .e("change", () => {
-            child.setAttribute("$checked", checkbox.checked);
-            history.add();
-          });
-        if ("$checked" in child.attributes) {
-          checkbox.checked = child._attributes.$checked == "true";
-        } else {
-          child.setAttribute("$checked", checkbox.checked);
-        }
-        checkbox.ctrlClick(child._attrNodeMap.$checked || child);
-        checklist.appendChild(
-          div(checkbox, div(child.widget)).c("cl-item").ctrlClick(child),
-        );
+      if (this._attributes.$height) {
+        image.height = this._attributes.$height;
       }
       if (arg) {
-        if (checklist.children.length) {
-          return div(div(arg), checklist.c("indented"));
+        if (this._attributes.$url) {
+          return div(div(arg), div(image, this.childrenWidget).c("indented"));
+        } else if (this.childrenWidget.children.length) {
+          return div(div(arg), this._childrenWidget.c("indented"));
         } else {
           return div(arg);
         }
       } else {
-        return checklist;
+        return div(div(image), this.childrenWidget);
       }
     },
   },
@@ -487,6 +496,31 @@ export default {
       return crd.c("crd");
     },
   },
+  "-out": {
+    description: div(
+      div("Outline"),
+      div("Displays children as numbered outline."),
+    ),
+    create(arg) {
+      let outline = div();
+      this.traverseChildNodes((node, number) => {
+        if (node.parent) {
+          outline.appendChild(
+            div(span(number).c("tt"), " ", node.nameText).ctrlClick(node),
+          );
+        }
+      });
+      if (arg) {
+        if (outline.children.length) {
+          return div(div(arg), outline.c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else {
+        return outline;
+      }
+    },
+  },
   "-pts": {
     description: div(
       div("Paths"),
@@ -663,65 +697,6 @@ export default {
       }
     },
   },
-  "-img": {
-    description: div(
-      div("Image"),
-      div(code("argument"), ": image caption"),
-      div(code("$url"), ": the url of the image"),
-      div(code("$width"), ": the width in pixels"),
-      div(code("$height"), ": the height in pixels"),
-    ),
-    create(arg) {
-      let image = img();
-      if ("$url" in this.attributes) {
-        image.src = this._attributes.$url;
-      } else {
-        this.setAttribute("$url");
-      }
-      if (this._attributes.$width) {
-        image.width = this._attributes.$width;
-      }
-      if (this._attributes.$height) {
-        image.height = this._attributes.$height;
-      }
-      if (arg) {
-        if (this._attributes.$url) {
-          return div(div(arg), div(image, this.childrenWidget).c("indented"));
-        } else if (this.childrenWidget.children.length) {
-          return div(div(arg), this._childrenWidget.c("indented"));
-        } else {
-          return div(arg);
-        }
-      } else {
-        return div(div(image), this.childrenWidget);
-      }
-    },
-  },
-  "-ta": {
-    description: div(div("Textarea"), div("Children become lines of text.")),
-    create(arg) {
-      let ta = textarea()
-        .a("rows", 8)
-        .a("cols", 40)
-        .e("input", () => {
-          this.children.replaceChildren();
-          for (let line of ta.value.split("\n")) {
-            this.appendChild(new Node(line), false);
-          }
-          history.add(true);
-        });
-      let lines = [];
-      for (let child of this.children.children) {
-        lines.push(child.node.nameValue);
-      }
-      ta.value = lines.join("\n");
-      if (arg) {
-        return div(div(arg), ta.c("indented"));
-      } else {
-        return div(ta);
-      }
-    },
-  },
   "-opt": {
     description: div(
       div("Options"),
@@ -833,6 +808,31 @@ export default {
         }
       } else {
         return radio;
+      }
+    },
+  },
+  "-ta": {
+    description: div(div("Textarea"), div("Children become lines of text.")),
+    create(arg) {
+      let ta = textarea()
+        .a("rows", 8)
+        .a("cols", 40)
+        .e("input", () => {
+          this.children.replaceChildren();
+          for (let line of ta.value.split("\n")) {
+            this.appendChild(new Node(line), false);
+          }
+          history.add(true);
+        });
+      let lines = [];
+      for (let child of this.children.children) {
+        lines.push(child.node.nameValue);
+      }
+      ta.value = lines.join("\n");
+      if (arg) {
+        return div(div(arg), ta.c("indented"));
+      } else {
+        return div(ta);
       }
     },
   },
