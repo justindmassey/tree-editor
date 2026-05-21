@@ -504,7 +504,7 @@ export default {
     create(arg) {
       let outline = div();
       this.traverseChildNodes((node, number) => {
-        if (node.parent) {
+        if (node != this) {
           outline.appendChild(
             div(span(number).c("tt"), " ", node.nameText).ctrlClick(node),
           );
