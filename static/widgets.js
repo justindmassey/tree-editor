@@ -500,14 +500,26 @@ export default {
     description: div(
       div("Outline"),
       div("Displays children as numbered outline."),
+      div("Items can also be other widgets."),
     ),
     create(arg) {
       let outline = div();
       this.traverseChildNodes((node, number) => {
         if (node != this) {
-          outline.appendChild(
-            div(span(number).c("tt"), " ", node.nameText).ctrlClick(node),
-          );
+          if (node.nameValue.match(Node.widgetRegEx)) {
+            outline.appendChild(
+              div(span(number).c("tt"), " ", node.widget)
+                .c("out-item")
+                .ctrlClick(node),
+            );
+            return 1;
+          } else {
+            outline.appendChild(
+              div(div(number).c("tt"), div(node.nameText))
+                .c("out-item")
+                .ctrlClick(node),
+            );
+          }
         }
       });
       if (arg) {

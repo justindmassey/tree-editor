@@ -5,7 +5,8 @@
 }
 
 .cl-item,
-.rad-item {
+.rad-item,
+.out-item {
   display: flex;
   align-items: start;
   gap: 0.25ch;
@@ -140,8 +141,7 @@ img {
 }
 
 .tt {
-  font-family: monospace;
-  font-size: 1.25em;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .cen {

@@ -331,18 +331,19 @@ export default class Node {
   }
 
   traverseChildNodes(callback, includeCollapsed = true, number = "") {
-    if (callback(this, number)) {
-      return true;
+    let res = callback(this, number)
+    if (res) {
+      return res;
     } else if (includeCollapsed || this.expanded) {
       let num = 1;
-      let numWidth = String(this.childNodes.length).length
+      let numWidth = String(this.childNodes.length).length;
       for (let child of this._childNodes) {
         if (
           child.traverseChildNodes(
             callback,
             includeCollapsed,
             number + String(num).padStart(numWidth, " ") + ".",
-          )
+          ) === true
         ) {
           return true;
         }

@@ -12,7 +12,7 @@
   height: 16px;
   margin: 1px;
   vertical-align: middle;
-  font-family: monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .name:focus {
