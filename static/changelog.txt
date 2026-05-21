@@ -13,6 +13,8 @@ May 21, 2026
   - Added "expand all nodes on this level" node command (Alt+i x)
   - Added "collapse all nodes on this level" node command (Alt+i c)
   - Added "-out" widget (outline)
+  - Changed Fonts
+  - Moved default widget into widgets ("-txt")
 
 May 20, 2026
   - Added changelog to help
