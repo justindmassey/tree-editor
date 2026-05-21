@@ -14,6 +14,7 @@ class TreeEditor {
     registerShortcuts(window, globalCommands, this);
     window.addEventListener("keydown", (ev) => {
       if (ev.ctrlKey && ev.key.match(/^\d$/)) {
+        ev.preventDefault();
         let upToLevel = Number(ev.key);
         this.tree.root.traverse((node, level) => {
           if (level <= upToLevel) {
