@@ -232,16 +232,16 @@ export default {
       div(code("argument"), ": a header"),
       div("Each child becomes a subheader."),
       div("Grandchildren become the paragraph."),
-      div("If ", code("$index"), " is set, an index is added."),
+      div("If ", code("$toc"), " is set, a table of contents is added."),
     ),
     create(arg) {
       let paragraphs = div();
-      let index = p();
-      let showIndex = "$index" in this.attributes;
+      let toc = p();
+      let showToc = "$toc" in this.attributes;
       for (let child of this.childNodes) {
         let header = h2(child.nameText).ctrlClick(child);
-        if (showIndex) {
-          index.appendChild(
+        if (showToc) {
+          toc.appendChild(
             div(child._nameText)
               .c("anchor")
               .ctrlClick(child)
@@ -260,8 +260,8 @@ export default {
         }
         paragraphs.appendChild(paragraph);
       }
-      if (showIndex) {
-        paragraphs = div(index, paragraphs);
+      if (showToc) {
+        paragraphs = div(toc, paragraphs);
       }
       if (arg) {
         return div(h1(arg), paragraphs);
