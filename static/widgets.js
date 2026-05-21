@@ -30,7 +30,8 @@ import crossRef from "./cross-ref.js";
 export default {
   "-hdr": {
     description: div(
-      div("large header with the children below"),
+      div("Header"),
+      div("A large header with the children below."),
       div(code("argument"), ": the header text"),
     ),
     create(arg) {
@@ -39,7 +40,7 @@ export default {
   },
   "-ul": {
     description: div(
-      div("unordered list"),
+      div("Unordered list"),
       div(code("$prefix"), ": added before each item"),
       div(
         "If ",
@@ -75,7 +76,7 @@ export default {
     },
   },
   "-ol": {
-    description: "ordered list",
+    description: "Ordered list",
     create(arg) {
       let children = table().c("ltbl");
       let cnt = 1;
@@ -98,7 +99,7 @@ export default {
   },
   "-tgl": {
     description: div(
-      div("toggle"),
+      div("Toggle"),
       div("allows you to toggle the visibility of children"),
       div(code("$expanded"), ": if the children are visible"),
     ),
@@ -137,7 +138,7 @@ export default {
   },
   "-out": {
     description: div(
-      div("outline"),
+      div("Outline"),
       div("Displays the subtree as numbered outline."),
       div(code("argument"), ": the name of the root node of the outline"),
     ),
@@ -153,7 +154,7 @@ export default {
   },
   "-lin": {
     description: div(
-      div("line"),
+      div("Line"),
       div("Renders children as a line separated by ", code("$sep"), "."),
       div("If ", code("$sep"), " is not set, a space is used."),
     ),
@@ -187,7 +188,7 @@ export default {
   },
   "-par": {
     description: div(
-      div("paragraphs"),
+      div("Paragraphs"),
       div(code("argument"), ": a header"),
       div("Each child becomes a header."),
       div("Grandchildren become the paragraph."),
@@ -211,7 +212,7 @@ export default {
   },
   "-tl": {
     description: div(
-      div("tree link"),
+      div("Tree link"),
       div("a link to another tree"),
       div(code("argument"), ": the name of the tree to link to"),
       div(code("$label"), ": If set, it is used as the label."),
@@ -236,7 +237,7 @@ export default {
   },
   "-lnk": {
     description: div(
-      div("link"),
+      div("Link"),
       div(code("argument"), ": the link text"),
       div(code("$url"), ": the URL the link opens"),
     ),
@@ -259,7 +260,7 @@ export default {
   },
   "-cl": {
     description: div(
-      div("checklist"),
+      div("Checklist"),
       div("Turns each child into a checklist item."),
       div("Items have the attribute ", code("$checked"), "."),
     ),
@@ -295,7 +296,7 @@ export default {
   },
   "-tbl": {
     description: div(
-      div("table"),
+      div("Table"),
       div("Each child's name is a table header and its children the column."),
       div(
         "If a child has the attribute ",
@@ -372,7 +373,7 @@ export default {
   },
   "-htbl": {
     description: div(
-      div("horizontal table"),
+      div("Horizontal table"),
       div("children become row labels and their children the rows"),
       div("If the table has the attribute ", code("$align"), ", "),
       div("all grandchildren get alligned accordingly."),
@@ -437,7 +438,7 @@ export default {
   },
   "-crd": {
     description: div(
-      div("card"),
+      div("Card"),
       div(code("argument"), ": card header"),
       div("Children become the card body."),
       div("Attributes become a table at the bottom of the card."),
@@ -479,7 +480,7 @@ export default {
   },
   "-pts": {
     description: div(
-      div("paths"),
+      div("Paths"),
       div(
         "renders the path (separated by ",
         code("$sep"),
@@ -532,7 +533,7 @@ export default {
   },
   "-tbs": {
     description: div(
-      div("tabs"),
+      div("Tabs"),
       div("Each child name becomes a tab."),
       div(code("$tab"), " holds the current tab"),
     ),
@@ -578,7 +579,7 @@ export default {
   },
   "-pgs": {
     description: div(
-      div("pages"),
+      div("Pages"),
       div("Each child becomes a page."),
       div(code("$page"), " holds the current page number."),
       div("If ", code("$page"), " is set to ", code("last"), ","),
@@ -655,7 +656,7 @@ export default {
   },
   "-img": {
     description: div(
-      div("image"),
+      div("Image"),
       div(code("argument"), ": image caption"),
       div(code("$url"), ": the url of the image"),
       div(code("$width"), ": the width in pixels"),
@@ -688,7 +689,7 @@ export default {
     },
   },
   "-ta": {
-    description: div(div("textarea"), div("Children become lines of text.")),
+    description: div(div("Textarea"), div("Children become lines of text.")),
     create(arg) {
       let ta = textarea()
         .a("rows", 8)
@@ -714,7 +715,7 @@ export default {
   },
   "-opt": {
     description: div(
-      div("option"),
+      div("Options"),
       div(code("$value"), ": the selected option"),
       div("children become options"),
       div("Children of the selected option are rendered below."),
@@ -773,7 +774,7 @@ export default {
   },
   "-rad": {
     description: div(
-      div("radio buttons"),
+      div("Radio buttons"),
       div("Adds a radio button in front of children."),
       div(
         "If a child has a ",
@@ -828,7 +829,7 @@ export default {
   },
   "-frm": {
     description: div(
-      div("form"),
+      div("Form"),
       div("Attributes become form fields ", crossRef("Attributes"), "."),
       div(code("$"), "-attributes are ignored."),
       div("If the ", code("$type"), "-attribute is set on an attribute"),
@@ -922,7 +923,7 @@ export default {
   },
   "-bg": {
     description: div(
-      div("background"),
+      div("Background"),
       div(code("argument"), ": a CSS color"),
       div("colors the background of children"),
     ),
@@ -936,7 +937,7 @@ export default {
     },
   },
   "-cen": {
-    description: "center horizontally",
+    description: "Center horizontally",
     create(arg) {
       if (arg) {
         if (this.childrenWidget.children.length) {
@@ -952,7 +953,7 @@ export default {
     },
   },
   "-tt": {
-    description: div(div("teletype"), div("uses monospace font")),
+    description: div(div("Teletype"), div("uses monospace font")),
     create(arg) {
       if (arg) {
         if (this.childrenWidget.children.length) {
