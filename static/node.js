@@ -139,17 +139,9 @@ export default class Node {
         .ctrlClick(this);
     } else {
       let arg = this.attributeSubstitution(unescape(this.nameValue));
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(arg), this._childrenWidget.c("indented")).ctrlClick(
-            this,
-          );
-        } else {
-          return div(arg).ctrlClick(this);
-        }
-      } else {
-        return this.childrenWidget.ctrlClick(this);
-      }
+      return widgets["-txt"].create
+        .bind(this)(arg, this.nameValue)
+        .ctrlClick(this);
     }
   }
 
@@ -331,7 +323,7 @@ export default class Node {
   }
 
   traverseChildNodes(callback, includeCollapsed = true, number = "") {
-    let res = callback(this, number)
+    let res = callback(this, number);
     if (res) {
       return res;
     } else if (includeCollapsed || this.expanded) {

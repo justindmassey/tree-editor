@@ -28,6 +28,27 @@ import tree from "./tree.js";
 import crossRef from "./cross-ref.js";
 
 export default {
+  "-txt": {
+    description: div(
+      div("Indented text"),
+      div(
+        "If a node doesn't specify a widget, it defaults to ",
+        code("-txt"),
+        ".",
+      ),
+    ),
+    create(arg) {
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          return div(div(arg), this._childrenWidget.c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else {
+        return this.childrenWidget;
+      }
+    },
+  },
   "-hdr": {
     description: div(
       div("Header"),
