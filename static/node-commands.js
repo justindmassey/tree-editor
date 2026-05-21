@@ -401,6 +401,14 @@ export default {
       }
     },
   },
+  "Alt+c a": {
+    description: "children to array (for JSON export)",
+    action() {
+      if(nodeToArray(this)) {
+        history.add();
+      }
+    }
+  },
   "Alt+s s": {
     description: "sort siblings",
     action() {
@@ -432,15 +440,8 @@ export default {
     description: "siblings to array (for JSON export)",
     action() {
       if (this.parent) {
-        if (!isArray(this.parent)) {
-          for (let i = 0; i < this.parent.children.children.length; i++) {
-            let child = this.parent.children.children[i].node;
-            if (child.isAttribute) {
-              child.nameValue = i + "=" + child._isAttribute[2];
-            } else {
-              child.nameValue = i;
-            }
-          }
+        if (nodeToArray(this.parent)) {
+          this.focus();
           history.add();
         }
       } else {
@@ -516,6 +517,20 @@ function flattenNode(node) {
     node.children.replaceChildren();
     for (let descendant of descendants) {
       node.appendChild(descendant, false);
+    }
+    return true;
+  }
+}
+
+function nodeToArray(node) {
+  if (!isArray(node)) {
+    for (let i = 0; i < node.children.children.length; i++) {
+      let child = node.children.children[i].node;
+      if (child.isAttribute) {
+        child.nameValue = i + "=" + child._isAttribute[2];
+      } else {
+        child.nameValue = i;
+      }
     }
     return true;
   }
