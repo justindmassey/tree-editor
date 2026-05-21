@@ -146,6 +146,9 @@ export default {
       this.tree.root.focus();
     },
   },
+  "Control+DIGIT": {
+    description: div("expand only nodes up to level ", code("DIGIT"))
+  },
   "Alt+j": {
     description: "focus first node containing text",
     action() {

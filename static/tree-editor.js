@@ -12,6 +12,18 @@ class TreeEditor {
     this.help = help;
     this.elem = div(this.menuBar, this.tree, this.help);
     registerShortcuts(window, globalCommands, this);
+    window.addEventListener("keydown", (ev) => {
+      if (ev.ctrlKey && ev.key.match(/^\d$/)) {
+        let upToLevel = Number(ev.key);
+        this.tree.root.traverse((node, level) => {
+          if (level <= upToLevel) {
+            node.expand();
+          } else {
+            node.collapse();
+          }
+        });
+      }
+    });
   }
 }
 

@@ -305,24 +305,24 @@ export default class Node {
     }
   }
 
-  traverse(callback, includeCollapsed = true) {
-    if (callback(this)) {
+  traverse(callback, includeCollapsed = true, level = 1) {
+    if (callback(this, level)) {
       return true;
     } else if (includeCollapsed || this.expanded) {
       for (let child of Array.from(this.children.children)) {
-        if (child.node.traverse(callback, includeCollapsed)) {
+        if (child.node.traverse(callback, includeCollapsed, level + 1)) {
           return true;
         }
       }
     }
   }
 
-  traverseChildNodes(callback, includeCollapsed = true) {
-    if (callback(this)) {
+  traverseChildNodes(callback, includeCollapsed = true, level = 1) {
+    if (callback(this, level)) {
       return true;
     } else if (includeCollapsed || this.expanded) {
       for (let child of this.childNodes) {
-        if (child.traverseChildNodes(callback, includeCollapsed)) {
+        if (child.traverseChildNodes(callback, includeCollapsed, level + 1)) {
           return true;
         }
       }
