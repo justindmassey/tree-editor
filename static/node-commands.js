@@ -393,6 +393,14 @@ export default {
       }
     },
   },
+  "Alt+c f": {
+    description: "flatten children",
+    action() {
+      if (flattenNode(this)) {
+        history.add();
+      }
+    },
+  },
   "Alt+s s": {
     description: "sort siblings",
     action() {
@@ -414,28 +422,9 @@ export default {
   "Alt+s f": {
     description: "flatten siblings",
     action() {
-      if (this.parent) {
-        let flatten = false;
-        for (let child of this.parent.children.children) {
-          if (child.node.children.children.length) {
-            flatten = true;
-            break;
-          }
-        }
-        if (flatten) {
-          let descendants = [];
-          this.parent.traverse((node) => {
-            descendants.push(node);
-          });
-          descendants.shift();
-
-          this.parent.children.replaceChildren();
-          for (let node of descendants) {
-            this.parent.appendChild(node, false);
-          }
-          this.focus();
-          history.add();
-        }
+      if (this.parent && flattenNode(this.parent)) {
+        this.focus();
+        history.add();
       }
     },
   },
@@ -506,5 +495,28 @@ function shuffleNode(node) {
         return true;
       }
     }
+  }
+}
+
+function flattenNode(node) {
+  let flatten = false;
+  for (let child of node.children.children) {
+    if (child.node.children.children.length) {
+      flatten = true;
+      break;
+    }
+  }
+  if (flatten) {
+    let descendants = [];
+    node.traverse((descendant) => {
+      descendants.push(descendant);
+    });
+    descendants.shift();
+
+    node.children.replaceChildren();
+    for (let descendant of descendants) {
+      node.appendChild(descendant, false);
+    }
+    return true;
   }
 }

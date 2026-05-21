@@ -3,6 +3,7 @@ Tree Editor Changelog
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)
+  - Added "flatten children" node command (Alt+c f)
 
 May 20, 2026
   - Added changelog to help
