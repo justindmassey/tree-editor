@@ -379,8 +379,11 @@ export default class Node {
 
   updateAttribute(name, value) {
     if (this.attributes[name] != value) {
+      let lastName = this._attrNodeMap[name].lastName;
       this.setAttribute(name, value);
+      this._attrNodeMap[name].lastName = lastName;
       history.add();
+      this._attrNodeMap[name].updateLastValues();
     }
   }
 
@@ -455,6 +458,7 @@ export default class Node {
 
   set nameValue(newName) {
     if (newName != this.nameValue) {
+      console.log(newName);
       this.lastModified = new Date();
       this.name.value = newName;
       this.updateLastValues();
