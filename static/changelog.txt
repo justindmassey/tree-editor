@@ -9,6 +9,9 @@ May 21, 2026
   - Added "expand children" node command (Alt+c x)
   - Added "expand only nodes up to level" global command (Control+DIGIT)
   - Added "expand only nodes up to level" node command (Control+Alt+DIGIT)
+  - Added "delete nodes on the same level" node command (Alt+i d)
+  - Added "expand all nodes on this level" node command (Alt+i x)
+  - Added "collapse all nodes on this level" node command (Alt+i c)
 
 May 20, 2026
   - Added changelog to help

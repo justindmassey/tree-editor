@@ -212,6 +212,22 @@ export default {
       }
     },
   },
+  "Alt+i d": {
+    description: "delete nodes on the same level",
+    action() {
+      let nodesOnLevel = getNodesOnLevel(this);
+      if (this.parent) {
+        for (let node of nodesOnLevel) {
+          node.remove(false);
+        }
+        this.parent.focus();
+        history.add();
+      } else if (this.remove()) {
+        this.focus();
+        history.add();
+      }
+    },
+  },
   "ArrowUp, Alt+p": {
     description: "focus previous node",
     action() {
@@ -400,6 +416,22 @@ export default {
       this.traverse((n) => n.collapse());
     },
   },
+  "Alt+i x": {
+    description: "expand all nodes on this level",
+    action() {
+      for (let node of getNodesOnLevel(this)) {
+        node.expand();
+      }
+    },
+  },
+  "Alt+i c": {
+    description: "collapse all nodes on this level",
+    action() {
+      for (let node of getNodesOnLevel(this)) {
+        node.collapse();
+      }
+    },
+  },
   "Alt+c s": {
     description: "sort children",
     action() {
@@ -557,4 +589,21 @@ function nodeToArray(node) {
     }
     return true;
   }
+}
+
+function getNodesOnLevel(node) {
+  let nodeLevel;
+  let nodesOnLevel = [];
+  tree.root.traverse((n, level) => {
+    if (n == node) {
+      nodeLevel = level;
+      return true;
+    }
+  });
+  tree.root.traverse((node, level) => {
+    if (level == nodeLevel) {
+      nodesOnLevel.push(node);
+    }
+  });
+  return nodesOnLevel;
 }
