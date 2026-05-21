@@ -135,6 +135,22 @@ export default {
       }
     },
   },
+  "-out": {
+    description: div(
+      div("outline"),
+      div("Displays the subtree as numbered outline."),
+      div(code("argument"), ": the name of the root node of the outline"),
+    ),
+    create(arg) {
+      let outline = div();
+      this.traverseChildNodes((node, number) => {
+        outline.appendChild(
+          div(span(number).c("tt"), " ", node.nameText).ctrlClick(node),
+        );
+      });
+      return outline;
+    },
+  },
   "-lin": {
     description: div(
       div("line"),

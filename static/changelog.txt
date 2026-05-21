@@ -12,6 +12,7 @@ May 21, 2026
   - Added "delete nodes on the same level" node command (Alt+i d)
   - Added "expand all nodes on this level" node command (Alt+i x)
   - Added "collapse all nodes on this level" node command (Alt+i c)
+  - Added "-out" widget (outline)
 
 May 20, 2026
   - Added changelog to help

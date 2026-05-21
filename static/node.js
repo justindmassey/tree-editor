@@ -330,14 +330,23 @@ export default class Node {
     }
   }
 
-  traverseChildNodes(callback, includeCollapsed = true, level = 1) {
-    if (callback(this, level)) {
+  traverseChildNodes(callback, includeCollapsed = true, number = "1.") {
+    if (callback(this, number)) {
       return true;
     } else if (includeCollapsed || this.expanded) {
-      for (let child of this.childNodes) {
-        if (child.traverseChildNodes(callback, includeCollapsed, level + 1)) {
+      let num = 1;
+      let numWidth = String(this.childNodes.length).length
+      for (let child of this._childNodes) {
+        if (
+          child.traverseChildNodes(
+            callback,
+            includeCollapsed,
+            number + String(num).padStart(numWidth, " ") + ".",
+          )
+        ) {
           return true;
         }
+        num++;
       }
     }
   }
