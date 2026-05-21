@@ -420,6 +420,9 @@ export default {
     description: "expand all nodes on this level",
     action() {
       for (let node of getNodesOnLevel(this)) {
+        if (node.parent) {
+          node.parent.traverseUp((n) => n.expand());
+        }
         node.expand();
       }
     },
