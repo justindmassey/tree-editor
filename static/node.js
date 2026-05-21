@@ -330,7 +330,7 @@ export default class Node {
     }
   }
 
-  traverseChildNodes(callback, includeCollapsed = true, number = "1.") {
+  traverseChildNodes(callback, includeCollapsed = true, number = "") {
     if (callback(this, number)) {
       return true;
     } else if (includeCollapsed || this.expanded) {
