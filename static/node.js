@@ -92,6 +92,19 @@ export default class Node {
             history.add();
           }
         }
+      })
+      .e("keydown", (ev) => {
+        if (ev.ctrlKey && ev.altKey && ev.key.match(/^\d$/)) {
+          ev.preventDefault();
+          let upToLevel = Number(ev.key);
+          this.traverse((node, level) => {
+            if (level <= upToLevel) {
+              node.expand();
+            } else {
+              node.collapse();
+            }
+          });
+        }
       });
     registerShortcuts(this.name, nodeCommands, this);
     this.nameValue = name;

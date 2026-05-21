@@ -13,7 +13,7 @@ class TreeEditor {
     this.elem = div(this.menuBar, this.tree, this.help);
     registerShortcuts(window, globalCommands, this);
     window.addEventListener("keydown", (ev) => {
-      if (ev.ctrlKey && ev.key.match(/^\d$/)) {
+      if (ev.ctrlKey && !ev.altKey && ev.key.match(/^\d$/)) {
         ev.preventDefault();
         let upToLevel = Number(ev.key);
         this.tree.root.traverse((node, level) => {

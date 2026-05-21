@@ -2,6 +2,7 @@ import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
 import { isArray } from "./exporters/json.js";
+import { div, code } from "./lib/elements.js";
 
 export default {
   "Shift+Enter": {
@@ -340,6 +341,12 @@ export default {
       tree.root.traverse((n) => n.collapse());
       this.focus();
     },
+  },
+  "Control+Alt+DIGIT": {
+    description: div(
+      div("expand only nodes up to level ", code("DIGIT")),
+      div("(relative to this node)"),
+    ),
   },
   "Alt+c x": {
     description: "expand children",
