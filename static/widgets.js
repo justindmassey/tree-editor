@@ -508,7 +508,7 @@ export default {
         );
       }
       for (let child of this.childNodes) {
-        let row = tr(td(div(child.nameText).c("htbl-label").ctrlClick(child)));
+        let row = tr(td(div(child.nameText).c("bold").ctrlClick(child)));
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
@@ -1047,9 +1047,7 @@ export default {
             ).ctrlClick(attrNode),
           );
           if (attrNode.childrenWidget.children.length) {
-            form.appendChild(
-              tr(td(), td(attrNode._childrenWidget).c("frm-field-children")),
-            );
+            form.appendChild(tr(td(), td(attrNode._childrenWidget)));
           }
         }
       }

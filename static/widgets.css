@@ -11,7 +11,8 @@
 }
 
 thead,
-.htbl-label {
+.htbl-label,
+.bold {
   font-weight: bold;
 }
 
@@ -154,8 +155,4 @@ img {
 
 a {
   color: var(--color-1);
-}
-
-.bold {
-  font-weight: bold;
 }
