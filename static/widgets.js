@@ -383,18 +383,18 @@ export default {
         code("center"),
         ".",
       ),
-      div("If the attribute ", code("$numbered"), " is set on the table,"),
+      div("If the attribute ", code("$num"), " is set on the table,"),
       div("the rows get numbered."),
     ),
     create(arg) {
       let header = tr();
       let bdy = tbody();
       let longestChild = 0;
-      let numbered = "$numbered" in this.attributes;
+      let numbered = "$num" in this.attributes;
       let tableAlign = this._attributes.$align || "";
       if (numbered) {
         header.appendChild(
-          td("#").a("align", "center").ctrlClick(this._attrNodeMap.$numbered),
+          td("#").a("align", "center").ctrlClick(this._attrNodeMap.$num),
         );
       }
       for (let child of this.childNodes) {
@@ -409,7 +409,7 @@ export default {
           row.appendChild(
             td(i + 1)
               .a("align", "right")
-              .ctrlClick(this._attrNodeMap.$numbered),
+              .ctrlClick(this._attrNodeMap.$num),
           );
         }
         for (let child of this._childNodes) {
@@ -461,14 +461,14 @@ export default {
         code("center"),
         ".",
       ),
-      div("If the attribute ", code("$numbered"), " is set on the table,"),
+      div("If the attribute ", code("$num"), " is set on the table,"),
       div("the columns get numbered."),
     ),
     create(arg) {
       let tbl = table();
       let longestChild = 0;
       let align = this.attributes.$align || "";
-      let numbered = "$numbered" in this._attributes;
+      let numbered = "$num" in this._attributes;
       let hasLabels = this.childNodes.some((n) => n.nameText);
       let numbersRow;
       if (numbered) {
@@ -477,7 +477,7 @@ export default {
             td("#")
               .c("htbl-label")
               .a("align", "center")
-              .ctrlClick(this._attrNodeMap.$numbered),
+              .ctrlClick(this._attrNodeMap.$num),
           );
         } else {
           numbersRow = tr();
@@ -501,7 +501,7 @@ export default {
       }
       if (numbersRow) {
         for (let i = 1; i <= longestChild; i++) {
-          numbersRow.appendChild(td(i).ctrlClick(this._attrNodeMap.$numbered));
+          numbersRow.appendChild(td(i).ctrlClick(this._attrNodeMap.$num));
         }
         tbl.prepend(numbersRow);
       }
