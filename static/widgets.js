@@ -59,6 +59,16 @@ export default {
       return div(h1(arg), this.childrenWidget).c("hdr");
     },
   },
+    "-sh": {
+    description: div(
+      div("Small header"),
+      div("Children are rendered below."),
+      div(code("argument"), ": the header text"),
+    ),
+    create(arg) {
+      return div(h4(arg), this.childrenWidget).c("hdr");
+    },
+  },
   "-ul": {
     description: div(
       div("Unordered list"),
