@@ -7,6 +7,7 @@ May 22, 2026
   - Added -gly (glossary) widget
   - Render attribute children of -frm (form widget) below the field value
   - Render attribute children of -crd (card widget) below the attribute value
+  - Replaced -gly widget with a more general -atbl (attribute table) widget
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)

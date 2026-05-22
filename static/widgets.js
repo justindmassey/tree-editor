@@ -271,63 +271,6 @@ export default {
       }
     },
   },
-  "-gly": {
-    description: div(
-      div("Glossary"),
-      div("Renders a glossary below the children."),
-      div("Attributes become entries in the glossary."),
-      div("Children of attributes are added to the description"),
-      div(code("$"), "-attributes are ignored."),
-    ),
-    create(arg) {
-      let term = "Term";
-      let description = "Description";
-      let title = "Glossary";
-      if (navigator.language.startsWith("de")) {
-        term = "Begriff";
-        description = "Beschreibung";
-        title = "Glossar";
-      }
-
-      let glossary = table(thead(tr(td(term), td(description))));
-      for (let attrNode of this.attrNodes) {
-        if (!attrNode._isAttribute[1].startsWith("$")) {
-          glossary.appendChild(
-            tr(
-              td(attrNode.attrNameText),
-              td(
-                div(attrNode.attributeSubstitution(attrNode._isAttribute[2])),
-                attrNode.childrenWidget,
-              ),
-            ).ctrlClick(attrNode),
-          );
-        }
-      }
-      let bdy;
-      if (glossary.children.length > 1) {
-        bdy = div(this.childrenWidget, p(div(title).c("bold"), glossary));
-      } else {
-        bdy = this.childrenWidget;
-      }
-      if (arg) {
-        if (
-          this._childrenWidget.children.length ||
-          glossary.children.length > 1
-        ) {
-          return div(div(arg), bdy.c("indented"));
-        } else {
-          return div(arg);
-        }
-      } else if (
-        this._childrenWidget.children.length ||
-        glossary.children.length > 1
-      ) {
-        return bdy;
-      } else {
-        return div();
-      }
-    },
-  },
   "-lnk": {
     description: div(
       div("Link"),
@@ -549,6 +492,55 @@ export default {
         }
       } else {
         return tbl.c("tbl");
+      }
+    },
+  },
+  "-atbl": {
+    description: div(
+      div("Attribute table"),
+      div("Attributes become rows in the table."),
+      div("Children of attributes are added to the right column"),
+      div(code("$"), "-attributes are ignored."),
+      div("The first row is bold unless ", code("$nohead"), " is set."),
+      div("Non-attribute children are rendered below the table"),
+    ),
+    create(arg) {
+      let atbl = table().c("atbl");
+      for (let attrNode of this.attrNodes) {
+        if (!attrNode._isAttribute[1].startsWith("$")) {
+          atbl.appendChild(
+            tr(
+              td(attrNode.attrNameText),
+              td(
+                div(attrNode.attributeSubstitution(attrNode._isAttribute[2])),
+                attrNode.childrenWidget,
+              ),
+            ).ctrlClick(attrNode),
+          );
+        }
+      }
+      let bdy;
+      if (atbl.children.length) {
+        if (!("$nohead" in this.attributes)) {
+          atbl.firstChild.c("bold");
+        }
+        bdy = div(atbl);
+        if (this.childrenWidget.children.length) {
+          bdy.appendChild(this._childrenWidget);
+        }
+      } else {
+        bdy = this.childrenWidget;
+      }
+      if (arg) {
+        if (this._childrenWidget.children.length || atbl.children.length) {
+          return div(div(arg), bdy.c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else if (this._childrenWidget.children.length || atbl.children.length) {
+        return bdy;
+      } else {
+        return div();
       }
     },
   },
