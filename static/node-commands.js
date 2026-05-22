@@ -267,7 +267,7 @@ export default {
     },
   },
   "Alt+i d": {
-    description: "Delete nodes on the same level",
+    description: "Delete nodes on this level",
     action() {
       let nodesOnLevel = getNodesOnLevel(this);
       if (this.parent) {
