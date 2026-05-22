@@ -15,7 +15,8 @@ thead,
   font-weight: bold;
 }
 
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   margin-top: 4px;
 }
 
@@ -157,4 +158,8 @@ img {
 
 a {
   color: var(--color-1);
+}
+
+.bold {
+  font-weight: bold;
 }

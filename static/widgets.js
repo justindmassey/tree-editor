@@ -19,6 +19,7 @@ import {
   h2,
   button,
   img,
+  h4,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -267,6 +268,50 @@ export default {
         return div(h1(arg), paragraphs);
       } else {
         return div(paragraphs);
+      }
+    },
+  },
+  "-gly": {
+    description: div(
+      div("Glossary"),
+      div("Renders a glossary below the children."),
+      div("Attributes become entries in the glossary."),
+      div(code("$"), "-attributes are ignored."),
+    ),
+    create(arg) {
+      let glossary = table(thead(tr(td("Term"), td("Description"))));
+      for (let attrNode of this.attrNodes) {
+        if (!attrNode._isAttribute[1].startsWith("$")) {
+          glossary.appendChild(
+            tr(
+              td(attrNode.attrNameText),
+              td(attrNode._isAttribute[2]),
+            ).ctrlClick(attrNode),
+          );
+        }
+      }
+      let bdy;
+      if (glossary.children.length > 1) {
+        bdy = div(this.childrenWidget, p(div("Glossary").c("bold"), glossary));
+      } else {
+        bdy = this.childrenWidget;
+      }
+      if (arg) {
+        if (
+          this._childrenWidget.children.length ||
+          glossary.children.length > 1
+        ) {
+          return div(div(arg), bdy.c("indented"));
+        } else {
+          return div(arg);
+        }
+      } else if (
+        this._childrenWidget.children.length ||
+        glossary.children.length > 1
+      ) {
+        return bdy;
+      } else {
+        return div();
       }
     },
   },

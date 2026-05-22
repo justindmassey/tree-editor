@@ -4,6 +4,7 @@ Tree Editor Changelog
 May 22, 2026
   - Renamed -par (paragraphs widget) to -sec (sections)
   - Renamed -hdr to -lh (large header)
+  - Added -gly (glossary) widget
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)
