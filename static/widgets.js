@@ -276,17 +276,17 @@ export default {
       div("Glossary"),
       div("Renders a glossary below the children."),
       div("Attributes become entries in the glossary."),
+      div("Children of attributes are added to the description"),
       div(code("$"), "-attributes are ignored."),
     ),
     create(arg) {
       let glossary = table(thead(tr(td("Term"), td("Description"))));
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
+          let description = td(div(attrNode._isAttribute[2]));
+          description.appendChild(attrNode.childrenWidget);
           glossary.appendChild(
-            tr(
-              td(attrNode.attrNameText),
-              td(attrNode._isAttribute[2]),
-            ).ctrlClick(attrNode),
+            tr(td(attrNode.attrNameText), description).ctrlClick(attrNode),
           );
         }
       }
