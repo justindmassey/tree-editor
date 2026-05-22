@@ -48,10 +48,10 @@ export default {
       }
     },
   },
-  "-hdr": {
+  "-lh": {
     description: div(
-      div("Header"),
-      div("A large header with the children below."),
+      div("Large header"),
+      div("Children are rendered below."),
       div(code("argument"), ": the header text"),
     ),
     create(arg) {
