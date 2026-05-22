@@ -557,7 +557,7 @@ export default {
       }
     },
   },
-  "Alt+c f": {
+  "Alt+c y": {
     description: "Shuffle children",
     action() {
       if (shuffleNode(this)) {
@@ -607,7 +607,7 @@ export default {
       }
     },
   },
-  "Alt+s f": {
+  "Alt+s y": {
     description: "Shuffle siblings",
     action() {
       if (this.parent && shuffleNode(this.parent)) {
