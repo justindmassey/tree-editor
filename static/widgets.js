@@ -280,7 +280,16 @@ export default {
       div(code("$"), "-attributes are ignored."),
     ),
     create(arg) {
-      let glossary = table(thead(tr(td("Term"), td("Description"))));
+      let term = "Term";
+      let description = "Description";
+      let title = "Glossary";
+      if (navigator.language == "de-DE") {
+        term = "Begriff";
+        description = "Beschreibung";
+        title = "Glossar";
+      }
+
+      let glossary = table(thead(tr(td(term), td(description))));
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
           glossary.appendChild(
@@ -296,7 +305,7 @@ export default {
       }
       let bdy;
       if (glossary.children.length > 1) {
-        bdy = div(this.childrenWidget, p(div("Glossary").c("bold"), glossary));
+        bdy = div(this.childrenWidget, p(div(title).c("bold"), glossary));
       } else {
         bdy = this.childrenWidget;
       }
