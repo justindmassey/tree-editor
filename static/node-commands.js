@@ -459,7 +459,10 @@ export default {
     },
   },
   "Alt+a j": {
-    description: "Focus closest ancestor containing text (case insensitive)",
+    description: div(
+      div("Focus closest ancestor containing text"),
+      div("(case insensitive)"),
+    ),
     action() {
       let find = prompt("Focus closest ancestor containing:").toUpperCase();
       let search = this.parent;
@@ -469,6 +472,27 @@ export default {
           return;
         }
         search = search.parent;
+      }
+    },
+  },
+
+  "Alt+i j": {
+    description: div(
+      div("Focus first node on this level"),
+      div("containing text (case insensitive)"),
+    ),
+    action() {
+      let find = prompt(
+        "Focus first node on this level containing:",
+      ).toUpperCase();
+      for (let node of getNodesOnLevel(this)) {
+        if (
+          node.name != document.activeElement &&
+          node.nameValue.toUpperCase().includes(find)
+        ) {
+          node.focus();
+          return;
+        }
       }
     },
   },
@@ -685,6 +709,20 @@ export default {
             history.add();
           }
         }
+      }
+    },
+  },
+  "Alt+i f": {
+    description: "flatten nodes on this level",
+    action() {
+      let flattened = false;
+      for (let node of getNodesOnLevel(this)) {
+        if (flattenNode(node)) {
+          flattened = true;
+        }
+      }
+      if (flattened) {
+        history.add();
       }
     },
   },
