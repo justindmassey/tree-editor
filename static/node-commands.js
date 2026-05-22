@@ -436,7 +436,7 @@ export default {
     },
   },
   "Alt+c m": {
-    descriptiont: "move attribute children to top",
+    description: "move attribute children to top",
     action() {
       if (attsToTop(this)) {
         history.add();
