@@ -573,6 +573,7 @@ export default {
           atbl.firstChild.lastChild.align = "";
           if (numbered) {
             atbl.firstChild.firstChild.textContent = "#";
+            atbl.firstChild.firstChild.ctrlClick(this._attrNodeMap.$num);
             atbl.firstChild.firstChild.align = "center";
           }
         }
