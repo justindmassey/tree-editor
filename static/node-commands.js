@@ -467,6 +467,32 @@ export default {
       }
     },
   },
+  "Alt+y": {
+    description: "move attributes to the top",
+    action() {
+      if (this.parent) {
+        let prevChildren = Array.from(this.parent.children.children);
+        let lastAttribute;
+        for (let child of this.parent.children.children) {
+          if (child.node.isAttribute) {
+            if (lastAttribute) {
+              lastAttribute.insertAfter(child.node);
+            } else {
+              this.parent.prependChild(child.node);
+            }
+            lastAttribute = child.node;
+          }
+        }
+        this.focus();
+        for (let i = 0; i < prevChildren.length; i++) {
+          if (prevChildren[i] != this.parent.children.children[i]) {
+            history.add();
+            return;
+          }
+        }
+      }
+    },
+  },
   "Alt+s s": {
     description: "sort siblings",
     action() {
