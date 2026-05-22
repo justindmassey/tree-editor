@@ -435,6 +435,14 @@ export default {
       }
     },
   },
+  "Alt+c m": {
+    descriptiont: "move attribute children to top",
+    action() {
+      if (attsToTop(this)) {
+        history.add();
+      }
+    },
+  },
   "Alt+c s": {
     description: "sort children",
     action() {
@@ -467,29 +475,11 @@ export default {
       }
     },
   },
-  "Alt+y": {
-    description: "move attributes to the top",
+  "Alt+s m, Alt+y": {
+    description: "move attribute siblings to the top",
     action() {
-      if (this.parent) {
-        let prevChildren = Array.from(this.parent.children.children);
-        let lastAttribute;
-        for (let child of prevChildren) {
-          if (child.node.isAttribute) {
-            if (lastAttribute) {
-              lastAttribute.insertAfter(child.node);
-            } else {
-              this.parent.prependChild(child.node);
-            }
-            lastAttribute = child.node;
-          }
-        }
-        this.focus();
-        for (let i = 0; i < prevChildren.length; i++) {
-          if (prevChildren[i] != this.parent.children.children[i]) {
-            history.add();
-            return;
-          }
-        }
+      if (this.parent && attsToTop(this.parent, this)) {
+        history.add();
       }
     },
   },
@@ -550,6 +540,29 @@ export default {
     },
   },
 };
+
+function attsToTop(node, focus) {
+  let prevChildren = Array.from(node.children.children);
+  let lastAttribute;
+  for (let child of prevChildren) {
+    if (child.node.isAttribute) {
+      if (lastAttribute) {
+        lastAttribute.insertAfter(child.node, false);
+      } else {
+        node.prependChild(child.node, false);
+      }
+      lastAttribute = child.node;
+    }
+  }
+  if (focus) {
+    focus.focus();
+  }
+  for (let i = 0; i < prevChildren.length; i++) {
+    if (prevChildren[i] != node.children.children[i]) {
+      return true;
+    }
+  }
+}
 
 function sortNode(node) {
   if (node.children.children.length > 1) {
