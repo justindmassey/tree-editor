@@ -49,10 +49,41 @@ export default {
   "Control+Enter": {
     description: "add this node to a new parent node",
     action() {
-      let parent = new Node();
-      this.replaceWith(parent);
-      parent.appendChild(this, false);
+      let newParent = addParent(this);
+      newParent.focus();
       history.add();
+    },
+  },
+  "Alt+c p": {
+    description: "add each child to a new parent",
+    action() {
+      if (this.children.children.length) {
+        for (let child of this.children.children) {
+          addParent(child.node);
+        }
+        history.add();
+      }
+    },
+  },
+  "Alt+s p": {
+    description: "add each sibling to a new parent",
+    action() {
+      if (this.parent) {
+        let newParent;
+        if (this.parent.children.children.length) {
+          for (let child of this.parent.children.children) {
+            newParent = addParent(child.node);
+            if (child.node == this) {
+              newParent.focus();
+            }
+          }
+          history.add();
+        }
+      } else {
+        let newParent = addParent(this);
+        newParent.focus();
+        history.add();
+      }
     },
   },
   "Control+Shift+Enter": {
@@ -540,6 +571,13 @@ export default {
     },
   },
 };
+
+function addParent(node) {
+  let parent = new Node();
+  node.replaceWith(parent, false);
+  parent.appendChild(node, false);
+  return parent;
+}
 
 function attsToTop(node, focus) {
   let prevChildren = Array.from(node.children.children);

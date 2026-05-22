@@ -10,6 +10,7 @@ May 22, 2026
   - Replaced -gly widget with a more general -atbl (attribute table) widget
   - Added -sh (small header) widget
   - Added "move attributes to the top" command (Alt+y)
+  - Added "add each child/sibling to a new parent" commands (Alt+c p / Alt+s p)
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)
