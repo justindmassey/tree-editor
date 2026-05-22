@@ -259,7 +259,7 @@ export default {
     },
   },
   "Alt+i k": {
-    description: "Delete siblings but keep children",
+    description: "Delete nodes on this level but keep children",
     action() {
       if (this.parent) {
         let toFocus;
