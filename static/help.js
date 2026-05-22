@@ -73,7 +73,7 @@ let help = div(
       crossRef("Global Commands"),
       ".",
     ),
-    div("Any clipboard text containing a newline is treated as a node."),
+    div("Any clipboard text containing a newline is treated as a node when pasting."),
   ),
   reference(nodeCommands),
   p(
