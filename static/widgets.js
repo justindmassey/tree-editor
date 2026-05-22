@@ -283,7 +283,7 @@ export default {
       let term = "Term";
       let description = "Description";
       let title = "Glossary";
-      if (navigator.language == "de-DE") {
+      if (navigator.language.startsWith("de")) {
         term = "Begriff";
         description = "Beschreibung";
         title = "Glossar";
