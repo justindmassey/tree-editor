@@ -59,7 +59,7 @@ export default {
       return div(h1(arg), this.childrenWidget).c("hdr");
     },
   },
-    "-sh": {
+  "-sh": {
     description: div(
       div("Small header"),
       div("Children are rendered below."),
@@ -67,6 +67,50 @@ export default {
     ),
     create(arg) {
       return div(h4(arg), this.childrenWidget).c("hdr");
+    },
+  },
+  "-sec": {
+    description: div(
+      div("Sections"),
+      div(code("argument"), ": a header"),
+      div("Each child becomes a section header."),
+      div("Grandchildren become the section."),
+      div("If ", code("$toc"), " is set, a table of contents is added."),
+    ),
+    create(arg) {
+      let paragraphs = div();
+      let toc = p();
+      let showToc = "$toc" in this.attributes;
+      for (let child of this.childNodes) {
+        let header = h2(child.nameText).ctrlClick(child);
+        if (showToc) {
+          toc.appendChild(
+            div(child._nameText)
+              .c("anchor")
+              .ctrlClick(child)
+              .e("click", () => {
+                header.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }),
+          );
+        }
+        paragraphs.appendChild(header);
+        let paragraph = p();
+        for (let grandchild of child.childNodes) {
+          paragraph.appendChild(grandchild.widget);
+        }
+        paragraphs.appendChild(paragraph);
+      }
+      if (showToc) {
+        paragraphs = div(toc, paragraphs);
+      }
+      if (arg) {
+        return div(h1(arg), paragraphs);
+      } else {
+        return div(paragraphs);
+      }
     },
   },
   "-ul": {
@@ -234,50 +278,6 @@ export default {
         }
       } else {
         return div(line);
-      }
-    },
-  },
-  "-sec": {
-    description: div(
-      div("Sections"),
-      div(code("argument"), ": a header"),
-      div("Each child becomes a section header."),
-      div("Grandchildren become the section."),
-      div("If ", code("$toc"), " is set, a table of contents is added."),
-    ),
-    create(arg) {
-      let paragraphs = div();
-      let toc = p();
-      let showToc = "$toc" in this.attributes;
-      for (let child of this.childNodes) {
-        let header = h2(child.nameText).ctrlClick(child);
-        if (showToc) {
-          toc.appendChild(
-            div(child._nameText)
-              .c("anchor")
-              .ctrlClick(child)
-              .e("click", () => {
-                header.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }),
-          );
-        }
-        paragraphs.appendChild(header);
-        let paragraph = p();
-        for (let grandchild of child.childNodes) {
-          paragraph.appendChild(grandchild.widget);
-        }
-        paragraphs.appendChild(paragraph);
-      }
-      if (showToc) {
-        paragraphs = div(toc, paragraphs);
-      }
-      if (arg) {
-        return div(h1(arg), paragraphs);
-      } else {
-        return div(paragraphs);
       }
     },
   },
