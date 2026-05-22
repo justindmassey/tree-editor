@@ -283,10 +283,14 @@ export default {
       let glossary = table(thead(tr(td("Term"), td("Description"))));
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          let description = td(div(attrNode._isAttribute[2]));
-          description.appendChild(attrNode.childrenWidget);
           glossary.appendChild(
-            tr(td(attrNode.attrNameText), description).ctrlClick(attrNode),
+            tr(
+              td(attrNode.attrNameText),
+              td(
+                div(attrNode.attributeSubstitution(attrNode._isAttribute[2])),
+                attrNode.childrenWidget,
+              ),
+            ).ctrlClick(attrNode),
           );
         }
       }
@@ -554,7 +558,10 @@ export default {
           attrTable.appendChild(
             tr(
               td(attr.attrNameText),
-              td(attr.attributeSubstitution(attr._isAttribute[2])),
+              td(
+                div(attr.attributeSubstitution(attr._isAttribute[2])),
+                attr.childrenWidget,
+              ),
             ).ctrlClick(attr),
           );
         }
