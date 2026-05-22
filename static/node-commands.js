@@ -506,6 +506,14 @@ export default {
     },
   },
   "Alt+c r": {
+    description: "reverse children",
+    action() {
+      if (reverseNode(this)) {
+        history.add();
+      }
+    },
+  },
+  "Alt+c f": {
     description: "shuffle children",
     action() {
       if (shuffleNode(this)) {
@@ -547,6 +555,15 @@ export default {
     },
   },
   "Alt+s r": {
+    description: "reverse siblings",
+    action() {
+      if (this.parent && reverseNode(this.parent)) {
+        this.focus();
+        history.add();
+      }
+    },
+  },
+  "Alt+s f": {
     description: "shuffle siblings",
     action() {
       if (this.parent && shuffleNode(this.parent)) {
@@ -659,6 +676,15 @@ function sortNode(node) {
         return true;
       }
     }
+  }
+}
+
+function reverseNode(node) {
+  if (node.children.children.length > 1) {
+    for (let child of Array.from(node.children.children)) {
+      node.prependChild(child.node, false);
+    }
+    return true;
   }
 }
 
