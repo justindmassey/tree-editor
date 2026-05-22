@@ -70,15 +70,32 @@ export default {
     action() {
       if (this.parent) {
         let newParent;
-        if (this.parent.children.children.length) {
-          for (let child of this.parent.children.children) {
-            newParent = addParent(child.node);
-            if (child.node == this) {
-              newParent.focus();
-            }
+        for (let child of this.parent.children.children) {
+          newParent = addParent(child.node);
+          if (child.node == this) {
+            newParent.focus();
           }
-          history.add();
         }
+        history.add();
+      } else {
+        let newParent = addParent(this);
+        newParent.focus();
+        history.add();
+      }
+    },
+  },
+  "Alt+i p": {
+    description: "Add each node on this level to a new parent",
+    action() {
+      if (this.parent) {
+        let newParent;
+        for (let node of getNodesOnLevel(this)) {
+          newParent = addParent(node);
+          if (node == this) {
+            newParent.focus();
+          }
+        }
+        history.add();
       } else {
         let newParent = addParent(this);
         newParent.focus();
@@ -228,6 +245,29 @@ export default {
             toFocus = deleteAndKeepChildren(child.node);
           } else {
             deleteAndKeepChildren(child.node);
+          }
+        }
+        toFocus.focus();
+        history.add();
+      } else {
+        let toFocus = deleteAndKeepChildren(this);
+        if (toFocus) {
+          toFocus.focus();
+          history.add();
+        }
+      }
+    },
+  },
+  "Alt+i k": {
+    description: "Delete siblings but keep children",
+    action() {
+      if (this.parent) {
+        let toFocus;
+        for (let node of getNodesOnLevel(this)) {
+          if (node == this) {
+            toFocus = deleteAndKeepChildren(node);
+          } else {
+            deleteAndKeepChildren(node);
           }
         }
         toFocus.focus();
