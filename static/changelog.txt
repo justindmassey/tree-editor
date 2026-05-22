@@ -13,6 +13,7 @@ May 22, 2026
   - Added "add each child/sibling to a new parent" commands (Alt+c p / Alt+s p)
   - Added "delete children/siblings but keep grandchildren/children" commands (Alt+c k / Alt+s k)
   - Added "reverse children/siblings" commands (Alt+c r / Alt+s r)
+  - Added "children/sibling/ancestor jump" commands (Alt+c j / Alt+s j / Alt+a j)
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)

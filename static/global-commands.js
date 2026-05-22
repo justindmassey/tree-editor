@@ -6,7 +6,7 @@ import Node from "./node.js";
 
 export default {
   "Alt+h": {
-    description: "show/hide help",
+    description: "Show/hide help",
     action() {
       this.help.classList.toggle("hidden");
       if (this.help.classList.contains("hidden")) {
@@ -17,7 +17,7 @@ export default {
     },
   },
   "Alt+m": {
-    description: "show/hide menu bar",
+    description: "Show/hide menu bar",
     action() {
       this.menuBar.elem.classList.toggle("hidden");
       if (this.menuBar.elem.classList.contains("hidden")) {
@@ -35,7 +35,7 @@ export default {
     },
   },
   "Alt+o": {
-    description: "show/hide output",
+    description: "Show/hide output",
     action() {
       this.tree.output.classList.toggle("hidden");
       if (this.tree.output.classList.contains("hidden")) {
@@ -46,7 +46,7 @@ export default {
     },
   },
   "Alt+t": {
-    description: "show/hide tree",
+    description: "Show/hide tree",
     action() {
       this.tree.tree.classList.toggle("hidden");
       if (this.tree.tree.classList.contains("hidden")) {
@@ -65,7 +65,7 @@ export default {
     },
   },
   "Alt+k": {
-    description: "clear tree",
+    description: "Clear tree",
     action() {
       if (this.tree.root.remove()) {
         history.add();
@@ -74,7 +74,7 @@ export default {
     },
   },
   "Control+s": {
-    description: "save the tree",
+    description: "Save the tree",
     action() {
       let name = this.tree.name;
       if (
@@ -101,7 +101,7 @@ export default {
     },
   },
   "Control+Alt+d": {
-    description: "delete this tree",
+    description: "Delete this tree",
     action() {
       let name = this.tree.name;
       if (
@@ -129,28 +129,28 @@ export default {
     },
   },
   "Control+z": {
-    description: "undo",
+    description: "Undo",
     action() {
       history.undo();
     },
   },
   "Control+y": {
-    description: "redo",
+    description: "Redo",
     action() {
       history.redo();
     },
   },
   "Alt+r": {
-    description: "focus root node",
+    description: "Focus root node",
     action() {
       this.tree.root.focus();
     },
   },
   "Control+DIGIT": {
-    description: div("expand only nodes up to level ", code("DIGIT"))
+    description: div("Expand only nodes up to level ", code("DIGIT"))
   },
   "Alt+j": {
-    description: "focus first node containing text",
+    description: "Focus first node containing text (case insensitive)",
     action() {
       let find = prompt("Focus first node containing:").toUpperCase();
       this.tree.root.traverse((n) => {
@@ -165,28 +165,28 @@ export default {
     },
   },
   "Alt+e": {
-    description: div("set paste mode to ", code("replace"), " (exchange)"),
+    description: div("Set paste mode to ", code("replace"), " (exchange)"),
     action() {
       this.tree.pasteMode = "replace";
       this.tree.toast.pop('Paste mode: "replace"');
     },
   },
-  "Alt+a": {
-    description: div("set paste mode to ", code("append")),
+  "Alt++": {
+    description: div("Set paste mode to ", code("append")),
     action() {
       this.tree.pasteMode = "append";
       this.tree.toast.pop('Paste mode: "append"');
     },
   },
   "Alt+u": {
-    description: div("set paste mode to ", code("merge"), " (unify)"),
+    description: div("Set paste mode to ", code("merge"), " (unify)"),
     action() {
       this.tree.pasteMode = "merge";
       this.tree.toast.pop('Paste mode: "merge"');
     },
   },
   "Alt+x r": {
-    description: "recover last session",
+    description: "Recover last session",
     action() {
       let lastSession = localStorage.getItem("autosave");
       if (lastSession) {
@@ -198,7 +198,7 @@ export default {
     },
   },
   "Alt+w": {
-    description: "toggle mousewheel node movement",
+    description: "Toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;
       localStorage.setItem(
@@ -212,7 +212,7 @@ export default {
     },
   },
   "Control+g": {
-    description: "clear the current prefix command",
+    description: "Clear the current prefix command",
     action() {
       this.tree.toast.pop("Prefix command cleared");
     },

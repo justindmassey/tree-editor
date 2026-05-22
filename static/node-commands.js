@@ -6,21 +6,21 @@ import { div, code } from "./lib/elements.js";
 
 export default {
   "Shift+Enter": {
-    description: "append child",
+    description: "Append child",
     action() {
       this.appendChild(new Node());
       history.add();
     },
   },
   "Alt+Shift+Enter": {
-    description: "prepend child",
+    description: "Prepend child",
     action() {
       this.prependChild(new Node());
       history.add();
     },
   },
   Enter: {
-    description: "insert a new node after this one",
+    description: "Insert a new node after this one",
     action() {
       if (this.parent) {
         this.insertAfter(new Node());
@@ -29,7 +29,7 @@ export default {
     },
   },
   "Control+Alt+Enter": {
-    description: "insert a new node at the top",
+    description: "Insert a new node at the top",
     action() {
       if (this.parent) {
         this.parent.prependChild(new Node());
@@ -38,7 +38,7 @@ export default {
     },
   },
   "Alt+Enter": {
-    description: "insert a new node after the parent node",
+    description: "Insert a new node after the parent node",
     action() {
       if (this.parent && this.parent.parent) {
         this.parent.insertAfter(new Node());
@@ -47,7 +47,7 @@ export default {
     },
   },
   "Control+Enter": {
-    description: "add this node to a new parent node",
+    description: "Add this node to a new parent node",
     action() {
       let newParent = addParent(this);
       newParent.focus();
@@ -55,7 +55,7 @@ export default {
     },
   },
   "Alt+c p": {
-    description: "add each child to a new parent",
+    description: "Add each child to a new parent",
     action() {
       if (this.children.children.length) {
         for (let child of this.children.children) {
@@ -66,7 +66,7 @@ export default {
     },
   },
   "Alt+s p": {
-    description: "add each sibling to a new parent",
+    description: "Add each sibling to a new parent",
     action() {
       if (this.parent) {
         let newParent;
@@ -87,7 +87,7 @@ export default {
     },
   },
   "Control+Shift+Enter": {
-    description: "add siblings to a new parent node",
+    description: "Add siblings to a new parent node",
     action() {
       if (this.parent) {
         let newParent = new Node();
@@ -105,7 +105,7 @@ export default {
     },
   },
   "Alt+ArrowUp, Alt+Shift+P": {
-    description: "move this node up",
+    description: "Move this node up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
         if (this.elem.previousSibling) {
@@ -119,7 +119,7 @@ export default {
     },
   },
   "Alt+ArrowDown, Alt+Shift+N": {
-    description: "move this node down",
+    description: "Move this node down",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
         if (this.elem.nextSibling) {
@@ -133,7 +133,7 @@ export default {
     },
   },
   "Shift+ArrowUp": {
-    description: "move this node to the top",
+    description: "Move this node to the top",
     action() {
       if (this.parent && this.parent.children.firstChild != this.elem) {
         this.parent.prependChild(this);
@@ -142,7 +142,7 @@ export default {
     },
   },
   "Shift+ArrowDown": {
-    description: "move this node to the bottom",
+    description: "Move this node to the bottom",
     action() {
       if (this.parent && this.parent.children.lastChild != this.elem) {
         this.parent.appendChild(this);
@@ -151,7 +151,7 @@ export default {
     },
   },
   "Alt+ArrowLeft": {
-    description: "promote node",
+    description: "Promote node",
     action() {
       if (this.parent && this.parent.parent) {
         this.parent.insertAfter(this);
@@ -160,7 +160,7 @@ export default {
     },
   },
   "Alt+ArrowRight": {
-    description: "demote node",
+    description: "Demote node",
     action() {
       if (this.elem.previousSibling) {
         this.elem.previousSibling.node.appendChild(this);
@@ -169,7 +169,7 @@ export default {
     },
   },
   "Alt+Shift+ArrowUp": {
-    description: "move siblings up",
+    description: "Move siblings up",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
         this.parent.appendChild(this.parent.children.firstChild.node, false);
@@ -179,7 +179,7 @@ export default {
     },
   },
   "Alt+Shift+ArrowDown": {
-    description: "move siblings down",
+    description: "Move siblings down",
     action() {
       if (this.parent && this.parent.children.children.length > 1) {
         this.parent.prependChild(this.parent.children.lastChild.node, false);
@@ -189,7 +189,7 @@ export default {
     },
   },
   "Control+d": {
-    description: "delete this node",
+    description: "Delete this node",
     action() {
       if (this.remove()) {
         history.add();
@@ -197,7 +197,7 @@ export default {
     },
   },
   "Control+k": {
-    description: "delete this node but keep the children",
+    description: "Delete this node but keep the children",
     action() {
       let toFocus = deleteAndKeepChildren(this);
       if (toFocus) {
@@ -207,7 +207,7 @@ export default {
     },
   },
   "Alt+c k": {
-    description: "delete children but keep grandchildren",
+    description: "Delete children but keep grandchildren",
     action() {
       if (this.children.children.length) {
         for (let child of Array.from(this.children.children)) {
@@ -219,7 +219,7 @@ export default {
     },
   },
   "Alt+s k": {
-    description: "delete siblings but keep children",
+    description: "Delete siblings but keep children",
     action() {
       if (this.parent) {
         let toFocus;
@@ -242,7 +242,7 @@ export default {
     },
   },
   "Alt+d d": {
-    description: "delete descendants",
+    description: "Delete descendants",
     action() {
       if (this.children.firstChild) {
         this.children.replaceChildren();
@@ -251,7 +251,7 @@ export default {
     },
   },
   "Alt+s d": {
-    description: "delete siblings",
+    description: "Delete siblings",
     action() {
       if (this.parent) {
         if (this.parent.children.children.length) {
@@ -267,7 +267,7 @@ export default {
     },
   },
   "Alt+i d": {
-    description: "delete nodes on the same level",
+    description: "Delete nodes on the same level",
     action() {
       let nodesOnLevel = getNodesOnLevel(this);
       if (this.parent) {
@@ -283,7 +283,7 @@ export default {
     },
   },
   "ArrowUp, Alt+p": {
-    description: "focus previous node",
+    description: "Focus previous node",
     action() {
       if (this.elem.previousSibling) {
         let lastNode;
@@ -303,7 +303,7 @@ export default {
     },
   },
   "ArrowDown, Alt+n": {
-    description: "focus next node",
+    description: "Focus next node",
     action() {
       if (this.children.children.length && this.expanded) {
         this.children.children[0].node.focus();
@@ -322,7 +322,7 @@ export default {
     },
   },
   "Control+ArrowUp, Control+Alt+p": {
-    description: "focus previous sibling",
+    description: "Focus previous sibling",
     action() {
       if (this.parent) {
         if (this.elem.previousSibling) {
@@ -334,7 +334,7 @@ export default {
     },
   },
   "Control+ArrowDown, Control+Alt+n": {
-    description: "focus next sibling",
+    description: "Focus next sibling",
     action() {
       if (this.parent) {
         if (this.elem.nextSibling) {
@@ -346,7 +346,7 @@ export default {
     },
   },
   "Alt+l": {
-    description: "focus last sibling",
+    description: "Focus last sibling",
     action() {
       if (this.parent) {
         this.parent.children.lastChild.node.focus();
@@ -354,7 +354,7 @@ export default {
     },
   },
   "Control+u": {
-    description: "focus the parent node",
+    description: "Focus the parent node",
     action() {
       if (this.parent) {
         this.parent.focus();
@@ -362,7 +362,7 @@ export default {
     },
   },
   "Alt+b": {
-    description: "focus the node edited before this one",
+    description: "Focus the node edited before this one",
     action() {
       let nodes = [];
       tree.root.traverse((node) => {
@@ -376,7 +376,7 @@ export default {
     },
   },
   "Alt+v": {
-    description: "focus the node edited after this one",
+    description: "Focus the node edited after this one",
     action() {
       let nodes = [];
       tree.root.traverse((node) => {
@@ -389,8 +389,52 @@ export default {
       }
     },
   },
-  "Alt+d r": {
-    description: "replace root with this node",
+  "Alt+c j": {
+    description: "Focus first child containing text (case insensitive)",
+    action() {
+      let find = prompt("Focus first child containing:").toUpperCase();
+      for (let child of this.children.children) {
+        if (child.node.nameValue.toUpperCase().includes(find)) {
+          child.node.focus();
+          return;
+        }
+      }
+    },
+  },
+  "Alt+s j": {
+    description: "Focus first sibling containing text (case insensitive)",
+    action() {
+      if (this.parent) {
+        let find = prompt("Focus first sibling containing:").toUpperCase();
+        for (let child of this.parent.children.children) {
+          if (
+            child.node.name != document.activeElement &&
+            child.node.nameValue.toUpperCase().includes(find)
+          ) {
+            child.node.focus();
+            return;
+          }
+        }
+      }
+    },
+  },
+  "Alt+a j": {
+    description: "Focus closest ancestor containing text (case insensitive)",
+    action() {
+      let find = prompt("Focus closest ancestor containing:").toUpperCase();
+      let search = this.parent;
+      while (search) {
+        if (search.nameValue.toUpperCase().includes(find)) {
+          search.focus();
+          return;
+        }
+        search = search.parent;
+      }
+    },
+  },
+
+  "Alt+a k": {
+    description: "Replace root with this node",
     action() {
       if (this.parent) {
         tree.root = this;
@@ -400,13 +444,13 @@ export default {
     },
   },
   Tab: {
-    description: "toggle visibility of children",
+    description: "Toggle visibility of children",
     action() {
       this.toggle();
     },
   },
   "Alt+f": {
-    description: "collapse all nodes and show this one",
+    description: "Collapse all nodes and show this one",
     action() {
       tree.root.traverse((n) => n.collapse());
       this.focus();
@@ -414,12 +458,12 @@ export default {
   },
   "Control+Alt+DIGIT": {
     description: div(
-      div("expand only nodes up to level ", code("DIGIT")),
+      div("Expand only nodes up to level ", code("DIGIT")),
       div("(relative to this node)"),
     ),
   },
   "Alt+c x": {
-    description: "expand children",
+    description: "Expand children",
     action() {
       for (let child of this.children.children) {
         child.node.expand();
@@ -427,7 +471,7 @@ export default {
     },
   },
   "Alt+c c": {
-    description: "collapse children",
+    description: "Collapse children",
     action() {
       for (let child of this.children.children) {
         child.node.collapse();
@@ -435,7 +479,7 @@ export default {
     },
   },
   "Alt+s x": {
-    description: "expand siblings",
+    description: "Expand siblings",
     action() {
       if (this.parent) {
         for (let sibling of this.parent.children.children) {
@@ -447,7 +491,7 @@ export default {
     },
   },
   "Alt+s c": {
-    description: "collapse siblings",
+    description: "Collapse siblings",
     action() {
       if (this.parent) {
         for (let sibling of this.parent.children.children) {
@@ -459,19 +503,19 @@ export default {
     },
   },
   "Alt+d x": {
-    description: "expand all descendants",
+    description: "Expand all descendants",
     action() {
       this.traverse((n) => n.expand());
     },
   },
   "Alt+d c": {
-    description: "collapse all descendants",
+    description: "Collapse all descendants",
     action() {
       this.traverse((n) => n.collapse());
     },
   },
   "Alt+i x": {
-    description: "expand all nodes on this level",
+    description: "Expand all nodes on this level",
     action() {
       for (let node of getNodesOnLevel(this)) {
         if (node.parent) {
@@ -482,7 +526,7 @@ export default {
     },
   },
   "Alt+i c": {
-    description: "collapse all nodes on this level",
+    description: "Collapse all nodes on this level",
     action() {
       for (let node of getNodesOnLevel(this)) {
         node.collapse();
@@ -490,7 +534,7 @@ export default {
     },
   },
   "Alt+c m": {
-    description: "move attribute children to top",
+    description: "Move attribute children to top",
     action() {
       if (attsToTop(this)) {
         history.add();
@@ -498,7 +542,7 @@ export default {
     },
   },
   "Alt+c s": {
-    description: "sort children",
+    description: "Sort children",
     action() {
       if (sortNode(this)) {
         history.add();
@@ -506,7 +550,7 @@ export default {
     },
   },
   "Alt+c r": {
-    description: "reverse children",
+    description: "Reverse children",
     action() {
       if (reverseNode(this)) {
         history.add();
@@ -514,7 +558,7 @@ export default {
     },
   },
   "Alt+c f": {
-    description: "shuffle children",
+    description: "Shuffle children",
     action() {
       if (shuffleNode(this)) {
         history.add();
@@ -522,7 +566,7 @@ export default {
     },
   },
   "Alt+c f": {
-    description: "flatten children",
+    description: "Flatten children",
     action() {
       if (flattenNode(this)) {
         history.add();
@@ -530,7 +574,7 @@ export default {
     },
   },
   "Alt+c a": {
-    description: "children to array (for JSON export)",
+    description: "Children to array (for JSON export)",
     action() {
       if (nodeToArray(this)) {
         history.add();
@@ -538,7 +582,7 @@ export default {
     },
   },
   "Alt+s m, Alt+y": {
-    description: "move attribute siblings to the top",
+    description: "Move attribute siblings to the top",
     action() {
       if (this.parent && attsToTop(this.parent, this)) {
         history.add();
@@ -546,7 +590,7 @@ export default {
     },
   },
   "Alt+s s": {
-    description: "sort siblings",
+    description: "Sort siblings",
     action() {
       if (this.parent && sortNode(this.parent)) {
         this.focus();
@@ -555,7 +599,7 @@ export default {
     },
   },
   "Alt+s r": {
-    description: "reverse siblings",
+    description: "Reverse siblings",
     action() {
       if (this.parent && reverseNode(this.parent)) {
         this.focus();
@@ -564,7 +608,7 @@ export default {
     },
   },
   "Alt+s f": {
-    description: "shuffle siblings",
+    description: "Shuffle siblings",
     action() {
       if (this.parent && shuffleNode(this.parent)) {
         this.focus();
@@ -573,7 +617,7 @@ export default {
     },
   },
   "Alt+s f": {
-    description: "flatten siblings",
+    description: "Flatten siblings",
     action() {
       if (this.parent && flattenNode(this.parent)) {
         this.focus();
@@ -582,7 +626,7 @@ export default {
     },
   },
   "Alt+s a": {
-    description: "siblings to array (for JSON export)",
+    description: "Siblings to array (for JSON export)",
     action() {
       if (this.parent) {
         if (nodeToArray(this.parent)) {
@@ -605,7 +649,7 @@ export default {
     },
   },
   "Control+g": {
-    description: "clear the current prefix command",
+    description: "Clear the current prefix command",
     action() {
       tree.toast.pop("Prefix command cleared");
     },
