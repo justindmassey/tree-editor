@@ -473,7 +473,7 @@ export default {
       if (this.parent) {
         let prevChildren = Array.from(this.parent.children.children);
         let lastAttribute;
-        for (let child of this.parent.children.children) {
+        for (let child of prevChildren) {
           if (child.node.isAttribute) {
             if (lastAttribute) {
               lastAttribute.insertAfter(child.node);
