@@ -525,30 +525,56 @@ export default {
     description: div(
       div("Attribute table"),
       div("Attributes become rows in the table."),
-      div("Children of attributes are added to the right column"),
+      div("Children of attributes are added to the right column."),
       div(code("$"), "-attributes are ignored."),
       div("The first row is bold unless ", code("$nohead"), " is set."),
-      div("Non-attribute children are rendered below the table"),
+      div("If the attribute ", code("$num"), " is set on the table,"),
+      div("the rows get numbered."),
+      div("If the table has the attribute ", code("$align"), ", "),
+      div("the right column gets aligned accordingly."),
+      div(
+        code("$align"),
+        " can be ",
+        code("left"),
+        ", ",
+        code("right"),
+        " or ",
+        code("center"),
+        ".",
+      ),
+      div("Non-attribute children are rendered below the table."),
     ),
     create(arg) {
+      let numbered = "$num" in this.attributes;
+      let header = !("$nohead" in this._attributes);
+      let align = this._attributes.$align || "";
       let atbl = table().c("atbl");
+      let num = 1;
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          atbl.appendChild(
-            tr(
-              td(attrNode.attrNameText),
-              td(
-                div(attrNode.attributeSubstitution(attrNode._isAttribute[2])),
-                attrNode.childrenWidget,
-              ),
-            ).ctrlClick(attrNode),
-          );
+          let row = tr(
+            td(attrNode.attrNameText),
+            td(
+              div(attrNode.attributeSubstitution(attrNode._isAttribute[2])),
+              attrNode.childrenWidget,
+            ).a("align", align),
+          ).ctrlClick(attrNode);
+          if (numbered) {
+            row.prepend(td(num - header).a("align", "right"));
+          }
+          atbl.appendChild(row);
+          num++;
         }
       }
       let bdy;
       if (atbl.children.length) {
-        if (!("$nohead" in this.attributes)) {
+        if (header) {
           atbl.firstChild.c("bold");
+          atbl.firstChild.lastChild.align = "";
+          if (numbered) {
+            atbl.firstChild.firstChild.textContent = "#";
+            atbl.firstChild.firstChild.align = "center";
+          }
         }
         bdy = div(atbl);
         if (this.childrenWidget.children.length) {
