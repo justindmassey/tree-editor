@@ -428,7 +428,12 @@ export default {
         }
         bdy.appendChild(row);
       }
-      let tbl = table(thead(header), bdy);
+      let tbl;
+      if (this._childNodes.some((n) => n._nameText)) {
+        tbl = table(thead(header), bdy);
+      } else {
+        tbl = table(bdy);
+      }
       if (arg) {
         if (header.children.length) {
           return div(div(arg), tbl.c("indented")).c("tbl");
@@ -464,17 +469,28 @@ export default {
       let longestChild = 0;
       let align = this.attributes.$align || "";
       let numbered = "$numbered" in this._attributes;
+      let hasLabels = this.childNodes.some((n) => n.nameText);
       let numbersRow;
       if (numbered) {
-        numbersRow = tr(
-          td("#")
-            .c("htbl-label")
-            .a("align", "center")
-            .ctrlClick(this._attrNodeMap.$numbered),
-        );
+        if (hasLabels) {
+          numbersRow = tr(
+            td("#")
+              .c("htbl-label")
+              .a("align", "center")
+              .ctrlClick(this._attrNodeMap.$numbered),
+          );
+        } else {
+          numbersRow = tr();
+        }
       }
-      for (let child of this.childNodes) {
-        let row = tr(td(div(child.nameText).c("bold").ctrlClick(child)));
+
+      for (let child of this._childNodes) {
+        let row;
+        if (hasLabels) {
+          row = tr(td(div(child.nameText).c("bold").ctrlClick(child)));
+        } else {
+          row = tr();
+        }
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
@@ -490,7 +506,7 @@ export default {
         tbl.prepend(numbersRow);
       }
       for (let row of tbl.children) {
-        for (let i = row.children.length; i < longestChild + 1; i++) {
+        for (let i = row.children.length; i < longestChild + hasLabels; i++) {
           row.appendChild(td());
         }
       }
