@@ -185,7 +185,7 @@ export default {
       this.tree.toast.pop('Paste mode: "merge"');
     },
   },
-  "Alt+x r": {
+  "Alt+y": {
     description: "Recover last session",
     action() {
       let lastSession = localStorage.getItem("autosave");
@@ -209,12 +209,6 @@ export default {
         "Mousewheel node movement: " +
           { true: "on", false: "off" }[this.tree.wheelNodeMovement],
       );
-    },
-  },
-  "Control+g": {
-    description: "Clear the current prefix command",
-    action() {
-      this.tree.toast.pop("Prefix command cleared");
     },
   },
 };

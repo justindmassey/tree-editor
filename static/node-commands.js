@@ -581,7 +581,7 @@ export default {
       }
     },
   },
-  "Alt+s m, Alt+y": {
+  "Alt+s m, Alt+.": {
     description: "Move attribute siblings to the top",
     action() {
       if (this.parent && attsToTop(this.parent, this)) {
