@@ -965,6 +965,7 @@ export default {
     description: div(
       div("Form"),
       div("Attributes become form fields ", crossRef("Attributes"), "."),
+      div("Attribute children are rendered below the field value"),
       div(code("$"), "-attributes are ignored."),
       div("If the ", code("$type"), "-attribute is set on an attribute"),
       div("then it sets the input type used in the form."),
@@ -1040,8 +1041,16 @@ export default {
           }
 
           form.appendChild(
-            tr(td(attrNode.attrNameText), td(entry)).ctrlClick(attrNode),
+            tr(
+              td(attrNode.attrNameText).a("align", "right"),
+              td(entry),
+            ).ctrlClick(attrNode),
           );
+          if (attrNode.childrenWidget.children.length) {
+            form.appendChild(
+              tr(td(), td(attrNode._childrenWidget).c("frm-field-children")),
+            );
+          }
         }
       }
       if (arg) {

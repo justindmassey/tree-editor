@@ -5,6 +5,7 @@ May 22, 2026
   - Renamed -par (paragraphs widget) to -sec (sections)
   - Renamed -hdr to -lh (large header)
   - Added -gly (glossary) widget
+  - Render attribute children of -frm (form widget) below the field value
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)

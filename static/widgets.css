@@ -51,10 +51,6 @@ input[type="range"] {
   vertical-align: middle;
 }
 
-.frm > table > tr > td:nth-child(1) {
-  text-align: right;
-}
-
 select {
   margin: 1px;
 }
