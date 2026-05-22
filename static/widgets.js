@@ -226,12 +226,12 @@ export default {
       }
     },
   },
-  "-par": {
+  "-sec": {
     description: div(
-      div("Paragraphs"),
+      div("Sections"),
       div(code("argument"), ": a header"),
-      div("Each child becomes a subheader."),
-      div("Grandchildren become the paragraph."),
+      div("Each child becomes a section header."),
+      div("Grandchildren become the section."),
       div("If ", code("$toc"), " is set, a table of contents is added."),
     ),
     create(arg) {
