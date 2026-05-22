@@ -589,24 +589,29 @@ export default class Node {
   }
 
   remove(focus = true) {
+    let focused;
     if (focus) {
       if (this.elem.nextSibling) {
         this.elem.nextSibling.node.focus();
+        focused = this.elem.nextSibling.node;
       } else if (this.elem.previousSibling) {
         this.elem.previousSibling.node.focus();
+        focused = this.elem.previousSibling.node;
       } else if (this.parent) {
         this.parent.focus();
+        focused = this.parent;
       } else {
         this.focus();
+        focused = this;
       }
     }
     if (this.parent) {
       this.elem.remove();
-      return true;
+      return focused || true;
     } else if (this.nameValue != "" || this.children.children.length) {
       this.children.replaceChildren();
       this.nameValue = "";
-      return true;
+      return focused || true;
     }
   }
 

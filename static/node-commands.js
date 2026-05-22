@@ -199,22 +199,45 @@ export default {
   "Control+k": {
     description: "delete this node but keep the children",
     action() {
-      if (this.parent) {
-        if (this.children.children.length) {
-          for (let i = this.children.children.length - 1; i >= 0; i--) {
-            this.insertAfter(this.children.children[i].node);
-          }
-          this.remove(false);
-        } else {
-          this.remove();
+      let toFocus = deleteAndKeepChildren(this);
+      if (toFocus) {
+        toFocus.focus();
+        history.add();
+      }
+    },
+  },
+  "Alt+c k": {
+    description: "delete children but keep grandchildren",
+    action() {
+      if (this.children.children.length) {
+        for (let child of Array.from(this.children.children)) {
+          deleteAndKeepChildren(child.node);
         }
+        this.focus();
         history.add();
-      } else if (this.children.children.length == 1) {
-        this.replaceWith(this.children.children[0].node);
+      }
+    },
+  },
+  "Alt+s k": {
+    description: "delete siblings but keep children",
+    action() {
+      if (this.parent) {
+        let toFocus;
+        for (let child of Array.from(this.parent.children.children)) {
+          if (child.node == this) {
+            toFocus = deleteAndKeepChildren(child.node);
+          } else {
+            deleteAndKeepChildren(child.node);
+          }
+        }
+        toFocus.focus();
         history.add();
-      } else if (this.nameValue) {
-        this.nameValue = "";
-        history.add();
+      } else {
+        let toFocus = deleteAndKeepChildren(this);
+        if (toFocus) {
+          toFocus.focus();
+          history.add();
+        }
       }
     },
   },
@@ -577,6 +600,28 @@ function addParent(node) {
   node.replaceWith(parent, false);
   parent.appendChild(node, false);
   return parent;
+}
+
+function deleteAndKeepChildren(node) {
+  if (node.parent) {
+    if (node.children.children.length) {
+      let firstChild = node.children.firstChild.node;
+      for (let i = node.children.children.length - 1; i >= 0; i--) {
+        node.insertAfter(node.children.children[i].node);
+      }
+      node.remove(false);
+      return firstChild;
+    } else {
+      return node.remove();
+    }
+  } else if (node.children.children.length == 1) {
+    let newRoot = node.children.firstChild.node;
+    node.replaceWith(newRoot);
+    return newRoot;
+  } else if (node.nameValue) {
+    node.nameValue = "";
+    return node;
+  }
 }
 
 function attsToTop(node, focus) {

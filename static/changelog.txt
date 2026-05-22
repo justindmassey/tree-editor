@@ -11,6 +11,7 @@ May 22, 2026
   - Added -sh (small header) widget
   - Added "move attributes to the top" command (Alt+y)
   - Added "add each child/sibling to a new parent" commands (Alt+c p / Alt+s p)
+  - Added "delete children/siblings but keep grandchildren/children" commands (Alt+c k / Alt+s k)
 
 May 21, 2026
   - Added "shuffle children" node command (Alt+c r)
