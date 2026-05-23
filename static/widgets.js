@@ -77,7 +77,7 @@ export default {
         ),
         div(
           "Text within previous ",
-          code("$text"),
+          code("$style"),
           "-matches can be mached by later ones.",
         ),
       ),
