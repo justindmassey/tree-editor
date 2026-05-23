@@ -247,7 +247,7 @@ export default {
       }
     },
   },
-  "-lin": {
+  "-ln": {
     description: div(
       div("Line"),
       div("Renders children as a line separated by ", code("$sep"), "."),
@@ -363,9 +363,9 @@ export default {
       }
     },
   },
-  "-tbl": {
+  "-vt": {
     description: div(
-      div("Table"),
+      div("Vertical Table"),
       div("Each child's name is a table header and its children the column."),
       div(
         "If a child has the attribute ",
@@ -445,7 +445,7 @@ export default {
       }
     },
   },
-  "-htbl": {
+  "-ht": {
     description: div(
       div("Horizontal table"),
       div("children become row labels and their children the rows"),
@@ -521,7 +521,7 @@ export default {
       }
     },
   },
-  "-atbl": {
+  "-at": {
     description: div(
       div("Attribute table"),
       div("Attributes become rows in the table."),
