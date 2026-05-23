@@ -49,7 +49,7 @@ export default {
         div(
           "The value of ",
           code("$text"),
-          " is the text within the widget to be styled",
+          " is found within the widget and styled",
         ),
         div("(matched case insensitively)."),
       ),
@@ -59,7 +59,7 @@ export default {
         "-attribute has an empty value, it matches all text.",
       ),
       div(
-        div("The children of the", code("$text"), "-attributes"),
+        div("The children of the ", code("$text"), "-attributes"),
         div(
           "are the ",
           a("CSS properties").a(
