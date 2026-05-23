@@ -139,6 +139,11 @@ export default class Node {
       this._widget = widgets[m[1]].create
         .bind(this)(this.attributeSubstitution(unescapeArg(m[2])), m[2])
         .ctrlClick(this);
+      if (m[1] == "-st") {
+        this.isStyleTextWidget = true;
+      } else {
+        this.isStyleTextWidget = false;
+      }
     } else {
       let arg = this.attributeSubstitution(unescape(this.nameValue));
       this._widget = widgets["-txt"].create
