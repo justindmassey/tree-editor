@@ -1178,9 +1178,12 @@ export default {
         "-attributes on this widget.",
       ),
       div(
-        "The value of ",
-        code("$text"),
-        " is the text within the widget to be styled.",
+        div(
+          "The value of ",
+          code("$text"),
+          " is the text within the widget to be styled",
+        ),
+        div("(matched case insensitively)."),
       ),
       div(
         div("The children of the", code("$text"), "-attributes"),
