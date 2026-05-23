@@ -1183,10 +1183,20 @@ export default {
         " is the text within the widget to be styled.",
       ),
       div(
-        "The children of the",
-        code("$text"),
-        "-attributes",
-        "are css properties represented as attributes.",
+        div("The children of the", code("$text"), "-attributes"),
+        div(
+          "are ",
+          a("CSS properties").a(
+            "href",
+            "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
+          ),
+          " represented as attributes.",
+        ),
+        div(
+          "Text within previous ",
+          code("$text"),
+          "-matches can be mached by later ones.",
+        ),
       ),
     ),
     create(arg) {
@@ -1239,41 +1249,42 @@ export function updateSelection(ev) {
 }
 
 function styleText(root, text, styles) {
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  const textNodes = [];
+  if (text) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
 
-  while (walker.nextNode()) {
-    textNodes.push(walker.currentNode);
-  }
-
-  const search = text.toLowerCase();
-
-  for (const node of textNodes) {
-    const value = node.nodeValue;
-    const lower = value.toLowerCase();
-    if (!lower.includes(search)) {
-      continue;
-    }
-    const fragment = document.createDocumentFragment();
-    let start = 0;
-    while (true) {
-      const index = lower.indexOf(search, start);
-
-      if (index === -1) {
-        break;
-      }
-      fragment.append(value.slice(start, index));
-      const span = document.createElement("span");
-      span.textContent = value.slice(index, index + text.length);
-      for (const [key, value] of Object.entries(styles)) {
-        span.style[key] = value;
-      }
-      fragment.append(span);
-      start = index + text.length;
+    while (walker.nextNode()) {
+      textNodes.push(walker.currentNode);
     }
 
-    fragment.append(value.slice(start));
+    const search = text.toLowerCase();
 
-    node.replaceWith(fragment);
+    for (const node of textNodes) {
+      const value = node.nodeValue;
+      const lower = value.toLowerCase();
+      if (!lower.includes(search)) {
+        continue;
+      }
+      const fragment = document.createDocumentFragment();
+      let start = 0;
+      while (true) {
+        const index = lower.indexOf(search, start);
+
+        if (index === -1) {
+          break;
+        }
+        fragment.append(value.slice(start, index));
+        const textElem = span(value.slice(index, index + text.length)).c("st");
+        for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = value;
+        }
+        fragment.append(textElem);
+        start = index + text.length;
+      }
+
+      fragment.append(value.slice(start));
+
+      node.replaceWith(fragment);
+    }
   }
 }

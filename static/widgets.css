@@ -156,3 +156,8 @@ img {
 a {
   color: var(--color-1);
 }
+
+.st {
+  display: inline-block;
+  border-radius: 2px;
+}
