@@ -1063,8 +1063,10 @@ export default {
     create(arg) {
       let form = table().c("frm-form");
       let children = this.childrenWidget;
+      let attrChildren = Object.create(null);
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
+          attrChildren[attrNode._isAttribute[1]] = div(attrNode.childrenWidget);
           let entry = input().e("input", () => {
             if (entry.type == "checkbox") {
               attrNode.nameValue =
@@ -1073,7 +1075,9 @@ export default {
               attrNode.nameValue = attrNode._isAttribute[1] + "=" + entry.value;
             }
             children.replaceChildren(...this.childrenWidget.children);
-
+            attrChildren[attrNode._isAttribute[1]].replaceChildren(
+              ...attrNode.childrenWidget.children,
+            );
             history.add(true);
           });
           if (attrNode.attributes.$type) {
@@ -1109,7 +1113,9 @@ export default {
             ).ctrlClick(attrNode),
           );
           if (attrNode.childrenWidget.children.length) {
-            form.appendChild(tr(td(), td(attrNode._childrenWidget)));
+            form.appendChild(
+              tr(td(), td(attrChildren[attrNode._isAttribute[1]])),
+            );
           }
         }
       }
