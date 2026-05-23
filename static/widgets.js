@@ -40,7 +40,7 @@ export default {
       ),
       div(
         "You can set multiple ",
-        code("$text"),
+        code("$style"),
         "-attributes on this widget ",
         crossRef("Attributes"),
         ".",
@@ -48,18 +48,18 @@ export default {
       div(
         div(
           "The value of ",
-          code("$text"),
-          " is found within the widget and styled",
+          code("$style"),
+          " is found within the widget text and styled",
         ),
         div("(matched case insensitively)."),
       ),
       div(
         "If a ",
-        code("$text"),
+        code("$style"),
         "-attribute has an empty value, it matches all text.",
       ),
       div(
-        div("The children of the ", code("$text"), "-attributes"),
+        div("The children of the ", code("$style"), "-attributes"),
         div(
           "are the ",
           a("CSS properties").a(

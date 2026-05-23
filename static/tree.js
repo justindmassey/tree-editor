@@ -244,7 +244,7 @@ class Tree {
     this.root.traverse((node) => {
       if (node.styleWidgetText) {
         for (let attr of node.attrNodes) {
-          if (attr._isAttribute[1] == "$text") {
+          if (attr._isAttribute[1] == "$style") {
             let text = attr.attributeSubstitution(attr._isAttribute[2]);
             styleText(node._widget, text, attr.attributes);
           }

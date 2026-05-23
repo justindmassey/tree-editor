@@ -136,8 +136,10 @@ let help = div(
   div("A backslash can be escaped with a backslash."),
   div("Attribute values need no escaping."),
   div(
-    "If a widget gets or sets an attribute, that attribute starts with a ",
+    "A widget may use special attributes that start with a ",
     code("$"),
+    " ",
+    crossRef("Widgets"),
     ".",
   ),
   div(code("$url"), "-attributes don't affect input size."),
