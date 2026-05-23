@@ -10,7 +10,6 @@ import importTree from "./importers/tree.js";
 import exportToTree from "./exporters/tree.js";
 
 Element.prototype.ctrlClick = function (node) {
-  node._widget = this;
   this.e("mousedown", (ev) => {
     if (ev.ctrlKey) {
       ev.stopPropagation();
