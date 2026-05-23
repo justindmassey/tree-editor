@@ -16,6 +16,9 @@ if (localStorage.getItem("output")) {
 if (localStorage.getItem("showTree") == "") {
   globalCommands["Alt+t"].action.bind(treeEditor)();
 }
+if (localStorage.getItem("centerOutput")) {
+  treeEditor.tree.output.classList.add("centered");
+}
 if (localStorage.getItem("tree") != null) {
   treeEditor.tree.load(localStorage.getItem("tree"));
 } else {

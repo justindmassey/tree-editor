@@ -6,6 +6,7 @@ May 23, 2026
   - Renamed some widgets
   - Moved -st functionality to -txt
   - Removed -cen widget
+  - Added center output command (Alt+x)
 
 May 22, 2026
   - Renamed -par (paragraphs widget) to -sec (sections)

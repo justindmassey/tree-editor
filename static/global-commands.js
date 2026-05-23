@@ -147,7 +147,7 @@ export default {
     },
   },
   "Control+DIGIT": {
-    description: div("Expand only nodes up to level ", code("DIGIT"))
+    description: div("Expand only nodes up to level ", code("DIGIT")),
   },
   "Alt+j": {
     description: "Focus first node containing text (case insensitive)",
@@ -194,6 +194,19 @@ export default {
         this.tree.root.focus();
         history.clear();
         setTimeout(() => history.add(), 0);
+      }
+    },
+  },
+  
+  "Alt+x": {
+    description: "toggle centering of output when the tree is hidden",
+    action() {
+      if (this.tree.tree.classList.contains("hidden")) {
+        this.tree.output.classList.toggle("centered");
+        localStorage.setItem(
+          "centerOutput",
+          this.tree.output.classList.contains("centered") || "",
+        );
       }
     },
   },

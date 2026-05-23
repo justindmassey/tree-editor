@@ -23,6 +23,10 @@
   width: fit-content;
 }
 
+.toast.pop {
+  animation: pop 1500ms ease-out;
+}
+
 @keyframes pop {
   0% {
     opacity: 1;

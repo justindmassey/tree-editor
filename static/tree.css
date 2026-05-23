@@ -51,6 +51,11 @@
   min-height: 0;
 }
 
+.tree-container.hidden + .output.centered {
+  display: flex;
+  justify-content: center;
+}
+
 .output::after {
   content: "";
   display: block;
