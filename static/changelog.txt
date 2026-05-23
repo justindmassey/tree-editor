@@ -5,6 +5,7 @@ May 23, 2026
   - Added -st (style text) widget
   - Renamed some widgets
   - Moved -st functionality to -txt
+  - Removed -cen widget
 
 May 22, 2026
   - Renamed -par (paragraphs widget) to -sec (sections)

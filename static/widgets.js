@@ -1187,22 +1187,6 @@ export default {
       return bg;
     },
   },
-  "-cen": {
-    description: "Center horizontally",
-    create(arg) {
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(div(arg), this._childrenWidget.c("indented"))).c(
-            "cen",
-          );
-        } else {
-          return div(arg).c("cen");
-        }
-      } else {
-        return div(this.childrenWidget).c("cen");
-      }
-    },
-  },
   "-tt": {
     description: div(div("Teletype"), div("uses monospace font")),
     create(arg) {

@@ -148,10 +148,7 @@ img {
   font-family: "IBM Plex Mono", monospace;
 }
 
-.cen {
-  display: flex;
-  justify-content: center;
-}
+
 
 a {
   color: var(--color-1);
@@ -160,4 +157,12 @@ a {
 .st {
   display: inline-block;
   border-radius: 2px;
+}
+
+span {
+  display: inline-block;
+}
+
+.widget {
+  width: fit-content;
 }
