@@ -242,7 +242,7 @@ class Tree {
 
   updateTextStyles() {
     this.root.traverse((node) => {
-      if (node.isStyleTextWidget) {
+      if (node.styleWidgetText) {
         for (let attr of node.attrNodes) {
           if (attr._isAttribute[1] == "$text") {
             let text = attr.attributeSubstitution(attr._isAttribute[2]);

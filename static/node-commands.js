@@ -430,7 +430,10 @@ export default {
     },
   },
   "Alt+c j": {
-    description: "Focus first child containing text (case insensitive)",
+    description: div(
+      div("Focus first child containing text"),
+      div("(case insensitive)"),
+    ),
     action() {
       let find = prompt("Focus first child containing:").toUpperCase();
       for (let child of this.children.children) {
@@ -442,7 +445,10 @@ export default {
     },
   },
   "Alt+s j": {
-    description: "Focus first sibling containing text (case insensitive)",
+    description: div(
+      div("Focus first sibling containing text"),
+      div("(case insensitive)"),
+    ),
     action() {
       if (this.parent) {
         let find = prompt("Focus first sibling containing:").toUpperCase();

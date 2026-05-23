@@ -73,7 +73,9 @@ let help = div(
       crossRef("Global Commands"),
       ".",
     ),
-    div("Any clipboard text containing a newline is treated as a node when pasting."),
+    div(
+      "Any clipboard text containing a newline is treated as a node when pasting.",
+    ),
   ),
   reference(nodeCommands),
   p(
@@ -103,7 +105,7 @@ let help = div(
       code("#"),
       '") ',
       div("are not rendered to the output."),
-      div("Control-click a widget in the output to focus its node."),
+      div(code("Control-Click"), " a widget in the output to focus its node."),
       div(
         'The hash symbol and the dash ("',
         code("-"),
@@ -133,6 +135,11 @@ let help = div(
   ),
   div("A backslash can be escaped with a backslash."),
   div("Attribute values need no escaping."),
+  div(
+    "If a widget gets or sets an attribute, that attribute starts with a ",
+    code("$"),
+    ".",
+  ),
   div(code("$url"), "-attributes don't affect input size."),
 
   section("Attribute Substitution"),

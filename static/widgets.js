@@ -20,6 +20,8 @@ import {
   button,
   img,
   h4,
+  ul,
+  li,
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
@@ -30,11 +32,54 @@ import crossRef from "./cross-ref.js";
 export default {
   "-txt": {
     description: div(
-      div("Indented text"),
+      div("Text"),
       div(
         "If a node doesn't specify a widget, it defaults to ",
         code("-txt"),
         ".",
+      ),
+      div(
+        "You can set multiple ",
+        code("$text"),
+        "-attributes on this widget ",
+        crossRef("Attributes"),
+        ".",
+      ),
+      div(
+        div(
+          "The value of ",
+          code("$text"),
+          " is the text within the widget to be styled",
+        ),
+        div("(matched case insensitively)."),
+      ),
+      div(
+        "If a ",
+        code("$text"),
+        "-attribute has an empty value, it matches all text.",
+      ),
+      div(
+        div("The children of the", code("$text"), "-attributes"),
+        div(
+          "are the ",
+          a("CSS properties").a(
+            "href",
+            "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
+          ),
+          " to be applied to the matched text",
+        ),
+        div(
+          "(for example: ",
+          code("background=yellow"),
+          " or ",
+          code("font-weight=bold"),
+          ").",
+        ),
+        div(
+          "Text within previous ",
+          code("$text"),
+          "-matches can be mached by later ones.",
+        ),
       ),
     ),
     create(arg) {
@@ -52,8 +97,8 @@ export default {
   "-lh": {
     description: div(
       div("Large header"),
-      div("Children are rendered below."),
       div(code("argument"), ": the header text"),
+      div("Children are rendered below."),
     ),
     create(arg) {
       return div(h1(arg), this.childrenWidget).c("hdr");
@@ -62,8 +107,8 @@ export default {
   "-sh": {
     description: div(
       div("Small header"),
-      div("Children are rendered below."),
       div(code("argument"), ": the header text"),
+      div("Children are rendered below."),
     ),
     create(arg) {
       return div(h4(arg), this.childrenWidget).c("hdr");
@@ -947,9 +992,8 @@ export default {
       div("Radio buttons"),
       div("Adds a radio button in front of children."),
       div(
-        "If a child has a ",
-        code("$name"),
-        "-attribute then that's used as ",
+        div("If a child has a ", code("$name"), "-attribute"),
+        "then that's used as ",
         code("$value"),
         " for the widget.",
       ),
@@ -1032,19 +1076,14 @@ export default {
       div("If the ", code("$type"), "-attribute is set on an attribute"),
       div("then it sets the input type used in the form."),
       div(
-        "Valid ",
-        code("$type"),
-        " values are: ",
-        code("date"),
-        ", ",
-        code("checkbox"),
-        ", ",
-        code("number"),
-        ", ",
-        code("range"),
-        " and ",
-        code("color"),
-        ".",
+        div("Valid ", code("$type"), " values are: "),
+        ul(
+          li(code("date")),
+          li(code("checkbox")),
+          li(code("number")),
+          li(code("range")),
+          li(code("color")),
+        ),
       ),
       div(
         code("$min"),
@@ -1056,7 +1095,7 @@ export default {
         code("number"),
         " or ",
         code("range"),
-        " attribute node set the input options.",
+        div(" attribute node set the input options."),
       ),
       div("Non-attribute children are rendered below."),
     ),
@@ -1174,60 +1213,6 @@ export default {
         }
       } else {
         return this.childrenWidget.c("tt");
-      }
-    },
-  },
-  "-st": {
-    description: div(
-      div("Style text"),
-      div(
-        "You can set multiple ",
-        code("$text"),
-        "-attributes on this widget.",
-      ),
-      div(
-        div(
-          "The value of ",
-          code("$text"),
-          " is the text within the widget to be styled",
-        ),
-        div("(matched case insensitively)."),
-      ),
-      div("If a ", code("$text"), "-attribute has an empty value,"),
-      div("it matches all text."),
-      div(
-        div("The children of the", code("$text"), "-attributes"),
-        div(
-          "are the ",
-          a("CSS properties").a(
-            "href",
-            "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
-          ),
-          " to be applied to the matched text",
-        ),
-        div(
-          "(for example: ",
-          code("background=yellow"),
-          " or ",
-          code("font-weight=bold"),
-          ").",
-        ),
-        div(
-          "Text within previous ",
-          code("$text"),
-          "-matches can be mached by later ones.",
-        ),
-      ),
-    ),
-    create(arg) {
-      if (arg) {
-        if (this.childrenWidget.children.length) {
-          return div(div(arg), this._childrenWidget.c("indented"));
-        } else {
-          return div(arg);
-        }
-      } else {
-        return this.childrenWidget;
       }
     },
   },
