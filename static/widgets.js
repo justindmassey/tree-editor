@@ -1185,15 +1185,24 @@ export default {
         ),
         div("(matched case insensitively)."),
       ),
+      div("If a ", code("$text"), "-attribute has an empty value,"),
+      div("it matches all text."),
       div(
         div("The children of the", code("$text"), "-attributes"),
         div(
-          "are ",
+          "are the ",
           a("CSS properties").a(
             "href",
             "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
           ),
-          " represented as attributes.",
+          " to be applied to the matched text",
+        ),
+        div(
+          "(for example: ",
+          code("background=yellow"),
+          " or ",
+          code("font-weight=bold"),
+          ").",
         ),
         div(
           "Text within previous ",
@@ -1252,14 +1261,13 @@ export function updateSelection(ev) {
 }
 
 function styleText(root, text, styles) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
   if (text) {
-    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
-
-    while (walker.nextNode()) {
-      textNodes.push(walker.currentNode);
-    }
-
     const search = text.toLowerCase();
 
     for (const node of textNodes) {
@@ -1288,6 +1296,15 @@ function styleText(root, text, styles) {
       fragment.append(value.slice(start));
 
       node.replaceWith(fragment);
+    }
+  } else {
+    for (const node of textNodes) {
+      const value = node.nodeValue;
+      const textElem = span(value).c("st");
+      for (const [key, value] of Object.entries(styles)) {
+        textElem.style[key] = value;
+        node.replaceWith(textElem);
+      }
     }
   }
 }
