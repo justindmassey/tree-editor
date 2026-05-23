@@ -197,9 +197,9 @@ export default {
       }
     },
   },
-  
+
   "Alt+x": {
-    description: "toggle centering of output when the tree is hidden",
+    description: "Toggle centering of output when the tree is hidden",
     action() {
       if (this.tree.tree.classList.contains("hidden")) {
         this.tree.output.classList.toggle("centered");
