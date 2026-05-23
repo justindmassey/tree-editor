@@ -1169,6 +1169,46 @@ export default {
       }
     },
   },
+  "-st": {
+    description: div(
+      div("Style text"),
+      div(
+        "You can set multiple ",
+        code("$text"),
+        "-attributes on this widget.",
+      ),
+      div(
+        "The value of ",
+        code("$text"),
+        " is the text within the widget to be styled.",
+      ),
+      div(
+        "The children of the",
+        code("$text"),
+        "-attributes",
+        "are css properties represented as attributes.",
+      ),
+    ),
+    create(arg) {
+      let widget;
+      if (arg) {
+        if (this.childrenWidget.children.length) {
+          widget = div(div(arg), this._childrenWidget.c("indented"));
+        } else {
+          widget = div(arg);
+        }
+      } else {
+        widget = this.childrenWidget;
+      }
+      for (let attr of this.attrNodes) {
+        if (attr._isAttribute[1] == "$text") {
+          let text = attr.attributeSubstitution(attr._isAttribute[2]);
+          styleText(widget, text, attr.attributes);
+        }
+      }
+      return widget;
+    },
+  },
 };
 
 export function updateSelection(ev) {
@@ -1195,5 +1235,45 @@ export function updateSelection(ev) {
         }
       }
     }
+  }
+}
+
+function styleText(root, text, styles) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  const search = text.toLowerCase();
+
+  for (const node of textNodes) {
+    const value = node.nodeValue;
+    const lower = value.toLowerCase();
+    if (!lower.includes(search)) {
+      continue;
+    }
+    const fragment = document.createDocumentFragment();
+    let start = 0;
+    while (true) {
+      const index = lower.indexOf(search, start);
+
+      if (index === -1) {
+        break;
+      }
+      fragment.append(value.slice(start, index));
+      const span = document.createElement("span");
+      span.textContent = value.slice(index, index + text.length);
+      for (const [key, value] of Object.entries(styles)) {
+        span.style[key] = value;
+      }
+      fragment.append(span);
+      start = index + text.length;
+    }
+
+    fragment.append(value.slice(start));
+
+    node.replaceWith(fragment);
   }
 }
