@@ -1075,9 +1075,11 @@ export default {
               attrNode.nameValue = attrNode._isAttribute[1] + "=" + entry.value;
             }
             children.replaceChildren(...this.childrenWidget.children);
-            attrChildren[attrNode._isAttribute[1]].replaceChildren(
-              ...attrNode.childrenWidget.children,
-            );
+            for (let att of this._attrNodes) {
+              attrChildren[att._isAttribute[1]].replaceChildren(
+                ...att.childrenWidget.children,
+              );
+            }
             history.add(true);
           });
           if (attrNode.attributes.$type) {
