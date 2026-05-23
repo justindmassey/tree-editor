@@ -136,15 +136,16 @@ export default class Node {
   get widget() {
     let m = this.nameValue.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
-      return widgets[m[1]].create
+      this._widget = widgets[m[1]].create
         .bind(this)(this.attributeSubstitution(unescapeArg(m[2])), m[2])
         .ctrlClick(this);
     } else {
       let arg = this.attributeSubstitution(unescape(this.nameValue));
-      return widgets["-txt"].create
+      this._widget = widgets["-txt"].create
         .bind(this)(arg, this.nameValue)
         .ctrlClick(this);
     }
+    return this._widget;
   }
 
   get childrenWidget() {

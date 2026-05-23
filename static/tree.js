@@ -6,6 +6,7 @@ import Toast from "./lib/toast.js";
 import nodeCommands from "./node-commands.js";
 import typedefMenu from "./typedef-menu.js";
 import lastEditedMenu from "./last-edited-menu.js";
+import { styleText } from "./widgets.js";
 
 class Tree {
   constructor() {
@@ -239,6 +240,20 @@ class Tree {
     }
   }
 
+  updateTextStyles() {
+    this.root.traverse((node) => {
+      let m = node.nameValue.match(Node.widgetRegEx);
+      if (m && m[1] == "-st") {
+        for (let attr of node.attrNodes) {
+          if (attr._isAttribute[1] == "$text") {
+            let text = attr.attributeSubstitution(attr._isAttribute[2]);
+            styleText(node._widget, text, attr.attributes);
+          }
+        }
+      }
+    });
+  }
+
   updateNameSize() {
     let longestName = 0;
     this.root.traverse((n) => {
@@ -269,6 +284,7 @@ class Tree {
     if (!skipUpdateOutput) {
       this.updateOutput();
     }
+    this.updateTextStyles();
     this.updateNameSize();
     if (typedefMenu.menu.open) {
       typedefMenu.update();

@@ -1230,12 +1230,6 @@ export default {
       } else {
         widget = this.childrenWidget;
       }
-      for (let attr of this.attrNodes) {
-        if (attr._isAttribute[1] == "$text") {
-          let text = attr.attributeSubstitution(attr._isAttribute[2]);
-          styleText(widget, text, attr.attributes);
-        }
-      }
       return widget;
     },
   },
@@ -1268,7 +1262,7 @@ export function updateSelection(ev) {
   }
 }
 
-function styleText(root, text, styles) {
+export function styleText(root, text, styles) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const textNodes = [];
 
