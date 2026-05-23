@@ -1220,17 +1220,15 @@ export default {
       ),
     ),
     create(arg) {
-      let widget;
       if (arg) {
         if (this.childrenWidget.children.length) {
-          widget = div(div(arg), this._childrenWidget.c("indented"));
+          return div(div(arg), this._childrenWidget.c("indented"));
         } else {
-          widget = div(arg);
+          return div(arg);
         }
       } else {
-        widget = this.childrenWidget;
+        return this.childrenWidget;
       }
-      return widget;
     },
   },
 };
