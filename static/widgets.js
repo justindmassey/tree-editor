@@ -1104,8 +1104,9 @@ export default {
       let children = this.childrenWidget;
       let attrChildren = Object.create(null);
       for (let attrNode of this.attrNodes) {
+        
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          attrChildren[attrNode._isAttribute[1]] = div(attrNode.childrenWidget);
+          attrChildren[attrNode._isAttribute[1]] = attrNode.childrenWidget;    
           let entry = input().e("input", () => {
             if (entry.type == "checkbox") {
               attrNode.nameValue =
@@ -1115,7 +1116,7 @@ export default {
             }
             children.replaceChildren(...this.childrenWidget.children);
             for (let att of this._attrNodes) {
-              attrChildren[att._isAttribute[1]].replaceChildren(
+              attrChildren[att._isAttribute[1]]?.replaceChildren(
                 ...att.childrenWidget.children,
               );
             }
