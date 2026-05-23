@@ -51,7 +51,7 @@
   min-height: 0;
 }
 
-.tree-container.hidden + .output.centered {
+.tree-container.hidden + .output.centered:not(.hidden) {
   display: flex;
   justify-content: center;
 }
