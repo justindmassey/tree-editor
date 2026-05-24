@@ -733,7 +733,7 @@ export default {
       }
     },
   },
-  "Alt+z": {
+  "Alt+w": {
     description: div("Flash the nodes widget ", crossRef("Widgets")),
     action() {
       if (this.outputs) {
@@ -743,6 +743,27 @@ export default {
           out.classList.add("flash");
         }
       }
+    },
+  },
+  "Alt+x i d": {
+    description: "Insert current date and time",
+    action() {
+      let name = this.nameValue;
+      let date = new Date()
+        .toLocaleString(undefined, {
+          dateStyle: "medium",
+          timeStyle: "short",
+        })
+        .replaceAll(".", "\\.")
+        .replaceAll(":", "\\:");
+      let cursorPos = this.name.selectionStart + date.length;
+      this.nameValue =
+        name.slice(0, this.name.selectionStart) +
+        date +
+        name.slice(this.name.selectionEnd);
+      this.name.selectionStart = cursorPos;
+      this.name.selectionEnd = cursorPos;
+      history.add();
     },
   },
   "Control+g": {

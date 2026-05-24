@@ -6,6 +6,8 @@ May 24, 2026
   - added "flash widget" node command (Alt+z)
   - Made attribute node text color gray
   - Attribute substitution lookup now starts in the current node
+  - Changed some commands
+  - Added "Insert date and time" command (Alt+x i d)
 
 May 23, 2026
   - Added -st (style text) widget

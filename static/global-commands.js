@@ -198,7 +198,7 @@ export default {
     },
   },
 
-  "Alt+x": {
+  "Alt+x c": {
     description: "Toggle centering of output when the tree is hidden",
     action() {
       if (this.tree.tree.classList.contains("hidden")) {
@@ -210,7 +210,7 @@ export default {
       }
     },
   },
-  "Alt+w": {
+  "Alt+x w": {
     description: "Toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;
@@ -222,6 +222,12 @@ export default {
         "Mousewheel node movement: " +
           { true: "on", false: "off" }[this.tree.wheelNodeMovement],
       );
+    },
+  },
+  "Control+g": {
+    description: "Clear the current prefix command",
+    action() {
+      tree.toast.pop("Prefix command cleared");
     },
   },
 };
