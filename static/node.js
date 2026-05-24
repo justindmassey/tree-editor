@@ -9,7 +9,7 @@ import tree from "./tree.js";
 import importTree from "./importers/tree.js";
 import exportToTree from "./exporters/tree.js";
 
-Element.prototype.ctrlClick = function (node) {
+Element.prototype.linkNode = function (node) {
   this.classList.add("out");
   if (!node.outputs) {
     node.outputs = [];
@@ -143,7 +143,7 @@ export default class Node {
     if (m && widgets[m[1]]) {
       this._widget = widgets[m[1]].create
         .bind(this)(this.attributeSubstitution(unescapeArg(m[2])), m[2])
-        .ctrlClick(this);
+        .linkNode(this);
       if (m[1] == "-txt") {
         this.styleWidgetText = true;
       } else {
@@ -154,7 +154,7 @@ export default class Node {
       let arg = this.attributeSubstitution(unescape(this.nameValue));
       this._widget = widgets["-txt"].create
         .bind(this)(arg, this.nameValue)
-        .ctrlClick(this);
+        .linkNode(this);
     }
     return this._widget.c("widget");
   }

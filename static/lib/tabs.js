@@ -20,7 +20,7 @@ export default class Tabs {
       for (let name of tabNames) {
         this.headers[name] = div(name).c("tab");
         if (tabs.get(name).node) {
-          this.headers[name].ctrlClick(tabs.get(name).node);
+          this.headers[name].linkNode(tabs.get(name).node);
         }
         this.headers[name].e("click", (ev) => {
           if (this.tab != name) {

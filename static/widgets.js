@@ -84,12 +84,12 @@ export default {
       let toc = p();
       let showToc = "$toc" in this.attributes;
       for (let child of this.childNodes) {
-        let header = h2(child.nameText).ctrlClick(child);
+        let header = h2(child.nameText).linkNode(child);
         if (showToc) {
           toc.appendChild(
             div(child._nameText)
               .c("anchor")
-              .ctrlClick(child)
+              .linkNode(child)
               .e("click", () => {
                 header.scrollIntoView({
                   behavior: "smooth",
@@ -136,7 +136,7 @@ export default {
       for (let child of this.childNodes) {
         children.appendChild(
           tr(
-            td(prefix).ctrlClick(this._attrNodeMap.$prefix || child),
+            td(prefix).linkNode(this._attrNodeMap.$prefix || child),
             td(child.widget),
           ),
         );
@@ -159,7 +159,7 @@ export default {
       let cnt = 1;
       for (let child of this.childNodes) {
         children.appendChild(
-          tr(td(cnt + ". ").ctrlClick(child), td(child.widget)),
+          tr(td(cnt + ". ").linkNode(child), td(child.widget)),
         );
         cnt++;
       }
@@ -194,9 +194,9 @@ export default {
         } else {
           child.setAttribute("$checked", checkbox.checked);
         }
-        checkbox.ctrlClick(child._attrNodeMap.$checked || child);
+        checkbox.linkNode(child._attrNodeMap.$checked || child);
         checklist.appendChild(
-          div(checkbox.ctrlClick(child), div(child.widget)).c("item"),
+          div(checkbox.linkNode(child), div(child.widget)).c("item"),
         );
       }
       if (arg) {
@@ -233,7 +233,7 @@ export default {
       }
       let toggleButton = span(icon)
         .c("tgl-icon")
-        .ctrlClick(this._attrNodeMap.$expanded || this)
+        .linkNode(this._attrNodeMap.$expanded || this)
         .e("click", () => {
           this.setAttribute("$expanded", !expanded);
           history.add();
@@ -265,7 +265,7 @@ export default {
       for (let child of this.childNodes) {
         line.appendChild(child.widget);
         line.appendChild(
-          (lastSep = div(separator).ctrlClick(this._attrNodeMap.$sep || this)),
+          (lastSep = div(separator).linkNode(this._attrNodeMap.$sep || this)),
         );
       }
       if (lastSep) {
@@ -320,7 +320,7 @@ export default {
         label = this._attributes.$label;
       }
       let btn = button(label || " ")
-        .ctrlClick(this._attrNodeMap.$label || this)
+        .linkNode(this._attrNodeMap.$label || this)
         .e("click", () => {
           tree.load(arg, this.attributeSubstitution(escapedArg));
         });
@@ -396,11 +396,11 @@ export default {
       let tableAlign = this._attributes.$align || "";
       if (numbered) {
         header.appendChild(
-          td("#").a("align", "center").ctrlClick(this._attrNodeMap.$num),
+          td("#").a("align", "center").linkNode(this._attrNodeMap.$num),
         );
       }
       for (let child of this.childNodes) {
-        header.appendChild(td(child.nameText).ctrlClick(child));
+        header.appendChild(td(child.nameText).linkNode(child));
         if (child.childNodes.length > longestChild) {
           longestChild = child._childNodes.length;
         }
@@ -411,7 +411,7 @@ export default {
           row.appendChild(
             td(i + 1)
               .a("align", "right")
-              .ctrlClick(this._attrNodeMap.$num),
+              .linkNode(this._attrNodeMap.$num),
           );
         }
         for (let child of this._childNodes) {
@@ -479,7 +479,7 @@ export default {
             td("#")
               .c("htbl-label")
               .a("align", "center")
-              .ctrlClick(this._attrNodeMap.$num),
+              .linkNode(this._attrNodeMap.$num),
           );
         } else {
           numbersRow = tr();
@@ -489,7 +489,7 @@ export default {
       for (let child of this._childNodes) {
         let row;
         if (hasLabels) {
-          row = tr(td(div(child.nameText).c("bold").ctrlClick(child)));
+          row = tr(td(div(child.nameText).c("bold").linkNode(child)));
         } else {
           row = tr();
         }
@@ -503,7 +503,7 @@ export default {
       }
       if (numbersRow) {
         for (let i = 1; i <= longestChild; i++) {
-          numbersRow.appendChild(td(i).ctrlClick(this._attrNodeMap.$num));
+          numbersRow.appendChild(td(i).linkNode(this._attrNodeMap.$num));
         }
         tbl.prepend(numbersRow);
       }
@@ -560,11 +560,11 @@ export default {
               div(attrNode.attributeSubstitution(attrNode._isAttribute[2])),
               attrNode.childrenWidget,
             ).a("align", align),
-          ).ctrlClick(attrNode);
+          ).linkNode(attrNode);
           if (numbered) {
             row.prepend(
               td(num - header)
-                .ctrlClick(this._attrNodeMap.$num)
+                .linkNode(this._attrNodeMap.$num)
                 .a("align", "right"),
             );
           }
@@ -579,7 +579,7 @@ export default {
           atbl.firstChild.lastChild.align = "";
           if (numbered) {
             atbl.firstChild.firstChild.textContent = "#";
-            atbl.firstChild.firstChild.ctrlClick(this._attrNodeMap.$num);
+            atbl.firstChild.firstChild.linkNode(this._attrNodeMap.$num);
             atbl.firstChild.firstChild.align = "center";
           }
         }
@@ -623,7 +623,7 @@ export default {
                 div(attr.attributeSubstitution(attr._isAttribute[2])),
                 attr.childrenWidget,
               ),
-            ).ctrlClick(attr),
+            ).linkNode(attr),
           );
         }
       }
@@ -661,7 +661,7 @@ export default {
         if (node != this) {
           if (node.nameValue.match(Node.widgetRegEx)) {
             outline.appendChild(
-              div(span(number).c("tt").ctrlClick(node), " ", node.widget).c(
+              div(span(number).c("tt").linkNode(node), " ", node.widget).c(
                 "item",
               ),
             );
@@ -670,7 +670,7 @@ export default {
             outline.appendChild(
               div(div(number).c("tt"), div(node.nameText))
                 .c("item")
-                .ctrlClick(node),
+                .linkNode(node),
             );
           }
         }
@@ -717,9 +717,9 @@ export default {
             let segments = node.getPath(this);
             let lastSegment = segments.pop();
             for (let segment of segments) {
-              path.appendChild(span(segment.name).ctrlClick(segment.node));
+              path.appendChild(span(segment.name).linkNode(segment.node));
               path.appendChild(
-                (lastSep = span(separator).ctrlClick(
+                (lastSep = span(separator).linkNode(
                   this._attrNodeMap.$sep || this,
                 )),
               );
@@ -727,7 +727,7 @@ export default {
             if (lastSegment) {
               path.appendChild(lastSegment.node.widget);
               path.appendChild(
-                (lastSep = span(separator).ctrlClick(
+                (lastSep = span(separator).linkNode(
                   this._attrNodeMap.$sep || this,
                 )),
               );
@@ -739,9 +739,9 @@ export default {
             let path = div().c("lin");
             let lastSep;
             for (let segment of node.getPath(this)) {
-              path.appendChild(span(segment.name).ctrlClick(segment.node));
+              path.appendChild(span(segment.name).linkNode(segment.node));
               path.appendChild(
-                (lastSep = span(separator).ctrlClick(
+                (lastSep = span(separator).linkNode(
                   this._attrNodeMap.$sep || this,
                 )),
               );
@@ -832,7 +832,7 @@ export default {
       }
       let pager = div(
         button("<")
-          .ctrlClick(this._attrNodeMap.$page || this)
+          .linkNode(this._attrNodeMap.$page || this)
           .e("click", () => {
             let page = Number(this._attributes.$page);
             if (this._attributes.$page == "last") {
@@ -854,7 +854,7 @@ export default {
         ),
         " ",
         button(">")
-          .ctrlClick(this._attrNodeMap.$page || this)
+          .linkNode(this._attrNodeMap.$page || this)
           .e("click", () => {
             let page = Number(this._attributes.$page);
             if (this._attributes.$page == "last" && this._childNodes.length) {
@@ -872,7 +872,7 @@ export default {
           }),
       )
         .c("pgs-pager")
-        .ctrlClick(this._attrNodeMap.$page || this);
+        .linkNode(this._attrNodeMap.$page || this);
       if (arg) {
         if (page) {
           return div(arg, " ", pager, div(page).c("indented"));
@@ -929,7 +929,7 @@ export default {
       } else if (this._childNodes.length) {
         this.setAttribute("$value", opt.value);
       }
-      opt.ctrlClick(this._attrNodeMap.$value || this);
+      opt.linkNode(this._attrNodeMap.$value || this);
       let elem;
       if (arg) {
         elem = div(arg, " ", opt);
@@ -982,14 +982,14 @@ export default {
         }
         child.lastNameText = name;
         radioButton.a("value", name);
-        radioButton.ctrlClick(this._attrNodeMap.$value || child);
+        radioButton.linkNode(this._attrNodeMap.$value || child);
         radioButton.e("click", () => {
           this.setAttribute("$value", radioButton.value);
           history.add();
         });
         radioButton.checked = this._attributes.$value == radioButton.value;
         radio.appendChild(
-          div(radioButton.ctrlClick(child), div(child.widget)).c("item"),
+          div(radioButton.linkNode(child), div(child.widget)).c("item"),
         );
       }
       if (arg) {
@@ -1112,7 +1112,7 @@ export default {
             tr(
               td(attrNode.attrNameText).a("align", "right"),
               td(entry),
-            ).ctrlClick(attrNode),
+            ).linkNode(attrNode),
           );
           if (attrNode.childrenWidget.children.length) {
             form.appendChild(
