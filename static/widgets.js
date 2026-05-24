@@ -767,7 +767,7 @@ export default {
     description: div(
       div("Tabs"),
       div("Each child name becomes a tab."),
-      div(code("$tab"), " holds the current tab"),
+      div(code("$selected"), " holds the current tab"),
       div(code("Control+Click"), "ing a child node sets the tab."),
     ),
     create(arg) {
@@ -777,9 +777,9 @@ export default {
         if (
           child.lastNameText != undefined &&
           child.lastNameText != child.nameText &&
-          child.lastNameText == this._attributes.$tab
+          child.lastNameText == this._attributes.$selected
         ) {
-          this.setAttribute("$tab", child._nameText);
+          this.setAttribute("$selected", child._nameText);
         }
         child.lastNameText = child.nameText;
         tabs.set(child.nameText, child.childrenWidget);
@@ -787,15 +787,15 @@ export default {
       }
 
       let initialTab = tabs.keys().next().value;
-      if ("$tab" in this._attributes && tabs.has(this._attributes.$tab)) {
-        initialTab = this._attributes.$tab;
+      if ("$selected" in this._attributes && tabs.has(this._attributes.$selected)) {
+        initialTab = this._attributes.$selected;
       }
       let tabsObj = new Tabs(tabs, initialTab, (tab) => {
-        this.setAttribute("$tab", tab);
+        this.setAttribute("$selected", tab);
         history.add();
       });
-      if (this._childNodes.length && !("$tab" in this._attributes)) {
-        this.setAttribute("$tab", tabsObj.tab);
+      if (this._childNodes.length && !("$selected" in this._attributes)) {
+        this.setAttribute("$selected", tabsObj.tab);
       }
       if (arg) {
         if (tabsObj.elem.firstChild.children.length) {
@@ -891,14 +891,14 @@ export default {
   "-opt": {
     description: div(
       div("Options"),
-      div(code("$value"), ": the selected option"),
+      div(code("$selected"), ": the selected option"),
       div("children become options"),
       div("Children of the selected option are rendered below."),
       div(code("Control+Click"), "ing a child node sets the selection."),
     ),
     create(arg) {
       let opt = select().e("change", () => {
-        this.setAttribute("$value", opt.value);
+        this.setAttribute("$selected", opt.value);
         history.add();
       });
       let optChildren = Object.create(null);
@@ -907,9 +907,9 @@ export default {
         if (
           child.lastNameText != undefined &&
           child.lastNameText != child.nameText &&
-          child.lastNameText == this.attributes.$value
+          child.lastNameText == this.attributes.$selected
         ) {
-          this.setAttribute("$value", child._nameText);
+          this.setAttribute("$selected", child._nameText);
         }
         child.lastNameText = child.nameText;
         if (options[child._nameText]) {
@@ -924,12 +924,12 @@ export default {
           optChildren[child._nameText] = child.childrenWidget;
         }
       }
-      if ("$value" in this.attributes) {
-        opt.value = this._attributes.$value;
+      if ("$selected" in this.attributes) {
+        opt.value = this._attributes.$selected;
       } else if (this._childNodes.length) {
-        this.setAttribute("$value", opt.value);
+        this.setAttribute("$selected", opt.value);
       }
-      opt.linkNode(this._attrNodeMap.$value || this);
+      opt.linkNode(this._attrNodeMap.$selected || this);
       let elem;
       if (arg) {
         elem = div(arg, " ", opt);
@@ -955,7 +955,7 @@ export default {
       div(
         div("If a child has a ", code("$name"), "-attribute"),
         "then that's used as ",
-        code("$value"),
+        code("$selected"),
         " for the widget.",
       ),
       div("Otherwise the child's node name is used."),
@@ -976,18 +976,18 @@ export default {
         if (
           child.lastNameText != undefined &&
           child.lastNameText != name &&
-          child.lastNameText == this._attributes.$value
+          child.lastNameText == this._attributes.$selected
         ) {
-          this.setAttribute("$value", name);
+          this.setAttribute("$selected", name);
         }
         child.lastNameText = name;
         radioButton.a("value", name);
-        radioButton.linkNode(this._attrNodeMap.$value || child);
+        radioButton.linkNode(this._attrNodeMap.$selected || child);
         radioButton.e("click", () => {
-          this.setAttribute("$value", radioButton.value);
+          this.setAttribute("$selected", radioButton.value);
           history.add();
         });
-        radioButton.checked = this._attributes.$value == radioButton.value;
+        radioButton.checked = this._attributes.$selected == radioButton.value;
         radio.appendChild(
           div(radioButton.linkNode(child), div(child.widget)).c("item"),
         );
@@ -1171,10 +1171,10 @@ export function updateSelection(ev) {
     if (m) {
       let widget = m[1];
       if (widget == "-opt") {
-        this.parent.updateAttribute("$value", this.nameText);
+        this.parent.updateAttribute("$selected", this.nameText);
       }
       if (widget == "-tbs") {
-        this.parent.updateAttribute("$tab", this.nameText);
+        this.parent.updateAttribute("$selected", this.nameText);
       }
       if (widget == "-pgs") {
         let page = this.parent.childNodes.indexOf(this) + 1;
@@ -1182,9 +1182,9 @@ export function updateSelection(ev) {
       }
       if (widget == "-rad") {
         if ("$name" in this.attributes) {
-          this.parent.updateAttribute("$value", this._attributes.$name);
+          this.parent.updateAttribute("$selected", this._attributes.$name);
         } else {
-          this.parent.updateAttribute("$value", this.nameText);
+          this.parent.updateAttribute("$selected", this.nameText);
         }
       }
     }
