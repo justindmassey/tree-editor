@@ -707,12 +707,12 @@ export default {
       } else {
         if (this.isAttribute) {
           if (this._isAttribute[1] != "0") {
-            this.nameValue = 0 + "=" + this._isAttribute[2];
+            this._nameValue = 0 + "=" + this._isAttribute[2];
             history.add();
           }
         } else {
           if (this.nameValue != "0") {
-            this.nameValue = 0;
+            this._nameValue = 0;
             history.add();
           }
         }
@@ -757,13 +757,14 @@ export default {
         .replaceAll(".", "\\.")
         .replaceAll(":", "\\:");
       let cursorPos = this.name.selectionStart + date.length;
-      this.nameValue =
+      this._nameValue =
         name.slice(0, this.name.selectionStart) +
         date +
         name.slice(this.name.selectionEnd);
       this.name.selectionStart = cursorPos;
       this.name.selectionEnd = cursorPos;
       history.add();
+      this.updateLastValues();
     },
   },
   "Control+g": {
@@ -893,11 +894,11 @@ function flattenNode(node) {
 function nodeToArray(node) {
   if (!isArray(node)) {
     for (let i = 0; i < node.children.children.length; i++) {
-      let child = node.children.children[i].node;
-      if (child.isAttribute) {
-        child.nameValue = i + "=" + child._isAttribute[2];
+      let child = node.children.children[i];
+      if (child.node.isAttribute) {
+        child.node._nameValue = i + "=" + child.node._isAttribute[2];
       } else {
-        child.nameValue = i;
+        child.node._nameValue = i
       }
     }
     return true;

@@ -250,11 +250,11 @@ export default class Node {
           let lastAttrNode = this.getAttrNode(child.node.lastAttrName);
           if (lastAttrNode && lastAttrNode.sourceOwner == typeName) {
             lastAttrNode.remove(false);
-            this.setAttribute(m[1], lastAttrNode.isAttribute[2], false, false);
+            this.setAttribute(m[1], lastAttrNode.isAttribute[2], false);
           }
         }
         if (!this.getAttrNode(m[1])) {
-          this.setAttribute(m[1], m[2], false, false);
+          this.setAttribute(m[1], m[2], false);
         }
         let attrNode = this.getAttrNode(m[1]);
         if (typeName) {
@@ -358,20 +358,20 @@ export default class Node {
     }
   }
 
-  setAttribute(unescapedName, value = "", focus = false, escape = true) {
-    let name = unescapedName;
-    if (escape) {
-      name = unescapedName.replace(/\\/g, "\\\\").replace(/=/g, "\\=");
-    }
+  setAttribute(name, value = "", focus = false, updateLastValues = true) {
     for (let i = this.children.children.length - 1; i >= 0; i--) {
       let child = this.children.children[i];
       if (child.node.nameValue.startsWith(name + "=")) {
-        child.node.nameValue = name + "=" + value;
+        if (updateLastValues) {
+          child.node.nameValue = name + "=" + value;
+        } else {
+          child.node._nameValue = name + "=" + value;
+        }
         if (this._attributes) {
-          this._attributes[unescapedName] = value;
+          this._attributes[name] = value;
         }
         if (this._attrNodeMap) {
-          this._attrNodeMap[unescapedName] = child.node;
+          this._attrNodeMap[name] = child.node;
         }
         if (focus) {
           child.node.focus();
@@ -382,23 +382,16 @@ export default class Node {
     let attr = new Node(name + "=" + value);
     this.prependChild(attr, focus);
     if (this._attributes) {
-      this._attributes[unescapedName] = value;
+      this._attributes[name] = value;
     }
     if (this._attrNodeMap) {
-      this._attrNodeMap[unescapedName] = attr;
+      this._attrNodeMap[name] = attr;
     }
   }
 
   updateAttribute(name, value) {
     if (this.attributes[name] != value) {
-      let lastName;
-      if (this._attrNodeMap[name]) {
-        lastName = this._attrNodeMap[name].lastName;
-      }
-      this.setAttribute(name, value);
-      if (lastName != undefined) {
-        this._attrNodeMap[name].lastName = lastName;
-      }
+      this.setAttribute(name, value, false, false);
       history.add();
       this._attrNodeMap[name].updateLastValues();
     }
@@ -474,10 +467,17 @@ export default class Node {
   }
 
   set nameValue(newName) {
-    if (newName != this.nameValue) {
+    if (String(newName) != this.nameValue) {
       this.lastModified = new Date();
       this.name.value = newName;
       this.updateLastValues();
+    }
+  }
+
+  set _nameValue(newName) {
+    if (String(newName) != this.nameValue) {
+      this.lastModified = new Date();
+      this.name.value = newName;
     }
   }
 

@@ -227,7 +227,7 @@ export default {
   "Control+g": {
     description: "Clear the current prefix command",
     action() {
-      tree.toast.pop("Prefix command cleared");
+      this.tree.toast.pop("Prefix command cleared");
     },
   },
 };
