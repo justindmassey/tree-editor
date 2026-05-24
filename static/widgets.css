@@ -172,3 +172,17 @@ span {
 .out:not(button, input, select, textarea).flash {
   animation: flash 500ms ease-out;
 }
+
+.out:is(button, input, select, textarea).flash {
+  animation: flash-control 500ms ease-out;
+}
+
+@keyframes flash-control {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
