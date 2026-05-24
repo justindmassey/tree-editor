@@ -952,6 +952,7 @@ export default {
     description: div(
       div("Radio buttons"),
       div("Adds a radio button in front of children."),
+      div(code("$selected"), ": the selected option"),
       div(
         div("If a child has a ", code("$name"), "-attribute"),
         "then that's used as ",
