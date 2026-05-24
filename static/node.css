@@ -39,3 +39,11 @@
 .remove-button {
   width: 14px;
 }
+
+.attribute > input {
+  color: var(--color-1);
+}
+
+.special-attribute input:not(.non-attribute) {
+  color: var(--color-2);
+}

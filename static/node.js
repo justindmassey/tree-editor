@@ -114,8 +114,6 @@ export default class Node {
       })
       .e("click", updateSelection.bind(this));
     registerShortcuts(this.name, nodeCommands, this);
-    this.nameValue = name;
-    this.updateLastValues();
     this.lastModified = new Date();
     this.removeButton = div("✕")
       .a("title", "Remove this node")
@@ -132,6 +130,8 @@ export default class Node {
       this.removeButton,
       this.children,
     ).c("node");
+    this.nameValue = name;
+    this.updateLastValues();
     this.elem.node = this;
     for (let child of children) {
       this.appendChild(child, false);
@@ -484,16 +484,19 @@ export default class Node {
   updateLastValues() {
     this.lastName = this.nameValue;
     let m = this.isAttribute;
+    this.elem.classList.remove("attribute");
+    this.elem.classList.remove("special-attribute");
+    this.name.classList.remove("non-attribute");
     if (m) {
       this.lastAttrName = m[1];
       if (m[1][0] == "$") {
-        this.name.style.color = "var(--color-2)";
+        this.elem.classList.add("special-attribute");
       } else {
-        this.name.style.color = "var(--color-1)";
+        this.elem.classList.add("attribute");
       }
     } else {
+      this.name.classList.add("non-attribute");
       this.lastAttrName = null;
-      this.name.style.color = "";
     }
   }
 
