@@ -1,9 +1,12 @@
 Tree Editor Changelog
 =====================
 
+May 25, 2026
+  - Added "remove widget prefix and $-attributes" node command (Alt+x w)
+
 May 24, 2026
-  - replaced -bg widget with global $bg attribute
-  - added "flash widget" node command (Alt+z)
+  - Replaced -bg widget with global $bg attribute
+  - Added "flash widget" node command (Alt+z)
   - Made attribute node text color gray
   - Attribute substitution lookup now starts in the current node
   - Changed some commands

@@ -745,7 +745,33 @@ export default {
       }
     },
   },
-  "Alt+x i d": {
+  "Alt+x w": {
+    description: div(
+      div("Remove widget prefix ", crossRef("Widgets")),
+      div(" and ", code("$"), "-attributes ", crossRef("Attributes")),
+    ),
+    action() {
+      let prefix = /^-[^\s.:]+\s*/;
+      let changed = false;
+      if (prefix.test(this.nameValue)) {
+        this._nameValue = this.nameValue.replace(prefix, "");
+        this.name.selectionStart = 0;
+        this.name.selectionEnd = 0;
+        changed = true;
+      }
+      for (let att of this.attrNodes) {
+        if (att._isAttribute[1].startsWith("$")) {
+          att.remove(false);
+          changed = true;
+        }
+      }
+      if (changed) {
+        history.add();
+        this.updateLastValues();
+      }
+    },
+  },
+  "Alt+x d": {
     description: "Insert current date and time",
     action() {
       let name = this.nameValue;
@@ -898,7 +924,7 @@ function nodeToArray(node) {
       if (child.node.isAttribute) {
         child.node._nameValue = i + "=" + child.node._isAttribute[2];
       } else {
-        child.node._nameValue = i
+        child.node._nameValue = i;
       }
     }
     return true;

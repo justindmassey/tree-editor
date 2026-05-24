@@ -210,7 +210,7 @@ export default {
       }
     },
   },
-  "Alt+x w": {
+  "Alt+x m": {
     description: "Toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;
