@@ -562,7 +562,7 @@ export default {
             ).a("align", align),
           ).ctrlClick(attrNode);
           if (numbered) {
-            row.prepend(td(num - header).a("align", "right"));
+            row.prepend(td(num - header).ctrlClick(this._attrNodeMap.$num).a("align", "right"));
           }
           atbl.appendChild(row);
           num++;
