@@ -159,7 +159,7 @@ export default {
       let cnt = 1;
       for (let child of this.childNodes) {
         children.appendChild(
-          tr(td(cnt + ". "), td(child.widget)).ctrlClick(child),
+          tr(td(cnt + ". ").ctrlClick(child), td(child.widget)),
         );
         cnt++;
       }
@@ -196,7 +196,7 @@ export default {
         }
         checkbox.ctrlClick(child._attrNodeMap.$checked || child);
         checklist.appendChild(
-          div(checkbox, div(child.widget)).c("item").ctrlClick(child),
+          div(checkbox.ctrlClick(child), div(child.widget)).c("item"),
         );
       }
       if (arg) {
@@ -562,7 +562,11 @@ export default {
             ).a("align", align),
           ).ctrlClick(attrNode);
           if (numbered) {
-            row.prepend(td(num - header).ctrlClick(this._attrNodeMap.$num).a("align", "right"));
+            row.prepend(
+              td(num - header)
+                .ctrlClick(this._attrNodeMap.$num)
+                .a("align", "right"),
+            );
           }
           atbl.appendChild(row);
           num++;
@@ -657,9 +661,9 @@ export default {
         if (node != this) {
           if (node.nameValue.match(Node.widgetRegEx)) {
             outline.appendChild(
-              div(span(number).c("tt"), " ", node.widget)
-                .c("item")
-                .ctrlClick(node),
+              div(span(number).c("tt").ctrlClick(node), " ", node.widget).c(
+                "item",
+              ),
             );
             return 1;
           } else {
@@ -985,7 +989,7 @@ export default {
         });
         radioButton.checked = this._attributes.$value == radioButton.value;
         radio.appendChild(
-          div(radioButton, div(child.widget)).c("item").ctrlClick(child),
+          div(radioButton.ctrlClick(child), div(child.widget)).c("item"),
         );
       }
       if (arg) {

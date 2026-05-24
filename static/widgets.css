@@ -148,8 +148,6 @@ img {
   font-family: "IBM Plex Mono", monospace;
 }
 
-
-
 a {
   color: var(--color-1);
 }
@@ -164,10 +162,13 @@ span {
 }
 
 .widget {
-  border-radius: 2px;
   width: fit-content;
 }
 
-.out.flash {
+.out:not(button, input, select, textarea) {
+  border-radius: 2px;
+}
+
+.out:not(button, input, select, textarea).flash {
   animation: flash 500ms ease-out;
 }
