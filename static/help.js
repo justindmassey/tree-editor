@@ -192,7 +192,7 @@ let help = div(
     code(";ATTRIBUTE_NAME;"),
     " is replaced with that attribute's value.",
   ),
-  div("Attribute lookup starts at the parent and moves upward."),
+  div("Attribute lookup starts in the current node and moves upward."),
   div("Unescaping is performed before attribute substitution."),
 
   section("Types"),

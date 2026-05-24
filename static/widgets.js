@@ -1006,6 +1006,12 @@ export default {
   "-ta": {
     description: div(div("Textarea"), div("Children become lines of text.")),
     create(arg) {
+      let label;
+      {
+        if (arg) {
+          label = div(arg);
+        }
+      }
       let ta = textarea()
         .a("rows", 8)
         .a("cols", 40)
@@ -1013,6 +1019,9 @@ export default {
           this.children.replaceChildren();
           for (let line of ta.value.split("\n")) {
             this.appendChild(new Node(line), false);
+          }
+          if (arg) {
+            label.textContent = this.nameText;
           }
           history.add(true);
         });
@@ -1022,7 +1031,7 @@ export default {
       }
       ta.value = lines.join("\n");
       if (arg) {
-        return div(div(arg), ta.c("indented"));
+        return div(label, ta.c("indented"));
       } else {
         return div(ta);
       }
@@ -1061,6 +1070,10 @@ export default {
       div("Non-attribute children are rendered below."),
     ),
     create(arg) {
+      let label;
+      if (arg) {
+        label = legend(arg);
+      }
       let form = table().c("frm-form");
       let children = this.childrenWidget;
       let attrChildren = Object.create(null);
@@ -1079,6 +1092,9 @@ export default {
               attrChildren[att._isAttribute[1]]?.replaceChildren(
                 ...att.childrenWidget.children,
               );
+            }
+            if (arg) {
+              label.textContent = this.nameText;
             }
             history.add(true);
           });
@@ -1122,7 +1138,7 @@ export default {
         }
       }
       if (arg) {
-        return fieldset(legend(arg), form, children).c("frm");
+        return fieldset(label, form, children).c("frm");
       } else {
         if (form.children.length) {
           return div(form, children).c("frm");
