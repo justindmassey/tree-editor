@@ -227,6 +227,7 @@ class Tree {
   }
 
   updateOutput() {
+    this.root.traverse((n) => (n.outputs = []));
     if (this.root.nameValue.match(Node.typedefRegEx)) {
       this.root.widget;
       this.output.replaceChildren();
@@ -242,11 +243,17 @@ class Tree {
 
   updateTextStyles() {
     this.root.traverse((node) => {
-      if (node.styleWidgetText) {
+      if (node.outputs?.length) {
         for (let attr of node.attrNodes) {
           if (attr._isAttribute[1] == "$style") {
             let text = attr.attributeSubstitution(attr._isAttribute[2]);
-            styleText(node._widget, text, attr.attributes);
+            for (let target of node.outputs) {
+              styleText(target, text, attr.attributes);
+            }
+          } else if (attr._isAttribute[1] == "$bg") {
+            for (let target of node.outputs) {
+              target.style.background = attr._isAttribute[2];
+            }
           }
         }
       }

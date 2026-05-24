@@ -38,49 +38,6 @@ export default {
         code("-txt"),
         ".",
       ),
-      div(
-        "You can set multiple ",
-        code("$style"),
-        "-attributes on this widget ",
-        crossRef("Attributes"),
-        ".",
-      ),
-      div(
-        div(
-          "The value of ",
-          code("$style"),
-          " is found within the widget text and styled",
-        ),
-        div("(matched case insensitively)."),
-      ),
-      div(
-        "If a ",
-        code("$style"),
-        "-attribute has an empty value, it matches all text.",
-      ),
-      div(
-        div("The children of the ", code("$style"), "-attributes"),
-        div(
-          "are the ",
-          a("CSS properties").a(
-            "href",
-            "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
-          ),
-          " to be applied to the matched text",
-        ),
-        div(
-          "(for example: ",
-          code("background=yellow"),
-          " or ",
-          code("font-weight=bold"),
-          ").",
-        ),
-        div(
-          "Text within previous ",
-          code("$style"),
-          "-matches can be mached by later ones.",
-        ),
-      ),
     ),
     create(arg) {
       if (arg) {
@@ -1104,9 +1061,8 @@ export default {
       let children = this.childrenWidget;
       let attrChildren = Object.create(null);
       for (let attrNode of this.attrNodes) {
-        
         if (!attrNode._isAttribute[1].startsWith("$")) {
-          attrChildren[attrNode._isAttribute[1]] = attrNode.childrenWidget;    
+          attrChildren[attrNode._isAttribute[1]] = attrNode.childrenWidget;
           let entry = input().e("input", () => {
             if (entry.type == "checkbox") {
               attrNode.nameValue =
@@ -1170,21 +1126,6 @@ export default {
           return children;
         }
       }
-    },
-  },
-  "-bg": {
-    description: div(
-      div("Background"),
-      div(code("argument"), ": a CSS color"),
-      div("colors the background of children"),
-    ),
-    create(arg) {
-      let bg = this.childrenWidget.c("bg");
-      if (arg) {
-        bg.style.background = arg;
-        bg.style.outline = "1px solid " + arg;
-      }
-      return bg;
     },
   },
   "-tt": {
