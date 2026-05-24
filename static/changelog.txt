@@ -2,7 +2,8 @@ Tree Editor Changelog
 =====================
 
 May 24, 2026
-  - 
+  - replaced -bg widget with global $bg attribute
+  - added "flash widget" node command (Alt+z)
 
 May 23, 2026
   - Added -st (style text) widget
@@ -10,7 +11,6 @@ May 23, 2026
   - Moved -st functionality to -txt
   - Removed -cen widget
   - Added center output command (Alt+x)
-  - replaced -bg widget with global $bg attribute
 
 May 22, 2026
   - Renamed -par (paragraphs widget) to -sec (sections)
