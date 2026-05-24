@@ -486,7 +486,11 @@ export default class Node {
     let m = this.isAttribute;
     if (m) {
       this.lastAttrName = m[1];
-      this.name.style.color = "var(--color-1)";
+      if (m[1][0] == "$") {
+        this.name.style.color = "var(--color-2)";
+      } else {
+        this.name.style.color = "var(--color-1)";
+      }
     } else {
       this.lastAttrName = null;
       this.name.style.color = "";
