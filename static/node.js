@@ -729,18 +729,47 @@ export default class Node {
   }
 }
 
-function unescape(str) {
-  return unescapeArg(
-    str
-      .replace(/^-[^\s.:]+\s*/, "")
-      .replace(/^(?<!\\)\\-/, "-")
-      .replace(/^#/, "")
-      .replace(/^(?<!\\)\\#/, "#")
-      .replace(/^::/, "")
-      .replace(/^(?<!\\)\\::/, "::"),
-  );
+const unescapePrefixes = [
+  {
+    replace: /^-[^\s.:]+\s*/,
+    with: "",
+  },
+  {
+    replace: /^(?<!\\)\\-/,
+    with: "-",
+  },
+  {
+    replace: /^#/,
+    with: "",
+  },
+  {
+    replace: /^(?<!\\)\\#/,
+    with: "#",
+  },
+  {
+    replace: /^::/,
+    with: "",
+  },
+  {
+    replace: /^(?<!\\)\\::/,
+    with: "::",
+  },
+];
+
+function removePrefix(str) {
+  for (let replacement of unescapePrefixes) {
+    if (replacement.replace.test(str)) {
+      return str.replace(replacement.replace, replacement.with);
+    }
+  }
+  return str;
 }
 
+function unescape(str) {
+  return unescapeArg(removePrefix(str));
+}
+
+window.u = unescape;
 function unescapeAttrName(str) {
   return str
     .replaceAll(/(?<!\\)\\=/g, "=")
