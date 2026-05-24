@@ -3,6 +3,7 @@ import tree from "./tree.js";
 import history from "./history.js";
 import { isArray } from "./exporters/json.js";
 import { div, code } from "./lib/elements.js";
+import crossRef from "./cross-ref.js";
 
 export default {
   "Shift+Enter": {
@@ -729,6 +730,18 @@ export default {
       }
       if (flattened) {
         history.add();
+      }
+    },
+  },
+  "Alt+z": {
+    description: div("Flash the nodes widget ", crossRef("Widgets")),
+    action() {
+      if (this.outputs) {
+        for (let out of this.outputs) {
+          out.classList.remove("flash");
+          out.offsetWidth;
+          out.classList.add("flash");
+        }
       }
     },
   },

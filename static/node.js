@@ -10,6 +10,7 @@ import importTree from "./importers/tree.js";
 import exportToTree from "./exporters/tree.js";
 
 Element.prototype.ctrlClick = function (node) {
+  this.classList.add("out");
   if (!node.outputs) {
     node.outputs = [];
   }

@@ -29,7 +29,11 @@ class ExecShortcut {
     if (event.shiftKey) {
       command += "Shift+";
     }
-    command += event.key;
+    if (event.key == " ") {
+      command += "Space";
+    } else {
+      command += event.key;
+    }
     if (command in this.prefixCommands) {
       event.preventDefault();
       this.prefixCommand += command + " ";

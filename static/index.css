@@ -46,7 +46,7 @@ body {
   }
 
   100% {
-    background-color: var(--bg);
+    background-color: transparent;
   }
 }
 
