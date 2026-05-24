@@ -241,7 +241,7 @@ class Tree {
     }
   }
 
-  updateTextStyles() {
+  updateStyles() {
     this.root.traverse((node) => {
       if (node.outputs?.length) {
         for (let attr of node.attrNodes) {
@@ -252,7 +252,9 @@ class Tree {
             }
           } else if (attr._isAttribute[1] == "$bg") {
             for (let target of node.outputs) {
-              target.style.background = attr._isAttribute[2];
+              target.style.background = attr.attributeSubstitution(
+                attr._isAttribute[2],
+              );
             }
           }
         }
@@ -290,7 +292,7 @@ class Tree {
     if (!skipUpdateOutput) {
       this.updateOutput();
     }
-    this.updateTextStyles();
+    this.updateStyles();
     this.updateNameSize();
     if (typedefMenu.menu.open) {
       typedefMenu.update();
