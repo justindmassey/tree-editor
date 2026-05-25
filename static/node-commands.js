@@ -631,7 +631,12 @@ export default {
   "Alt+c g": {
     description: "Group children by attribute",
     action() {
-      if (groupBy(this, prompt("Attribute to group by:"))) {
+      if (
+        groupBy(
+          this,
+          prompt("Attribute to group by:", firstChildAttributeName(this)),
+        )
+      ) {
         history.add();
       }
     },
@@ -689,12 +694,25 @@ export default {
   "Alt+s g": {
     description: "Group siblings by attribute",
     action() {
-      let attrName = prompt("Attribute to group by:");
       if (this.parent) {
-        if (groupBy(this.parent, attrName, true)) {
+        if (
+          groupBy(
+            this.parent,
+            prompt(
+              "Attribute to group by:",
+              firstChildAttributeName(this.parent),
+            ),
+            true,
+          )
+        ) {
           history.add();
         }
       } else {
+        let firstAttrName;
+        if (this.attrNodes.length) {
+          firstAttrName = this._attrNodes[0].attrNameText;
+        }
+        let attrName = prompt("Attribute to group by:", firstAttrName);
         let attrNode;
         for (let att of this.attrNodes) {
           if (att.attrNameText == attrName) {
@@ -1016,4 +1034,12 @@ function getNodesOnLevel(node) {
     }
   });
   return nodesOnLevel;
+}
+
+function firstChildAttributeName(node) {
+  for (let child of node.children.children) {
+    if (child.node.attrNodes.length) {
+      return child.node._attrNodes[0].attrNameText;
+    }
+  }
 }
