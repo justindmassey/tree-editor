@@ -692,7 +692,8 @@ export default {
       let attrName = prompt("Attribute to group by:");
       if (this.parent) {
         if (groupBy(this.parent, attrName)) {
-          (this.focus(), history.add());
+          this.focus();
+          history.add();
         }
       } else {
         let attrNode = this.getAttrNode(attrName);
