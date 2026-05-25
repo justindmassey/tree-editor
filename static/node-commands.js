@@ -885,7 +885,7 @@ function groupBy(node, attrName) {
   let groups = new Map();
   for (let child of node.children.children) {
     for (let attr of child.node.attrNodes) {
-      if (attr._isAttribute[1] == attrName) {
+      if (attr.attrNameText == attrName) {
         let groupName = attr._isAttribute[2];
         if (groups.has(groupName)) {
           groups.get(groupName).push(child.node);
@@ -896,6 +896,7 @@ function groupBy(node, attrName) {
     }
   }
   let lastInserted;
+  let groupNodes = [];
   for (let [groupName, nodes] of groups) {
     let groupNode = new Node(groupName);
     for (let node of nodes) {
@@ -907,6 +908,12 @@ function groupBy(node, attrName) {
       node.prependChild(groupNode, false);
     }
     lastInserted = groupNode;
+    groupNodes.push(groupNode);
+  }
+  for (let groupNode of groupNodes) {
+    if (!groupNode.children.children.length) {
+      groupNode.remove(false);
+    }
   }
   return groups.size;
 }
