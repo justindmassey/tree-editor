@@ -8,7 +8,7 @@ May 25, 2026
 
 May 24, 2026
   - Replaced -bg widget with global $bg attribute
-  - Added "flash widget" node command (Alt+z)
+  - Added "flash widget" node command (Alt+w)
   - Made attribute node text color gray
   - Attribute substitution lookup now starts in the current node
   - Changed some commands
