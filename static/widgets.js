@@ -339,7 +339,8 @@ export default {
       div(code("argument"), ": The menu label"),
       div("Child names are the names of the trees to open"),
       div("Children can have a ", code("$label"), "-attribute"),
-      div("to override the label of the menu item.")
+      div("to override the label of the menu item."),
+      div("Use in ", code("-ln"), " to make a menu bar.")
     ),
     create(arg) {
       let menu = new Menu(div(arg || " "));
@@ -361,7 +362,7 @@ export default {
         );
       }
       if(arg || this._childNodes.length) {
-        return div(menu.elem)
+        return div(menu.elem).c("tm")
       } else {
         return div();
       }

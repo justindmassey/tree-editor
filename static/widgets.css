@@ -38,9 +38,11 @@ input[type="range"] {
 .tabs,
 .frm,
 .crd,
+.tm,
 .frm-form {
   margin-bottom: 2px;
 }
+
 
 .bg {
   width: fit-content;
@@ -155,6 +157,10 @@ a {
 .st {
   display: inline-block;
   border-radius: 2px;
+}
+
+.tm>.menu {
+  margin: 0px;
 }
 
 span {
