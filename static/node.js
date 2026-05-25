@@ -139,6 +139,9 @@ export default class Node {
   }
 
   get widget() {
+    this.traverse((n) => {
+      n.outputs = [];
+    });
     let m = this.nameValue.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
       this._widget = widgets[m[1]].create
