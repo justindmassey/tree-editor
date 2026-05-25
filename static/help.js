@@ -228,6 +228,7 @@ let help = div(
   div(
     "Duplicate nodes in a type definition are ignored after the first occurrence.",
   ),
+  div("Type names can't include colons or dots."),
 
   section("Node Names"),
   div("A node's name is the text in its input field."),
