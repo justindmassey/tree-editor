@@ -164,22 +164,22 @@ export default {
       });
     },
   },
-  "Alt+e": {
+  "Alt+x r": {
     description: div("Set paste mode to ", code("replace"), " (exchange)"),
     action() {
       this.tree.pasteMode = "replace";
       this.tree.toast.pop('Paste mode: "replace"');
     },
   },
-  "Alt++": {
+  "Alt+x a": {
     description: div("Set paste mode to ", code("append")),
     action() {
       this.tree.pasteMode = "append";
       this.tree.toast.pop('Paste mode: "append"');
     },
   },
-  "Alt+u": {
-    description: div("Set paste mode to ", code("merge"), " (unify)"),
+  "Alt+x m": {
+    description: div("Set paste mode to ", code("merge")),
     action() {
       this.tree.pasteMode = "merge";
       this.tree.toast.pop('Paste mode: "merge"');
@@ -210,7 +210,7 @@ export default {
       }
     },
   },
-  "Alt+x m": {
+  "Alt+x s": {
     description: "Toggle mousewheel node movement",
     action() {
       this.tree.wheelNodeMovement = !this.tree.wheelNodeMovement;

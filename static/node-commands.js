@@ -394,7 +394,7 @@ export default {
       }
     },
   },
-  "Control+u": {
+  "Alt+u": {
     description: "Focus the parent node",
     action() {
       if (this.parent) {
