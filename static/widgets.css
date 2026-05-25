@@ -165,16 +165,30 @@ span {
   width: fit-content;
 }
 
+.out {
+  --flash-to: transparent;
+}
+
 .out:not(button, input, select, textarea) {
   border-radius: 2px;
 }
 
 .out:not(button, input, select, textarea).flash {
-  animation: flash 500ms ease-out;
+  animation: flash 800ms ease-out;
 }
 
 .out:is(button, input, select, textarea).flash {
-  animation: flash-control 500ms ease-out;
+  animation: flash-control 800ms ease-out;
+}
+
+@keyframes flash {
+  0% {
+    background-color: var(--color-2);
+  }
+
+  100% {
+    background-color: var(--flash-to);
+  }
 }
 
 @keyframes flash-control {

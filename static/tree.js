@@ -78,7 +78,7 @@ class Tree {
         this.root.focus();
         this.scrollToTop();
         history.add();
-        this.toast.pop(`The tree "${name}" was not found`)
+        this.toast.pop(`The tree "${name}" was not found`);
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();
@@ -255,6 +255,7 @@ class Tree {
               target.style.background = attr.attributeSubstitution(
                 attr._isAttribute[2],
               );
+              target.style.setProperty("--flash-to", attr._isAttribute[2]);
             }
           } else if (attr._isAttribute[1] == "$ol") {
             for (let target of node.outputs) {

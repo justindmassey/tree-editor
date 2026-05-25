@@ -40,16 +40,6 @@ body {
   background: var(--color-3);
 }
 
-@keyframes flash {
-  0% {
-    background-color: var(--color-2);
-  }
-
-  100% {
-    background-color: transparent;
-  }
-}
-
 body.flash {
   animation: flash 200ms ease-out;
 }
