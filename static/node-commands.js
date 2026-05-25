@@ -691,8 +691,7 @@ export default {
     action() {
       let attrName = prompt("Attribute to group by:");
       if (this.parent) {
-        if (groupBy(this.parent, attrName)) {
-          this.focus();
+        if (groupBy(this.parent, attrName, true)) {
           history.add();
         }
       } else {
@@ -886,7 +885,7 @@ function attsToTop(node, focus) {
   }
 }
 
-function groupBy(node, attrName) {
+function groupBy(node, attrName, focus) {
   let groups = new Map();
   for (let child of node.children.children) {
     for (let attr of child.node.attrNodes) {
@@ -902,9 +901,13 @@ function groupBy(node, attrName) {
   }
   let lastInserted;
   let groupNodes = [];
+  let toFocus;
   for (let [groupName, nodes] of groups) {
     let groupNode = new Node(groupName);
     for (let node of nodes) {
+      if (node == tree.activeNode) {
+        toFocus = groupNode;
+      }
       groupNode.appendChild(node, false);
     }
     if (lastInserted) {
@@ -919,6 +922,9 @@ function groupBy(node, attrName) {
     if (!groupNode.children.children.length) {
       groupNode.remove(false);
     }
+  }
+  if (focus && toFocus) {
+    toFocus.focus();
   }
   return groups.size;
 }
