@@ -787,7 +787,10 @@ export default {
       }
 
       let initialTab = tabs.keys().next().value;
-      if ("$selected" in this._attributes && tabs.has(this._attributes.$selected)) {
+      if (
+        "$selected" in this._attributes &&
+        tabs.has(this._attributes.$selected)
+      ) {
         initialTab = this._attributes.$selected;
       }
       let tabsObj = new Tabs(tabs, initialTab, (tab) => {
@@ -1235,8 +1238,8 @@ export function styleText(root, text, styles) {
       const textElem = span(value).c("st");
       for (const [key, value] of Object.entries(styles)) {
         textElem.style[key] = value;
-        node.replaceWith(textElem);
       }
+      node.replaceWith(textElem);
     }
   }
 }

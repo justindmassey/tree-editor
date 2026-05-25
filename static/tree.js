@@ -227,7 +227,6 @@ class Tree {
   }
 
   updateOutput() {
-    this.root.traverse((n) => (n.outputs = []));
     if (this.root.nameValue.match(Node.typedefRegEx)) {
       this.root.widget;
       this.output.replaceChildren();
@@ -258,9 +257,8 @@ class Tree {
             }
           } else if (attr._isAttribute[1] == "$ol") {
             for (let target of node.outputs) {
-              target.style.outline = "1px solid " + attr.attributeSubstitution(
-                attr._isAttribute[2],
-              );
+              target.style.outline =
+                "1px solid " + attr.attributeSubstitution(attr._isAttribute[2]);
             }
           }
         }
@@ -294,6 +292,9 @@ class Tree {
   }
 
   update(skipUpdateOutput) {
+    this.root.traverse((n) => {
+      n.outputs = [];
+    });
     this.updateTypes();
     if (!skipUpdateOutput) {
       this.updateOutput();

@@ -2,7 +2,6 @@ function exportNode(node) {
   if (node.children.children.length || !node.parent) {
     let n;
     try {
-      console.log(node.nameValue);
       n = document.createElement(node.nameValue);
     } catch (e) {
       alert(`Invalid tagname: "${node.nameValue}"`);

@@ -278,7 +278,3 @@ let help = div(
 toc.appendChild(div(a("Changelog").a("href", "./changelog.txt")));
 
 export default help;
-
-window.logDate = () => {
-  console.log(new Date().toLocaleString(undefined, { dateStyle: "medium" }));
-};
