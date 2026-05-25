@@ -696,8 +696,13 @@ export default {
           history.add();
         }
       } else {
-        let attrNode = this.getAttrNode(attrName);
-        if (attrNode && !attrNode._isAttribute[1].startsWith("#")) {
+        let attrNode;
+        for (let att of this.attrNodes) {
+          if (att.attrNameText == attrName) {
+            attrNode = att;
+          }
+        }
+        if (attrNode) {
           let newNode = new Node(attrNode._isAttribute[2]);
           this.replaceWith(newNode);
           newNode.appendChild(this, false);
