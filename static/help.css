@@ -27,6 +27,7 @@ code {
 }
 
 .anchor {
+  width: fit-content;
   color: var(--color-1);
   text-decoration: underline;
   cursor: pointer;
