@@ -77,8 +77,8 @@ class Tree {
         this.root = new Node(escapedName);
         this.root.focus();
         this.scrollToTop();
-        history.clear();
         history.add();
+        this.toast.pop(`The tree "${name}" was not found`)
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();

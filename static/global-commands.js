@@ -123,6 +123,8 @@ export default {
             }
             flash();
             this.tree.toast.pop(`Deleted "${name}"`);
+          } else {
+            this.tree.toast.pop(`The tree "${name}" was not found`)
           }
         });
       }
