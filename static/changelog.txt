@@ -4,6 +4,7 @@ Tree Editor Changelog
 May 25, 2026
   - Added "remove widget prefix and $-attributes" node command (Alt+x w)
   - Renamed $tab and $value to $selected
+  - Added "group children/siblings by attribute" node commands (Alt+c g / Alt+s g)
 
 May 24, 2026
   - Replaced -bg widget with global $bg attribute

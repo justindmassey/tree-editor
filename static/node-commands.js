@@ -628,6 +628,14 @@ export default {
       }
     },
   },
+  "Alt+c g": {
+    description: "Group children by attribute",
+    action() {
+      if (groupBy(this, prompt("Attribute to group by:"))) {
+        history.add();
+      }
+    },
+  },
   "Alt+c y": {
     description: "Shuffle children",
     action() {
@@ -675,6 +683,25 @@ export default {
       if (this.parent && reverseNode(this.parent)) {
         this.focus();
         history.add();
+      }
+    },
+  },
+  "Alt+s g": {
+    description: "Group siblings by attribute",
+    action() {
+      let attrName = prompt("Attribute to group by:");
+      if (this.parent) {
+        if (groupBy(this.parent, attrName)) {
+          (this.focus(), history.add());
+        }
+      } else {
+        let attrNode = this.getAttrNode(attrName);
+        if (attrNode && !attrNode._isAttribute[1].startsWith("#")) {
+          let newNode = new Node(attrNode._isAttribute[2]);
+          this.replaceWith(newNode);
+          newNode.appendChild(this, false);
+          history.add();
+        }
       }
     },
   },
@@ -851,6 +878,36 @@ function attsToTop(node, focus) {
       return true;
     }
   }
+}
+
+function groupBy(node, attrName) {
+  let groups = new Map();
+  for (let child of node.children.children) {
+    for (let attr of child.node.attrNodes) {
+      if (attr._isAttribute[1] == attrName) {
+        let groupName = attr._isAttribute[2];
+        if (groups.has(groupName)) {
+          groups.get(groupName).push(child.node);
+        } else {
+          groups.set(groupName, [child.node]);
+        }
+      }
+    }
+  }
+  let lastInserted;
+  for (let [groupName, nodes] of groups) {
+    let groupNode = new Node(groupName);
+    for (let node of nodes) {
+      groupNode.appendChild(node, false);
+    }
+    if (lastInserted) {
+      lastInserted.insertAfter(groupNode, false);
+    } else {
+      node.prependChild(groupNode, false);
+    }
+    lastInserted = groupNode;
+  }
+  return groups.size;
 }
 
 function sortNode(node) {
