@@ -8,7 +8,15 @@ export default class Menu {
       .e("click", () => {
         this.items.classList.add("hidden");
       });
-    this.elem = div(div(label).c("menu-label"), this.items)
+    this.elem = div(
+      div(label)
+        .e("click", (ev) => {
+          this.items.classList.toggle("hidden");
+          ev.stopPropagation();
+        })
+        .c("menu-label"),
+      this.items,
+    )
       .c("menu")
       .e("mouseenter", () => {
         this.items.classList.remove("hidden");

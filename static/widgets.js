@@ -25,6 +25,7 @@ import {
 } from "./lib/elements.js";
 import history from "./history.js";
 import Tabs from "./lib/tabs.js";
+import Menu from "./lib/menu.js";
 import Node from "./node.js";
 import tree from "./tree.js";
 import crossRef from "./cross-ref.js";
@@ -328,6 +329,41 @@ export default {
         return div(div(btn), this.childrenWidget.c("indented"));
       } else {
         return div(btn);
+      }
+    },
+  },
+  "-tm": {
+    description: div(
+      div("Tree menu"),
+      div("A Menu of trees that can be opened."),
+      div(code("argument"), ": The menu label"),
+      div("Child names are the names of the trees to open"),
+      div("Children can have a ", code("$label"), "-attribute"),
+      div("to override the label of the menu item.")
+    ),
+    create(arg) {
+      let menu = new Menu(div(arg || " "));
+      for (let child of this.childNodes) {
+        let treeName = child.nameText;
+        let unescapedTreeName = child.attributeSubstitution(child.nameValue);
+        let label;
+        if ("$label" in child.attributes) {
+          label = child.attributes.$label;
+        } else {
+          label = treeName;
+        }
+        menu.addItem(
+          div(label || " ")
+            .linkNode(child)
+            .e("click", () => {
+              tree.load(treeName, unescapedTreeName);
+            }),
+        );
+      }
+      if(arg || this._childNodes.length) {
+        return div(menu.elem)
+      } else {
+        return div();
       }
     },
   },

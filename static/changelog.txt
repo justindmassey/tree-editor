@@ -7,6 +7,7 @@ May 25, 2026
   - Added "group children/siblings by attribute" node commands (Alt+c g / Alt+s g)
   - Added $ol (outline) global attribute
   - Renamed $style to $st (style text)
+  - Added -tm (tree menu) widget
 
 May 24, 2026
   - Replaced -bg widget with global $bg attribute
