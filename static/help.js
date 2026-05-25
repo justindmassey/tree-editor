@@ -122,45 +122,62 @@ let help = div(
       ".",
     ),
     div("The ", code("argument"), " is a label unless stated otherwise."),
-    div("You can set multiple ", code("$style"), "-attributes a widget."),
-    div(
+    p(
       div(
-        "The value of ",
-        code("$style"),
-        " is found within the widget text and styled",
+        "You can set multiple ",
+        code("$st"),
+        "-attributes (style text) on a widget.",
       ),
-      div("(matched case insensitively)."),
-    ),
-    div(
-      "If a ",
-      code("$style"),
-      "-attribute has an empty value, it matches all text.",
-    ),
-    div(
-      div("The children of the ", code("$style"), "-attributes"),
       div(
-        "are the ",
-        a("CSS properties").a(
-          "href",
-          "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
+        div(
+          "The value of ",
+          code("$st"),
+          " is found within the widget text and styled",
         ),
-        " to be applied to the matched text",
+        div("(matched case insensitively)."),
       ),
       div(
-        "(for example: ",
-        code("background=yellow"),
-        " or ",
-        code("font-weight=bold"),
-        ").",
+        "If a ",
+        code("$st"),
+        "-attribute has an empty value, it matches all text.",
       ),
       div(
-        "If ",
-        code("$bg"),
-        " is set to a ",
-        a("CSS color").a(
-          "href",
-          "https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value",
-        ), ", it sets the widgets background color in the output."
+        div("The children of the ", code("$st"), "-attributes"),
+        div(
+          "are the ",
+          a("CSS properties").a(
+            "href",
+            "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties",
+          ),
+          " to be applied to the matched text",
+        ),
+        div(
+          "(for example: ",
+          code("background=yellow"),
+          " or ",
+          code("font-weight=bold"),
+          ").",
+        ),
+        div(
+          "If ",
+          code("$bg"),
+          " is set to a ",
+          a("CSS color").a(
+            "href",
+            "https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value",
+          ),
+          ", it sets the widgets background color in the output.",
+        ),
+        div(
+          "If ",
+          code("$ol"),
+          " is set to a ",
+          a("CSS color").a(
+            "href",
+            "https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value",
+          ),
+          ", it sets the widgets outline color in the output.",
+        ),
       ),
     ),
   ),

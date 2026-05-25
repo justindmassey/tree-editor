@@ -245,7 +245,7 @@ class Tree {
     this.root.traverse((node) => {
       if (node.outputs?.length) {
         for (let attr of node.attrNodes) {
-          if (attr._isAttribute[1] == "$style") {
+          if (attr._isAttribute[1] == "$st") {
             let text = attr.attributeSubstitution(attr._isAttribute[2]);
             for (let target of node.outputs) {
               styleText(target, text, attr.attributes);
@@ -253,6 +253,12 @@ class Tree {
           } else if (attr._isAttribute[1] == "$bg") {
             for (let target of node.outputs) {
               target.style.background = attr.attributeSubstitution(
+                attr._isAttribute[2],
+              );
+            }
+          } else if (attr._isAttribute[1] == "$ol") {
+            for (let target of node.outputs) {
+              target.style.outline = "1px solid " + attr.attributeSubstitution(
                 attr._isAttribute[2],
               );
             }
