@@ -67,10 +67,10 @@ class Tree {
     );
     window.addEventListener("beforeunload", () => this.autosave());
     window.addEventListener("popstate", (ev) => {
-      this.autosave();
       if (ev.state && "tree" in ev.state) {
         this.load(ev.state.tree, ev.state.tree, false);
       } else {
+        this.autosave();
         history.clear();
         this.root.remove();
         history.add();
