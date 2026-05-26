@@ -1,6 +1,6 @@
 import Node from "./node.js";
 import { div, span } from "./lib/elements.js";
-import history from "./history.js";
+import treeHistory from "./history.js";
 import { get } from "./lib/ajax.js";
 import Toast from "./lib/toast.js";
 import nodeCommands from "./node-commands.js";
@@ -62,30 +62,37 @@ class Tree {
         this.elem.classList.add("default-cursor");
       }
     });
-
     window.addEventListener("keyup", (ev) =>
       this.elem.classList.remove("default-cursor"),
     );
     window.addEventListener("beforeunload", () => {
       localStorage.setItem("autosave", JSON.stringify(this.root.serialize()));
     });
+    window.addEventListener("popstate", (ev) => {
+      if (ev.state?.tree) {
+        this.load(ev.state.tree, ev.state.tree, false);
+      }
+    });
   }
 
-  load(name, escapedName = name) {
+  load(name, escapedName = name, pushHistory = true) {
     get("/tree?name=" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
         this.root = new Node(escapedName);
         this.root.focus();
         this.scrollToTop();
-        history.add();
+        treeHistory.add();
         this.toast.pop(`The tree "${name}" was not found`);
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();
         this.scrollToTop();
-        history.clear();
-        setTimeout(() => history.add(), 0);
+        treeHistory.clear();
+        setTimeout(() => treeHistory.add(), 0);
         localStorage.setItem("tree", name);
+        if (pushHistory) {
+          history.pushState({ tree: name }, "", "");
+        }
       }
     });
   }

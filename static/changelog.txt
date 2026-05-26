@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+May 26, 2026
+  - Loading trees adds to browser history now
+
 May 25, 2026
   - Added "remove widget prefix and $-attributes" node command (Alt+x w)
   - Renamed $tab and $value to $selected
