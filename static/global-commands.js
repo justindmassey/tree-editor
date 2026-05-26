@@ -65,12 +65,17 @@ export default {
     },
   },
   "Alt+k": {
-    description: "Clear tree",
+    description: "New tree",
     action() {
-      if (this.tree.root.remove()) {
-        history.add();
-      }
+      this.tree.autosave();
+      history.clear();
+      this.tree.root.remove();
+      history.add();
       this.tree.scrollToTop();
+      localStorage.removeItem("tree");
+      let url = new URL(location);
+      url.searchParams.delete("tree");
+      window.history.pushState({}, "", url);
     },
   },
   "Control+s": {
