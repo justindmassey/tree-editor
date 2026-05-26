@@ -93,12 +93,7 @@ export default {
           } else {
             localStorage.setItem("tree", name);
             let url = new URL(location);
-
-            if (name) {
-              url.searchParams.set("tree", name);
-            } else {
-              url.searchParams.delete("tree");
-            }
+            url.searchParams.set("tree", name);
             window.history.replaceState({ tree: name }, "", url);
             treeMenu.update();
             this.tree.toast.pop(`Saved "${name}"`);
