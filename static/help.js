@@ -46,7 +46,7 @@ let help = div(
   h1("Tree Editor"),
   toc,
 
-  section("Global Commands"),
+  section("Editor Commands"),
   reference(globalCommands),
   p(
     div(
@@ -70,7 +70,7 @@ let help = div(
     div("You can copy or cut a whole node when there’s no text selected."),
     div(
       "How a node is pasted depends on paste mode ",
-      crossRef("Global Commands"),
+      crossRef("Editor Commands"),
       ".",
     ),
     div(
@@ -81,7 +81,7 @@ let help = div(
   p(
     div(
       "If mousewheel node movement is turned on ",
-      crossRef("Global Commands"),
+      crossRef("Editor Commands"),
     ),
     div(
       "a node can be moved up or down with ",
