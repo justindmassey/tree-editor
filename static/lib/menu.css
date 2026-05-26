@@ -44,11 +44,11 @@
   display: block;
 }
 
-.menu-items:first-child {
+.menu-items > *:first-child {
   border-top: none;
 }
 
-.menu-items:last-child {
+.menu-items > *:last-child {
   border-bottom: none;
 }
 
