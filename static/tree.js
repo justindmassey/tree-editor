@@ -75,7 +75,7 @@ class Tree {
         history.clear();
         this.root.remove();
         history.add();
-        this.tree.scrollToTop();
+        this.scrollToTop();
       }
     });
   }
