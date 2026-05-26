@@ -71,6 +71,7 @@ class Tree {
         this.load(ev.state.tree, ev.state.tree, false);
       } else {
         this.autosave();
+        localStorage.removeItem("tree");
         history.clear();
         this.root.remove();
         history.add();
