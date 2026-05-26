@@ -15,9 +15,9 @@ class LastEditedMenu {
     tree.root.traverse((node) => {
       nodes.push(node);
     });
-    for (let node of nodes
-      .toSorted((a, b) => b.lastModified - a.lastModified)
-      .slice(0, 16)) {
+    for (let node of nodes.toSorted(
+      (a, b) => b.lastModified - a.lastModified,
+    )) {
       this.menu.addItem(
         div(node.nameValue || " ")
           .c("tt")
