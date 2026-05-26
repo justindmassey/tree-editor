@@ -106,6 +106,7 @@ export default {
   "Control+Alt+d": {
     description: "Delete this tree",
     action() {
+      this.tree.autosave();
       let name = this.tree.name;
       if (
         !(

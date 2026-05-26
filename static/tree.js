@@ -65,11 +65,10 @@ class Tree {
     window.addEventListener("keyup", (ev) =>
       this.elem.classList.remove("default-cursor"),
     );
-    window.addEventListener("beforeunload", () => {
-      localStorage.setItem("autosave", JSON.stringify(this.root.serialize()));
-    });
+    window.addEventListener("beforeunload", () => this.autosave());
     window.addEventListener("popstate", (ev) => {
-      if (ev.state && ("tree" in ev.state)) {
+      this.autosave();
+      if (ev.state && "tree" in ev.state) {
         this.load(ev.state.tree, ev.state.tree, false);
       } else {
         history.clear();
@@ -81,6 +80,7 @@ class Tree {
   }
 
   load(name, escapedName = name, pushHistory = true) {
+    this.autosave();
     get("/tree?name=" + encodeURIComponent(name)).then((data) => {
       if (data.error) {
         this.root = new Node(escapedName);
@@ -102,6 +102,10 @@ class Tree {
         }
       }
     });
+  }
+
+  autosave() {
+    localStorage.setItem("autosave", JSON.stringify(this.root.serialize()));
   }
 
   set root(node) {
