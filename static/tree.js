@@ -69,7 +69,7 @@ class Tree {
       localStorage.setItem("autosave", JSON.stringify(this.root.serialize()));
     });
     window.addEventListener("popstate", (ev) => {
-      if (ev.state?.tree) {
+      if (ev.state && ("tree" in ev.state)) {
         this.load(ev.state.tree, ev.state.tree, false);
       } else {
         history.clear();

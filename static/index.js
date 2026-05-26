@@ -21,7 +21,7 @@ if (localStorage.getItem("centerOutput")) {
 }
 
 let treeName = new URL(location).searchParams.get("tree");
-if (treeName) {
+if (treeName != null) {
   treeEditor.tree.load(treeName, treeName, false);
   window.history.replaceState({ tree: treeName }, "", location.href);
 } else if (localStorage.getItem("tree") != null) {
