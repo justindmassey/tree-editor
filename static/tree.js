@@ -1,6 +1,6 @@
 import Node from "./node.js";
 import { div, span } from "./lib/elements.js";
-import treeHistory from "./history.js";
+import history from "./history.js";
 import { get } from "./lib/ajax.js";
 import Toast from "./lib/toast.js";
 import nodeCommands from "./node-commands.js";
@@ -81,17 +81,19 @@ class Tree {
         this.root = new Node(escapedName);
         this.root.focus();
         this.scrollToTop();
-        treeHistory.add();
+        history.add();
         this.toast.pop(`The tree "${name}" was not found`);
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();
         this.scrollToTop();
-        treeHistory.clear();
-        setTimeout(() => treeHistory.add(), 0);
+        history.clear();
+        setTimeout(() => history.add(), 0);
         localStorage.setItem("tree", name);
         if (pushHistory) {
-          history.pushState({ tree: name }, "", "");
+          let url = new URL(location);
+          url.searchParams.set("tree", name);
+          window.history.pushState({ tree: name }, "", url);
         }
       }
     });

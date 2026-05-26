@@ -92,6 +92,14 @@ export default {
             alert(res.error);
           } else {
             localStorage.setItem("tree", name);
+            let url = new URL(location);
+
+            if (name) {
+              url.searchParams.set("tree", name);
+            } else {
+              url.searchParams.delete("tree");
+            }
+            window.history.replaceState({ tree: name }, "", url);
             treeMenu.update();
             this.tree.toast.pop(`Saved "${name}"`);
             flash();
@@ -120,11 +128,14 @@ export default {
             treeMenu.update();
             if (localStorage.getItem("tree") == name) {
               localStorage.removeItem("tree");
+              let url = new URL(location);
+              url.searchParams.delete("tree");
+              window.history.replaceState({}, "", url);
             }
             flash();
             this.tree.toast.pop(`Deleted "${name}"`);
           } else {
-            this.tree.toast.pop(`The tree "${name}" was not found`)
+            this.tree.toast.pop(`The tree "${name}" was not found`);
           }
         });
       }
