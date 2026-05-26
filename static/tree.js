@@ -71,6 +71,11 @@ class Tree {
     window.addEventListener("popstate", (ev) => {
       if (ev.state?.tree) {
         this.load(ev.state.tree, ev.state.tree, false);
+      } else {
+        history.clear();
+        this.root.remove();
+        history.add();
+        this.tree.scrollToTop();
       }
     });
   }
