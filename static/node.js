@@ -11,9 +11,6 @@ import exportToTree from "./exporters/tree.js";
 
 Element.prototype.linkNode = function (node) {
   this.classList.add("out");
-  if (!node.outputs) {
-    node.outputs = [];
-  }
   node.outputs.push(this);
   this.e("mousedown", (ev) => {
     if (ev.ctrlKey) {
@@ -133,6 +130,7 @@ export default class Node {
     this.nameValue = name;
     this.updateLastValues();
     this.elem.node = this;
+    this.outputs = [];
     for (let child of children) {
       this.appendChild(child, false);
     }
