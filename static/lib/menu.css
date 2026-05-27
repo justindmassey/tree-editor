@@ -60,4 +60,5 @@
 .inactive-item:hover {
   background: var(--bg);
   color: var(--color-2);
+  box-shadow: none;
 }
