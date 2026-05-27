@@ -631,8 +631,9 @@ export default {
             atbl.firstChild.firstChild.align = "center";
           }
         }
-        bdy = div(atbl).c("tbl");
+        bdy = div(atbl.c("tbl")).c("tbl");
         if (this.childrenWidget.children.length) {
+          bdy.classList.remove("tbl")
           bdy.appendChild(this._childrenWidget);
         }
       } else {
