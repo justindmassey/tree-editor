@@ -73,6 +73,7 @@ button {
 }
 
 .crd {
+  overflow: hidden;
   width: fit-content;
   border: 1px solid var(--color-2);
   border-radius: 0.5em;
