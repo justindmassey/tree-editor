@@ -791,6 +791,9 @@ export default {
           out.classList.remove("flash");
           out.offsetWidth;
           out.classList.add("flash");
+          setTimeout(() => {
+            out.classList.remove("flash");
+          }, 800);
         }
       }
     },

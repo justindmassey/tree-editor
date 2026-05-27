@@ -181,7 +181,7 @@ span {
   border-radius: 2px;
 }
 
-.out:not(.hidden, button, input, select, textarea).flash {
+.out:not(button, input, select, textarea).flash {
   animation: flash 800ms ease-out;
 }
 
