@@ -587,7 +587,7 @@ export default {
       let numbered = "$num" in this.attributes;
       let header = !("$nohead" in this._attributes);
       let align = this._attributes.$align || "";
-      let atbl = table().c("atbl");
+      let atbl = table().c("atbl", "tbl");
       let num = 1;
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
