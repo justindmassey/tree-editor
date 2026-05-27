@@ -39,8 +39,8 @@ input[type="range"] {
 .frm,
 .crd,
 .tm,
-img,
-.frm-form {
+img {
+  margin-top: 2px;
   margin-bottom: 2px;
 }
 
