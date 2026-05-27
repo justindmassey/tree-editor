@@ -36,14 +36,28 @@ input[type="range"] {
 
 .tbl,
 .tabs,
-.frm,
 .crd,
 .tm,
-img {
+.img {
   margin-top: 0.25em;
   margin-bottom: 0.25em;
 }
 
+.tbl:first-child,
+.tabs:first-child,
+.crd:first-child,
+.tm:first-child,
+.img:first-child {
+  margin-top: 0em;
+}
+
+.tbl:last-child,
+.tabs:last-child,
+.crd:last-child,
+.tm:last-child,
+.img:last-child {
+  margin-bottom: 0em;
+}
 
 .bg {
   width: fit-content;
@@ -161,7 +175,7 @@ a {
   border-radius: 2px;
 }
 
-.tm>.menu {
+.tm > .menu {
   margin: 0px;
 }
 

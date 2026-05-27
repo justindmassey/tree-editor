@@ -340,7 +340,7 @@ export default {
       div("Child names are the names of the trees to open"),
       div("Children can have a ", code("$label"), "-attribute"),
       div("to override the label of the menu item."),
-      div("Use in ", code("-ln"), " to make a menu bar.")
+      div("Use in ", code("-ln"), " to make a menu bar."),
     ),
     create(arg) {
       let menu = new Menu(div(arg || " "));
@@ -361,8 +361,8 @@ export default {
             }),
         );
       }
-      if(arg || this._childNodes.length) {
-        return div(menu.elem).c("tm")
+      if (arg || this._childNodes.length) {
+        return div(menu.elem).c("tm");
       } else {
         return div();
       }
@@ -391,14 +391,25 @@ export default {
       }
       if (arg) {
         if (this._attributes.$url) {
-          return div(div(arg), div(image, this.childrenWidget).c("indented"));
+          if (this.childrenWidget.children.length) {
+            return div(
+              div(arg),
+              div(image.c("img"), this._childrenWidget).c("indented"),
+            );
+          } else {
+            return div(div(arg), div(image).c("img", "indented"));
+          }
         } else if (this.childrenWidget.children.length) {
           return div(div(arg), this._childrenWidget.c("indented"));
         } else {
           return div(arg);
         }
       } else {
-        return div(div(image), this.childrenWidget);
+        if (this.childrenWidget.children.length) {
+          return div(div(image).c("img"), this._childrenWidget);
+        } else {
+          return div(image).c("img");
+        }
       }
     },
   },
@@ -587,7 +598,7 @@ export default {
       let numbered = "$num" in this.attributes;
       let header = !("$nohead" in this._attributes);
       let align = this._attributes.$align || "";
-      let atbl = table().c("tbl");
+      let atbl = table();
       let num = 1;
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {
@@ -620,7 +631,7 @@ export default {
             atbl.firstChild.firstChild.align = "center";
           }
         }
-        bdy = div(atbl);
+        bdy = div(atbl).c("tbl");
         if (this.childrenWidget.children.length) {
           bdy.appendChild(this._childrenWidget);
         }
