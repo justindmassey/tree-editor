@@ -179,7 +179,7 @@ span {
   border-radius: 2px;
 }
 
-.out:not(button, input, select, textarea).flash {
+.out:not(button, input, select, textarea, .crd).flash {
   animation: flash 800ms ease-out;
 }
 
