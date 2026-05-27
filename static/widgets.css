@@ -40,8 +40,8 @@ input[type="range"] {
 .crd,
 .tm,
 img {
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 
@@ -177,11 +177,11 @@ span {
   --flash-to: transparent;
 }
 
-.out:not(button, input, select, textarea, .crd) {
+.out:not(button, input, select, textarea, .crd, .tab) {
   border-radius: 2px;
 }
 
-.out:not(button, input, select, textarea).flash {
+.out:not(.hidden, button, input, select, textarea).flash {
   animation: flash 800ms ease-out;
 }
 

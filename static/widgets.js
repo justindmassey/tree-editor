@@ -475,7 +475,7 @@ export default {
       }
       if (arg) {
         if (header.children.length) {
-          return div(div(arg), tbl.c("indented")).c("tbl");
+          return div(div(arg), tbl.c("tbl", "indented"));
         } else {
           return div(arg);
         }
@@ -551,7 +551,7 @@ export default {
       }
       if (arg) {
         if (tbl.children.length) {
-          return div(div(arg), tbl.c("indented")).c("tbl");
+          return div(div(arg), tbl.c("tbl", "indented"));
         } else {
           return div(arg);
         }
@@ -587,7 +587,7 @@ export default {
       let numbered = "$num" in this.attributes;
       let header = !("$nohead" in this._attributes);
       let align = this._attributes.$align || "";
-      let atbl = table().c("atbl", "tbl");
+      let atbl = table().c("tbl");
       let num = 1;
       for (let attrNode of this.attrNodes) {
         if (!attrNode._isAttribute[1].startsWith("$")) {

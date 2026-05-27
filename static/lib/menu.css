@@ -20,7 +20,7 @@
 }
 
 .menu:hover > .menu-label {
-  background: var(--color-3);
+  box-shadow: inset 0em 0em 5em var(--color-3);
 }
 
 .menu:hover > .menu-items.hidden {
@@ -53,7 +53,7 @@
 }
 
 .menu-items > *:hover {
-  background: var(--color-3);
+  box-shadow:inset 0em 0em 5em var(--color-3);
 }
 
 .inactive-item,

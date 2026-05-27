@@ -291,7 +291,10 @@ class Tree {
   updateNameSize() {
     let longestName = 0;
     this.root.traverse((n) => {
-      if (!n.nameValue.startsWith("$url=")) {
+      if (
+        !n.nameValue.startsWith("$selected=") &&
+        !n.nameValue.startsWith("$url=")
+      ) {
         if (n.nameValue.length > longestName) {
           if (n.nameValue.length <= Node.maxNameSize) {
             longestName = n.nameValue.length;
