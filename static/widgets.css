@@ -80,39 +80,6 @@ select {
   align-items: flex-start;
 }
 
-.ln > .blk,
-.ln > .blk-bottom,
-.ln > .blk-top {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.item > .blk,
-.item > .blk-bottom,
-.item > .blk-top,
-.ln > .blk,
-.ln > .blk-bottom,
-.ln > .blk-top {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.ln:has(> .blk),
-.item:has(> .blk) {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-}
-
-.ln:has(> .blk-bottom),
-.item:has(> .blk-bottom) {
-  margin-bottom: 0.25em;
-}
-
-.ln:has(> .blk-top),
-.ln:has(> .blk-top) {
-  margin-top: 0.25em;
-}
-
 fieldset {
   width: fit-content;
 }

@@ -196,9 +196,11 @@ export default {
           child.setAttribute("$checked", checkbox.checked);
         }
         checkbox.linkNode(child._attrNodeMap.$checked || child);
+        let item;
         checklist.appendChild(
-          div(checkbox.linkNode(child), child.widget).c("item"),
+          (item = div(checkbox.linkNode(child), child.widget).c("item")),
         );
+        setBlock(item, child._widget);
       }
       if (arg) {
         if (checklist.children.length) {
@@ -268,6 +270,7 @@ export default {
         line.appendChild(
           (lastSep = div(separator).linkNode(this._attrNodeMap.$sep || this)),
         );
+        setBlock(line, child._widget);
       }
       if (lastSep) {
         lastSep.remove();
@@ -275,12 +278,12 @@ export default {
 
       if (arg) {
         if (line.children.length) {
-          return div(div(arg), div(line).c("indented"));
+          return div(div(arg), line.c("indented"));
         } else {
           return div(arg);
         }
       } else {
-        return div(line);
+        return line;
       }
     },
   },
@@ -717,11 +720,15 @@ export default {
       this.traverseChildNodes((node, number) => {
         if (node != this) {
           if (node.nameValue.match(Node.widgetRegEx)) {
+            let item;
             outline.appendChild(
-              div(span(number).c("tt").linkNode(node), " ", node.widget).c(
-                "item",
-              ),
+              (item = div(
+                span(number).c("tt").linkNode(node),
+                " ",
+                node.widget,
+              ).c("item")),
             );
+            setBlock(item, node._widget);
             return 1;
           } else {
             outline.appendChild(
@@ -783,6 +790,7 @@ export default {
             }
             if (lastSegment) {
               path.appendChild(lastSegment.node.widget);
+              setBlock(path, lastSegment.node._widget);
               path.appendChild(
                 (lastSep = span(separator).linkNode(
                   this._attrNodeMap.$sep || this,
@@ -1049,9 +1057,11 @@ export default {
           history.add();
         });
         radioButton.checked = this._attributes.$selected == radioButton.value;
+        let item;
         radio.appendChild(
-          div(radioButton.linkNode(child), child.widget).c("item"),
+          (item = div(radioButton.linkNode(child), child.widget).c("item")),
         );
+        setBlock(item, child._widget);
       }
       if (arg) {
         if (radio.children.length) {
@@ -1298,5 +1308,20 @@ export function styleText(root, text, styles) {
       }
       node.replaceWith(textElem);
     }
+  }
+}
+
+function setBlock(parent, child) {
+  if (child.classList.contains("blk")) {
+    child.classList.remove("blk");
+    parent.classList.add("blk");
+  }
+  if (child.classList.contains("blk-top")) {
+    child.classList.remove("blk-top");
+    parent.classList.add("blk-top");
+  }
+  if (child.classList.contains("blk-bottom")) {
+    child.classList.remove("blk-bottom");
+    parent.classList.add("blk-bottom");
   }
 }
