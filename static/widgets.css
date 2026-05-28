@@ -75,9 +75,27 @@ select {
   margin: 1px;
 }
 
-.lin {
+.ln {
   display: flex;
   align-items: flex-start;
+}
+
+.ln>.blk, .ln>.blk-bottom, .ln>.blk-top {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.ln:has(>.blk) {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.ln:has(>.blk-bottom) {
+  margin-bottom: 0.25em;
+}
+
+.ln:has(>.blk-top) {
+  margin-top: 0.25em;
 }
 
 fieldset {

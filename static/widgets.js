@@ -261,7 +261,7 @@ export default {
       if ("$sep" in this.attributes) {
         separator = this._attributes.$sep;
       }
-      let line = span().c("lin");
+      let line = span().c("ln");
       let lastSep;
       for (let child of this.childNodes) {
         line.appendChild(child.widget);
