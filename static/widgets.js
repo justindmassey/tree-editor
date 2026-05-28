@@ -362,7 +362,7 @@ export default {
         );
       }
       if (arg || this._childNodes.length) {
-        return div(menu.elem).c("tm");
+        return div(menu.elem).c("blk", "tm");
       } else {
         return div();
       }
@@ -394,10 +394,10 @@ export default {
           if (this.childrenWidget.children.length) {
             return div(
               div(arg),
-              div(image.c("img"), this._childrenWidget).c("indented"),
+              div(image.c("blk"), this._childrenWidget).c("indented"),
             );
           } else {
-            return div(div(arg), div(image).c("img", "indented"));
+            return div(div(arg), div(image).c("blk", "indented"));
           }
         } else if (this.childrenWidget.children.length) {
           return div(div(arg), this._childrenWidget.c("indented"));
@@ -406,9 +406,17 @@ export default {
         }
       } else {
         if (this.childrenWidget.children.length) {
-          return div(div(image).c("img"), this._childrenWidget);
+          if (this._attributes.$url) {
+            return div(div(image).c("blk"), this._childrenWidget);
+          } else {
+            return this._childrenWidget;
+          }
         } else {
-          return div(image).c("img");
+          if (this._attributes.$url) {
+            return div(image).c("blk");
+          } else {
+            return div();
+          }
         }
       }
     },
@@ -486,12 +494,12 @@ export default {
       }
       if (arg) {
         if (header.children.length) {
-          return div(div(arg), tbl.c("tbl", "indented"));
+          return div(div(arg), tbl.c("blk", "indented"));
         } else {
           return div(arg);
         }
       } else {
-        return tbl.c("tbl");
+        return tbl.c("blk");
       }
     },
   },
@@ -562,12 +570,12 @@ export default {
       }
       if (arg) {
         if (tbl.children.length) {
-          return div(div(arg), tbl.c("tbl", "indented"));
+          return div(div(arg), tbl.c("blk", "indented"));
         } else {
           return div(arg);
         }
       } else {
-        return tbl.c("tbl");
+        return tbl.c("blk");
       }
     },
   },
@@ -631,9 +639,9 @@ export default {
             atbl.firstChild.firstChild.align = "center";
           }
         }
-        bdy = div(atbl.c("tbl")).c("tbl");
+        bdy = div(atbl.c("blk")).c("blk");
         if (this.childrenWidget.children.length) {
-          bdy.classList.remove("tbl")
+          bdy.classList.remove("blk");
           bdy.appendChild(this._childrenWidget);
         }
       } else {
@@ -676,7 +684,7 @@ export default {
           );
         }
       }
-      let crd = div().c("crd");
+      let crd = div().c("blk", "crd");
       let crdHeader;
       if (arg) {
         crdHeader = div(arg).c("crd-header");
@@ -695,7 +703,7 @@ export default {
       if (attrTable.children.length) {
         crd.appendChild(attrTable);
       }
-      return crd.c("crd");
+      return crd;
     },
   },
   "-out": {
@@ -851,12 +859,12 @@ export default {
       }
       if (arg) {
         if (tabsObj.elem.firstChild.children.length) {
-          return div(div(arg), tabsObj.elem.c("indented"));
+          return div(div(arg), tabsObj.elem.c("blk", "indented"));
         } else {
           return div(arg);
         }
       } else if (tabsObj.elem.firstChild.children.length) {
-        return tabsObj.elem;
+        return tabsObj.elem.c("blk");
       } else {
         return div();
       }

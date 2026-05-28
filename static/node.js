@@ -165,6 +165,18 @@ export default class Node {
     for (let child of this.childNodes) {
       this._childrenWidget.appendChild(child.widget);
     }
+    if (
+      this._childrenWidget.firstChild &&
+      this._childrenWidget.firstChild.classList.contains("blk")
+    ) {
+      this._childrenWidget.classList.add("blk")
+    }
+    if (
+      this._childrenWidget.lastChild &&
+      this._childrenWidget.lastChild.classList.contains("blk")
+    ) {
+      this._childrenWidget.classList.add("blk")
+    }
     return this._childrenWidget;
   }
 

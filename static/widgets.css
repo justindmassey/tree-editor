@@ -34,28 +34,16 @@ input[type="range"] {
   text-align: right;
 }
 
-.tbl,
-.tabs,
-.crd,
-.tm,
-.img {
+.blk {
   margin-top: 0.25em;
   margin-bottom: 0.25em;
 }
 
-.tbl:first-child,
-.tabs:first-child,
-.crd:first-child,
-.tm:first-child,
-.img:first-child {
+.blk:first-child {
   margin-top: 0em;
 }
 
-.tbl:last-child,
-.tabs:last-child,
-.crd:last-child,
-.tm:last-child,
-.img:last-child {
+.blk:last-child {
   margin-bottom: 0em;
 }
 
