@@ -169,13 +169,13 @@ export default class Node {
       this._childrenWidget.firstChild &&
       this._childrenWidget.firstChild.classList.contains("blk")
     ) {
-      this._childrenWidget.classList.add("blk")
+      this._childrenWidget.classList.add("blk-bottom")
     }
     if (
       this._childrenWidget.lastChild &&
       this._childrenWidget.lastChild.classList.contains("blk")
     ) {
-      this._childrenWidget.classList.add("blk")
+      this._childrenWidget.classList.add("blk-top")
     }
     return this._childrenWidget;
   }

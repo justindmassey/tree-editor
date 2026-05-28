@@ -47,6 +47,20 @@ input[type="range"] {
   margin-bottom: 0em;
 }
 
+.blk-bottom {
+  margin-bottom: 0.25em;
+}
+.blk-bottom:last-child {
+  margin-bottom: 0em;
+}
+
+.blk-top {
+  margin-bottom: 0.25em;
+}
+.blk-top:first-child {
+  margin-top: 0em;
+}
+
 .bg {
   width: fit-content;
   border-radius: 2px;
