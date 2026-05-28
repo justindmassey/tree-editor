@@ -197,7 +197,7 @@ export default {
         }
         checkbox.linkNode(child._attrNodeMap.$checked || child);
         checklist.appendChild(
-          div(checkbox.linkNode(child), div(child.widget)).c("item"),
+          div(checkbox.linkNode(child), child.widget).c("item"),
         );
       }
       if (arg) {
@@ -769,7 +769,7 @@ export default {
       for (let child of this.childNodes) {
         child.traverseChildNodes((node) => {
           if (node.nameValue.match(Node.widgetRegEx)) {
-            let path = div().c("lin");
+            let path = div().c("ln");
             let lastSep;
             let segments = node.getPath(this);
             let lastSegment = segments.pop();
@@ -1050,7 +1050,7 @@ export default {
         });
         radioButton.checked = this._attributes.$selected == radioButton.value;
         radio.appendChild(
-          div(radioButton.linkNode(child), div(child.widget)).c("item"),
+          div(radioButton.linkNode(child), child.widget).c("item"),
         );
       }
       if (arg) {
