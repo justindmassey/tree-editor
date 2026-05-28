@@ -793,7 +793,7 @@ export default {
             pathsDiv.appendChild(path);
             return 1;
           } else if (!node.childNodes.length) {
-            let path = div().c("lin");
+            let path = div().c("ln");
             let lastSep;
             for (let segment of node.getPath(this)) {
               path.appendChild(span(segment.name).linkNode(segment.node));
