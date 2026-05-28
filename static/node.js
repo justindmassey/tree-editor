@@ -167,15 +167,17 @@ export default class Node {
     }
     if (
       this._childrenWidget.firstChild &&
-      this._childrenWidget.firstChild.classList.contains("blk")
+      (this._childrenWidget.firstChild.classList.contains("blk") ||
+        this._childrenWidget.firstChild.classList.contains("blk-top"))
     ) {
-      this._childrenWidget.classList.add("blk-bottom")
+      this._childrenWidget.classList.add("blk-top");
     }
     if (
       this._childrenWidget.lastChild &&
-      this._childrenWidget.lastChild.classList.contains("blk")
+      (this._childrenWidget.lastChild.classList.contains("blk") ||
+        this._childrenWidget.lastChild.classList.contains("blk-bottom"))
     ) {
-      this._childrenWidget.classList.add("blk-top")
+      this._childrenWidget.classList.add("blk-bottom");
     }
     return this._childrenWidget;
   }
