@@ -648,8 +648,6 @@ export default {
         }
         bdy = div(atbl.c("blk")).c("blk");
         if (this.childrenWidget.children.length) {
-          
-          
           bdy.appendChild(this._childrenWidget);
         }
       } else {
@@ -1010,6 +1008,7 @@ export default {
         elem = div(opt);
       }
       if (opt.value in optChildren) {
+        promoteBlk(elem, optChildren[opt.value]);
         if (arg) {
           if (optChildren[opt.value].children.length) {
             elem.appendChild(optChildren[opt.value].c("indented"));
