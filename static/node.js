@@ -167,6 +167,8 @@ export default class Node {
     for (let child of this.childNodes) {
       this._childrenWidget.appendChild(child.widget);
     }
+    setBlkTop(this._childrenWidget);
+    setBlkBottom(this._childrenWidget);
     return this._childrenWidget;
   }
 

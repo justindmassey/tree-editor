@@ -34,32 +34,11 @@ input[type="range"] {
   text-align: right;
 }
 
-.blk {
-  margin-top: 0.25em;
+.blk:has(+.blk),
+.blk:has(+.blk-top),
+.blk-bottom:has(+.blk),
+.blk-bottom:has(+.blk-top) {
   margin-bottom: 0.25em;
-}
-
-.blk:first-child {
-  margin-top: 0em;
-}
-
-.blk:last-child {
-  margin-bottom: 0em;
-}
-
-.blk-bottom {
-  margin-bottom: 0.25em;
-}
-.blk-bottom:last-child {
-  margin-bottom: 0em;
-}
-
-.blk-top {
-  margin-top: 0.25em;
-}
-
-.blk-top:first-child {
-  margin-top: 0em;
 }
 
 .ltbl > tr.blk:has(+ tr.blk) > td,
