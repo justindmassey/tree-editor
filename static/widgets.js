@@ -206,6 +206,7 @@ export default {
         );
         promoteBlk(item, child._widget);
       }
+      this.childrenWidget;
       if (arg) {
         if (checklist.children.length) {
           return div(div(arg), checklist.c("indented"));
@@ -944,21 +945,20 @@ export default {
       )
         .c("pgs-pager")
         .linkNode(this._attrNodeMap.$page || this);
-      let elem;
+
       if (arg) {
         if (page) {
-          elem = div(arg, " ", pager, page.c("indented"));
+          return div(arg, " ", pager, page.c("indented"));
         } else {
           return div(arg, " ", pager);
         }
       } else {
         if (page) {
-          elem = div(pager, page);
+          return div(pager, page);
         } else {
           return div(pager);
         }
       }
-      promoteBlk(elem, page);
       return elem;
     },
   },
@@ -1011,7 +1011,6 @@ export default {
         elem = div(opt);
       }
       if (opt.value in optChildren) {
-        promoteBlk(elem, optChildren[opt.value]);
         if (arg) {
           if (optChildren[opt.value].children.length) {
             elem.appendChild(optChildren[opt.value].c("indented"));
@@ -1070,6 +1069,7 @@ export default {
         );
         promoteBlk(item, child._widget);
       }
+      this.childrenWidget;
       if (arg) {
         if (radio.children.length) {
           return div(div(arg), radio.c("indented"));

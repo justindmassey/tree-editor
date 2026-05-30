@@ -157,12 +157,8 @@ export default class Node {
         .bind(this)(arg, this.nameValue)
         .linkNode(this);
     }
-    if (
-      this._childrenWidget &&
-      this._childrenWidget.classList.contains("blk-bottom")
-    ) {
-      this._widget.classList.add("blk-bottom");
-    }
+    setBlkBottom(this._widget);
+    setBlkTop(this._widget);
     return this._widget.c("widget");
   }
 
@@ -170,20 +166,6 @@ export default class Node {
     this._childrenWidget = div();
     for (let child of this.childNodes) {
       this._childrenWidget.appendChild(child.widget);
-    }
-    if (
-      this._childrenWidget.firstChild &&
-      (this._childrenWidget.firstChild.classList.contains("blk") ||
-        this._childrenWidget.firstChild.classList.contains("blk-top"))
-    ) {
-      this._childrenWidget.classList.add("blk-top");
-    }
-    if (
-      this._childrenWidget.lastChild &&
-      (this._childrenWidget.lastChild.classList.contains("blk") ||
-        this._childrenWidget.lastChild.classList.contains("blk-bottom"))
-    ) {
-      this._childrenWidget.classList.add("blk-bottom");
     }
     return this._childrenWidget;
   }
@@ -812,5 +794,28 @@ function replaceBackslash(m) {
     return "";
   } else {
     return "\\";
+  }
+}
+
+function setBlkBottom(elem) {
+  if (elem.lastElementChild) {
+    setBlkBottom(elem.lastElementChild);
+    if (
+      elem.lastElementChild.classList.contains("blk-bottom") ||
+      elem.lastElementChild.classList.contains("blk")
+    ) {
+      elem.classList.add("blk-bottom");
+    }
+  }
+}
+function setBlkTop(elem) {
+  if (elem.firstElementChild) {
+    setBlkTop(elem.firstElementChild);
+    if (
+      elem.firstElementChild.classList.contains("blk-top") ||
+      elem.firstElementChild.classList.contains("blk")
+    ) {
+      elem.classList.add("blk-top");
+    }
   }
 }
