@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+May 30, 2026
+  - Changed port from 3000 to 7433
+
 May 26, 2026
   - Loading trees adds to browser history now
   - Renamed "Global Commands" to "Editor Commands" in help
