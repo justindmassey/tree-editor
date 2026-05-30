@@ -944,19 +944,22 @@ export default {
       )
         .c("pgs-pager")
         .linkNode(this._attrNodeMap.$page || this);
+      let elem;
       if (arg) {
         if (page) {
-          return div(arg, " ", pager, div(page).c("indented"));
+          elem = div(arg, " ", pager, page.c("indented"));
         } else {
           return div(arg, " ", pager);
         }
       } else {
         if (page) {
-          return div(pager, div(page));
+          elem = div(pager, page);
         } else {
           return div(pager);
         }
       }
+      promoteBlk(elem, page);
+      return elem;
     },
   },
   "-opt": {
