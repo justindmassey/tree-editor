@@ -157,6 +157,12 @@ export default class Node {
         .bind(this)(arg, this.nameValue)
         .linkNode(this);
     }
+    if (
+      this._childrenWidget &&
+      this._childrenWidget.classList.contains("blk-bottom")
+    ) {
+      this._widget.classList.add("blk-bottom");
+    }
     return this._widget.c("widget");
   }
 
