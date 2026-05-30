@@ -52,11 +52,11 @@ fastify.get("/delete", async function (req) {
   }
 });
 
-fastify.listen({ port: 3000 }, function (err, addr) {
+fastify.listen({ port: 7433 }, function (err, addr) {
   if (err) {
     console.error(err.message);
   } else {
-    console.log("Listening on", addr);
+    console.log("You can now visit http://localhost:7433")
   }
 });
 

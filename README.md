@@ -17,4 +17,4 @@ Usage:
     npm install
     node .
 
-then visit localhost:3000 in your browser
+then visit localhost:7433 in your browser
