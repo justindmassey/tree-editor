@@ -55,10 +55,14 @@ input[type="range"] {
 }
 
 .blk-top {
-  margin-top: 0.25em;
+  padding-top: 0.25em;
 }
-.blk-top:first-child {
-  margin-top: 0em;
+
+.ltbl>tr.blk:has(+tr.blk) > td,
+.ltbl>tr.blk:has(+tr.blk-top) > td,
+.ltbl>tr.blk-bottom:has(+tr.blk) > td,
+.ltbl>tr.blk-bottom:has(+tr.blk-top) > td {
+  padding-bottom: 0.25em;
 }
 
 .bg {

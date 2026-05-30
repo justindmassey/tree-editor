@@ -135,12 +135,14 @@ export default {
       }
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
+        let row;
         children.appendChild(
-          tr(
+          (row = tr(
             td(prefix).linkNode(this._attrNodeMap.$prefix || child),
             td(child.widget),
-          ),
+          )),
         );
+        promoteBlk(row, child._widget);
       }
       if (children.children.length) {
         if (arg) {
@@ -159,9 +161,11 @@ export default {
       let children = table().c("ltbl");
       let cnt = 1;
       for (let child of this.childNodes) {
+        let row;
         children.appendChild(
-          tr(td(cnt + ". ").linkNode(child), td(child.widget)),
+          (row = tr(td(cnt + ". ").linkNode(child), td(child.widget))),
         );
+        promoteBlk(row, child._widget);
         cnt++;
       }
       if (children.children.length) {
@@ -200,7 +204,7 @@ export default {
         checklist.appendChild(
           (item = div(checkbox.linkNode(child), child.widget).c("item")),
         );
-        setBlock(item, child._widget);
+        promoteBlk(item, child._widget);
       }
       if (arg) {
         if (checklist.children.length) {
@@ -270,7 +274,7 @@ export default {
         line.appendChild(
           (lastSep = div(separator).linkNode(this._attrNodeMap.$sep || this)),
         );
-        setBlock(line, child._widget);
+        promoteBlk(line, child._widget);
       }
       if (lastSep) {
         lastSep.remove();
@@ -728,7 +732,7 @@ export default {
                 node.widget,
               ).c("item")),
             );
-            setBlock(item, node._widget);
+            promoteBlk(item, node._widget);
             return 1;
           } else {
             outline.appendChild(
@@ -790,7 +794,7 @@ export default {
             }
             if (lastSegment) {
               path.appendChild(lastSegment.node.widget);
-              setBlock(path, lastSegment.node._widget);
+              promoteBlk(path, lastSegment.node._widget);
               path.appendChild(
                 (lastSep = span(separator).linkNode(
                   this._attrNodeMap.$sep || this,
@@ -1061,7 +1065,7 @@ export default {
         radio.appendChild(
           (item = div(radioButton.linkNode(child), child.widget).c("item")),
         );
-        setBlock(item, child._widget);
+        promoteBlk(item, child._widget);
       }
       if (arg) {
         if (radio.children.length) {
@@ -1311,7 +1315,7 @@ export function styleText(root, text, styles) {
   }
 }
 
-function setBlock(parent, child) {
+function promoteBlk(parent, child) {
   if (child.classList.contains("blk")) {
     child.classList.remove("blk");
     parent.classList.add("blk");
