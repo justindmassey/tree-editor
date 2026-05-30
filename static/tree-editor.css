@@ -3,3 +3,21 @@
 @import url("./help.css");
 @import url("./tree.css");
 
+.splash {
+  color: cyan;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.tree-editor:has(> .menu-bar.hidden):has(> .help.hidden):has(
+    > .tree > .tree-container.hidden
+  ):has(> .tree > .output.hidden)
+  > .splash {
+  background: black;
+  display: flex;
+}

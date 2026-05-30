@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+May 31, 2026
+  - Showing tree image when output, help, menu bar and tree are hidden
+
 May 30, 2026
   - Changed port from 3000 to 7433
 
