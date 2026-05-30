@@ -649,6 +649,7 @@ export default {
         }
         bdy = div(atbl.c("blk")).c("blk");
         if (this.childrenWidget.children.length) {
+          bdy.classList.remove("blk");
           bdy.appendChild(this._childrenWidget);
         }
       } else {

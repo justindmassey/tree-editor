@@ -34,18 +34,18 @@ input[type="range"] {
   text-align: right;
 }
 
-.blk:has(+.blk),
-.blk:has(+.blk-top),
-.blk-bottom:has(+.blk),
-.blk-bottom:has(+.blk-top) {
-  margin-bottom: 0.25em;
+.blk + .blk,
+.blk + .blk-top,
+.blk-bottom + .blk,
+.blk-bottom + .blk-top {
+  margin-top: 0.25em;
 }
 
-.ltbl > tr.blk:has(+ tr.blk) > td,
-.ltbl > tr.blk:has(+ tr.blk-top) > td,
-.ltbl > tr.blk-bottom:has(+ tr.blk) > td,
-.ltbl > tr.blk-bottom:has(+ tr.blk-top) > td {
-  padding-bottom: 0.25em;
+.ltbl > tr.blk + tr.blk > td,
+.ltbl > tr.blk + tr.blk-top > td,
+.ltbl > tr.blk-bottom + tr.blk > td,
+.ltbl > tr.blk-bottom + tr.blk-top > td {
+  padding-top: 0.25em;
 }
 
 .bg {
