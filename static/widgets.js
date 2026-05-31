@@ -262,6 +262,15 @@ export default {
       div("Line"),
       div("Renders children inline separated by ", code("$sep"), "."),
       div("If ", code("$sep"), " is not set, a space is used."),
+      div(
+        code("$align"),
+        ": align items (can be ",
+        code("bottom"),
+        " or ",
+        code("center"),
+        ")",
+        div("Items are aligned to the top by default."),
+      ),
     ),
     create(arg) {
       let separator = " ";
@@ -269,6 +278,13 @@ export default {
         separator = this._attributes.$sep;
       }
       let line = span().c("ln");
+      if ("$align" in this._attributes) {
+        line.style.alignItems =
+          {
+            bottom: "flex-end",
+            center: "center",
+          }[this._attributes.$align] || "";
+      }
       let lastSep;
       for (let child of this.childNodes) {
         line.appendChild(child.widget);
@@ -328,7 +344,8 @@ export default {
       if ("$label" in this.attributes) {
         label = this._attributes.$label;
       }
-      let btn = button(label || " ").c("blk")
+      let btn = button(label || " ")
+        .c("blk")
         .linkNode(this._attrNodeMap.$label || this)
         .e("click", () => {
           tree.load(arg, this.attributeSubstitution(escapedArg));

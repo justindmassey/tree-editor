@@ -64,7 +64,7 @@ select {
 
 .ln {
   display: flex;
-  align-items: flex-start;
+  align-items: start;
 }
 
 fieldset {
