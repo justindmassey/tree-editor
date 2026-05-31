@@ -30,6 +30,12 @@ Element.prototype.linkNode = function (node) {
   return this;
 };
 
+Element.prototype.setBlk = function () {
+  setBlkTop(this);
+  setBlkBottom(this);
+  return this;
+};
+
 export default class Node {
   static attrRegEx = /^((?:[^=]|(?:(?<!\\)\\=))*)(?<!(?<!\\)\\)=(.*)$/;
   static widgetRegEx = /^(-[^\s.:]+)\s*(.*)/;
@@ -157,9 +163,8 @@ export default class Node {
         .bind(this)(arg, this.nameValue)
         .linkNode(this);
     }
-    setBlkBottom(this._widget);
-    setBlkTop(this._widget);
-    return this._widget.c("widget");
+
+    return this._widget.setBlk().c("widget");
   }
 
   get childrenWidget() {
@@ -167,9 +172,8 @@ export default class Node {
     for (let child of this.childNodes) {
       this._childrenWidget.appendChild(child.widget);
     }
-    setBlkTop(this._childrenWidget);
-    setBlkBottom(this._childrenWidget);
-    return this._childrenWidget;
+
+    return this._childrenWidget.setBlk();
   }
 
   getPath(upTo) {
