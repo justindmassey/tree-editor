@@ -960,7 +960,6 @@ export default {
           return div(pager);
         }
       }
-      return elem;
     },
   },
   "-opt": {
