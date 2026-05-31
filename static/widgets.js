@@ -328,7 +328,7 @@ export default {
       if ("$label" in this.attributes) {
         label = this._attributes.$label;
       }
-      let btn = button(label || " ")
+      let btn = button(label || " ").c("blk")
         .linkNode(this._attrNodeMap.$label || this)
         .e("click", () => {
           tree.load(arg, this.attributeSubstitution(escapedArg));
@@ -944,7 +944,7 @@ export default {
             history.add();
           }),
       )
-        .c("pgs-pager")
+        .c("blk", "pgs-pager")
         .linkNode(this._attrNodeMap.$page || this);
 
       if (arg) {
@@ -1007,9 +1007,9 @@ export default {
       opt.linkNode(this._attrNodeMap.$selected || this);
       let elem;
       if (arg) {
-        elem = div(arg, " ", opt);
+        elem = div(div(arg, " ", opt).c("blk"));
       } else {
-        elem = div(opt);
+        elem = div(opt).c("blk");
       }
       if (opt.value in optChildren) {
         if (arg) {

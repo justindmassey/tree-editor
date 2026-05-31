@@ -71,11 +71,6 @@ fieldset {
   width: fit-content;
 }
 
-button {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-}
-
 .crd {
   overflow: hidden;
   width: fit-content;
