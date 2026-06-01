@@ -1122,7 +1122,7 @@ export default {
         });
       let text = "";
       for (let child of this.children.children) {
-        text += exportToTree(child.node);
+        text += exportToTree(child.node, 2);
       }
       ta.value = text;
       if (arg) {
