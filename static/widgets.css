@@ -92,19 +92,16 @@ fieldset {
 }
 
 .crd-body {
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  margin: auto;
+  margin: auto; 
 }
 
-.crd-body > * {
-  width: fit-content;
-  display: inline-block;
-  text-align: left;
-}
 
 .crd-attr-table {
   width: 100%;
