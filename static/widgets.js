@@ -29,6 +29,8 @@ import Menu from "./lib/menu.js";
 import Node from "./node.js";
 import tree from "./tree.js";
 import crossRef from "./cross-ref.js";
+import exportToTree from "./exporters/tree.js";
+import importTree from "./importers/tree.js";
 
 export default {
   "-txt": {
@@ -1099,7 +1101,7 @@ export default {
     },
   },
   "-ta": {
-    description: div(div("Textarea"), div("Children become lines of text.")),
+    description: div(div("Textarea"), div("Lets you edit children as indented text.")),
     create(arg) {
       let label;
       {
@@ -1112,19 +1114,17 @@ export default {
         .a("cols", 40)
         .e("input", () => {
           this.children.replaceChildren();
-          for (let line of ta.value.split("\n")) {
-            this.appendChild(new Node(line), false);
+          for (let node of importTree(ta.value, false)) {
+            this.appendChild(node, false);
           }
-          if (arg) {
-            label.textContent = this.nameText;
-          }
+          label.textContent = arg;
           history.add(true);
         });
-      let lines = [];
+      let text = "";
       for (let child of this.children.children) {
-        lines.push(child.node.nameValue);
+        text += exportToTree(child.node);
       }
-      ta.value = lines.join("\n");
+      ta.value = text;
       if (arg) {
         return div(label, ta.c("indented"));
       } else {
@@ -1303,9 +1303,11 @@ export function styleText(root, text, styles) {
       ) {
         const textElem = span(node.parentElement.textContent).c("st");
         for (let style of node.parentElement.style) {
+          textElem.style[style] = "";
           textElem.style[style] = node.parentElement.style[style];
         }
         for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = "";
           textElem.style[key] = value;
         }
         node.parentElement.replaceWith(textElem);
@@ -1327,6 +1329,7 @@ export function styleText(root, text, styles) {
         fragment.append(value.slice(start, index));
         const textElem = span(value.slice(index, index + text.length)).c("st");
         for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = "";
           textElem.style[key] = value;
         }
         fragment.append(textElem);
@@ -1344,6 +1347,7 @@ export function styleText(root, text, styles) {
 
       if (node.parentElement?.classList.contains("st")) {
         for (let style of node.parentElement.style) {
+          textElem.style[style] = "";
           textElem.style[style] = node.parentElement.style[style];
         }
         for (const [key, value] of Object.entries(styles)) {
@@ -1352,6 +1356,7 @@ export function styleText(root, text, styles) {
         node.parentElement.replaceWith(textElem);
       } else {
         for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = "";
           textElem.style[key] = value;
         }
         node.replaceWith(textElem);

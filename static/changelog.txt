@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+Jun 1, 2026
+  - Allowed -ta widget children to be subtrees (via text indentation)
+
 May 31, 2026
   - Showing tree image when output, help, menu bar and tree are hidden
   - Added $align attribute to -ln widget
