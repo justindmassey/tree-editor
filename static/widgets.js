@@ -1302,6 +1302,9 @@ export function styleText(root, text, styles) {
         node.parentElement.textContent.toLowerCase() == search
       ) {
         const textElem = span(node.parentElement.textContent).c("st");
+        for (let style of node.parentElement.style) {
+          textElem.style[style] = node.parentElement.style[style];
+        }
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = value;
         }
@@ -1338,12 +1341,19 @@ export function styleText(root, text, styles) {
     for (const node of textNodes) {
       const value = node.nodeValue;
       const textElem = span(value).c("st");
-      for (const [key, value] of Object.entries(styles)) {
-        textElem.style[key] = value;
-      }
+
       if (node.parentElement?.classList.contains("st")) {
+        for (let style of node.parentElement.style) {
+          textElem.style[style] = node.parentElement.style[style];
+        }
+        for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = value;
+        }
         node.parentElement.replaceWith(textElem);
       } else {
+        for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = value;
+        }
         node.replaceWith(textElem);
       }
     }
