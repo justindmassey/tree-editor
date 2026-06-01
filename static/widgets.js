@@ -1225,7 +1225,7 @@ export default {
               td(entry),
             ).linkNode(attrNode),
           );
-          if (attrNode.childrenWidget.children.length) {
+          if (attrNode._childrenWidget.children.length) {
             form.appendChild(
               tr(td(), td(attrChildren[attrNode._isAttribute[1]])),
             );
@@ -1297,6 +1297,17 @@ export function styleText(root, text, styles) {
     const search = text.toLowerCase();
 
     for (const node of textNodes) {
+      if (
+        node.parentElement?.classList.contains("st") &&
+        node.parentElement.textContent.toLowerCase() == search
+      ) {
+        const textElem = span(node.parentElement.textContent).c("st");
+        for (const [key, value] of Object.entries(styles)) {
+          textElem.style[key] = value;
+        }
+        node.parentElement.replaceWith(textElem);
+        continue;
+      }
       const value = node.nodeValue;
       const lower = value.toLowerCase();
       if (!lower.includes(search)) {
