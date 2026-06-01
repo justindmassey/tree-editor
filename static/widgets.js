@@ -1341,7 +1341,11 @@ export function styleText(root, text, styles) {
       for (const [key, value] of Object.entries(styles)) {
         textElem.style[key] = value;
       }
-      node.replaceWith(textElem);
+      if (node.parentElement?.classList.contains("st")) {
+        node.parentElement.replaceWith(textElem);
+      } else {
+        node.replaceWith(textElem);
+      }
     }
   }
 }
