@@ -1319,7 +1319,10 @@ export function styleText(root, text, styles) {
           textElem.style[key] = "";
           textElem.style[key] = value;
         }
-        textElem.style.setProperty("--flash-to", styles.background);
+        textElem.style.setProperty(
+          "--flash-to",
+          styles.background || node.parentElement.style.background,
+        );
         node.parentElement.replaceWith(textElem);
         styleSpans.push(textElem);
         continue;
@@ -1360,7 +1363,7 @@ export function styleText(root, text, styles) {
     for (const node of textNodes) {
       const value = node.nodeValue;
       const textElem = span(value).c("st", "out");
-      textElem.style.setProperty("--flash-to", styles.background);
+
       if (node.parentElement?.classList.contains("st")) {
         for (let style of node.parentElement.style) {
           textElem.style[style] = "";
@@ -1369,12 +1372,17 @@ export function styleText(root, text, styles) {
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = value;
         }
+        textElem.style.setProperty(
+          "--flash-to",
+          styles.background || node.parentElement.style.background,
+        );
         node.parentElement.replaceWith(textElem);
       } else {
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = "";
           textElem.style[key] = value;
         }
+        textElem.style.setProperty("--flash-to", styles.background);
         node.replaceWith(textElem);
       }
       styleSpans.push(textElem);

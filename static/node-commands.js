@@ -795,6 +795,17 @@ export default {
           out.flashTimeout = setTimeout(() => {
             out.classList.remove("flash");
           }, 800);
+          for (let st of out.querySelectorAll(".st.out")) {
+            st.classList.remove("flash");
+            st.offsetWidth;
+            st.classList.add("flash");
+
+            clearTimeout(st.flashTimeout);
+            st.flashTimeout = setTimeout(
+              () => st.classList.remove("flash"),
+              800,
+            );
+          }
         }
       }
     },
