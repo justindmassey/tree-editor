@@ -1290,6 +1290,11 @@ export function updateSelection(ev) {
 }
 
 export function styleText(root, text, styles) {
+  for (let style in styles) {
+    if (style.startsWith("$")) {
+      delete styles[style];
+    }
+  }
   let styleSpans = [];
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const textNodes = [];
@@ -1332,7 +1337,10 @@ export function styleText(root, text, styles) {
           break;
         }
         fragment.append(value.slice(start, index));
-        const textElem = span(value.slice(index, index + text.length)).c("st", "out");
+        const textElem = span(value.slice(index, index + text.length)).c(
+          "st",
+          "out",
+        );
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = "";
           textElem.style[key] = value;
