@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+Jun 2, 2026
+  - Added $fg global styling attribute
+
 Jun 1, 2026
   - Allowed -ta widget children to be subtrees (via text indentation)
 

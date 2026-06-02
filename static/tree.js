@@ -282,6 +282,13 @@ class Tree {
               target.style.outline =
                 "1px solid " + attr.attributeSubstitution(attr._isAttribute[2]);
             }
+          } else if (attr._isAttribute[1] == "$fg") {
+            for (let target of node.outputs) {
+              target.style.color = "";
+              target.style.color = attr.attributeSubstitution(
+                attr._isAttribute[2],
+              );
+            }
           }
         }
       }

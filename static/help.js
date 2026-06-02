@@ -160,6 +160,16 @@ let help = div(
         ),
         div(
           "If ",
+          code("$fg"),
+          " is set to a ",
+          a("CSS color").a(
+            "href",
+            "https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value",
+          ),
+          ", it sets the widgets text color in the output.",
+        ),
+        div(
+          "If ",
           code("$bg"),
           " is set to a ",
           a("CSS color").a(
