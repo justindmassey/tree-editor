@@ -1290,6 +1290,7 @@ export function updateSelection(ev) {
 }
 
 export function styleText(root, text, styles) {
+  let styleSpans = [];
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const textNodes = [];
 
@@ -1304,7 +1305,7 @@ export function styleText(root, text, styles) {
         node.parentElement?.classList.contains("st") &&
         node.parentElement.textContent.toLowerCase() == search
       ) {
-        const textElem = span(node.parentElement.textContent).c("st");
+        const textElem = span(node.parentElement.textContent).c("st", "out");
         for (let style of node.parentElement.style) {
           textElem.style[style] = "";
           textElem.style[style] = node.parentElement.style[style];
@@ -1314,6 +1315,7 @@ export function styleText(root, text, styles) {
           textElem.style[key] = value;
         }
         node.parentElement.replaceWith(textElem);
+        styleSpans.push(textElem);
         continue;
       }
       const value = node.nodeValue;
@@ -1330,12 +1332,13 @@ export function styleText(root, text, styles) {
           break;
         }
         fragment.append(value.slice(start, index));
-        const textElem = span(value.slice(index, index + text.length)).c("st");
+        const textElem = span(value.slice(index, index + text.length)).c("st", "out");
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = "";
           textElem.style[key] = value;
         }
         fragment.append(textElem);
+        styleSpans.push(textElem);
         start = index + text.length;
       }
 
@@ -1346,7 +1349,7 @@ export function styleText(root, text, styles) {
   } else {
     for (const node of textNodes) {
       const value = node.nodeValue;
-      const textElem = span(value).c("st");
+      const textElem = span(value).c("st", "out");
 
       if (node.parentElement?.classList.contains("st")) {
         for (let style of node.parentElement.style) {
@@ -1364,8 +1367,10 @@ export function styleText(root, text, styles) {
         }
         node.replaceWith(textElem);
       }
+      styleSpans.push(textElem);
     }
   }
+  return styleSpans;
 }
 
 function promoteBlk(parent, child) {

@@ -266,9 +266,10 @@ class Tree {
           if (attr._isAttribute[1] == "$st") {
             let text = attr.attributeSubstitution(attr._isAttribute[2]);
             for (let target of node.outputs) {
-              styleText(target, text, attr.attributes);
+              attr.outputs = styleText(target, text, attr.attributes);
             }
           } else if (attr._isAttribute[1] == "$bg") {
+            attr.outputs = node.outputs;
             for (let target of node.outputs) {
               target.style.background = "";
               target.style.background = attr.attributeSubstitution(
@@ -277,12 +278,14 @@ class Tree {
               target.style.setProperty("--flash-to", attr._isAttribute[2]);
             }
           } else if (attr._isAttribute[1] == "$ol") {
+            attr.outputs = node.outputs;
             for (let target of node.outputs) {
               target.style.outline = "";
               target.style.outline =
                 "1px solid " + attr.attributeSubstitution(attr._isAttribute[2]);
             }
           } else if (attr._isAttribute[1] == "$fg") {
+            attr.outputs = node.outputs;
             for (let target of node.outputs) {
               target.style.color = "";
               target.style.color = attr.attributeSubstitution(
