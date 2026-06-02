@@ -18,7 +18,7 @@ if (!fss.existsSync(treesDir)) {
 fastify.get("/list", async function () {
   try {
     return (await fs.readdir(treesDir)).map((filename) => {
-      return decodeURIComponent(filename).slice(0, -ext.length);
+      return decodeURIComponent(filename.slice(0, -ext.length));
     });
   } catch (e) {
     return { error: e.message };
@@ -55,14 +55,10 @@ fastify.listen({ port: 7433 }, function (err, addr) {
   if (err) {
     console.error(err.message);
   } else {
-    console.log("You can now visit http://localhost:7433")
+    console.log("You can now visit http://localhost:7433");
   }
 });
 
 function getFilename(treeName) {
-  return path.join(
-    __dirname,
-    "trees",
-    encodeURIComponent(treeName) + ext,
-  );
+  return path.join(__dirname, "trees", encodeURIComponent(treeName) + ext);
 }
