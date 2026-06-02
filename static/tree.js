@@ -266,11 +266,12 @@ class Tree {
           if (attr._isAttribute[1] == "$st") {
             let text = attr.attributeSubstitution(attr._isAttribute[2]);
             attr.outputs = [];
+            attr.attributes;
             for (let target of node.outputs) {
-              attr.outputs.push(...styleText(target, text, attr.attributes));
+              attr.outputs.push(...styleText(target, text, attr._attributes));
             }
-            for (let child of attr.children.children) {
-              child.node.outputs = attr.outputs;
+            for (let name in attr._attrNodeMap) {
+              attr._attrNodeMap[name].outputs = attr.outputs;
             }
           } else if (attr._isAttribute[1] == "$bg") {
             attr.outputs = node.outputs;
