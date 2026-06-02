@@ -11,7 +11,7 @@ fastify.register(fastifyStatic, {
   prefix: "/",
 });
 
-let treesDir = path.join(__dirname, "trees");
+const treesDir = path.join(__dirname, "trees");
 if (!fss.existsSync(treesDir)) {
   fss.mkdirSync(treesDir);
 }
@@ -22,15 +22,17 @@ fastify.get("/list", async function () {
       return filename.replaceAll(sep, path.sep).slice(0, -ext.length);
     });
   } catch (e) {
-    return { error: e.message };
+    console.error("Error listing trees:", e.message);
+    return { error: "Internal server error" };
   }
 });
 
 fastify.get("/tree", async function (req) {
   try {
-    return fs.readFile(getFilename(req.query.name));
+    return await fs.readFile(getFilename(req.query.name));
   } catch (e) {
-    return { error: e.message };
+    console.error("Error reading tree:", e.message);
+    return { error: "Internal server error" };
   }
 });
 
@@ -39,7 +41,8 @@ fastify.post("/save", async function (req) {
     await fs.writeFile(getFilename(req.query.name), req.body);
     return {};
   } catch (e) {
-    return { error: e.message };
+    console.error("Error saving tree:", e.message);
+    return { error: "Internal server error" };
   }
 });
 
@@ -48,22 +51,30 @@ fastify.get("/delete", async function (req) {
     await fs.unlink(getFilename(req.query.name));
     return {};
   } catch (e) {
-    return { error: e.message };
+    console.error("Error deleting tree:", e.message);
+    return { error: "Internal server error" };
   }
 });
 
 fastify.listen({ port: 7433 }, function (err, addr) {
   if (err) {
-    console.error(err.message);
+    console.error("Startup error:", err.message);
   } else {
-    console.log("You can now visit http://localhost:7433")
+    console.log("Server running at http://localhost:7433");
   }
 });
 
 function getFilename(treeName) {
-  return path.join(
-    __dirname,
-    "trees",
-    treeName.replaceAll(path.sep, sep) + ext,
-  );
+  if (typeof treeName !== "string") {
+    throw new Error("Invalid tree name");
+  }
+
+  const safeTreeName = treeName.replaceAll(path.sep, sep);
+  const resolvedPath = path.resolve(treesDir, safeTreeName + ext);
+
+  if (!resolvedPath.startsWith(treesDir)) {
+    throw new Error("Access denied");
+  }
+
+  return resolvedPath;
 }
