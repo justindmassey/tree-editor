@@ -1115,8 +1115,10 @@ export default {
         .a("cols", 40)
         .e("input", () => {
           this.children.replaceChildren();
-          for (let node of importTree(ta.value, false)) {
-            this.appendChild(node, false);
+          if (ta.value) {
+            for (let node of importTree(ta.value, false)) {
+              this.appendChild(node, false);
+            }
           }
           label.textContent = arg;
           history.add(true);
