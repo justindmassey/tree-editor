@@ -1101,13 +1101,14 @@ export default {
     },
   },
   "-ta": {
-    description: div(div("Textarea"), div("Lets you edit children as indented text.")),
+    description: div(
+      div("Textarea"),
+      div("Lets you edit children as indented text."),
+    ),
     create(arg) {
       let label;
-      {
-        if (arg) {
-          label = div(arg);
-        }
+      if (arg) {
+        label = div(arg);
       }
       let ta = textarea()
         .a("rows", 8)
