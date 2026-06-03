@@ -215,12 +215,14 @@ export default {
   "Alt+x c": {
     description: "Toggle centering of output when the tree is hidden",
     action() {
-      if (this.tree.tree.classList.contains("hidden")) {
-        this.tree.output.classList.toggle("centered");
-        localStorage.setItem(
-          "centerOutput",
-          this.tree.output.classList.contains("centered") || "",
-        );
+      let centered = this.tree.output.classList.toggle("centered");
+      localStorage.setItem("centerOutput", centered || "");
+      if (!this.tree.tree.classList.contains("hidden")) {
+        if (centered) {
+          this.tree.toast.pop("Output centered when tree is hidden");
+        } else {
+          this.tree.toast.pop("Output left aligned when tree is hidden");
+        }
       }
     },
   },
