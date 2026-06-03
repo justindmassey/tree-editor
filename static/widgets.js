@@ -138,10 +138,11 @@ export default {
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
         let row;
+        let childWidget = child.widget;
         children.appendChild(
           (row = tr(
             td(prefix).linkNode(this._attrNodeMap.$prefix || child),
-            td(child.widget),
+            td(childWidget),
           )),
         );
         promoteBlk(row, child._widget);
@@ -164,8 +165,9 @@ export default {
       let cnt = 1;
       for (let child of this.childNodes) {
         let row;
+        let childWidget = child.widget;
         children.appendChild(
-          (row = tr(td(cnt + ". ").linkNode(child), td(child.widget))),
+          (row = tr(td(cnt + ". ").linkNode(child), td(childWidget))),
         );
         promoteBlk(row, child._widget);
         cnt++;
@@ -201,14 +203,11 @@ export default {
         } else {
           child.setAttribute("$checked", checkbox.checked);
         }
-        checkbox.linkNode(child._attrNodeMap.$checked || child);
         let item;
-        checklist.appendChild(
-          (item = div(checkbox.linkNode(child), child.widget).c("item")),
-        );
+        checklist.appendChild((item = div(checkbox, child.widget).c("item")));
+        checkbox.linkNode(child._attrNodeMap.$checked || child);
         promoteBlk(item, child._widget);
       }
-      this.childrenWidget;
       if (arg) {
         if (checklist.children.length) {
           return div(div(arg), checklist.c("indented"));
@@ -745,11 +744,12 @@ export default {
         if (node != this) {
           if (node.nameValue.match(Node.widgetRegEx)) {
             let item;
+            let nodeWidget = node.widget;
             outline.appendChild(
               (item = div(
                 span(number).c("tt").linkNode(node),
                 " ",
-                node.widget,
+                nodeWidget,
               ).c("item")),
             );
             promoteBlk(item, node._widget);
