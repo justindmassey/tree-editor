@@ -53,7 +53,13 @@ fastify.get("/delete", async function (req) {
 
 fastify.listen({ port: 7433 }, function (err, addr) {
   if (err) {
-    console.error(err.message);
+    if (err.code == "EADDRINUSE") {
+      console.log("Couldn't start server.");
+      console.log("Tree Editor is probably already running.");
+    } else {
+      console.error(err.message);
+    }
+    process.exit(1);
   } else {
     console.log("You can now visit http://localhost:7433");
   }
