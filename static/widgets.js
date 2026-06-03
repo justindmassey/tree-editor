@@ -518,7 +518,6 @@ export default {
           let label = row.children[+numbered];
           if (label) {
             label.classList.add("bold");
-            console.log(this._childNodes[0])
             if (
               !(
                 this._childNodes[0] &&
