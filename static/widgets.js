@@ -518,7 +518,15 @@ export default {
           let label = row.children[+numbered];
           if (label) {
             label.classList.add("bold");
-            label.removeAttribute("align");
+            console.log(this._childNodes[0])
+            if (
+              !(
+                this._childNodes[0] &&
+                "$align" in this._childNodes[0]._attributes
+              )
+            ) {
+              label.removeAttribute("align");
+            }
           }
         }
         bdy.appendChild(row);
