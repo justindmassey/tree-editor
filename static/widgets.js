@@ -138,11 +138,11 @@ export default {
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
         let row;
-        let childWidget = child.widget;
+        child.widget;
         children.appendChild(
           (row = tr(
             td(prefix).linkNode(this._attrNodeMap.$prefix || child),
-            td(childWidget),
+            td(child._widget),
           )),
         );
         promoteBlk(row, child._widget);
@@ -165,9 +165,9 @@ export default {
       let cnt = 1;
       for (let child of this.childNodes) {
         let row;
-        let childWidget = child.widget;
+        child.widget;
         children.appendChild(
-          (row = tr(td(cnt + ". ").linkNode(child), td(childWidget))),
+          (row = tr(td(cnt + ". ").linkNode(child), td(child._widget))),
         );
         promoteBlk(row, child._widget);
         cnt++;
@@ -744,12 +744,12 @@ export default {
         if (node != this) {
           if (node.nameValue.match(Node.widgetRegEx)) {
             let item;
-            let nodeWidget = node.widget;
+            node.widget;
             outline.appendChild(
               (item = div(
                 span(number).c("tt").linkNode(node),
                 " ",
-                nodeWidget,
+                node._widget,
               ).c("item")),
             );
             promoteBlk(item, node._widget);
