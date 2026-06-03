@@ -467,6 +467,8 @@ export default {
         code("center"),
         ".",
       ),
+      div("If the attribute ", code("$labels"), " is set on the table,"),
+      div("the first column will have bold text and gets aligned to the left."),
       div("If the attribute ", code("$num"), " is set on the table,"),
       div("the rows get numbered."),
     ),
@@ -475,7 +477,9 @@ export default {
       let bdy = tbody();
       let longestChild = 0;
       let numbered = "$num" in this.attributes;
+      let labels = "$labels" in this.attributes;
       let tableAlign = this._attributes.$align || "";
+
       if (numbered) {
         header.appendChild(
           td("#").a("align", "center").linkNode(this._attrNodeMap.$num),
@@ -508,6 +512,13 @@ export default {
             row.appendChild(td(cell.widget).a("align", align));
           } else {
             row.appendChild(td());
+          }
+        }
+        if (labels) {
+          let label = row.children[+numbered];
+          if (label) {
+            label.classList.add("bold");
+            label.removeAttribute("align");
           }
         }
         bdy.appendChild(row);
@@ -545,6 +556,8 @@ export default {
         code("center"),
         ".",
       ),
+      div("If the attribute ", code("$labels"), " is set on the table,"),
+      div("the row gets bold text and gets aligned to the left."),
       div("If the attribute ", code("$num"), " is set on the table,"),
       div("the columns get numbered."),
     ),
@@ -553,6 +566,7 @@ export default {
       let longestChild = 0;
       let align = this.attributes.$align || "";
       let numbered = "$num" in this._attributes;
+      let labels = "$labels" in this._attributes;
       let hasLabels = this.childNodes.some((n) => n.nameText);
       let numbersRow;
       if (numbered) {
@@ -594,6 +608,16 @@ export default {
           row.appendChild(td());
         }
       }
+      if (labels) {
+        let headerRow = tbl.children[+numbered];
+        if (headerRow) {
+          headerRow.a("align", "left").c("bold");
+          for (let cell of headerRow.children) {
+            cell.removeAttribute("align");
+          }
+        }
+      }
+
       if (arg) {
         if (tbl.children.length) {
           return div(div(arg), tbl.c("blk", "indented"));

@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+Jun 3, 2026
+  - Added $labels option to -vt and -ht widgets
+
 Jun 2, 2026
   - Added $fg global styling attribute
 
