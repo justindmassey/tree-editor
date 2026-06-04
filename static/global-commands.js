@@ -8,8 +8,7 @@ export default {
   "Alt+h": {
     description: "Show/hide help",
     action() {
-      this.help.classList.toggle("hidden");
-      if (this.help.classList.contains("hidden")) {
+      if (this.help.classList.toggle("hidden")) {
         localStorage.setItem("help", "");
       } else {
         localStorage.setItem("help", "true");
@@ -19,8 +18,7 @@ export default {
   "Alt+m": {
     description: "Show/hide menu bar",
     action() {
-      this.menuBar.elem.classList.toggle("hidden");
-      if (this.menuBar.elem.classList.contains("hidden")) {
+      if (this.menuBar.elem.classList.toggle("hidden")) {
         localStorage.setItem("menuBar", "");
         this.tree.elem.style.marginTop = "0px";
         this.tree.elem.style.height = "";
@@ -37,8 +35,7 @@ export default {
   "Alt+o": {
     description: "Show/hide output",
     action() {
-      this.tree.output.classList.toggle("hidden");
-      if (this.tree.output.classList.contains("hidden")) {
+      if (this.tree.output.classList.toggle("hidden")) {
         localStorage.setItem("output", "");
       } else {
         localStorage.setItem("output", "true");
@@ -48,8 +45,7 @@ export default {
   "Alt+t": {
     description: "Show/hide tree",
     action() {
-      this.tree.tree.classList.toggle("hidden");
-      if (this.tree.tree.classList.contains("hidden")) {
+      if (this.tree.tree.classList.toggle("hidden")) {
         localStorage.setItem("showTree", "");
         this.tree.elem.style.height = "";
       } else {
