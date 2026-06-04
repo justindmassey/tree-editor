@@ -1341,25 +1341,18 @@ export function styleText(root, text, styles) {
         node.parentElement?.classList.contains("st") &&
         node.parentElement.textContent.toLowerCase() == search
       ) {
-        const textElem = span(node.parentElement.textContent).c("st", "out");
-        for (let style of node.parentElement.style) {
-          textElem.style[style] = "";
-          textElem.style[style] = node.parentElement.style[style];
-        }
         for (const [key, value] of Object.entries(styles)) {
-          textElem.style[key] = "";
-          textElem.style[key] = value;
+          node.parentElement.style[key] = "";
+          node.parentElement.style[key] = value;
         }
-        textElem.style.setProperty(
+        node.parentElement.style.setProperty(
           "--flash-to",
-          styles.background || node.parentElement.style.background,
+          node.parentElement.style.background,
         );
-        node.parentElement.replaceWith(textElem);
-        styleSpans.push(textElem);
+        styleSpans.push(node.parentElement);
         continue;
       }
-      const value = node.nodeValue;
-      const lower = value.toLowerCase();
+      const lower = node.nodeValue.toLowerCase();
       if (!lower.includes(search)) {
         continue;
       }
@@ -1371,11 +1364,10 @@ export function styleText(root, text, styles) {
         if (index === -1) {
           break;
         }
-        fragment.append(value.slice(start, index));
-        const textElem = span(value.slice(index, index + text.length)).c(
-          "st",
-          "out",
-        );
+        fragment.append(node.nodeValue.slice(start, index));
+        const textElem = span(
+          node.nodeValue.slice(index, index + text.length),
+        ).c("st", "out");
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = "";
           textElem.style[key] = value;
@@ -1386,37 +1378,31 @@ export function styleText(root, text, styles) {
         start = index + text.length;
       }
 
-      fragment.append(value.slice(start));
+      fragment.append(node.nodeValue.slice(start));
 
       node.replaceWith(fragment);
     }
   } else {
     for (const node of textNodes) {
-      const value = node.nodeValue;
-      const textElem = span(value).c("st", "out");
-
       if (node.parentElement?.classList.contains("st")) {
-        for (let style of node.parentElement.style) {
-          textElem.style[style] = "";
-          textElem.style[style] = node.parentElement.style[style];
-        }
         for (const [key, value] of Object.entries(styles)) {
-          textElem.style[key] = value;
+          node.parentElement.style[key] = value;
         }
-        textElem.style.setProperty(
+        node.parentElement.style.setProperty(
           "--flash-to",
-          styles.background || node.parentElement.style.background,
+          node.parentElement.style.background,
         );
-        node.parentElement.replaceWith(textElem);
+        styleSpans.push(node.parentElement);
       } else {
+        const textElem = span(node.nodeValue).c("st", "out");
         for (const [key, value] of Object.entries(styles)) {
           textElem.style[key] = "";
           textElem.style[key] = value;
         }
         textElem.style.setProperty("--flash-to", styles.background);
         node.replaceWith(textElem);
+        styleSpans.push(textElem);
       }
-      styleSpans.push(textElem);
     }
   }
   return styleSpans;
