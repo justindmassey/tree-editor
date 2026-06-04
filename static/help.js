@@ -280,13 +280,12 @@ let help = div(
     "to ",
     a("justindmassey@gmail.com").a("href", "mailto:justindmassey@gmail.com"),
     " or on ",
-    a("Tree Editor's GitHub page").a(
-      "href",
-      "https://github.com/justindmassey/tree-editor",
-    ),
+    a("Tree Editor's GitHub page")
+      .a("target", "_blank")
+      .a("href", "https://github.com/justindmassey/tree-editor"),
     ".",
   ),
-  
+
   p(
     div("Back to top")
       .c("anchor")
@@ -299,6 +298,8 @@ let help = div(
   ),
 ).c("help", "hidden");
 
-toc.appendChild(div(a("Changelog").a("href", "./changelog.txt")));
+toc.appendChild(
+  div(a("Changelog").a("target", "_blank").a("href", "./changelog.txt")),
+);
 
 export default help;
