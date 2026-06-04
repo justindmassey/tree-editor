@@ -1386,6 +1386,7 @@ export function styleText(root, text, styles) {
     for (const node of textNodes) {
       if (node.parentElement?.classList.contains("st")) {
         for (const [key, value] of Object.entries(styles)) {
+          node.parentElement.style[key] = "";
           node.parentElement.style[key] = value;
         }
         node.parentElement.style.setProperty(
