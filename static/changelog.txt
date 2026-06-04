@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+Jun 4, 2026
+  - Added "Feedback" section to help
+
 Jun 3, 2026
   - Added $labels option to -vt and -ht widgets
 
