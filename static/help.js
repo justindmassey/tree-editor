@@ -274,16 +274,6 @@ let help = div(
   div("Nodes without children become text content."),
   div("Children of attribute nodes are ignored."),
 
-  p(
-    div("Back to top")
-      .c("anchor")
-      .e("click", () => {
-        help.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }),
-  ),
   section("Feedback"),
   div("Please report any bug, annoyance, or idea for improvement"),
   div(
@@ -295,6 +285,17 @@ let help = div(
       "https://github.com/justindmassey/tree-editor",
     ),
     ".",
+  ),
+  
+  p(
+    div("Back to top")
+      .c("anchor")
+      .e("click", () => {
+        help.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }),
   ),
 ).c("help", "hidden");
 
