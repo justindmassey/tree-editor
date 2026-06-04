@@ -285,12 +285,12 @@ let help = div(
       }),
   ),
   section("Feedback"),
-  div("Please report any bug, annoyance, or idea fror improvement"),
+  div("Please report any bug, annoyance, or idea for improvement"),
   div(
     "to ",
     a("justindmassey@gmail.com").a("href", "mailto:justindmassey@gmail.com"),
     " or on ",
-    a("Tree Editors GitHub page").a(
+    a("Tree Editor's GitHub page").a(
       "href",
       "https://github.com/justindmassey/tree-editor",
     ),
