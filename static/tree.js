@@ -95,12 +95,12 @@ class Tree {
         this.scrollToTop();
         history.clear();
         setTimeout(() => history.add(), 0);
-        localStorage.setItem("tree", name);
-        if (pushHistory) {
-          let url = new URL(location);
-          url.searchParams.set("tree", name);
-          window.history.pushState({ tree: name }, "", url);
-        }
+      }
+      localStorage.setItem("tree", name);
+      if (pushHistory) {
+        let url = new URL(location);
+        url.searchParams.set("tree", name);
+        window.history.pushState({ tree: name }, "", url);
       }
     });
   }
