@@ -26,10 +26,12 @@ if (treeName != null) {
   let rootName = url.searchParams.get("root");
   if (rootName == null) {
     treeEditor.tree.load(treeName, treeName, false);
+    window.history.replaceState({ tree: treeName }, "", location.href);
   } else {
     treeEditor.tree.load(treeName, rootName, false);
+    window.history.replaceState({ tree: treeName, root: rootName }, "", location.href);
   }
-  window.history.replaceState({ tree: treeName }, "", location.href);
+  
 } else if (localStorage.getItem("tree") != null) {
   treeName = localStorage.getItem("tree");
   let rootName = localStorage.getItem("root");
