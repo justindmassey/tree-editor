@@ -768,11 +768,10 @@ function removePrefix(str) {
   return str;
 }
 
-function unescape(str) {
+export function unescape(str) {
   return unescapeArg(removePrefix(str));
 }
 
-window.u = unescape;
 function unescapeAttrName(str) {
   return str
     .replaceAll(/(?<!\\)\\=/g, "=")

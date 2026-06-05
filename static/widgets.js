@@ -31,6 +31,7 @@ import tree from "./tree.js";
 import crossRef from "./cross-ref.js";
 import exportToTree from "./exporters/tree.js";
 import importTree from "./importers/tree.js";
+import { unescape } from "./node.js";
 
 export default {
   "-txt": {
@@ -341,7 +342,7 @@ export default {
       div("If the tree doesn't exist, it's created (but not saved)."),
     ),
     create(arg, escapedArg) {
-      let label = arg;
+      let label = unescape(escapedArg);
       if ("$label" in this.attributes) {
         label = this._attributes.$label;
       }
@@ -349,7 +350,7 @@ export default {
         .c("blk")
         .linkNode(this._attrNodeMap.$label || this)
         .e("click", () => {
-          tree.load(arg, this.attributeSubstitution(escapedArg));
+          tree.load(unescape(escapedArg), this.attributeSubstitution(escapedArg));
         });
       if (this.childrenWidget.children.length) {
         return div(div(btn), this.childrenWidget.c("indented"));
