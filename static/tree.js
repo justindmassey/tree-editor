@@ -89,18 +89,24 @@ class Tree {
         this.scrollToTop();
         history.add();
         this.toast.pop(`The tree "${name}" was not found`);
+        localStorage.setItem("tree", escapedName);
+        if (pushHistory) {
+          let url = new URL(location);
+          url.searchParams.set("tree", escapedName);
+          window.history.pushState({ tree: escapedName }, "", url);
+        }
       } else {
         this.root = Node.deserialize(data);
         this.root.focus();
         this.scrollToTop();
         history.clear();
         setTimeout(() => history.add(), 0);
-      }
-      localStorage.setItem("tree", name);
-      if (pushHistory) {
-        let url = new URL(location);
-        url.searchParams.set("tree", name);
-        window.history.pushState({ tree: name }, "", url);
+        localStorage.setItem("tree", name);
+        if (pushHistory) {
+          let url = new URL(location);
+          url.searchParams.set("tree", name);
+          window.history.pushState({ tree: name }, "", url);
+        }
       }
     });
   }
