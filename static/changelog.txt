@@ -23,7 +23,7 @@ May 30, 2026
 May 26, 2026
   - Loading trees adds to browser history now
   - Renamed "Global Commands" to "Editor Commands" in help
-  - Replaced "Clear tree" with "New tree" command (Control+k)
+  - Replaced "Clear tree" with "New tree" command (Alt+k)
 
 May 25, 2026
   - Added "remove widget prefix and $-attributes" node command (Alt+x w)
