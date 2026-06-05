@@ -68,7 +68,11 @@ class Tree {
     window.addEventListener("beforeunload", () => this.autosave());
     window.addEventListener("popstate", (ev) => {
       if (ev.state && "tree" in ev.state) {
-        this.load(ev.state.tree, ev.state.tree, false);
+        if ("root" in ev.state) {
+          this.load(ev.state.tree, ev.state.root, false);
+        } else {
+          this.load(ev.state.tree, ev.state.tree, false);
+        }
       } else {
         this.autosave();
         localStorage.removeItem("tree");
@@ -89,11 +93,13 @@ class Tree {
         this.scrollToTop();
         history.add();
         this.toast.pop(`The tree "${name}" was not found`);
-        localStorage.setItem("tree", escapedName);
+        localStorage.setItem("tree", name);
+        localStorage.setItem("root", escapedName);
         if (pushHistory) {
           let url = new URL(location);
-          url.searchParams.set("tree", escapedName);
-          window.history.pushState({ tree: escapedName }, "", url);
+          url.searchParams.set("tree", name);
+          url.searchParams.set("root", escapedName);
+          window.history.pushState({ tree: name, root: escapedName }, "", url);
         }
       } else {
         this.root = Node.deserialize(data);
@@ -102,9 +108,11 @@ class Tree {
         history.clear();
         setTimeout(() => history.add(), 0);
         localStorage.setItem("tree", name);
+        localStorage.removeItem("root");
         if (pushHistory) {
           let url = new URL(location);
           url.searchParams.set("tree", name);
+          url.searchParams.delete("root");
           window.history.pushState({ tree: name }, "", url);
         }
       }

@@ -69,8 +69,10 @@ export default {
       history.add();
       this.tree.scrollToTop();
       localStorage.removeItem("tree");
+      localStorage.removeItem("root");
       let url = new URL(location);
       url.searchParams.delete("tree");
+      url.searchParams.delete("root");
       window.history.pushState({}, "", url);
     },
   },
@@ -93,8 +95,10 @@ export default {
             alert(res.error);
           } else {
             localStorage.setItem("tree", name);
+            localStorage.removeItem("root");
             let url = new URL(location);
             url.searchParams.set("tree", name);
+            url.searchParams.delete("root");
             window.history.replaceState({ tree: name }, "", url);
             treeMenu.update();
             this.tree.toast.pop(`Saved "${name}"`);
@@ -123,16 +127,19 @@ export default {
           this.tree.scrollToTop();
           if (!res.error) {
             treeMenu.update();
-            if (localStorage.getItem("tree") == name) {
-              localStorage.removeItem("tree");
-              let url = new URL(location);
-              url.searchParams.delete("tree");
-              window.history.replaceState({}, "", url);
-            }
+
             flash();
             this.tree.toast.pop(`Deleted "${name}"`);
           } else {
             this.tree.toast.pop(`The tree "${name}" was not found`);
+          }
+          if (localStorage.getItem("tree") == name) {
+            localStorage.removeItem("tree");
+            localStorage.removeItem("root");
+            let url = new URL(location);
+            url.searchParams.delete("tree");
+            url.searchParams.delete("root");
+            window.history.replaceState({}, "", url);
           }
         });
       }

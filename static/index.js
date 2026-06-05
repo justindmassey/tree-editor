@@ -20,15 +20,28 @@ if (localStorage.getItem("centerOutput")) {
   treeEditor.tree.output.classList.add("centered");
 }
 
-let treeName = new URL(location).searchParams.get("tree");
+let url = new URL(location);
+let treeName = url.searchParams.get("tree");
 if (treeName != null) {
-  treeEditor.tree.load(treeName, treeName, false);
+  let rootName = url.searchParams.get("root");
+  if (rootName == null) {
+    treeEditor.tree.load(treeName, treeName, false);
+  } else {
+    treeEditor.tree.load(treeName, rootName, false);
+  }
   window.history.replaceState({ tree: treeName }, "", location.href);
 } else if (localStorage.getItem("tree") != null) {
   treeName = localStorage.getItem("tree");
-  treeEditor.tree.load(treeName, treeName, false);
+  let rootName = localStorage.getItem("root");
   let url = new URL(location);
   url.searchParams.set("tree", treeName);
+  if (rootName == null) {
+    treeEditor.tree.load(treeName, treeName, false);
+  } else {
+    url.searchParams.set("root", rootName);
+    treeEditor.tree.load(treeName, rootName, false);
+  }
+
   window.history.replaceState({ tree: treeName }, "", url);
 } else {
   treeEditor.tree.root.focus();
