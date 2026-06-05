@@ -37,12 +37,14 @@ if (treeName != null) {
   url.searchParams.set("tree", treeName);
   if (rootName == null) {
     treeEditor.tree.load(treeName, treeName, false);
+    window.history.replaceState({ tree: treeName }, "", url);
   } else {
     url.searchParams.set("root", rootName);
     treeEditor.tree.load(treeName, rootName, false);
+    window.history.replaceState({ tree: treeName, root: rootName }, "", url);
   }
 
-  window.history.replaceState({ tree: treeName }, "", url);
+  
 } else {
   treeEditor.tree.root.focus();
   history.add();

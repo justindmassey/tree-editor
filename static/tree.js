@@ -76,6 +76,7 @@ class Tree {
       } else {
         this.autosave();
         localStorage.removeItem("tree");
+        localStorage.removeItem("root");
         history.clear();
         this.root.remove();
         history.add();
