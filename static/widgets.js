@@ -62,7 +62,7 @@ export default {
       div("Children are rendered below."),
     ),
     create(arg) {
-      return div(h1(arg), this.childrenWidget).c("hdr");
+      return div(h1(arg), this.childrenWidget);
     },
   },
   "-sh": {
@@ -72,7 +72,7 @@ export default {
       div("Children are rendered below."),
     ),
     create(arg) {
-      return div(h4(arg), this.childrenWidget).c("hdr");
+      return div(h4(arg), this.childrenWidget);
     },
   },
   "-sec": {
@@ -115,7 +115,7 @@ export default {
       if (arg) {
         return div(h1(arg), paragraphs);
       } else {
-        return div(paragraphs);
+        return paragraphs;
       }
     },
   },
