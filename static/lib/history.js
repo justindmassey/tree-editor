@@ -11,13 +11,13 @@ export default class History {
   }
 
   add(...onchangeArgs) {
-    if (this.onchange) {
-      this.onchange(...onchangeArgs);
-    }
     this.index++;
     this.history = this.history.slice(-this.maxLength, this.index);
     this.index = Math.min(this.index, this.maxLength);
     this.history.push(this.serialize());
+    if (this.onchange) {
+      this.onchange(...onchangeArgs);
+    }
   }
 
   undo(...onchangeArgs) {
