@@ -34,6 +34,7 @@ export default class Menu {
   clearItems() {
     this.items.replaceChildren();
   }
+  
   static inactiveItem(title) {
     return div(title)
       .c("inactive-item")
