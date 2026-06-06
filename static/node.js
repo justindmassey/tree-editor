@@ -796,17 +796,6 @@ function replaceBackslash(m) {
   }
 }
 
-function setBlkBottom(elem) {
-  if (elem.lastElementChild) {
-    setBlkBottom(elem.lastElementChild);
-    if (
-      elem.lastElementChild.classList.contains("blk-bottom") ||
-      elem.lastElementChild.classList.contains("blk")
-    ) {
-      elem.classList.add("blk-bottom");
-    }
-  }
-}
 function setBlkTop(elem) {
   if (elem.firstElementChild) {
     setBlkTop(elem.firstElementChild);
@@ -815,6 +804,18 @@ function setBlkTop(elem) {
       elem.firstElementChild.classList.contains("blk")
     ) {
       elem.classList.add("blk-top");
+    }
+  }
+}
+
+function setBlkBottom(elem) {
+  if (elem.lastElementChild) {
+    setBlkBottom(elem.lastElementChild);
+    if (
+      elem.lastElementChild.classList.contains("blk-bottom") ||
+      elem.lastElementChild.classList.contains("blk")
+    ) {
+      elem.classList.add("blk-bottom");
     }
   }
 }
