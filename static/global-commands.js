@@ -209,6 +209,7 @@ export default {
       if (lastSession) {
         this.tree.root = Node.deserialize(JSON.parse(lastSession));
         this.tree.root.focus();
+        this.tree.scrollToTop();
         history.clear();
         setTimeout(() => history.add(), 0);
       }
