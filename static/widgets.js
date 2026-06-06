@@ -350,7 +350,10 @@ export default {
         .c("blk")
         .linkNode(this._attrNodeMap.$label || this)
         .e("click", () => {
-          tree.load(unescape(escapedArg), this.attributeSubstitution(escapedArg));
+          tree.load(
+            unescape(escapedArg),
+            this.attributeSubstitution(escapedArg),
+          );
         });
       if (this.childrenWidget.children.length) {
         return div(div(btn), this.childrenWidget.c("indented"));
@@ -533,7 +536,7 @@ export default {
       }
       let tbl;
       if (this._childNodes.some((n) => n._nameText)) {
-        tbl = table(thead(header), bdy);
+        tbl = table(thead(header).c("bold"), bdy);
       } else {
         tbl = table(bdy);
       }
@@ -581,7 +584,7 @@ export default {
         if (hasLabels) {
           numbersRow = tr(
             td("#")
-              .c("htbl-label")
+              .c("bold")
               .a("align", "center")
               .linkNode(this._attrNodeMap.$num),
           );
