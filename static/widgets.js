@@ -475,6 +475,7 @@ export default {
       div("the first column will have bold text and gets aligned to the left."),
       div("If the attribute ", code("$num"), " is set on the table,"),
       div("the rows get numbered."),
+      div("Leave the children empty to omit the column headers.")
     ),
     create(arg) {
       let header = tr();
@@ -571,6 +572,7 @@ export default {
       div("the row gets bold text and gets aligned to the left."),
       div("If the attribute ", code("$num"), " is set on the table,"),
       div("the columns get numbered."),
+      div("Leave the children empty to omit the row labels.")
     ),
     create(arg) {
       let tbl = table();
