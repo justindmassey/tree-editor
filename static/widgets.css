@@ -48,11 +48,6 @@ input[type="range"] {
   padding-top: 0.25em;
 }
 
-.bg {
-  width: fit-content;
-  border-radius: 2px;
-}
-
 .frm > table > tr > td {
   border: none;
   vertical-align: middle;
