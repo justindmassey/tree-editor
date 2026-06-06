@@ -1,5 +1,5 @@
 export default function parseIndentedText(text, addedRootLine = "") {
-  let lines = text.replace(/\n$/, "").split(/\r?\n/);
+  let lines = text.replace(/\r?\n$/, "").split(/\r?\n/);
   var nodes = [{ indent: -1, line: addedRootLine, children: [] }];
   for (let line of lines) {
     let m = line.match(/^(\s*)(.*)/);
