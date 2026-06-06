@@ -392,7 +392,7 @@ export default {
         );
       }
       if (arg || this._childNodes.length) {
-        return div(menu.elem).c("blk", "tm");
+        return div(menu.elem).c("blk");
       } else {
         return div();
       }
