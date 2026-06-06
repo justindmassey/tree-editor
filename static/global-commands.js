@@ -182,7 +182,7 @@ export default {
     },
   },
   "Alt+x r": {
-    description: div("Set paste mode to ", code("replace"), " (exchange)"),
+    description: div("Set paste mode to ", code("replace")),
     action() {
       this.tree.pasteMode = "replace";
       this.tree.toast.pop('Paste mode: "replace"');
