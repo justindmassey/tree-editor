@@ -160,7 +160,7 @@ export default {
   "Alt+r": {
     description: "Focus root node",
     action() {
-      this.tree.root.focus();
+      this.tree.root.focus(true);
     },
   },
   "Control+DIGIT": {
@@ -175,7 +175,7 @@ export default {
           n.nameValue.toUpperCase().includes(find) &&
           document.activeElement != n.name
         ) {
-          n.focus();
+          n.focus(true);
           return true;
         }
       });

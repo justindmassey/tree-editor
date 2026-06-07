@@ -44,7 +44,6 @@ export default class Node {
   static typedefRegEx = /^::([^:\.]+)/;
   static minNameSize = 40;
   static maxNameSize = 80;
-
   constructor(name = "", ...children) {
     this.toggleButton = div("▼")
       .c("button", "toggle-button")
@@ -61,6 +60,9 @@ export default class Node {
       .e("focus", () => {
         this.updateLastValues();
         tree.activeNode = this;
+        if (this.updateHistoryOnFocus) {
+          history.update();
+        }
       })
       .e("paste", (ev) => {
         let clipText = ev.clipboardData.getData("text/plain");
@@ -137,6 +139,7 @@ export default class Node {
     this.updateLastValues();
     this.elem.node = this;
     this.outputs = [];
+    this.updateHistoryOnFocus = true;
     for (let child of children) {
       this.appendChild(child, false);
     }
@@ -596,12 +599,16 @@ export default class Node {
     return level;
   }
 
-  focus() {
+  focus(updateHistoryOnFocus) {
+    if (!updateHistoryOnFocus) {
+      this.updateHistoryOnFocus = false;
+    }
     if (this.parent) {
       this.parent.traverseUp((n) => n.expand());
     }
     this.name.focus();
     tree.activeNode = this;
+    this.updateHistoryOnFocus = true;
   }
 
   replaceWith(node, focus = true) {

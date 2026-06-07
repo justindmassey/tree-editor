@@ -39,4 +39,10 @@ export default class History {
       }
     }
   }
+
+  update() {
+    if (this.index >= 0) {
+      this.history[this.index] = this.serialize();
+    }
+  }
 }

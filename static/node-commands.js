@@ -327,13 +327,13 @@ export default {
         }, false);
         lastNode.focus();
       } else if (this.parent) {
-        this.parent.focus();
+        this.parent.focus(true);
       } else {
         let lastNode;
         tree.root.traverse((n) => {
           lastNode = n;
         }, false);
-        lastNode.focus();
+        lastNode.focus(true);
       }
     },
   },
@@ -343,14 +343,14 @@ export default {
       if (this.children.children.length && this.expanded) {
         this.children.children[0].node.focus();
       } else if (this.elem.nextSibling) {
-        this.elem.nextSibling.node.focus();
+        this.elem.nextSibling.node.focus(true);
       } else {
         this.parent.traverseUp((node) => {
           if (node.elem.nextSibling) {
             node.elem.nextSibling.node.focus();
             return true;
           } else {
-            tree.root.focus();
+            tree.root.focus(true);
           }
         });
       }
@@ -361,9 +361,9 @@ export default {
     action() {
       if (this.parent) {
         if (this.elem.previousSibling) {
-          this.elem.previousSibling.node.focus();
+          this.elem.previousSibling.node.focus(true);
         } else {
-          this.parent.children.lastChild.node.focus();
+          this.parent.children.lastChild.node.focus(true);
         }
       }
     },
@@ -373,9 +373,9 @@ export default {
     action() {
       if (this.parent) {
         if (this.elem.nextSibling) {
-          this.elem.nextSibling.node.focus();
+          this.elem.nextSibling.node.focus(true);
         } else {
-          this.parent.children.firstChild.node.focus();
+          this.parent.children.firstChild.node.focus(true);
         }
       }
     },
@@ -384,7 +384,7 @@ export default {
     description: "Focus last sibling",
     action() {
       if (this.parent) {
-        this.parent.children.lastChild.node.focus();
+        this.parent.children.lastChild.node.focus(true);
       }
     },
   },
@@ -392,7 +392,7 @@ export default {
     description: "Focus the parent node",
     action() {
       if (this.parent) {
-        this.parent.focus();
+        this.parent.focus(true);
       }
     },
   },
@@ -406,7 +406,7 @@ export default {
       nodes.sort((a, b) => a.lastModified - b.lastModified);
       let prevEdited = nodes[nodes.indexOf(this) - 1];
       if (prevEdited) {
-        prevEdited.focus();
+        prevEdited.focus(true);
       }
     },
   },
@@ -420,7 +420,7 @@ export default {
       nodes.sort((a, b) => a.lastModified - b.lastModified);
       let nextEdited = nodes[nodes.indexOf(this) + 1];
       if (nextEdited) {
-        nextEdited.focus();
+        nextEdited.focus(true);
       }
     },
   },
@@ -433,7 +433,7 @@ export default {
       let find = prompt("Focus first child containing:").toUpperCase();
       for (let child of this.children.children) {
         if (child.node.nameValue.toUpperCase().includes(find)) {
-          child.node.focus();
+          child.node.focus(true);
           return;
         }
       }
@@ -452,7 +452,7 @@ export default {
             child.node.name != document.activeElement &&
             child.node.nameValue.toUpperCase().includes(find)
           ) {
-            child.node.focus();
+            child.node.focus(true);
             return;
           }
         }
@@ -469,7 +469,7 @@ export default {
       let search = this.parent;
       while (search) {
         if (search.nameValue.toUpperCase().includes(find)) {
-          search.focus();
+          search.focus(true);
           return;
         }
         search = search.parent;
@@ -491,7 +491,7 @@ export default {
           node.name != document.activeElement &&
           node.nameValue.toUpperCase().includes(find)
         ) {
-          node.focus();
+          node.focus(true);
           return;
         }
       }
