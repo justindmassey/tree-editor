@@ -26,7 +26,7 @@ class TypedefMenu {
       this.menu.addItem(
         div(type)
           .a("title", node.nameValue)
-          .e("click", () => node.focus()),
+          .e("click", () => node.focus(true)),
       );
     }
     if (!this.menu.items.children.length) {

@@ -17,7 +17,7 @@ Element.prototype.linkNode = function (node) {
       ev.stopPropagation();
       ev.stopImmediatePropagation();
       ev.preventDefault();
-      node.focus();
+      node.focus(true);
     }
   });
   this.e("click", (ev) => {
@@ -599,8 +599,8 @@ export default class Node {
     return level;
   }
 
-  focus(updateHistoryOnFocus) {
-    if (!updateHistoryOnFocus) {
+  focus(updateHistory = false) {
+    if (!updateHistory) {
       this.updateHistoryOnFocus = false;
     }
     if (this.parent) {

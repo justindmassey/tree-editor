@@ -325,7 +325,7 @@ export default {
         this.elem.previousSibling.node.traverse((n) => {
           lastNode = n;
         }, false);
-        lastNode.focus();
+        lastNode.focus(true);
       } else if (this.parent) {
         this.parent.focus(true);
       } else {
@@ -341,13 +341,13 @@ export default {
     description: "Focus next node",
     action() {
       if (this.children.children.length && this.expanded) {
-        this.children.children[0].node.focus();
+        this.children.children[0].node.focus(true);
       } else if (this.elem.nextSibling) {
         this.elem.nextSibling.node.focus(true);
       } else {
         this.parent.traverseUp((node) => {
           if (node.elem.nextSibling) {
-            node.elem.nextSibling.node.focus();
+            node.elem.nextSibling.node.focus(true);
             return true;
           } else {
             tree.root.focus(true);
@@ -518,7 +518,7 @@ export default {
     description: "Collapse all nodes and show this one",
     action() {
       tree.root.traverse((n) => n.collapse());
-      this.focus();
+      this.focus(true);
     },
   },
   "Control+Alt+DIGIT": {

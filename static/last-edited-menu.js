@@ -22,7 +22,7 @@ class LastEditedMenu {
         div(node.nameValue || " ")
           .c("tt")
           .a("title", node.name.title)
-          .e("click", () => node.focus()),
+          .e("click", () => node.focus(true)),
       );
     }
   }
