@@ -698,6 +698,7 @@ export default class Node {
     } else {
       this.collapse();
     }
+    history.update();
   }
 
   attributeSubstitution(str, depth = 0) {

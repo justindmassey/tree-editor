@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+Jun 7, 2026
+  - Updating current history entry on node focus and toggle
+
 Jun 4, 2026
   - Added "Feedback" section to help
 
