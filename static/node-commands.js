@@ -88,20 +88,14 @@ export default {
   "Alt+i p": {
     description: "Add each node on this level to a new parent",
     action() {
-      if (this.parent) {
-        let newParent;
-        for (let node of getNodesOnLevel(this)) {
-          newParent = addParent(node);
-          if (node == this) {
-            newParent.focus();
-          }
+      let newParent;
+      for (let node of getNodesOnLevel(this)) {
+        newParent = addParent(node);
+        if (node == this) {
+          newParent.focus();
         }
-        history.add();
-      } else {
-        let newParent = addParent(this);
-        newParent.focus();
-        history.add();
       }
+      history.add();
     },
   },
   "Control+Shift+Enter": {
