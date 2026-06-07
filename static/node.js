@@ -116,6 +116,7 @@ export default class Node {
               node.collapse();
             }
           });
+          history.update();
         }
       })
       .e("click", updateSelection.bind(this));

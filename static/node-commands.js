@@ -533,6 +533,7 @@ export default {
       for (let child of this.children.children) {
         child.node.expand();
       }
+      history.update();
     },
   },
   "Alt+c c": {
@@ -541,6 +542,7 @@ export default {
       for (let child of this.children.children) {
         child.node.collapse();
       }
+      history.update();
     },
   },
   "Alt+s x": {
@@ -553,6 +555,7 @@ export default {
       } else {
         this.expand();
       }
+      history.update();
     },
   },
   "Alt+s c": {
@@ -565,18 +568,21 @@ export default {
       } else {
         this.collapse();
       }
+      history.update();
     },
   },
   "Alt+d x": {
     description: "Expand all descendants",
     action() {
       this.traverse((n) => n.expand());
+      history.update();
     },
   },
   "Alt+d c": {
     description: "Collapse all descendants",
     action() {
       this.traverse((n) => n.collapse());
+      history.update();
     },
   },
   "Alt+i x": {
@@ -588,6 +594,7 @@ export default {
         }
         node.expand();
       }
+      history.update();
     },
   },
   "Alt+i c": {
@@ -596,6 +603,7 @@ export default {
       for (let node of getNodesOnLevel(this)) {
         node.collapse();
       }
+      history.update();
     },
   },
   "Alt+c m": {

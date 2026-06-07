@@ -4,6 +4,7 @@ import globalCommands from "./global-commands.js";
 import help from "./help.js";
 import { div, h1, img } from "./lib/elements.js";
 import menuBar from "./menu-bar.js";
+import history from "./history.js";
 
 class TreeEditor {
   constructor() {
@@ -28,6 +29,7 @@ class TreeEditor {
             node.collapse();
           }
         });
+        history.update();
       }
     });
   }
