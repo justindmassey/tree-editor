@@ -225,7 +225,6 @@ export default {
         for (let child of Array.from(this.children.children)) {
           deleteAndKeepChildren(child.node);
         }
-        this.focus();
         history.add();
       }
     },
@@ -869,7 +868,7 @@ function deleteAndKeepChildren(node) {
     if (node.children.children.length) {
       let firstChild = node.children.firstChild.node;
       for (let i = node.children.children.length - 1; i >= 0; i--) {
-        node.insertAfter(node.children.children[i].node);
+        node.insertAfter(node.children.children[i].node, false);
       }
       node.remove(false);
       return firstChild;
@@ -878,7 +877,7 @@ function deleteAndKeepChildren(node) {
     }
   } else if (node.children.children.length == 1) {
     let newRoot = node.children.firstChild.node;
-    node.replaceWith(newRoot);
+    node.replaceWith(newRoot, false);
     return newRoot;
   } else if (node.nameValue) {
     node.nameValue = "";
