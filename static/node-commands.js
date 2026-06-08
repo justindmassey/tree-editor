@@ -669,8 +669,7 @@ export default {
   "Alt+s m, Alt+.": {
     description: "Move attribute siblings to the top",
     action() {
-      if (this.parent && attsToTop(this.parent)) {
-        this.focus()
+      if (this.parent && attsToTop(this.parent, this)) {
         history.add();
       }
     },
@@ -886,7 +885,7 @@ function deleteAndKeepChildren(node) {
   }
 }
 
-function attsToTop(node) {
+function attsToTop(node, focus) {
   let prevChildren = Array.from(node.children.children);
   let lastAttribute;
   for (let child of prevChildren) {
@@ -899,7 +898,9 @@ function attsToTop(node) {
       lastAttribute = child.node;
     }
   }
-  
+  if (focus) {
+    focus.focus();
+  }
   for (let i = 0; i < prevChildren.length; i++) {
     if (prevChildren[i] != node.children.children[i]) {
       return true;
