@@ -178,16 +178,6 @@ let help = div(
           ),
           ", it sets the widgets background color in the output.",
         ),
-        div(
-          "If ",
-          code("$ol"),
-          " is set to a ",
-          a("CSS color").a(
-            "href",
-            "https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value",
-          ),
-          ", it sets the widgets outline color in the output.",
-        ),
       ),
     ),
   ),

@@ -297,13 +297,6 @@ class Tree {
               );
               target.style.setProperty("--flash-to", attr._isAttribute[2]);
             }
-          } else if (attr._isAttribute[1] == "$ol") {
-            attr.outputs = node.outputs;
-            for (let target of node.outputs) {
-              target.style.outline = "";
-              target.style.outline =
-                "1px solid " + attr.attributeSubstitution(attr._isAttribute[2]);
-            }
           } else if (attr._isAttribute[1] == "$fg") {
             attr.outputs = node.outputs;
             for (let target of node.outputs) {
