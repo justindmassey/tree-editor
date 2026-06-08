@@ -623,29 +623,26 @@ export default class Node {
   }
 
   remove(focus = true) {
-    let focused;
+    let toFocus;
+    if (this.elem.nextSibling) {
+      toFocus = this.elem.nextSibling.node;
+    } else if (this.elem.previousSibling) {
+      toFocus = this.elem.previousSibling.node;
+    } else if (this.parent) {
+      toFocus = this.parent;
+    } else {
+      toFocus = this;
+    }
     if (focus) {
-      if (this.elem.nextSibling) {
-        this.elem.nextSibling.node.focus();
-        focused = this.elem.nextSibling.node;
-      } else if (this.elem.previousSibling) {
-        this.elem.previousSibling.node.focus();
-        focused = this.elem.previousSibling.node;
-      } else if (this.parent) {
-        this.parent.focus();
-        focused = this.parent;
-      } else {
-        this.focus();
-        focused = this;
-      }
+      toFocus.focus();
     }
     if (this.parent) {
       this.elem.remove();
-      return focused || true;
+      return toFocus || true;
     } else if (this.nameValue != "" || this.children.children.length) {
       this.children.replaceChildren();
       this.nameValue = "";
-      return focused || true;
+      return toFocus || true;
     }
   }
 
