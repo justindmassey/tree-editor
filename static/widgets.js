@@ -223,7 +223,7 @@ export default {
   "-tgl": {
     description: div(
       div("Toggle"),
-      div("allows you to toggle the visibility of children"),
+      div("Allows you to toggle the visibility of children."),
       div(code("$expanded"), ": if the children are visible"),
     ),
     create(arg) {
@@ -557,7 +557,7 @@ export default {
       div("Horizontal table"),
       div("children become row labels and their children the rows"),
       div("If the table has the attribute ", code("$align"), ", "),
-      div("all grandchildren get alligned accordingly."),
+      div("all grandchildren get aligned accordingly."),
       div(
         code("$align"),
         " can be ",

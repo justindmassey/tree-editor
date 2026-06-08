@@ -166,7 +166,7 @@ let help = div(
             "href",
             "https://developer.mozilla.org/docs/Web/CSS/Reference/Values/color_value",
           ),
-          ", it sets the widgets text color in the output.",
+          ", it sets the widget's text color in the output.",
         ),
         div(
           "If ",
