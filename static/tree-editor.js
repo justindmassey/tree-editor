@@ -2,7 +2,7 @@ import tree from "./tree.js";
 import registerShortcuts from "./lib/register-shortcuts.js";
 import editorCommands from "./editor-commands.js";
 import help from "./help.js";
-import { div, h1, img } from "./lib/elements.js";
+import { div, img } from "./lib/elements.js";
 import menuBar from "./menu-bar.js";
 import history from "./history.js";
 
