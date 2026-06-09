@@ -152,17 +152,15 @@ export default class Node {
     });
     let m = this.nameValue.match(Node.widgetRegEx);
     if (m && widgets[m[1]]) {
-      this._widget = widgets[m[1]].create
-        .bind(this)(this.attributeSubstitution(unescapeArg(m[2])), m[2])
-        .linkNode(this);
+      this._widget = widgets[m[1]].create.bind(this)(
+        this.attributeSubstitution(unescapeArg(m[2])),
+        m[2],
+      );
     } else {
       let arg = this.attributeSubstitution(unescape(this.nameValue));
-      this._widget = widgets["-txt"].create
-        .bind(this)(arg, this.nameValue)
-        .linkNode(this);
+      this._widget = widgets["-txt"].create.bind(this)(arg, this.nameValue);
     }
-
-    return this._widget.setBlk().c("widget");
+    return this._widget.linkNode(this).setBlk().c("widget");
   }
 
   get childrenWidget() {
