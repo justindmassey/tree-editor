@@ -5,7 +5,7 @@ export default class Tabs {
     this.initialTab = initialTab;
     this.onchange = onchange;
     this.header = div().c("tabs-header");
-    this.headers = {};
+    this.headers = Object.create(null);
     this.body = div().c("tabs-body");
     this.elem = div(this.header, this.body).c("tabs");
     this.tabs = tabs;
