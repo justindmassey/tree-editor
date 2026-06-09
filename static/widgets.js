@@ -475,7 +475,7 @@ export default {
       div("the first column will have bold text and gets aligned to the left."),
       div("If the attribute ", code("$num"), " is set on the table,"),
       div("the rows get numbered."),
-      div("Leave the children empty to omit the column headers.")
+      div("Leave the children empty to omit the column headers."),
     ),
     create(arg) {
       let header = tr();
@@ -542,13 +542,15 @@ export default {
         tbl = table(bdy);
       }
       if (arg) {
-        if (header.children.length) {
+        if (this._childNodes.length) {
           return div(div(arg), tbl.c("blk", "indented"));
         } else {
           return div(arg);
         }
-      } else {
+      } else if (this._childNodes.length) {
         return tbl.c("blk");
+      } else {
+        return div();
       }
     },
   },
@@ -572,7 +574,7 @@ export default {
       div("the row gets bold text and gets aligned to the left."),
       div("If the attribute ", code("$num"), " is set on the table,"),
       div("the columns get numbered."),
-      div("Leave the children empty to omit the row labels.")
+      div("Leave the children empty to omit the row labels."),
     ),
     create(arg) {
       let tbl = table();
@@ -632,13 +634,15 @@ export default {
       }
 
       if (arg) {
-        if (tbl.children.length) {
+        if (this._childNodes.length) {
           return div(div(arg), tbl.c("blk", "indented"));
         } else {
           return div(arg);
         }
-      } else {
+      } else if (this._childNodes.length) {
         return tbl.c("blk");
+      } else {
+        return div();
       }
     },
   },
