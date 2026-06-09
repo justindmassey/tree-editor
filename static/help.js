@@ -12,7 +12,7 @@ import {
   a,
 } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
-import globalCommands from "./global-commands.js";
+import editorCommands from "./editor-commands.js";
 import widgets from "./widgets.js";
 import crossRef from "./cross-ref.js";
 
@@ -47,7 +47,7 @@ let help = div(
   toc,
 
   section("Editor Commands"),
-  reference(globalCommands),
+  reference(editorCommands),
   p(
     div(
       "If the root node has the attribute ",
@@ -64,6 +64,7 @@ let help = div(
     ),
     div("The default paste mode is ", code("replace"), "."),
   ),
+
   section("Node Commands"),
   p(
     div("There is always one root node."),

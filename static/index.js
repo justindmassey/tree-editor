@@ -1,20 +1,20 @@
 import treeEditor from "./tree-editor.js";
 import history from "./history.js";
-import globalCommands from "./global-commands.js";
+import editorCommands from "./editor-commands.js";
 
 document.body.appendChild(treeEditor.elem);
 
 if (localStorage.getItem("menuBar")) {
-  globalCommands["Alt+m"].action.bind(treeEditor)();
+  editorCommands["Alt+m"].action.bind(treeEditor)();
 }
 if (localStorage.getItem("help") || localStorage.getItem("help") == null) {
-  globalCommands["Alt+h"].action.bind(treeEditor)();
+  editorCommands["Alt+h"].action.bind(treeEditor)();
 }
 if (localStorage.getItem("output")) {
-  globalCommands["Alt+o"].action.bind(treeEditor)();
+  editorCommands["Alt+o"].action.bind(treeEditor)();
 }
 if (localStorage.getItem("showTree") == "") {
-  globalCommands["Alt+t"].action.bind(treeEditor)();
+  editorCommands["Alt+t"].action.bind(treeEditor)();
 }
 if (localStorage.getItem("centerOutput")) {
   treeEditor.tree.output.classList.add("centered");
