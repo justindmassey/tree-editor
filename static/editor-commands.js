@@ -1,7 +1,7 @@
 import history from "./history.js";
 import { post, get } from "./lib/ajax.js";
 import treeMenu from "./tree-menu.js";
-import { div, code } from "./lib/elements.js";
+import { div, code, var_ } from "./lib/elements.js";
 import Node from "./node.js";
 
 export default {
@@ -164,7 +164,8 @@ export default {
     },
   },
   "Control+DIGIT": {
-    description: div("Expand only nodes up to level ", code("DIGIT")),
+    name: div("Control+", var_("DIGIT")),
+    description: div("Expand only nodes up to level ", code(var_("DIGIT"))),
   },
   "Alt+j": {
     description: "Focus first node containing text (case insensitive)",

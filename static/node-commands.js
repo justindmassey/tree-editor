@@ -2,7 +2,7 @@ import Node from "./node.js";
 import tree from "./tree.js";
 import history from "./history.js";
 import { isArray } from "./exporters/json.js";
-import { div, code } from "./lib/elements.js";
+import { div, code, var_ } from "./lib/elements.js";
 import crossRef from "./cross-ref.js";
 
 export default {
@@ -521,8 +521,9 @@ export default {
     },
   },
   "Control+Alt+DIGIT": {
+    name: div("Control+Alt+", var_("DIGIT")),
     description: div(
-      div("Expand only nodes up to level ", code("DIGIT")),
+      div("Expand only nodes up to level ", code(var_("DIGIT"))),
       div("(relative to this node)"),
     ),
   },

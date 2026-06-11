@@ -20,7 +20,9 @@ import crossRef from "./cross-ref.js";
 function reference(items) {
   let ref = table();
   for (let item in items) {
-    ref.appendChild(tr(td(code(item)), td(items[item].description)));
+    ref.appendChild(
+      tr(td(code(items[item].name || item)), td(items[item].description)),
+    );
   }
   return ref;
 }
