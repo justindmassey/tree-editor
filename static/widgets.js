@@ -122,27 +122,24 @@ export default {
   "-ul": {
     description: div(
       div("Unordered list"),
-      div(code("$prefix"), ": added before each item"),
+      div(code("$pre"), ": prefix added before each item"),
       div(
         "If ",
-        code("$prefix"),
+        code("$pre"),
         " is not set, a bullet operator (",
         code("∙ "),
         ") is used.",
       ),
     ),
     create(arg) {
-      let prefix = "∙ ";
-      if ("$prefix" in this.attributes) {
-        prefix = this._attributes.$prefix;
-      }
+      let prefix = this.attributes.$pre ?? "∙ ";
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
         let row;
         child.widget;
         children.appendChild(
           (row = tr(
-            td(prefix).linkNode(this._attrNodeMap.$prefix || child),
+            td(prefix).linkNode(this._attrNodeMap.$pre || child),
             td(child._widget),
           )),
         );
@@ -275,10 +272,7 @@ export default {
       ),
     ),
     create(arg) {
-      let separator = " ";
-      if ("$sep" in this.attributes) {
-        separator = this._attributes.$sep;
-      }
+      let separator = this.attributes.$sep ?? " ";
       let line = span().c("ln");
       if ("$align" in this._attributes) {
         line.style.alignItems =
@@ -342,10 +336,7 @@ export default {
       div("If the tree doesn't exist, it's created (but not saved)."),
     ),
     create(arg, escapedArg) {
-      let label = unescape(escapedArg);
-      if ("$label" in this.attributes) {
-        label = this._attributes.$label;
-      }
+      let label = this.attributes.$label ?? unescape(escapedArg);
       let btn = button(label || " ")
         .c("blk")
         .linkNode(this._attrNodeMap.$label || this)
@@ -377,12 +368,7 @@ export default {
       for (let child of this.childNodes) {
         let treeName = child.nameText;
         let unescapedTreeName = child.attributeSubstitution(child.nameValue);
-        let label;
-        if ("$label" in child.attributes) {
-          label = child.attributes.$label;
-        } else {
-          label = treeName;
-        }
+        let label = child.attributes.$label ?? treeName
         menu.addItem(
           div(label || " ")
             .linkNode(child)
@@ -507,12 +493,7 @@ export default {
         }
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
-          let align;
-          if ("$align" in child.attributes) {
-            align = child._attributes.$align;
-          } else {
-            align = tableAlign;
-          }
+          let align = child.attributes.$align ?? tableAlign
           if (cell) {
             row.appendChild(td(cell.widget).a("align", align));
           } else {
@@ -830,13 +811,7 @@ export default {
       ),
     ),
     create(arg) {
-      let separator;
-      if ("$sep" in this.attributes) {
-        separator = this._attributes.$sep;
-      } else {
-        separator = " ";
-      }
-
+      let separator = this.attributes.$sep ?? " "
       let pathsDiv = div();
       for (let child of this.childNodes) {
         child.traverseChildNodes((node) => {
@@ -1102,12 +1077,7 @@ export default {
       this.attributes;
       for (let child of this.childNodes) {
         let radioButton = input().a("type", "radio").a("name", groupName);
-        let name;
-        if ("$name" in child.attributes) {
-          name = child._attributes.$name;
-        } else {
-          name = child.nameText;
-        }
+        let name = child.attributes.$name ?? child.nameText
         if (
           child.lastNameText != undefined &&
           child.lastNameText != name &&

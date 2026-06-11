@@ -1,6 +1,9 @@
 Tree Editor Changelog
 =====================
 
+Jun 11, 2026
+  - renamed -ol widget's $prefix attribute to $pre
+
 Jun 8, 2026
   - removed $ol global styling attribute
 

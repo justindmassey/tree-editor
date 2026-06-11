@@ -21,7 +21,7 @@ function reference(items) {
   let ref = table();
   for (let item in items) {
     ref.appendChild(
-      tr(td(code(items[item].name || item)), td(items[item].description)),
+      tr(td(code(items[item].name ?? item)), td(items[item].description)),
     );
   }
   return ref;

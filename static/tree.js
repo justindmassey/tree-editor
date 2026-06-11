@@ -140,11 +140,7 @@ class Tree {
   }
 
   get name() {
-    if ("$name" in this.root.attributes) {
-      return this.root._attributes.$name;
-    } else {
-      return this.root.nameText;
-    }
+    return this.root.attributes.$name ?? this.root.nameText;
   }
 
   updateTypes() {
