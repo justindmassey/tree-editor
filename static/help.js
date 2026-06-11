@@ -10,6 +10,7 @@ import {
   ul,
   li,
   a,
+  var_,
 } from "./lib/elements.js";
 import nodeCommands from "./node-commands.js";
 import editorCommands from "./editor-commands.js";
@@ -98,7 +99,7 @@ let help = div(
 
   section("Widgets"),
   p(
-    div("Widgets begin with ", code("-WIDGET ARGUMENT"), "."),
+    div("Widgets begin with ", code("-", var_("WIDGET ARGUMENT")), "."),
     div("Widgets are rendered to the output"),
     div("(press Alt+o to toggle the output visibility)."),
     div(
@@ -185,7 +186,7 @@ let help = div(
   reference(widgets),
 
   section("Attributes"),
-  div("Attributes have the form ", code("NAME=VALUE"), "."),
+  div("Attributes have the form ", code(var_("NAME"), "=", var_("VALUE")), "."),
   div(
     'Equals symbols ("',
     code("="),
@@ -204,22 +205,25 @@ let help = div(
   div(code("$url"), "-attributes don't affect input size."),
 
   section("Attribute Substitution"),
-  div("If a node name or attribute value contains ", code(";ATTRIBUTE_NAME;")),
+  div(
+    "If a node name or attribute value contains ",
+    code(";", var_("ATTRIBUTE_NAME"), ";"),
+  ),
   div(
     " then ",
-    code(";ATTRIBUTE_NAME;"),
+    code(";", var_("ATTRIBUTE_NAME"), ";"),
     " is replaced with that attribute's value.",
   ),
   div("Attribute lookup starts in the current node and moves upward."),
   div("Unescaping is performed before attribute substitution."),
 
   section("Types"),
-  div("Nodes with a name of the form ", code("::TYPE")),
+  div("Nodes with a name of the form ", code("::", var_("TYPE"))),
   div("are type definitions."),
-  div("Nodes with ", code(".TYPE"), " in their name"),
+  div("Nodes with ", code(".", var_("TYPE")), " in their name"),
   div("inherit from that type definition."),
   div('The dots ("', code("."), '") can be escaped with a backslash.'),
-  div("Children of nodes with ", code(":TYPE"), " in their name"),
+  div("Children of nodes with ", code(":", var_("TYPE")), " in their name"),
   div("inherit from that type definition."),
   div('The colons ("', code(":"), '") can be escaped with a backslash.'),
   div("Type definitions can inherit from other type definitions."),
