@@ -1285,14 +1285,12 @@ export function updateSelection(ev) {
       let widget = m[1];
       if (widget == "-opt" || widget == "-tbs") {
         this.parent.updateAttribute("$selected", this.nameText);
-      }
-      if (widget == "-rad") {
+      } else if (widget == "-rad") {
         this.parent.updateAttribute(
           "$selected",
           this.attributes.$name ?? this.nameText,
         );
-      }
-      if (widget == "-pgs") {
+      } else if (widget == "-pgs") {
         let page = this.parent._childNodes.indexOf(this) + 1;
         this.parent.updateAttribute("$page", page);
       }
