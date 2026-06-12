@@ -2,13 +2,10 @@
   "name": "tree-editor",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "keywords": ["tree"],
+  "author": "Justin Massey",
   "license": "ISC",
-  "description": "",
+  "description": "A unique browser-based tree editor",
   "dependencies": {
     "@fastify/static": "^7.0.4",
     "fastify": "^4.28.1"
