@@ -34,14 +34,12 @@ import importTree from "./importers/tree.js";
 import { unescape } from "./node.js";
 
 Element.prototype.promoteBlk = function (child) {
-  console.log(child)
   for (let className of ["blk", "blk-top", "blk-bottom"]) {
     if (child.classList.contains(className)) {
       child.classList.remove(className);
       this.classList.add(className);
     }
   }
-  console.log(child)
   return this;
 };
 
