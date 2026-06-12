@@ -33,6 +33,22 @@ import exportToTree from "./exporters/tree.js";
 import importTree from "./importers/tree.js";
 import { unescape } from "./node.js";
 
+Element.prototype.promoteBlk = function (child) {
+  if (child.classList.contains("blk")) {
+    child.classList.remove("blk");
+    this.classList.add("blk");
+  }
+  if (child.classList.contains("blk-top")) {
+    child.classList.remove("blk-top");
+    this.classList.add("blk-top");
+  }
+  if (child.classList.contains("blk-bottom")) {
+    child.classList.remove("blk-bottom");
+    this.classList.add("blk-bottom");
+  }
+  return this;
+};
+
 export default {
   "-txt": {
     description: div(
@@ -135,15 +151,13 @@ export default {
       let prefix = this.attributes.$pre ?? "∙ ";
       let children = table().c("ltbl");
       for (let child of this.childNodes) {
-        let row;
         child.widget;
         children.appendChild(
-          (row = tr(
+          tr(
             td(prefix).linkNode(this._attrNodeMap.$pre || child),
             td(child._widget),
-          )),
+          ).promoteBlk(child._widget),
         );
-        promoteBlk(row, child._widget);
       }
       if (children.children.length) {
         if (arg) {
@@ -162,12 +176,12 @@ export default {
       let children = table().c("ltbl");
       let cnt = 1;
       for (let child of this.childNodes) {
-        let row;
         child.widget;
         children.appendChild(
-          (row = tr(td(cnt + ". ").linkNode(child), td(child._widget))),
+          tr(td(cnt + ". ").linkNode(child), td(child._widget)).promoteBlk(
+            child._widget,
+          ),
         );
-        promoteBlk(row, child._widget);
         cnt++;
       }
       if (children.children.length) {
@@ -201,10 +215,10 @@ export default {
         } else {
           child.setAttribute("$checked", checkbox.checked);
         }
-        let item;
-        checklist.appendChild((item = div(checkbox, child.widget).c("item")));
+        checklist.appendChild(
+          div(checkbox, child.widget).promoteBlk(child._widget).c("item"),
+        );
         checkbox.linkNode(child._attrNodeMap.$checked || child);
-        promoteBlk(item, child._widget);
       }
       if (arg) {
         if (checklist.children.length) {
@@ -287,7 +301,7 @@ export default {
         line.appendChild(
           (lastSep = div(separator).linkNode(this._attrNodeMap.$sep || this)),
         );
-        promoteBlk(line, child._widget);
+        line.promoteBlk(child._widget);
       }
       if (lastSep) {
         lastSep.remove();
@@ -368,7 +382,7 @@ export default {
       for (let child of this.childNodes) {
         let treeName = child.nameText;
         let unescapedTreeName = child.attributeSubstitution(child.nameValue);
-        let label = child.attributes.$label ?? treeName
+        let label = child.attributes.$label ?? treeName;
         menu.addItem(
           div(label || " ")
             .linkNode(child)
@@ -493,7 +507,7 @@ export default {
         }
         for (let child of this._childNodes) {
           let cell = child.childNodes[i];
-          let align = child.attributes.$align ?? tableAlign
+          let align = child.attributes.$align ?? tableAlign;
           if (cell) {
             row.appendChild(td(cell.widget).a("align", align));
           } else {
@@ -765,16 +779,12 @@ export default {
       this.traverseChildNodes((node, number) => {
         if (node != this) {
           if (node.nameValue.match(Node.widgetRegEx)) {
-            let item;
             node.widget;
             outline.appendChild(
-              (item = div(
-                span(number).c("tt").linkNode(node),
-                " ",
-                node._widget,
-              ).c("item")),
+              div(span(number).c("tt").linkNode(node), " ", node._widget)
+                .promoteBlk(node._widget)
+                .c("item"),
             );
-            promoteBlk(item, node._widget);
             return 1;
           } else {
             outline.appendChild(
@@ -811,7 +821,7 @@ export default {
       ),
     ),
     create(arg) {
-      let separator = this.attributes.$sep ?? " "
+      let separator = this.attributes.$sep ?? " ";
       let pathsDiv = div();
       for (let child of this.childNodes) {
         child.traverseChildNodes((node) => {
@@ -830,7 +840,7 @@ export default {
             }
             if (lastSegment) {
               path.appendChild(lastSegment.node.widget);
-              promoteBlk(path, lastSegment.node._widget);
+              path.promoteBlk(lastSegment.node._widget);
               path.appendChild(
                 (lastSep = span(separator).linkNode(
                   this._attrNodeMap.$sep || this,
@@ -1077,7 +1087,7 @@ export default {
       this.attributes;
       for (let child of this.childNodes) {
         let radioButton = input().a("type", "radio").a("name", groupName);
-        let name = child.attributes.$name ?? child.nameText
+        let name = child.attributes.$name ?? child.nameText;
         if (
           child.lastNameText != undefined &&
           child.lastNameText != name &&
@@ -1093,11 +1103,11 @@ export default {
           history.add();
         });
         radioButton.checked = this._attributes.$selected == radioButton.value;
-        let item;
         radio.appendChild(
-          (item = div(radioButton.linkNode(child), child.widget).c("item")),
+          div(radioButton.linkNode(child), child.widget)
+            .promoteBlk(child._widget)
+            .c("item"),
         );
-        promoteBlk(item, child._widget);
       }
       this.childrenWidget;
       if (arg) {
@@ -1387,19 +1397,4 @@ export function styleText(root, text, styles) {
     }
   }
   return styleSpans;
-}
-
-function promoteBlk(parent, child) {
-  if (child.classList.contains("blk")) {
-    child.classList.remove("blk");
-    parent.classList.add("blk");
-  }
-  if (child.classList.contains("blk-top")) {
-    child.classList.remove("blk-top");
-    parent.classList.add("blk-top");
-  }
-  if (child.classList.contains("blk-bottom")) {
-    child.classList.remove("blk-bottom");
-    parent.classList.add("blk-bottom");
-  }
 }
