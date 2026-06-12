@@ -34,18 +34,14 @@ import importTree from "./importers/tree.js";
 import { unescape } from "./node.js";
 
 Element.prototype.promoteBlk = function (child) {
-  if (child.classList.contains("blk")) {
-    child.classList.remove("blk");
-    this.classList.add("blk");
+  console.log(child)
+  for (let className of ["blk", "blk-top", "blk-bottom"]) {
+    if (child.classList.contains(className)) {
+      child.classList.remove(className);
+      this.classList.add(className);
+    }
   }
-  if (child.classList.contains("blk-top")) {
-    child.classList.remove("blk-top");
-    this.classList.add("blk-top");
-  }
-  if (child.classList.contains("blk-bottom")) {
-    child.classList.remove("blk-bottom");
-    this.classList.add("blk-bottom");
-  }
+  console.log(child)
   return this;
 };
 
