@@ -1283,22 +1283,18 @@ export function updateSelection(ev) {
     let m = this.parent.nameValue.match(Node.widgetRegEx);
     if (m) {
       let widget = m[1];
-      if (widget == "-opt") {
+      if (widget == "-opt" || widget == "-tbs") {
         this.parent.updateAttribute("$selected", this.nameText);
-      }
-      if (widget == "-tbs") {
-        this.parent.updateAttribute("$selected", this.nameText);
-      }
-      if (widget == "-pgs") {
-        let page = this.parent.childNodes.indexOf(this) + 1;
-        this.parent.updateAttribute("$page", page);
       }
       if (widget == "-rad") {
-        if ("$name" in this.attributes) {
-          this.parent.updateAttribute("$selected", this._attributes.$name);
-        } else {
-          this.parent.updateAttribute("$selected", this.nameText);
-        }
+        this.parent.updateAttribute(
+          "$selected",
+          this.attributes.$name ?? this.nameText,
+        );
+      }
+      if (widget == "-pgs") {
+        let page = this.parent._childNodes.indexOf(this) + 1;
+        this.parent.updateAttribute("$page", page);
       }
     }
   }
